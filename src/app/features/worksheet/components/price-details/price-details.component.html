@@ -1,0 +1,342 @@
+<!-- <div class="app-screen--header">
+    Price Details
+    <div class="app-screen--header-tag"></div>
+</div> -->
+<div class="app-screen--content" *ngIf="!showWorksheetAPILoader">
+    <div class="price-details--card">
+        <div class="price-details--header price-details-system--header">
+           <p> System </p>
+           <p> Values in {{WorksheetPrerequisites[0].baseCurrency}} </p>
+        </div>
+        <kendo-card *ngFor="let a of worksheetDetailsCard" class="price-details--kendo-card">
+          <div class="price-details-listview--kendo-card-content">
+            <div class="price-details-listview--kendo-card-details">
+              <div class="price-details-listview--left-info">
+                <div class="price-details-listview--kendo-card-sub-title">
+                  <span class="short-title">TSOLP</span>
+                  <span class="long-title">TSOLP - Total Sellout List Price</span>
+                </div>      
+              </div>      
+              <div class="price-details-listview--kendo-card-info ">
+                {{ commonService.displayDecimalFormat(a.soTotRateWOPLCBC) }}
+              </div>
+            </div>
+            <div class="price-details-listview--kendo-card-details">
+              <div class="price-details-listview--left-info">
+                <div class="price-details-listview--kendo-card-sub-title">                 
+                  <span class="short-title">TDLC</span>
+                  <span class="long-title">TDLC - Total Deal Level Cost</span>
+                </div>
+              </div>
+              <div class="price-details-listview--kendo-card-info ">
+                {{ commonService.displayDecimalFormat(a.totalTransOverheadBC) }}
+              </div>
+            </div>
+            <div class="price-details-listview--kendo-card-details">
+              <div class="price-details-listview--left-info">
+                <div class="price-details-listview--kendo-card-sub-title">
+                  <span class="short-title">TDLP</span>
+                  <span class="long-title">TDLP - Total Deal Level Price</span>
+                </div>
+              </div>
+              <div class="price-details-listview--kendo-card-info ">
+                {{ commonService.displayDecimalFormat(a.grossSPBC) }}
+              </div>
+            </div>
+          </div>
+        </kendo-card>
+    </div>
+
+    <div class="price-details--card">
+        <div class="price-details--header">
+           <p> Quote </p>
+        </div>
+        <kendo-card *ngFor="let a of worksheetDetailsCard" class="price-details--kendo-card">
+          <div class="price-details-listview--kendo-card-content">
+            <div class="price-details-listview--kendo-card-details">
+              <div class="price-details-listview--left-info">
+                <div class="price-details-listview--kendo-card-sub-title">
+                  <span class="short-title">TSOLP</span>
+                  <span class="long-title">TSOLP - Total Sellout List Price</span>
+                </div>   
+              </div>         
+              <div class="price-details-listview--kendo-card-info ">
+                {{ commonService.displayDecimalFormat(a.quoteValueBC) }}
+              </div>
+            </div>
+            <div class="price-details-listview--kendo-card-details">
+              <div class="price-details-listview--left-info">
+                <div class="price-details-listview--kendo-card-sub-title">
+                  Discount
+                </div>
+                <div class="price-details-percentage-info">
+                  {{ commonService.displayDecimalFormat(formatNumber(a.specialDiscountPC)) }}&nbsp;%
+                </div> 
+              </div>
+              <div class="price-details-listview--kendo-card-info ">
+                {{ commonService.displayDecimalFormat(a.discountValueBC) }}
+              </div>
+            </div>
+            <div class="price-details-listview--kendo-card-details">
+              <div class="price-details-listview--left-info">
+                <div class="price-details-listview--kendo-card-sub-title">
+                  <span class="short-title">NSOP</span>
+                  <span class="long-title">NSOP - Net Sellout Price</span>
+                </div>
+              </div>
+              <div class="price-details-listview--kendo-card-info ">
+                {{ commonService.displayDecimalFormat(a.quoteValueBC - a.discountValueBC) }}
+              </div>
+            </div>
+            <div class="price-details-listview--kendo-card-details">
+              <div class="price-details-listview--left-info">
+                <div class="price-details-listview--kendo-card-sub-title">
+                  Tax
+                </div>
+              </div>
+              <div class="price-details-listview--kendo-card-info ">
+                {{ commonService.displayDecimalFormat(a.taxValueBC) }}
+              </div>
+            </div>
+          </div>
+        </kendo-card>
+    </div>
+
+    <div class="price-details--card">
+        <div class="price-details--header">
+           <p> &nbsp; </p>
+        </div>
+        <kendo-card *ngFor="let a of worksheetDetailsCard" class="price-details--kendo-card">
+          <div class="price-details-listview--kendo-card-content">
+            <div class="price-details-listview--kendo-card-details">
+              <div class="price-details-listview--left-info">
+                <div class="price-details-listview--kendo-card-sub-title">
+                  <span class="short-title">Sys Disc.</span>
+                  <span class="long-title">System SO Discount</span>
+                </div>     
+                <div class="price-details-percentage-info" 
+                  [style.background-color]="sysDiscBackgroundColor"
+                  [style.border-left]="'5px solid' + sysDiscleftBorderColor">
+                  {{ commonService.displayDecimalFormat(formatNumber((a.sowspDifferenceQC / a.grossSPQC) * 100)) }}&nbsp;%
+                </div>  
+                <div class="price-details-attachment-info" (click)="onClickSuppAttachment($event)">
+                  <i class="fa-solid fa-paperclip" style="font-size: medium;"></i>
+                </div>
+              </div>    
+              <div class="price-details-listview--kendo-card-info ">
+                {{ commonService.displayDecimalFormat(a.sowspDifferenceBC) }}
+              </div>
+            </div>
+            <div *ngIf="WorksheetPrerequisites[0].marginExcelDownloadPrivilege" class="price-details-listview--kendo-card-details">
+              <div class="price-details-listview--left-info">
+                <div class="price-details-listview--kendo-card-sub-title">
+                  <span class="short-title">Deal Margin</span>
+                  <span class="long-title">Gross Margin</span>  
+                </div>
+                <div class="price-details-percentage-info">
+                  {{ commonService.displayDecimalFormat(formatNumber(a.marginPC)) }}&nbsp;%
+                </div> 
+              </div>
+              <div class="price-details-listview--kendo-card-info ">
+                {{ commonService.displayDecimalFormat(a.marginQC * WorksheetPrerequisites[0].conversionRate) }}
+              </div>
+            </div>
+            <div class="price-details-listview--kendo-card-details">
+              <div class="price-details-listview--left-info">
+                <div class="price-details-listview--kendo-card-sub-title">              
+                  <span class="short-title">Adnl. SI Disc.</span>
+                  <span class="long-title">DRQ Discount</span>  
+                </div>
+                <div class="price-details-percentage-info">
+                  {{ commonService.displayDecimalFormat(formatNumber(a.drqqC_PC)) }}&nbsp;%
+                </div> 
+              </div>
+              <div class="price-details-listview--kendo-card-info ">
+                {{ commonService.displayDecimalFormat(a.additnSuppDiscBC) }}
+              </div>
+            </div>
+          </div>
+        </kendo-card>
+    </div>
+
+    <form [formGroup]="priceDetails">
+      <!-- <kendo-window
+        *ngIf="showSysDiscAttachment"
+        (close)="onClickShowSysDiscAttachment()"
+        [minWidth]="200"
+        [width]="400"
+      >
+        <kendo-window-titlebar>
+          <span class="k-window-title">System Discount Attachments</span>
+          <button kendoWindowCloseAction></button>
+        </kendo-window-titlebar>
+        <div class="app-comments--container price-details-comments--container ">
+            <kendo-label class="app-comments--grid">Uploaded Files</kendo-label>
+            <div *ngFor="let file of myFiles; let i = index"
+              class="app-kendo-attachment-files">
+              <div (click)="downloadAttachment(i)">{{ file.name }}</div>
+            </div>
+        </div>
+      </kendo-window> -->
+
+      <app-attachment-pop-up 
+        [showAttachmentPopup]="showSysDiscAttachment"
+        (attachmentPopupClose)="onCloseAttachmentPopup()"
+        title = "System Discount Attachments"
+        [attachmentPopupDetails]="attachmentPopupDetails">
+      </app-attachment-pop-up>
+
+      <div *ngIf="['Auto', '1', '2', '3', '4'].includes(worksheetDetailsCard[0].currentApprovalLevel) || [0,1].includes(worksheetDetailsCard[0].nextApprovalLevel)" 
+        class="app-comments--container price-details-comments--container ">
+        <kendo-formfield>
+          <div class="app-comments--content">
+            <!-- <kendo-label class="app-comments--label"
+            [for]="amComments"
+            >AM Comments:</kendo-label
+            > -->
+            <div class="app-kendo--textarea-wrapper">
+              <kendo-label
+                class="app-kendo--label"
+                [for]="amComments"
+                >AM Comments:</kendo-label>
+              <button 
+                  type="button" 
+                  class="mic-icon-btn" 
+                  [disabled]="!(worksheetDetailsCard[0].isAccessWSApproval && worksheetDetailsCard[0].loginLevel =='AM' && (worksheetDetailsCard[0].nextApprovalLevel === 1 || worksheetDetailsCard[0].nextApprovalLevel == null))"
+                  (click)="commonService.startListeningAndPatch(priceDetails,'amComments')">
+                  <img src="assets/content/images/microphone.svg" alt="mic" />
+              </button>
+            </div>
+            <kendo-textarea
+              class="app-kendo--textarea"
+              placeholder="Type your message here.."
+              formControlName="amComments"
+              [readonly]="!(worksheetDetailsCard[0].isAccessWSApproval && worksheetDetailsCard[0].loginLevel =='AM' && (worksheetDetailsCard[0].nextApprovalLevel === 1 || worksheetDetailsCard[0].nextApprovalLevel == null))"
+              [value]="worksheetDetailsCard[0].level1Comments"
+              #amComments
+              [rows]="5"
+              resizable="vertical"></kendo-textarea>
+          </div>
+          <kendo-formerror class="app-kendo--error-msg"
+            >AM comments is required</kendo-formerror
+          >
+        </kendo-formfield>
+      </div>
+      <div *ngIf="['2', '3', '4'].includes(worksheetDetailsCard[0].currentApprovalLevel) || worksheetDetailsCard[0].nextApprovalLevel == 2"
+        class="app-comments--container price-details-comments--container ">
+        <kendo-formfield>
+          <div class="app-comments--content">
+            <!-- <kendo-label class="app-comments--label"
+            [for]="smComments"
+            >SM Comments:</kendo-label
+            > -->
+            <div class="app-kendo--textarea-wrapper">
+              <kendo-label
+                class="app-kendo--label"
+                [for]="smComments"
+                >SM Comments:</kendo-label>
+              <button 
+                  type="button" 
+                  class="mic-icon-btn" 
+                  [disabled]="!(worksheetDetailsCard[0].isAccessWSApproval && worksheetDetailsCard[0].loginLevel =='SM' && worksheetDetailsCard[0].nextApprovalLevel === 2)"
+                  (click)="commonService.startListeningAndPatch(priceDetails,'smComments')">
+                  <img src="assets/content/images/microphone.svg" alt="mic" />
+              </button>
+            </div>
+            <kendo-textarea
+              class="app-kendo--textarea"
+              placeholder="Type your message here.."
+              formControlName="smComments"
+              [readonly]="!(worksheetDetailsCard[0].isAccessWSApproval && worksheetDetailsCard[0].loginLevel =='SM' && worksheetDetailsCard[0].nextApprovalLevel === 2)"
+              [value]="worksheetDetailsCard[0].level2Comments"
+              #smComments
+              [rows]="5"
+              resizable="vertical"></kendo-textarea>
+          </div>
+          <kendo-formerror class="app-kendo--error-msg"
+            >SM comments is required</kendo-formerror
+          >
+        </kendo-formfield>
+      </div>
+      <div *ngIf="worksheetDetailsCard[0].currentApprovalLevel === '3' || worksheetDetailsCard[0].nextApprovalLevel === 3 || (worksheetDetailsCard[0].currentApprovalLevel === '4' && worksheetDetailsCard[0].level3Comments != '')"
+        class="app-comments--container price-details-comments--container ">
+        <kendo-formfield>
+          <div class="app-comments--content">
+            <!-- <kendo-label class="app-comments--label"
+            [for]="finComments"
+            >Finance Comments:</kendo-label
+            > -->
+            <div class="app-kendo--textarea-wrapper">
+              <kendo-label
+                class="app-kendo--label"
+                [for]="finComments"
+                >Finance Comments:</kendo-label>
+              <button 
+                  type="button" 
+                  class="mic-icon-btn" 
+                  [disabled]="!(worksheetDetailsCard[0].isAccessWSApproval && worksheetDetailsCard[0].loginLevel =='Finance' && worksheetDetailsCard[0].nextApprovalLevel === 3)"
+                  (click)="commonService.startListeningAndPatch(priceDetails,'finComments')">
+                  <img src="assets/content/images/microphone.svg" alt="mic" />
+              </button>
+            </div>
+            <kendo-textarea
+              class="app-kendo--textarea"
+              placeholder="Type your message here.."
+              formControlName="finComments"
+              [readonly]="!(worksheetDetailsCard[0].isAccessWSApproval && worksheetDetailsCard[0].loginLevel =='Finance' && worksheetDetailsCard[0].nextApprovalLevel === 3)"
+              [value]="worksheetDetailsCard[0].level3Comments"
+              #finComments
+              [rows]="5"
+              resizable="vertical"></kendo-textarea>
+          </div>
+          <kendo-formerror class="app-kendo--error-msg"
+            >Finance comments is required</kendo-formerror
+          >
+        </kendo-formfield>
+      </div>
+      <div *ngIf="['4'].includes(worksheetDetailsCard[0].currentApprovalLevel) || worksheetDetailsCard[0].nextApprovalLevel == 4"
+        class="app-comments--container price-details-comments--container ">
+        <kendo-formfield>
+          <div class="app-comments--content">
+            <!-- <kendo-label class="app-comments--label"
+            [for]="mgmtComments"
+            >Management Comments:</kendo-label
+            > -->
+            <div class="app-kendo--textarea-wrapper">
+              <kendo-label
+                class="app-kendo--label"
+                [for]="mgmtComments"
+                >Management Comments:</kendo-label>
+              <button 
+                  type="button" 
+                  class="mic-icon-btn" 
+                  [disabled]="!(worksheetDetailsCard[0].isAccessWSApproval && worksheetDetailsCard[0].loginLevel =='Management' && worksheetDetailsCard[0].nextApprovalLevel === 4)"
+                  (click)="commonService.startListeningAndPatch(priceDetails,'mgmtComments')">
+                  <img src="assets/content/images/microphone.svg" alt="mic" />
+              </button>
+            </div>
+            <kendo-textarea
+              class="app-kendo--textarea"
+              placeholder="Type your message here.."
+              formControlName="mgmtComments"
+              [readonly]="!(worksheetDetailsCard[0].isAccessWSApproval && worksheetDetailsCard[0].loginLevel =='Management' && worksheetDetailsCard[0].nextApprovalLevel === 4)"
+              [value]="worksheetDetailsCard[0].level4Comments"
+              #mgmtComments
+              [rows]="5"
+              resizable="vertical"></kendo-textarea>
+          </div>
+          <kendo-formerror class="app-kendo--error-msg"
+            >Management comments is required</kendo-formerror
+          >
+        </kendo-formfield>
+      </div>
+    </form>
+</div>
+
+<div class="app-screen--loader" *ngIf="showWorksheetAPILoader">
+    <kendo-loader
+      type="converging-spinner"
+      themeColor="info"
+      size="medium"></kendo-loader>
+    <div>Loading price details...</div>
+</div>

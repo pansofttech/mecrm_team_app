@@ -1,0 +1,357 @@
+<div *ngIf="!showWorksheetAPILoader">
+  <div class="app-screen--info-header">
+    <div class="app-screen--info-header-left">
+      DRQ Request
+    </div>
+
+    <div class="app-screen--info-header-right" *ngIf="isPartsGridOpen">
+      <app-notification-colors [data]="colorNotificationData"></app-notification-colors>
+    </div>
+  </div>
+  
+  <div *ngIf="!isPartsGridOpen">
+    <div class="app-screen--info-header" *ngIf="!isPartsGridOpen">
+      <div class="app-screen--info-header-left">
+        Supplier List
+      </div>
+    </div>
+    
+    <div *ngFor="let a of WorksheetDRQSupplierDetailsCard; let i=index;" class="app-enquiry-details-listview--cards">
+      <kendo-card class="app-enquiry-details-listview--kendo-card">
+        <div class="app-enquiry-details-listview--kendo-card-header">
+          <div class="app-enquiry-details-listview--kendo-card-number">
+            {{ a.supplierName }}
+          </div>
+          <div>
+            <!-- <img
+              src="assets/content/images/edit.svg"
+              alt="new"
+              (click)="navigateById(a.supplierId)" /> -->
+            <i class="fa-solid fa-pen" (click)="navigateById(a.supplierId)" ></i>
+          </div>
+        </div>
+
+        <div class="app-enquiry-details-listview--kendo-splitter">
+          <kendo-splitter orientation="horizontal"></kendo-splitter>
+        </div>
+
+        <div class="app-enquiry-details-listview--kendo-card-content">
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              New Parts
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{ a.newParts }}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Deleted Parts
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{ a.deletedParts }}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Tot. Disc. Amt. QC
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{ commonService.displayDecimalFormat(a.totalDiscount_QC) }}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Tot. Addl. Disc. Amt. QC
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{ commonService.displayDecimalFormat(a.addDiscount_QC) }}
+            </div>
+          </div>
+
+          <div *ngIf="!a.isSMCommentsOpen" class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              SM Comments
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-comments">
+              <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                  {{ a.smComments | slice:0:30 }} ..... 
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                <img (click)="onSMCommentsClick(i)" src="assets/content/images/down.svg"/>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="a.isSMCommentsOpen" class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              SM Comments
+            </div>
+
+            <div class="app-enquiry-details-listview--kendo-card-comments">
+              <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                  {{ a.smComments }}
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                <img (click)="onSMCommentsClick(i)" src="assets/content/images/up.svg"/>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </kendo-card>
+    </div>
+  </div>
+
+  <div *ngIf="isPartsGridOpen">
+    <div class="app-screen--info-header" *ngIf="isPartsGridOpen">
+      <div class="app-screen--info-header-left">
+        {{WorksheetDRQItemsDetailsCard[0].supplierName}}
+      </div>
+      <div class="app-screen--info-header-right" (click)="onBackClickHandle()">
+        <!-- <img src="assets/content/images/backward.svg"/>
+        <span>Back</span> -->
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div> 
+
+    <kendo-grid
+      [data]="WorksheetDRQGridItemsDetailsCard"
+      [pageSize]="6"
+      [resizable]="true"
+      [sortable]="true"
+      [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+      >
+
+      <kendo-grid-column
+        field="drqItemStatus"
+        title=""
+        [filterable]="false"
+        [sortable]="false"
+        [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+        [width]="10"
+        [locked]="false"
+        [style]="{'display': 'block', 'padding': '0% 0%'}"
+      >
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <div class="kendo-grid--Status-cell" [ngClass]="{
+            'kendo-grid--StatusGreen': dataItem.drqItemStatus == 1,
+            'kendo-grid--StatusBlue': dataItem.drqItemStatus == 2,
+            'kendo-grid--StatusRed': dataItem.drqItemStatus == 3,
+            }">
+            &nbsp;<br/> &nbsp;
+          </div>
+        </ng-template> 
+
+      </kendo-grid-column>
+      
+      <kendo-grid-column
+      field="isDRQ"
+      title="Raise DRQ"
+      [width]="100"
+      [locked]="false"
+      editor="boolean"
+      [headerStyle]="{ 'background-color': '#1C6C73' , 'color': '#FFFFFF', 'text-align': 'center'}"
+      >
+        <ng-template kendoGridHeaderTemplate>
+          <div style="display: flex; align-items: center; justify-content: left; width: 100%;">
+              <span style="text-align: left;">
+                  Raise<br/>DRQ
+              </span>
+              <input type="checkbox" [(ngModel)]="allChecked" (change)="toggleAll($event)" class="chkAll k-checkbox enabled" />
+          </div>
+        </ng-template>
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <div style="text-align:center;width: 100%;">
+            <input type="checkbox" [(ngModel)]="dataItem.isDRQ" class="chkbx k-checkbox" [disabled]="false" />
+          </div>
+        </ng-template>
+      </kendo-grid-column>
+
+      <kendo-grid-column
+        field="productName"
+        title="Product"
+        [filterable]="false"
+        [sortable]="false"
+        [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'center'}"
+        [width]="120"
+      >
+        <ng-template kendoGridHeaderTemplate>
+          <div style="text-align:left;width:100%;height:100%;">Product</div>
+        </ng-template> 
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <div>{{ isNullOrZero(dataItem.productName) }}</div>
+        </ng-template>
+      </kendo-grid-column>
+
+      <kendo-grid-column
+        field="partNo"
+        title="Part No. |  Option  |  Description"
+        [filterable]="false"
+        [sortable]="false"
+        [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'center'}"
+        [width]="180"
+        >
+        <ng-template kendoGridHeaderTemplate>
+          <div style="text-align:left;">Part No. &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; Option  <br> Description</div>
+        </ng-template> 
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+          <div
+            kendoPopoverAnchor
+            [popover]="popover"      
+            #container="kendoPopoverAnchor"
+            #anchor="kendoPopoverAnchor"
+            (click)="showPopover(dataItem)"
+            showOn="click"
+            >
+            <span> {{isNullOrZero(dataItem.partNo)}} &nbsp;&nbsp;|&nbsp;&nbsp; {{isNullOrZero(dataItem.option)}} </span>
+            <br/>
+            <span [title]="isNullOrZero(dataItem.description)" class="short-title">
+              {{ isNullOrZero(dataItem.description) | slice:0:15 }} ..... 
+            </span>
+            <span [title]="isNullOrZero(dataItem.description)" class="long-title">
+              {{ isNullOrZero(dataItem.description) | slice:0:20 }} .....            
+            </span>
+          </div>
+
+          <kendo-popover
+          class="kendo-popover"
+          #popover
+          position="top"
+          [width]="popoverWidth"
+          [callout]="true">
+          <ng-template
+            kendoPopoverTitleTemplate let-anchor let-container>
+            <div class="kendo-popover-title-wrapper">
+              <span class="kendo-popover-title">Part Details</span>
+              <span class="kendo-popover-title" (click)="closePopover(rowIndex)"> <i class="fa-solid fa-xmark"></i> </span>
+            </div>
+          </ng-template>
+          <ng-template 
+            kendoPopoverBodyTemplate let-anchor let-data="data">
+            <ul width="100%">
+              <li>
+                <strong>Part No:</strong>
+                {{ isNullOrZero(dataItem.partNo) }}
+              </li>
+              <li>
+                <strong>Option:</strong>
+                {{ isNullOrZero(dataItem.option) }}
+              </li>
+              <li>
+                <strong>Description:</strong>
+                {{ isNullOrZero(dataItem.description) }}
+              </li>
+            </ul>
+          </ng-template>
+          </kendo-popover>
+        </ng-template> 
+      </kendo-grid-column>
+
+      <kendo-grid-column
+        field="productLine"
+        title="PL"
+        [filterable]="true"
+        [sortable]="true"
+        [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'center'}"
+        [width]="80"
+      >
+        <ng-template kendoGridHeaderTemplate>
+          <div style="text-align:center;width:100%;height:100%;">PL</div>
+        </ng-template> 
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <div style="text-align:center;width:100%;height:100%;">{{ isNullOrZero(dataItem.productLine) }}</div>
+        </ng-template>
+      </kendo-grid-column>
+
+      <kendo-grid-column
+        field="reqDRQPC"
+        title="Req. Addl. Disc. %"
+        [filterable]="false"
+        [sortable]="false"
+        [width]="100"
+        [type]="'number'"
+        editor="numeric"
+        [headerStyle]="{ 'background-color': '#1C6C73' , 'color': '#FFFFFF', 'text-align': 'center'}"
+      >
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <kendo-numerictextbox
+            [(ngModel)]="dataItem.reqDRQPC"
+            [spinners]="false"
+            [format]="'n2'"
+            [decimals]="2"
+            [min]="0"
+            [max]="100"
+            class="columnRightToLeft"
+          ></kendo-numerictextbox>
+        </ng-template>
+        <ng-template kendoGridHeaderTemplate>
+          <div style="text-align: center">Requested <br> Addl. Disc. %</div>
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+
+    <div class="app-screen--footer">
+      <form [formGroup]="drqApprovalForm">
+        <div class="app-comments--container">
+          <kendo-formfield>
+            <div class="app-comments--content">
+              <!-- <kendo-label class="app-comments--label"
+              [for]="drqSMComments"
+              >SM Comments:</kendo-label
+              > -->
+              <div class="app-kendo--textarea-wrapper">
+                <kendo-label
+                  class="app-kendo--label"
+                  [for]="drqSMComments"
+                  >SM Comments:</kendo-label>
+                <button 
+                    type="button" 
+                    class="mic-icon-btn" 
+                    (click)="commonService.startListeningAndPatch(drqApprovalForm,'drqSMComments')">
+                    <img src="assets/content/images/microphone.svg" alt="mic" />
+                </button>
+              </div>
+              <kendo-textarea
+                class="app-comments--textarea"
+                placeholder="Type your message here.."
+                formControlName="drqSMComments"
+                #drqSMComments
+                [rows]="5"
+                resizable="vertical">
+              </kendo-textarea>
+            </div>
+            <kendo-formerror class="app-comments--error-msg"
+              >SM Comments is required</kendo-formerror>
+          </kendo-formfield>
+        </div>
+      </form>
+
+      <button
+        *ngIf=true
+        kendobutton
+        class="app-save--button"
+        (click)="saveDRQRequest()">
+        Save
+      </button>
+      <button
+        kendobutton
+        class="app-cancel--button"
+        (click)="onBackClickHandle()">
+        Cancel
+      </button>
+    </div>
+
+  </div>  
+</div>
+  
+<div class="app-screen--loader" *ngIf="showWorksheetAPILoader">
+  <kendo-loader
+    type="converging-spinner"
+    themeColor="info"
+    size="medium">
+  </kendo-loader>
+  <div>Loading DRQ details...</div>
+</div>
+  
+  

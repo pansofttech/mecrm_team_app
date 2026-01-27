@@ -1,0 +1,24 @@
+<kendo-window
+ *ngIf="showAttachmentPopup"
+ (close)="onAttachmentPopupClose()"
+ [minWidth]="200"
+ [width]="400"
+ [style.left.px]="popupPosition.x"
+ [style.top.px]="popupPosition.y"
+ class="app-attachment-popup">
+
+    <kendo-window-titlebar>
+        <span class="k-window-title">{{ title }}</span>
+        <button kendoWindowCloseAction></button>
+    </kendo-window-titlebar>   
+
+    <div class="app-comments--container">
+        <div class="app-screen--loader" *ngIf="showAPILoader">
+            <kendo-loader
+              type="converging-spinner"
+              themeColor="info"
+              size="medium"></kendo-loader>
+            <div>Loading details...</div>
+        </div>
+    </div>
+</kendo-window>

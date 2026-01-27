@@ -1,0 +1,72 @@
+.header{
+  display: flex;
+  margin: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.total-header{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.sub-title{
+  color: var(--body-grey, #69727b);
+  font-family: var(--font-family-text);
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-weight: var(--font-weight-normal);
+  line-height: normal;
+}
+.sold{
+  color: #383838;
+  font-family: var(--font-family-text);
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+}
+.sub-title{
+  display: flex;
+  flex-basis: 100%;
+  justify-content: left;
+  gap:0.1rem;
+}
+.sub-title-left{
+  display: flex;
+  flex-basis: 70%;
+  justify-content: left;
+  gap:0.1rem;
+}
+.sub-title-right{
+  display: flex;
+  flex-basis: 30%;
+  justify-content: right;
+  gap:0.1rem;
+}
+
+.sub-title-content{
+  flex-basis: 31.5%;
+}
+.sub-title-content-left{
+    flex-basis: 45%;
+}
+.sub-title-content-right{
+    flex-basis: 45%;
+}
+.sold-content{
+  flex-basis: 68.5%;
+}
+.sold-content-left{
+    flex-basis: 55%;
+}
+.sold-content-right{
+    flex-basis: 55%;
+}
+.sold-content-total{
+  flex-basis: 68.5%;
+}
+.sub-title-total{
+  flex-basis: 31.5%;
+}

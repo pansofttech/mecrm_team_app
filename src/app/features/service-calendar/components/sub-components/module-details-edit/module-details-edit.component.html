@@ -1,0 +1,133 @@
+<!-- <div class="app-locked--container">
+    <div class="app-screen--header">
+      Module Details
+    </div> 
+</div> -->
+
+<div class="app-screen--content">
+    <div class="app-kendo-form--container" [formGroup]="moduleDetailsForm">
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="moduleName">
+            Module
+          </kendo-label>
+          <kendo-textbox
+            class="app-kendo--dropdownlist"
+            formControlName="moduleName"
+            #moduleName>
+          </kendo-textbox>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+          Module name is required
+        </kendo-formerror>
+      </kendo-formfield>
+  
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="modelNo">
+            Model No.
+          </kendo-label>
+          <kendo-textbox
+            class="app-kendo--dropdownlist"
+            formControlName="modelNo"
+            #modelNo
+            required>
+          </kendo-textbox>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+          Model No. is required
+        </kendo-formerror>
+      </kendo-formfield>
+  
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="partNo">
+            Part No.
+          </kendo-label>
+          <kendo-textbox
+            class="app-kendo--dropdownlist"
+            formControlName="partNo"
+            #partNo>
+          </kendo-textbox>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+          Part No. is required
+        </kendo-formerror>
+      </kendo-formfield>
+  
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="serialNo">
+            Serial No.
+          </kendo-label>
+          <kendo-textbox
+            class="app-kendo--dropdownlist"
+            formControlName="serialNo"
+            #serialNo
+            required>
+          </kendo-textbox>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+          Serial No. is required
+        </kendo-formerror>
+      </kendo-formfield>
+  
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="versionNo">
+            Version/Firmware
+          </kendo-label>
+          <kendo-textbox
+            class="app-kendo--dropdownlist"
+            formControlName="versionNo"
+            #versionNo>
+          </kendo-textbox>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+          Version/Firmware is required
+        </kendo-formerror>
+      </kendo-formfield>
+  
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label
+            class="app-kendo--label"
+            [for]="notes">
+            Notes
+          </kendo-label>
+          <kendo-textarea
+            class="app-kendo--textarea"
+            placeholder="Type  your message here.."
+            formControlName="notes"
+            #notes
+            [rows]="6"
+            resizable="vertical"></kendo-textarea>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Notes is required
+        </kendo-formerror>
+      </kendo-formfield>    
+    </div>
+    <div class="app-screen--footer">
+      <button
+        kendoButton
+        class="app-save--button"
+        (click)="submit()">
+        Submit
+      </button>
+      <button
+        kendobutton
+        class="app-cancel--button"
+        (click)="onBackClickHandle()">
+        Cancel
+      </button>
+    </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+  <kendo-loader
+    type="converging-spinner"
+    themeColor="info"
+    size="medium"></kendo-loader>
+  <div>Loading module details....</div>
+</div>

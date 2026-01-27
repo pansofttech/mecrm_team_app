@@ -1,0 +1,183 @@
+<div class="app-scrollable--container" *ngIf="!showAPILoader">
+    <div class="app-screen--info-tab">
+          <div class="app-screen--info-tab-left"> 
+          </div>
+          <div class="app-screen--info-tab-right"> 
+            <input
+              kendoRadioButton
+              type="radio"
+              value="selectall"
+              #selectall
+              [checked]="prlcService.isAllCardSelected"
+              (click)="toggleCardSelection()"/>
+            <kendo-label
+              [for]="selectall"
+              text="Select all"
+            ></kendo-label>
+          </div>
+    </div>
+    <div *ngFor="let a of partsListCards; let i = index" class="app-enquiry-details-listview--cards">
+        <kendo-card class="app-enquiry-details-listview--kendo-card" [ngClass]="{'selected-card': a.isCardSelected}">
+            <div class="app-enquiry-details-listview--kendo-card-header">
+                    <div class="app-enquiry-details-listview--kendo-card-number">
+                    {{ a.supplierName }}
+                    </div>
+                    <div class="card-two-options">
+                        <div>
+                            <input type="radio"
+                            kendoRadioButton
+                            [checked]="a.isCardSelected"
+                            (click)="isCardSelected(i)" />
+                        </div>
+                    </div>  
+            </div>
+
+            <div class="app-enquiry-details-listview--kendo-splitter">
+                <kendo-splitter orientation="horizontal"></kendo-splitter>
+            </div>
+
+            <div class="app-enquiry-details-listview--kendo-card-content">
+                <div class="kendo-card-content">
+                    <div class="kendo-card-content-left fb-100">
+                        <div class="kendo-card-content--sub-title fb-35">
+                            Part No
+                        </div>
+                        <div class="kendo-card-content--value fb-65">
+                            {{ a.partNo}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kendo-card-content">
+                    <div class="kendo-card-content-left fb-100">
+                        <div class="kendo-card-content--sub-title fb-35">
+                            Option
+                        </div>
+                        <div class="kendo-card-content--value fb-65">
+                            {{ a.option}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kendo-card-content">
+                        <div class="kendo-card-content-left fb-100">
+                        <div class="kendo-card-content--sub-title fb-35">
+                            PL
+                        </div>
+                        <div class="kendo-card-content--value fb-65">
+                            {{ a.productLine}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kendo-card-content">
+                    <div class="kendo-card-content-left fb-100">
+                        <div class="kendo-card-content--sub-title fb-35">
+                            ULP 
+                        </div>
+                        <div class="kendo-card-content--value fb-65">
+                            {{ commonService.displayDecimalFormat(a.unitPrice) }} {{ a.currencyName }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kendo-card-content">
+                    <div class="kendo-card-content-left fb-100">
+                        <div class="kendo-card-content--sub-title fb-35">
+                            Supp Disc.
+                        </div>
+                        <div class="kendo-card-content--value fb-65">
+                            {{ a.discount}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kendo-card-content">
+                    <div class="kendo-card-content-left fb-100">
+                        <div class="kendo-card-content--sub-title fb-35">
+                            Ad. Supp Disc.
+                        </div>
+                        <div class="kendo-card-content--value fb-65">
+                            {{ commonService.displayDecimalFormat(a.suppDiscount) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kendo-card-content">
+                    <div class="kendo-card-content-left fb-100">
+                        <div class="kendo-card-content--sub-title fb-35">
+                            TSINP
+                        </div>
+                        <div class="kendo-card-content--value fb-65">
+                            {{ commonService.displayDecimalFormat(a.orderValue) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kendo-card-content">
+                    <div class="kendo-card-content-left fb-100">
+                        <div class="kendo-card-content--sub-title fb-35">
+                            USOLP
+                        </div>
+                        <div class="kendo-card-content--value fb-65">
+                            {{ commonService.displayDecimalFormat(a.unitItemSP) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kendo-card-content">
+                    <div class="kendo-card-content-left fb-100">
+                        <div class="kendo-card-content--sub-title fb-35">
+                            TSOLP
+                        </div>
+                        <div class="kendo-card-content--value fb-65">
+                            {{ commonService.displayDecimalFormat(a.itemSP) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kendo-card-content">
+                    <div class="kendo-card-content-left fb-100">
+                        <div class="kendo-card-content--sub-title fb-35">
+                            Status:
+                        </div>
+                        <div class="kendo-card-content--value fb-65">
+                            {{ a.partStatus}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kendo-card-content">
+                    <div class="kendo-card-content-left fb-100">
+                        <div class="kendo-card-content--sub-title fb-35">
+                            Proc. Reason
+                        </div>
+                        <div class="kendo-card-content--value fb-65">
+                            {{ a.procurementReason}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kendo-card-content">
+                    <div class="kendo-card-content-left fb-90">
+                        <div class="kendo-card-content--sub-title fb-39">
+                            Remarks
+                        </div>
+                        <div *ngIf="!a.isDescriptionOpen" class="kendo-card-content--value fb-61">
+                            {{ a.remark | slice:0:20 }} ...
+                        </div>
+                        <div *ngIf="a.isDescriptionOpen" class="kendo-card-content--value fb-61">
+                            {{ a.remark }}
+                        </div>
+                    </div>
+                    <div class="kendo-card-content-right fb-10" style="justify-content: flex-end;">
+                        <img *ngIf="!a.isDescriptionOpen" (click)="isDescOpened(i)" src="assets/content/images/down.svg"/>
+                        <img *ngIf="a.isDescriptionOpen" (click)="isDescOpened(i)"src="assets/content/images/up.svg">
+                    </div>
+                </div>
+            </div>
+            
+        </kendo-card>
+    </div>
+</div>
+

@@ -1,0 +1,107 @@
+<div class="app-locked--container" *ngIf="!showAPILoader">
+  <div class="app-screen--info-header">
+    <div class="app-screen--info-header-left">
+      Completion
+    </div>
+    <div class="app-screen--info-header-right" (click)="onBackClickHandle()">
+      <img src="assets/content/images/backward.svg" />
+      <span>Back</span>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!showAPILoader">
+    <kendo-stepper
+    [steps]="steps"
+    stepType="full"
+    [linear]="false"
+    [(currentStep)]="currentStep"
+    cssClass="enquiry-details-content--stepper"
+    (stepSelect)="onStepSelect($event)">
+  </kendo-stepper>
+  
+  <div class="app-screen--content">
+    <form class="k-form k-form-md" [formGroup]="callCompletionForm">
+      <app-completion-details
+        *ngIf="currentStep === 0"
+        [completionDetails]="currentGroup"
+        [srid]="srid"
+        [srlcDetails]="srlcDetails"
+        [CSRAttachment]="CSRAttachment"   
+        (surveyValidator)="surveyValidator()"></app-completion-details>
+      <app-installation-details
+        *ngIf="currentStep === 1"
+        [installationDetails]="currentGroup"
+        [srid]="srid"
+        [IBStickerAttachment]="IBStickerAttachment"
+        [srlcDetails]="srlcDetails"></app-installation-details>
+      <app-systematization-details
+        *ngIf="currentStep === 2"
+        [systematizationDetails]="currentGroup"
+        [srid]="srid"
+        [srlcDetails]="srlcDetails"></app-systematization-details>
+      <app-module-details
+        *ngIf="currentStep === 3"
+        [srid]="srid"
+        [isEditable]="isEditable"
+        [moduleDetails]="currentGroup"
+        [installBaseId]="srlcDetails[0].installBaseID? srlcDetails[0].installBaseID: 0"
+        [moduleDetailsCard]="moduleDetails"
+        (hideShowFooter)="hideShowFooter($event)"
+        (validateModuleDetails)="validateModules(this.moduleDetails)"
+        (moduleDetailsCardChange)="updateModuleDetailsCard($event)"></app-module-details>
+      <app-other-tasks
+        *ngIf="currentStep === 4"
+        [srid]="srid"
+        [isEditable]="isEditable"
+        [otherDetails]="currentGroup"
+        [callCompletionForm]="callCompletionForm"
+        [otherTasksDetails]="otherTasksDetails"
+        (hideShowFooter)="hideShowFooter($event)"
+        (validateOtherDetails)="validateOtherTasks(this.otherTasksDetails)"></app-other-tasks>
+      <app-service-survey
+        *ngIf="currentStep === 5 && serviceCalendarService.isSurveyRequired"
+        [srid]="srid"
+        [surveyDetails]="currentGroup"
+        [srlcDetails]="srlcDetails"></app-service-survey>
+    </form>
+    <div class="app-screen--footer" *ngIf="!isInnerScreen">
+      <button
+        kendobutton
+        class="app-general--button"
+        (click)="next()"
+        *ngIf="currentStep !== (serviceCalendarService.isSurveyRequired? 5: 4)">
+        Next
+      </button>
+      <button
+        kendoButton
+        class="app-save--button"
+        (click)="submit()"
+        *ngIf="currentStep === (serviceCalendarService.isSurveyRequired? 5: 4)">
+        Submit
+      </button>
+      <button
+        kendobutton
+        class="app-cancel--button"
+        *ngIf="currentStep === 0"
+        (click)="onBackClickHandle()">
+        Cancel
+      </button>
+      <button
+        kendobutton
+        class="app-cancel--button"
+        *ngIf="currentStep !== 0"
+        (click)="prev()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+  <kendo-loader
+    type="converging-spinner"
+    themeColor="info"
+    size="medium"></kendo-loader>
+  <div>{{ loaderMessage }}.</div>
+</div>    

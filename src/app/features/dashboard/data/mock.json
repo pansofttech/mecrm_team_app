@@ -1,0 +1,80 @@
+{
+  "quickCards": [
+    {
+      "image": "line-chart",
+      "text": "Enquiry",
+      "path": "enquiry-details"
+    },
+    {
+      "image": "line-chart",
+      "text": "Funnel Update",
+      "path": "enquiry-listview"
+    },
+    {
+      "image": "wrench",
+      "text": "Service Calls",
+      "path": "service-calendar"
+    },
+    {
+      "image": "line-chart",
+      "text": "Worksheet",
+      "path": "worksheet-details"
+    },
+    {
+      "image": "line-chart",
+      "text": "Sales Parts Management",
+      "path": "sales-parts-management"
+    },
+    {
+      "image": "wrench",
+      "text": "Parts Requisition Worklist",
+      "path": "parts-requisition-worklist"
+    }
+  ],
+
+  "moduleCards": [
+    {
+      "image": "wrench",
+      "text": "Service"
+    },
+    {
+      "image": "line-chart",
+      "text": "Sales"
+    },
+    {
+      "image": "truck",
+      "text": "PL"
+    },
+    {
+      "image": "money-bill",
+      "text": "F&A"
+    },
+    {
+      "image": "bullhorn",
+      "text": "Marketing"
+    }
+  ],
+
+  "landingPageList": [
+    {
+      "text1": "Sales for Sep 2023",
+      "text2": "Rs 2,71,000",
+      "image": "dashboard-sales-icon"
+    },
+    {
+      "text1": "Sales for Sep 2023",
+      "text2": "Rs 2,71,000",
+      "image": "dashboard-sales-icon"
+    },
+    {
+      "text1": "Sales for Sep 2023",
+      "text2": "Rs 2,71,000",
+      "image": "dashboard-sales-icon"
+    },
+    {
+      "text1": "Sales for Sep 2023",
+      "text2": "Rs 2,71,000",
+      "image": "dashboard-sales-icon"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<div class="app-navigation-main--container">
+    <i class="fa-solid fa-chevron-left app-icon-light" (click)="onBackClickHandle()"></i>
+    <div class="app-navigation--header">&nbsp;&nbsp;{{title}}</div>
+    <div *ngIf="showRefresh" (click)="onRefreshHandle()">
+        <i class="fa-solid fa-arrows-rotate app-icon-light"> </i>
+    </div>
+</div>

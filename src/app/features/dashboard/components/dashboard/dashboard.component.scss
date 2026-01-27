@@ -1,0 +1,91 @@
+.dashboard-header--container {
+  box-shadow: none;
+  background-color: transparent;
+  padding-top: 1rem;
+  color: var(--primary-white);
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard--title {
+  // font-family: DM Sans;
+  font-size: var(--text-size-3);
+  font-weight: var(--font-weight-bolder);
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: var(--primary-white);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.landing-page-main {
+  // height: 100vh;
+  background: linear-gradient(270deg, #327790 0%, #49AFCD 33.33%, #89BA82 67.19%, #A0B31D 100%)
+}
+.dashboard-logo {
+  max-width: 60%; 
+  max-height: 60%;
+  object-fit: contain;
+}
+.dashboard-ecrm-logo {
+  width: 1.375rem;
+  height: 1.375rem;
+  filter: brightness(0) invert(1);
+}
+.dashboard--badge-container {
+  display: flex;
+}
+.dashboard--menu-container {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+}
+.dashboard--menu-drawer-header{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 0.6rem;
+  background: linear-gradient(270deg, #327790 0%, #49AFCD 33.33%, #89BA82 67.19%)
+}
+.dashboard-menu-user-initial-icon {
+  width: 50px;           
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-white);
+  background-color: var(--primary-white); 
+  display: flex;          
+  justify-content: center;
+  align-items: center;
+  padding: 0;           
+}
+.dashboard--menu-drawer-username{
+  font-size: var(--text-size-2);
+  font-weight: var(--font-weight-bolder);
+  color: var(--primary-white);
+}
+.dashboard--menu-drawer-footer{
+  position: absolute; 
+  bottom:0.2rem; 
+  left: 0.5rem;
+  width: 93%;
+}
+
+.notification-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notification-icon .badge {
+  position: absolute;
+  top: -13px;
+  right: -5px;       
+  font-size: var(--text-size-04);
+  background: red;
+  color: var(--primary-white);
+  font-weight: var(--font-weight-bolder);
+  border-radius: 50%;
+  padding: 2px 4px;
+  line-height: 1;
+}

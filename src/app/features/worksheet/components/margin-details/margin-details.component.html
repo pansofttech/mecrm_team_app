@@ -1,0 +1,382 @@
+<div *ngIf="!showWorksheetAPILoader">
+  <div class="app-screen--info-header">
+    <div class="app-screen--info-header-left">
+      Margin
+    </div>
+    <kendo-button class="app-screen--info-header-right"
+      (click)="marginExcelDownload()"> 
+      <kendo-loader *ngIf="isDownloadloaderVisible" size="small"> </kendo-loader>
+      <!-- <img src="assets/content/images/download.svg" alt="->" width="12" height="12"/>  -->
+      <i class="fa-solid fa-download"></i>
+      <span>&nbsp;Download</span> 
+    </kendo-button>
+  </div>
+
+  <div *ngIf="isProductGridOpen"> 
+    <div class="app-screen--info-header">
+      <div class="app-screen--info-header-left">
+        Product List
+      </div>
+    </div>
+    <kendo-grid 
+    class="app-kendo-grid"
+    [kendoGridBinding]="marginProductGridDetails" 
+    [pageSize]="6" 
+    [pageable]="true"
+    [resizable]="true"
+    [sortable]="true"
+  >
+
+    <kendo-grid-column
+      field="productName"
+      title="Product"
+      [filterable]="false"
+      [sortable]="false"
+      [locked]="false"
+      [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+      [footerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'left'}"
+      [width]="160"
+    >
+      <ng-template kendoGridHeaderTemplate>
+        <div style="text-align:left;width: 100%;">Product</div>
+      </ng-template> 
+      <ng-template kendoGridCellTemplate let-dataItem>
+          {{isNullOrZero(dataItem.productName)}}
+      </ng-template> 
+      <ng-template kendoGridFooterTemplate>
+        <div>
+          <strong>Deal Margin</strong>
+        </div>
+      </ng-template> 
+
+    </kendo-grid-column>
+
+    <kendo-grid-column
+      field="_QuoteMarginPC"
+      title="Margin"
+      [filterable]="false"
+      [sortable]="false"
+      [locked]="false"
+      [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+      [footerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'right'}"
+      [width]="70"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div style="text-align:right">
+          {{ commonService.displayDecimalFormat(dataItem._QuoteMarginPC)}}     
+        </div>
+      </ng-template> 
+      <ng-template kendoGridHeaderTemplate>
+        <div style="text-align:right;width: 100%;">Margin %</div>
+      </ng-template> 
+      <ng-template kendoGridFooterTemplate>
+        <div>
+          {{calculateSumOfMargin("_TotalCostQC", "_NetQuote", marginProductGridDetails, 'Product') }}
+        </div>
+      </ng-template> 
+    </kendo-grid-column>
+ 
+    <kendo-grid-column
+      [filterable]="false"
+      [sortable]="false"
+      [locked]="false"
+      [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+      [footerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'right'}"
+      [width]="30"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div style="text-align:center" (click)="onSuppProdClick('Supplier',null,dataItem.productName)">
+          >>
+        </div>
+      </ng-template> 
+    </kendo-grid-column>
+
+    </kendo-grid>
+  </div>
+
+  <div *ngIf="isSupplierGridOpen"> 
+    <div class="app-screen--info-header">
+      <div class="app-screen--info-header-left">
+        {{ selectedProduct }}
+      </div>
+      <div class="app-screen--info-header-right" 
+        (click)="onSuppProdClick('Product',null,null)">
+        <!-- <img src="assets/content/images/backward.svg"/> -->
+         <i class="fa-solid fa-backward"></i>
+        <span>Back</span>
+      </div>
+    </div> 
+
+    <kendo-grid
+    class="app-kendo-grid"
+    [kendoGridBinding]="marginSupplierGridDetails" 
+    [pageSize]="6" 
+    [pageable]="true"
+    [resizable]="true"
+    [sortable]="true"
+    >
+
+    <kendo-grid-column
+      field="supplierName"
+      title="Supplier"
+      [filterable]="false"
+      [sortable]="false"
+      [locked]="false"
+      [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+      [footerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'left'}"
+      [width]="160"
+    >
+      <ng-template kendoGridHeaderTemplate>
+        <div style="text-align:left;width:100%;">Supplier</div>
+      </ng-template> 
+      <ng-template kendoGridCellTemplate let-dataItem>
+          {{isNullOrZero(dataItem.supplierName)}}
+      </ng-template> 
+      <ng-template kendoGridFooterTemplate>
+        <div>
+          <strong>Product Margin</strong>
+        </div>
+      </ng-template> 
+    </kendo-grid-column>
+
+    <kendo-grid-column
+      field="_QuoteMarginPC"
+      title="Margin"
+      [filterable]="false"
+      [sortable]="false"
+      [locked]="false"
+      [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+      [footerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'right'}"
+      [width]="70"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div style="text-align:right">
+          {{ commonService.displayDecimalFormat(dataItem._QuoteMarginPC)}} 
+        </div>
+      </ng-template> 
+      <ng-template kendoGridHeaderTemplate>
+        <div style="text-align:right;width: 100%;">Margin %</div>
+      </ng-template> 
+      <ng-template kendoGridFooterTemplate>
+        <div style='text-align:right'>
+          {{calculateSumOfMargin("_TotalCostQC", "_NetQuote", marginSupplierGridDetails,'Supplier') }}
+        </div>
+      </ng-template> 
+    </kendo-grid-column>
+
+    <kendo-grid-column
+    [filterable]="false"
+    [sortable]="false"
+    [locked]="false"
+    [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+    [footerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'right'}"
+    [width]="30"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div style="text-align:center" (click)="onSuppProdClick('Parts',dataItem.supplierName, selectedProduct)">
+          >>
+        </div>
+      </ng-template> 
+    </kendo-grid-column>
+
+    </kendo-grid>
+  </div>
+
+  <div *ngIf="isPartsGridOpen"> 
+    <div class="app-screen--info-header">
+      <div class="app-screen--info-header-left">
+        {{selectedProduct}}
+      </div>
+    </div>
+    <div class="app-screen--info-header">
+      <div class="app-screen--info-header-left">
+        {{selectedSupplier}}
+      </div>
+      <div class="app-screen--info-header-right" 
+        (click)="onSuppProdClick('Supplier',selectedSupplier, selectedProduct)">
+        <img src="assets/content/images/backward.svg"/>
+        <span>Back</span>      
+      </div>
+    </div> 
+    
+    <kendo-grid
+      class="app-kendo-grid"
+      [kendoGridBinding]="marginPartsGridDetails" 
+      [pageSize]="6" 
+      [pageable]="true"
+      [resizable]="true"
+      [sortable]="true"
+      (pageChange)="onPageChange($event)"
+    >
+
+      <kendo-grid-column
+        field="partNo"
+        title="Part No. |  Option  |  Description"
+        [filterable]="false"
+        [sortable]="false"
+        [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'center'}"
+        [footerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'left'}"
+        [width]="150"
+      >
+        <ng-template kendoGridHeaderTemplate>
+          <div style="text-align:left;">Part No. &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; Option  <br> Description</div>
+        </ng-template> 
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+          <div
+            kendoPopoverAnchor
+            [popover]="popover"      
+            #container="kendoPopoverAnchor"
+            #anchor="kendoPopoverAnchor"
+            (click)="showPopover(dataItem)"
+            showOn="click"
+            >
+            <span> {{isNullOrZero(dataItem.partNo)}} &nbsp;&nbsp;|&nbsp;&nbsp; {{isNullOrZero(dataItem.partNoOption)}} </span>
+            <br/>
+            <span [title]="isNullOrZero(dataItem.description)" class="short-title">
+              {{ isNullOrZero(dataItem.description) | slice:0:22 }} ..... 
+            </span>
+            <span [title]="isNullOrZero(dataItem.description)" class="long-title">
+              {{ isNullOrZero(dataItem.description) | slice:0:60 }} .....            
+            </span>
+          </div>
+
+          <kendo-popover
+          class="kendo-popover"
+          #popover
+          position="top"
+          [width]="popoverWidth"
+          [callout]="true">
+          <ng-template
+            kendoPopoverTitleTemplate let-anchor let-container>
+            <div class="kendo-popover-title-wrapper">
+              <span class="kendo-popover-title">Part Details</span>
+              <span class="kendo-popover-title" (click)="closePopover(rowIndex)"> <i class="fa-solid fa-xmark"></i> </span>
+            </div>
+          </ng-template>
+          <ng-template 
+            kendoPopoverBodyTemplate let-anchor let-data="data">
+            <ul width="100%">
+              <li>
+                <strong>Part No:</strong>
+                {{ isNullOrZero(dataItem.partNo) }}
+              </li>
+              <li>
+                <strong>Option:</strong>
+                {{ isNullOrZero(dataItem.partNoOption) }}
+              </li>
+              <li>
+                <strong>Description:</strong>
+                {{ isNullOrZero(dataItem.description) }}
+              </li>
+            </ul>
+          </ng-template>
+          </kendo-popover>
+
+        </ng-template> 
+        <ng-template kendoGridFooterTemplate>
+          <div>
+            Supplier Margin
+          </div>
+        </ng-template> 
+      </kendo-grid-column>
+
+      <kendo-grid-column
+      field="productLine"
+      title="PL"
+      [filterable]="false"
+      [sortable]="false"
+      [locked]="false"
+      [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+      [footerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'left'}"
+      [width]="30"
+      >
+      <ng-template kendoGridHeaderTemplate>
+        <div style="text-align:center;width: 100%;"> PL </div>
+      </ng-template> 
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <div style="text-align:center;width: 100%;">
+            {{isNullOrZero(dataItem.productLine)}}
+          </div>
+        </ng-template> 
+      </kendo-grid-column>
+
+      <kendo-grid-column
+      field="_QuoteMarginPC"
+      title="Margin"
+      [filterable]="false"
+      [sortable]="false"
+      [locked]="false"
+      [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+      [footerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'right'}"
+      [width]="60"
+      >
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <div style="text-align:right">
+            {{ commonService.displayDecimalFormat(dataItem._QuoteMarginPC) }}  
+          </div>
+        </ng-template> 
+        <ng-template kendoGridHeaderTemplate>
+          <div style="text-align:right;width: 100%;">Margin %</div>
+        </ng-template> 
+        <ng-template kendoGridFooterTemplate>
+          <div>
+            {{calculateSumOfMargin("_TotalCostQC", "_NetQuote", marginPartsGridDetails, 'Parts')}}
+          </div>
+        </ng-template> 
+      </kendo-grid-column>
+
+      <!-- <kendo-grid-column
+        field="isOptional"
+        title="Is Opt."
+        [filterable]="false"
+        [sortable]="false"
+        [locked]="false"
+        [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+        [width]="95"
+      >
+        <ng-template kendoGridCellTemplate let-dataItem>
+          {{(dataItem.isOptional == 0)?'No':'Yes'}}
+        </ng-template> 
+      </kendo-grid-column>
+
+      <kendo-grid-column
+        field="isAlternateProduct"
+        title="Is Alt."
+        [filterable]="false"
+        [sortable]="false"
+        [locked]="false"
+        [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+        [width]="95"
+      >
+        <ng-template kendoGridCellTemplate let-dataItem>
+          {{(dataItem.isAlternateProduct == 0)?'No':'Yes'}}
+        </ng-template> 
+      </kendo-grid-column>
+
+      <kendo-grid-column
+        field="isUnManagedSupplier"
+        title="Is LocalSupplier"
+        [filterable]="false"
+        [sortable]="false"
+        [locked]="false"
+        [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+        [width]="135"
+      >
+        <ng-template kendoGridCellTemplate let-dataItem>
+            {{(dataItem.isUnManagedSupplier == 0)?'No':'Yes'}}
+        </ng-template> 
+      </kendo-grid-column> -->
+
+    </kendo-grid>
+
+  </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showWorksheetAPILoader">
+  <kendo-loader
+    type="converging-spinner"
+    themeColor="info"
+    size="medium"></kendo-loader>
+  <div>Loading margin details...</div>
+</div>
+

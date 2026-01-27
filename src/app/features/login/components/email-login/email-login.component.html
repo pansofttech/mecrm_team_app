@@ -1,0 +1,29 @@
+<div class="email-login-page--main-container">
+    <kendo-card  class="email-login-page--kendo-card">
+        <div class="email-login-page--logo-img">  <img src="assets/content/images/login-images/Group-img.svg"  alt="email"/></div>
+           <div class="email-login-page--title">Enter Email Id</div>
+             <div class="email-login-page--form-container">
+                <form [formGroup]="loginForm" class="email-login-page--login-form">
+                    <div class="email-login-page--formfield">
+                        <kendo-formfield >
+                            <kendo-textbox  class="email-login-page--textbox"
+                                   formControlName="email"
+                                    #email
+                                    required
+                                    placeholder="Enter Email ID">
+                                       <ng-template kendoTextBoxPrefixTemplate>
+                                        <img src="assets/content/images/login-images/password.svg" alt="email" class="email-login-page--textbox-img">
+                                        </ng-template>
+                              </kendo-textbox>
+                              <kendo-formerror class="email-login-page--form-error" >Email Id is Invalid</kendo-formerror>
+                         </kendo-formfield>
+                     </div>
+                      <div class="email-login-page--forgot-link">Forgot  your password?</div>
+                      <div> 
+                         <button kendoButton class="email-login-page--signin-button"  [disabled]="loginForm.invalid" (click)="onSubmit()" >Sign In</button>
+                      </div>
+                </form>
+              </div>
+     </kendo-card>
+</div>
+

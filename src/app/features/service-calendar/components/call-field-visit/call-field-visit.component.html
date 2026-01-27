@@ -1,0 +1,69 @@
+<div class="app-locked--container" *ngIf="!showAPILoader">
+  <div class="app-screen--info-header">
+    <div class="app-screen--info-header-left">
+      Field Visit
+    </div>
+    <div class="app-screen--info-header-right" (click)="onBackClickHandle()">
+      <img src="assets/content/images/backward.svg" />
+      <span>Back</span>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!showAPILoader">
+  <div class="app-screen--content">
+    <div class="app-kendo-form--container">
+      <form class="k-form k-form-md" [formGroup]="callFieldVisitForm">
+        <kendo-formfield>
+          <div class="app-kendo--content">
+            <div class="app-kendo--textarea-wrapper">
+              <kendo-label
+                class="app-kendo--label"
+                [for]="fieldVisitRemarks"
+                >Remarks</kendo-label>
+              <button 
+                  type="button" 
+                  class="mic-icon-btn" 
+                  (click)="startListeningFieldVisitRemarks();">
+                  <img src="assets/content/images/microphone.svg" alt="mic" />
+              </button>
+            </div>
+            <kendo-textarea
+              class="app-kendo--textarea"
+              placeholder="Type your message here.."
+              formControlName="fieldVisitRemarks"
+              #fieldVisitRemarks
+              [rows]="6"
+              resizable="vertical" required></kendo-textarea>          
+          </div>
+          <kendo-formerror class="app-kendo--error-msg">Field visit remarks is required</kendo-formerror>
+        </kendo-formfield>
+      </form>
+      <kendo-button (click)="getGeoCoords()"> Click for Location </kendo-button>
+    </div>
+    <div class="app-screen--footer">
+      <button
+        kendoButton
+        class="app-save--button"
+        *ngIf="isEditable"
+        (click)="submit()">
+        Submit
+      </button>
+      <button
+        kendobutton
+        *ngIf="isEditable"
+        class="app-cancel--button"
+        (click)="onBackClickHandle()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+  <kendo-loader
+    type="converging-spinner"
+    themeColor="info"
+    size="medium"></kendo-loader>
+  <div>{{ loaderMessage }}</div>
+</div>   

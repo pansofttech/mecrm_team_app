@@ -1,0 +1,171 @@
+<div [formGroup]="prApprovalComments" *ngIf="!showAPILoader">
+    <div class="margin-0-5 margin-top-0-25">
+        <kendo-card class="app-enquiry-details-listview--kendo-card">
+          <div class="app-enquiry-details-listview--kendo-card-content">
+            <div class="kendo-card-content">
+              <div class="kendo-card-content--title">
+                Margin Before Request
+              </div>
+            </div>
+
+            <div class="kendo-card-content">
+              <div class="kendo-card-content-left fb-60">
+                <div class="kendo-card-content--sub-title fb-40">
+                  Value:
+                </div>
+                <div class="kendo-card-content--value fb-60">
+                  {{ commonService.displayDecimalFormat(prInfoCard[0].beforeMarginBC) }}
+                </div>
+              </div>
+
+              <div class="kendo-card-content-right fb-40">
+                <div class="kendo-card-content--sub-title fb-50">
+                    <span class="label-full">Percentage:</span>
+                    <span class="label-short">Perc.</span>
+                </div>
+                <div class="kendo-card-content--value fb-50">
+                  {{ commonService.displayDecimalFormat(prInfoCard[0].beforeMarginBCPC) }} &nbsp; % 
+                </div>
+              </div>
+            </div>
+
+            <div class="kendo-card-content">
+              <div class="kendo-card-content--title">
+                Margin After Request
+              </div>
+            </div>
+            
+            <div class="kendo-card-content">
+              <div class="kendo-card-content-left fb-60">
+                <div class="kendo-card-content--sub-title fb-40">
+                  Value:
+                </div>
+                <div class="kendo-card-content--value fb-60">
+                  {{ commonService.displayDecimalFormat(prInfoCard[0].afterMarginBC) }}
+                </div>
+              </div>
+
+              <div class="kendo-card-content-right fb-40">
+                <div class="kendo-card-content--sub-title fb-50">
+                    <span class="label-full">Percentage:</span>
+                    <span class="label-short">Perc.</span>
+                </div>
+                <div class="kendo-card-content--value fb-50">
+                  {{ commonService.displayDecimalFormat(prInfoCard[0].afterMarginBCPC)}} &nbsp; % 
+                </div>
+              </div>
+            </div>
+          </div> 
+        </kendo-card>
+    </div>  
+
+    <div class="app-kendo-form--container">
+        <kendo-formfield>
+            <div class="app-kendo--content">
+            <div class="app-kendo--textarea-wrapper">
+                <kendo-label
+                class="app-kendo--label"
+                [for]="approverComments"
+                >Approver Comments</kendo-label>
+                <button 
+                    type="button" 
+                    [disabled]="!(getApprovalLevel() == 'Manager')"
+                    class="mic-icon-btn" 
+                    (click)="commonService.startListeningAndPatch(prApprovalComments ,'approverComments');">
+                <img src="assets/content/images/microphone.svg" alt="mic" />
+                </button>
+            </div>  
+            <kendo-textarea
+                class="app-kendo--textarea"
+                placeholder="Type your message here.."
+                formControlName="approverComments"
+                [readonly]="!(getApprovalLevel() == 'Manager')"
+                #approverComments
+                [rows]="6"
+                resizable="vertical"></kendo-textarea>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">Approver Comments is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+            <div class="app-kendo--content">
+            <div class="app-kendo--textarea-wrapper">
+                <kendo-label
+                class="app-kendo--label"
+                [for]="plApproverComments"
+                >PL Approver Comments</kendo-label>
+                <button 
+                    type="button"
+                    [disabled]="!(getApprovalLevel() == 'PL')" 
+                    class="mic-icon-btn" 
+                    (click)="commonService.startListeningAndPatch(prApprovalComments ,'plApproverComments');">
+                <img src="assets/content/images/microphone.svg" alt="mic" />
+                </button>
+            </div>  
+            <kendo-textarea
+                class="app-kendo--textarea"
+                placeholder="Type your message here.."
+                formControlName="plApproverComments"
+                [readonly]="!(getApprovalLevel() == 'PL')"
+                #plApproverComments
+                [rows]="6"
+                resizable="vertical"></kendo-textarea>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">PL Approver Comments is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+            <div class="app-kendo--content">
+            <div class="app-kendo--textarea-wrapper">
+                <kendo-label
+                class="app-kendo--label"
+                [for]="managementComments"
+                >Management Comments</kendo-label>
+                <button 
+                    type="button" 
+                    class="mic-icon-btn" 
+                    [disabled]="!(getApprovalLevel() == 'Management')"
+                    (click)="commonService.startListeningAndPatch(prApprovalComments ,'managementComments');">
+                <img src="assets/content/images/microphone.svg" alt="mic" />
+                </button>
+            </div>  
+            <kendo-textarea
+                class="app-kendo--textarea"
+                placeholder="Type your message here.."
+                formControlName="managementComments"
+                [readonly]="!(getApprovalLevel() == 'Management')"
+                #managementComments
+                [rows]="6"
+                resizable="vertical"></kendo-textarea>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">Management Comments is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+            <div class="app-kendo--content">
+            <div class="app-kendo--textarea-wrapper">
+                <kendo-label
+                class="app-kendo--label"
+                [for]="remarks"
+                >Remarks</kendo-label>
+                <button 
+                    type="button" 
+                    class="mic-icon-btn" 
+                    [disabled]="!(getApprovalLevel() == 'Remarks')"
+                    (click)="commonService.startListeningAndPatch(prApprovalComments ,'remarks');">
+                <img src="assets/content/images/microphone.svg" alt="mic" />
+                </button>
+            </div>  
+            <kendo-textarea
+                class="app-kendo--textarea"
+                placeholder="Type your message here.."
+                formControlName="remarks"
+                [readonly]="!(getApprovalLevel() == 'Remarks')"
+                #remarks
+                [rows]="6"
+                resizable="vertical"></kendo-textarea>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">Remarks is required</kendo-formerror>
+        </kendo-formfield>
+    </div>
+</div>

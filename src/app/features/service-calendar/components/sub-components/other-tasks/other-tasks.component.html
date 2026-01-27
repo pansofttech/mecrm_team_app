@@ -1,0 +1,139 @@
+<div class="app-locked--container">
+    <div class="app-screen--info-header">
+      <div class="app-screen--info-header-left">
+        Other Tasks
+      </div>
+      <div class="app-screen--info-header-right">
+        <div *ngIf="isOtherTasksDetailsEditOpen" 
+             class="app-screen--info-header-right" (click)="onBackClickHandle()">
+             <img src="assets/content/images/backward.svg" />
+             <span>Back</span>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div *ngIf="!showAPILoader">
+    <div [formGroup]="otherDetails">
+      <kendo-formfield>
+        <kendo-textbox
+          formControlName="dummyOtherTaskControl"
+          #dummyOtherTaskControl
+          hidden>
+        </kendo-textbox>
+        <kendo-formerror class="app-stepper--error-msg">
+          Other tasks details are mandatory
+        </kendo-formerror>
+      </kendo-formfield>
+    </div>
+    <div *ngIf="isOtherTasksDetailsOpen">
+      <div *ngIf="otherTasksDetails.length > 0 && !showAPILoader && !isOtherTasksDetailsEditOpen">
+        <div *ngFor="let a of otherTasksDetails;let i=index;" class="app-enquiry-details-listview--cards">
+          <kendo-card class="app-enquiry-details-listview--kendo-card">
+            <div class="app-enquiry-details-listview--kendo-card-header">
+              <div class="app-enquiry-details-listview--kendo-card-number">
+                {{ a.taskType }}
+              </div>
+              <div *ngIf="isEditable">
+                <!-- <img src="assets/content/images/edit.svg"
+                alt="new"
+                (click)="onOtherTasksEdit(i)"/> -->
+                <i class="fa-solid fa-pen" (click)="onOtherTasksEdit(i)" ></i>
+              </div>
+            </div>
+
+            <div class="app-enquiry-details-listview--kendo-splitter">
+              <kendo-splitter orientation="horizontal"></kendo-splitter>
+            </div>
+
+            <div class="total-header">
+              <div class="sub-title-left">
+                <div class="sub-title sub-title-total">
+                  Comp. Date:
+                </div>
+                <div class="sold sold-content-total">
+                  {{ commonService.displayDateFormat(a.completedDate) }}
+                </div>
+              </div>
+            </div>
+
+            <div class="total-header">
+              <div class="sub-title-left">
+                <div class="sub-title sub-title-total">
+                  Exceptional:
+                </div>
+                <div class="sold sold-content-total">
+                  {{ a.exceptional == true? 'Yes': 'No'}}
+                </div>
+              </div>
+            </div>
+
+            <div class="total-header">
+              <div class="sub-title-left">
+                <div class="sub-title sub-title-total">
+                  Exp. Date:
+                </div>
+                <div class="sold sold-content-total">
+                  {{ commonService.displayDateFormat(a.expectedCompletionDate) }}
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="!a.isDescOpen" class="total-header">
+              <div class="sub-title-left">
+                <div class="sub-title sub-title-total">
+                  Remarks:
+                </div>
+                <div class="app-enquiry-details-listview--kendo-card-comments" (click)="onDescriptionClick(i)">
+                  <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                    {{ a.remarks | slice:0:30 }} .....
+                  </div>
+                  <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                    <img (click)="onDescriptionClick(i)" src="assets/content/images/down.svg" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="a.isDescOpen" class="total-header">
+              <div class="sub-title-left">
+                <div class="sub-title sub-title-total">
+                  Remarks:
+                </div>
+                <div class="app-enquiry-details-listview--kendo-card-comments" (click)="onDescriptionClick(i)">
+                  <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                    {{ a.remarks }}
+                  </div>
+                  <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                    <img (click)="onDescriptionClick(i)" src="assets/content/images/up.svg" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </kendo-card>
+        </div>
+      </div>
+        
+      <app-other-tasks-edit
+        *ngIf="isOtherTasksDetailsEditOpen"
+        [svcOtherTasksDetails]="otherTasksDetails"
+        [index]="selectedIndex"
+        [callCompletionForm]="callCompletionForm"
+        (onBackClick)="onBackClickHandle()">
+      </app-other-tasks-edit>
+
+      <div *ngIf="otherTasksDetails.length === 0 && !showAPILoader && !isOtherTasksDetailsEditOpen" class="app-disclaimer--card">
+        <div class="app-disclaimer--content">
+          <h5>No other tasks found</h5>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+    <kendo-loader
+      type="converging-spinner"
+      themeColor="info"
+      size="medium"></kendo-loader>
+    <div>Loading other tasks....</div>
+</div>

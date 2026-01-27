@@ -1,0 +1,22 @@
+.app-kendo-form--container {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 1.5rem;
+  margin-top:0.25rem;
+  gap: 1rem;
+}
+.app-screen--info-header-left{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 0.5rem;
+  gap: 0.35rem;
+  flex: 1;
+}
+.app-screen--header-new .header-line {
+  flex: 1;
+  height: 1.1px;
+  background: linear-gradient(to right, var(--primary-black), transparent);
+  opacity: 0.3;
+}

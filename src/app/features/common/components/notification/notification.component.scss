@@ -1,0 +1,110 @@
+//Notification Icon
+.notification-icon {
+  position: relative;
+  color: #757575;
+  font-size: var(--text-size-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bounce-once {
+  display: inline-block;
+  animation: bounce 1s ease;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+  transform: translateY(0);
+}
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+.notification-icon .badge {
+  position: absolute;
+  top: -7px;
+  right: 35px;       
+  background: red;
+  color: white;
+  font-size: var(--text-size-01);
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 4px;
+  line-height: 1;
+}
+
+.notification-screen{
+   padding-top: 3rem;
+}
+
+//Notification Card
+.notification-card{
+  display: flex;
+  justify-content: space-between;
+}
+.notification-module-icon{
+  width: 40px;           
+  height: 40px;
+  border-radius: 50%;    
+  background-color: #EBF3F4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);              
+  font-size: larger;
+}
+.notification-card-left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  gap: 0.10rem;
+  padding-left: 0.75rem;
+}
+.notification-card-content{
+  align-items: center;
+  justify-content: left;
+  padding: 0.75rem;
+}
+.notification-card-right{
+  align-items: center;
+  justify-content: right;
+  padding: 1rem;
+}
+.app-enquiry-details-listview--kendo-card{
+  border-radius: 15px;
+}
+
+.no-notification{
+  color: #757575;
+  font-size: var(--text-size-1);
+}
+
+.app-enquiry-details-listview--kendo-card-content {
+  display: flex;
+  margin: 0.25rem;
+  flex-direction: column;
+  gap: 0.313rem;
+}
+.notification-title {
+  color: var(--primary-color);
+  font-size: var(--text-size-2);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+  flex: 1 0 0;
+  padding-bottom: 0.25rem;
+}
+.notification-body {
+  color: var(--body-grey, #69727b);
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+  flex-basis: 100%;
+}

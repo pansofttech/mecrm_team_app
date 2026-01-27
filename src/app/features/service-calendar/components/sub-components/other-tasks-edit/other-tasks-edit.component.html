@@ -1,0 +1,126 @@
+<div class="app-locked--container">
+    <!-- <div class="app-screen--header">
+      Module Details
+    </div> -->
+</div>
+
+<div class="app-screen--content">
+    <div class="app-kendo-form--container" [formGroup]="otherTasksDetailsForm">
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="taskType">
+            Task
+          </kendo-label>
+          <kendo-textbox
+            class="app-kendo--dropdownlist"
+            formControlName="taskType"
+            #taskType
+            required>
+          </kendo-textbox>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+          Task is required
+        </kendo-formerror>
+      </kendo-formfield>
+  
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="completedDate">
+            Completed Date
+          </kendo-label>
+          <kendo-datepicker
+              class="app-kendo--dropdownlist"
+              formControlName="completedDate" 
+              #completedDate
+              placeholder="dd-MMM-yyyy"
+              format="dd-MMM-yyyy">
+          </kendo-datepicker>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg" *ngIf="otherTasksDetailsForm.get('completedDate')?.hasError('required')">
+          Completed date is required
+        </kendo-formerror>
+        <kendo-formerror class="app-kendo--error-msg" *ngIf="otherTasksDetailsForm.get('completedDate')?.hasError('invalidDate')">
+          Other Task completed date must be before or equal to the call completed date.
+        </kendo-formerror>
+      </kendo-formfield>
+
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <div class="app-kendo--content-horizontal">
+              <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="exceptional">
+                Exceptional
+              </kendo-label>
+              <kendo-checkbox class="app-kendo--checkbox"
+                  formControlName="exceptional"  
+                  #exceptional>
+              </kendo-checkbox>
+          </div>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Exceptional is required
+        </kendo-formerror>
+      </kendo-formfield>
+  
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="expectedCompletionDate">
+            Exceptional Completion Date
+          </kendo-label>
+          <kendo-datepicker
+              class="app-kendo--dropdownlist"
+              formControlName="expectedCompletionDate" 
+              #expectedCompletionDate
+              placeholder="dd-MMM-yyyy"
+              format="dd-MMM-yyyy">
+          </kendo-datepicker>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg" *ngIf="otherTasksDetailsForm.get('expectedCompletionDate')?.hasError('required')">
+          Exp. completion date is required
+        </kendo-formerror>
+        <kendo-formerror class="app-kendo--error-msg" *ngIf="otherTasksDetailsForm.get('expectedCompletionDate')?.hasError('invalidDate')">
+          Exp. completion date must be greater than the call completed date.
+        </kendo-formerror>
+      </kendo-formfield>
+  
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label
+            class="app-kendo--label" [for]="remarks">
+            Remarks
+          </kendo-label>
+          <kendo-textarea
+            class="app-kendo--textarea"
+            placeholder="Type  your message here.."
+            formControlName="remarks"
+            #remarks
+            [rows]="6"
+            resizable="vertical" required></kendo-textarea>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Remarks is required
+        </kendo-formerror>
+      </kendo-formfield>    
+    </div>
+    <div class="app-screen--footer">
+      <button
+        kendoButton
+        class="app-save--button"
+        (click)="submit()">
+        Submit
+      </button>
+      <button
+        kendobutton
+        class="app-cancel--button"
+        (click)="onBackClickHandle()">
+        Cancel
+      </button>
+    </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+  <kendo-loader
+    type="converging-spinner"
+    themeColor="info"
+    size="medium"></kendo-loader>
+  <div>Loading other tasks details....</div>
+</div>

@@ -1,0 +1,242 @@
+//Card Design
+.selected-card {
+  border: 2px solid var(--secondary-selected);
+}
+.part-details-cards--container{
+  padding-bottom: 8rem;
+}
+.part-details-listview--cards {
+  margin: 1rem;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  transition: border-color 2s ease-in-out;
+}
+.part-details-listview--cards.selected {
+  animation: borderEffect 2s forwards;
+}
+@keyframes borderEffect {
+  0% {
+    border-color: var(--secondary-selected);
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+
+.header{
+  display: flex;
+  margin: 1rem;
+  align-items: center;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.total-header{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.sub-title{
+  color: var(--body-grey, #69727b);
+  font-family: var(--font-family-text);
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-weight: var(--font-weight-normal);
+  line-height: normal;
+}
+.sold{
+  color: #383838;
+  font-family: var(--font-family-text);
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+}
+.sub-title-left{
+  display: flex;
+  flex-basis: 70%;
+  justify-content: left;
+  gap:0.1rem;
+}
+.sub-title-right{
+  display: flex;
+  flex-basis: 30%;
+  justify-content: right;
+  gap:0.1rem;
+}
+.sub-title-content-left{
+    flex-basis: 45%;
+}
+.sub-title-content-right{
+    flex-basis: 45%;
+}
+.sold-content-left{
+    flex-basis: 55%;
+}
+.sold-content-right{
+    flex-basis: 55%;
+}
+.sold-content-total{
+  flex-basis: 68.5%;
+}
+.sub-title-total{
+  flex-basis: 31.5%;
+}
+.app-enquiry-details-listview--kendo-card {
+  position: relative;
+}
+.sub-title-right img {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;
+  width: 25px;
+  height: 25px;
+}
+.card-selection-addition-icon{
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+}
+.app-enquiry-details-listview--kendo-card-header {
+  display: flex;
+}
+.app-enquiry-details-listview--kendo-card-comments{
+  flex-basis: 68.5%;
+}
+
+//Search Tab Styles
+.parts-request-search-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  touch-action: none;
+}
+.draggable-tab{
+  width:100%;
+  display: flex;
+  justify-content: center;
+  cursor: grab;
+}
+.draggable-image{
+  min-width:10rem;
+  max-width: 35rem;
+  display: flex;
+  justify-content: center;
+  background-color: #D9D9D9;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  margin-bottom: -2px;
+}
+.opened-draggable-tab-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #D9D9D9;
+  padding-top: 0.5rem;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  margin: 0 auto; 
+}
+.closed-draggable-tab-container{
+  display: flex;
+  justify-content: center;
+  background-color: #D9D9D9;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  margin: 0 auto; 
+}
+@media (min-width: 689px) {
+  .opened-draggable-tab-container,
+  .closed-draggable-tab-container {
+    width: 30rem;
+  }
+}
+@media (max-width: 689px) {
+  .opened-draggable-tab-container,
+  .closed-draggable-tab-container {
+    width: 100%;
+  }
+}
+.search-entity {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.25rem;
+  align-items: center;
+}
+.search-entity-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem 0rem;
+}
+.closed-search-entity{
+  padding: 1rem;;
+}
+.search-parameter {
+  flex-basis: 25%;
+  color: #383838;
+  font-family: var(--font-family-text);
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+  margin: 0.5rem 0.5rem 0.5rem 1rem;
+}
+.search-parameter-details {
+  flex-basis: 75%;
+  color: #555;
+}
+.app-button-small{
+  width:25%;
+  border: none;
+  min-height: 2rem;
+}
+.app-control--container{
+  border-top: 1px solid #dfdfdf;
+  padding-bottom: 10rem;
+}
+.app-control-button-container{
+  display: flex;
+  gap:0.5rem;
+  margin:1rem
+}
+.app-control--button {
+  width:50%;
+  border: none;
+  min-height: 2rem;
+  border-radius: 0.125rem;
+  background: rgba(191, 191, 191, 0.25);
+  box-shadow: 0px 4px 20px 0px rgba(191, 191, 191, 0.25);
+  color: var(--primary-black);
+  text-align: center;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.25rem;
+  letter-spacing: 0.0175rem;
+}
+.app-control--button-selected{
+  background-color: var(--primary-color);
+  border: 1px solid #fff;
+  color: var(--primary-white);
+}
+.app-enquiry-details-listview--kendo-splitter {
+  margin: 0.5rem 1rem;
+}
+.app-kendo--search-textbox {
+  border-radius: 19.5px;
+  background: var(--neutral-4, #f2f2f2);
+  color: var(--neutral-1, #343434);
+  font-size: var(--text-size-01);
+  font-style: normal;
+  font-weight: var(--font-weight-normal);
+  line-height: 16px;
+}

@@ -1,0 +1,269 @@
+<!-- <div class="app-locked--sub-container" *ngIf="!showAPILoader">
+  <div class="app-screen--info-header">
+    <div class="app-screen--info-header-left">
+      Service Request
+    </div>    
+  </div>
+    <div class="app-screen--header-new">
+      <div class="app-screen--info-header-left">
+        <span class="header-text">Service Request</span>
+        <span class="header-line"></span>
+      </div>
+    </div>
+</div> -->
+
+<div [formGroup]="serviceRequestDetails" *ngIf="!showAPILoader">
+    <div class="app-kendo-form--container">
+        <kendo-formfield>
+            <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="contactName">
+                Customer contact
+            </kendo-label>
+            <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="contactName"
+                #contactName
+                [data]="dependantComboDataForContactName"
+                textField="comboName"
+                valueField="comboId"
+                [valuePrimitive]="true"
+                required>
+            </kendo-dropdownlist>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">
+                Customer contact name is required
+            </kendo-formerror>
+        </kendo-formfield>
+
+        <!-- <kendo-formfield>
+            <div class="app-kendo--content">
+                <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="contactEmail">
+                    Email
+                </kendo-label>
+                <kendo-textbox
+                    class="app-kendo--dropdownlist"
+                    formControlName="contactEmail"
+                    #contactEmail>
+                </kendo-textbox>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">
+                Customer contact email is required
+            </kendo-formerror>
+        </kendo-formfield> -->
+
+        <div class="app-comments--container">
+            <kendo-label class="app-kendo--label">
+                Email
+            </kendo-label>
+            <div class="app-kendo-form--row-container">
+                <kendo-formfield class="flex-basis-10">
+                    <div class="app-kendo--content">
+                        <div class="app-kendo--content-horizontal">
+                            <kendo-checkbox class="app-kendo--checkbox"
+                                formControlName="contactConfirmCheckbox"  
+                                #contactConfirmCheckbox>
+                            </kendo-checkbox>
+                        </div>
+                    </div>
+                </kendo-formfield>
+            
+                <kendo-formfield class="flex-basis-90">
+                    <div class="app-kendo--content">
+                        <div class="app-kendo--content-horizontal">
+                            <kendo-textbox
+                                class="app-kendo--dropdownlist"
+                                formControlName="contactEmail"
+                                #contactEmail>
+                            </kendo-textbox>
+                        </div>
+                    </div>
+                </kendo-formfield>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let a of srlcDetails;" class="app-enquiry-details-listview--cards">
+        <kendo-card class="app-enquiry-details-listview--kendo-card">
+        <div class="app-enquiry-details-listview--kendo-card-content">
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+                <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                Product Name
+                </div>
+                <div class="app-enquiry-details-listview--kendo-card-sold ">
+                {{ a.productName }}
+                </div>
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                Manufacturer
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold ">
+                {{ a.manufacturer }}
+            </div>
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                Serial Number
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold ">
+                {{ a.serialNumber }}
+            </div>
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                Product Group
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold ">
+                {{ a.productGroup }}
+            </div>
+            </div>
+        </div>
+        </kendo-card>
+    </div>  
+
+    <div class="app-kendo-form--container">
+        <div class="app-comments--container">
+            <kendo-label class="app-kendo--label">
+            Confirm InstallBase? 
+            </kendo-label>
+            <div class="app-kendo-form--row-container">
+            <kendo-formfield class="flex-basis-50">
+                <div class="app-kendo--content">
+                <div class="app-kendo--content-horizontal">
+                    <kendo-checkbox class="app-kendo--checkbox"
+                        formControlName="yesConfirmIB"  
+                        #yesConfirmIB>
+                    </kendo-checkbox>
+                    <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="yesConfirmIB">
+                        Yes
+                    </kendo-label>
+                </div>
+                </div>
+            </kendo-formfield>
+        
+            <kendo-formfield class="flex-basis-50">
+                <div class="app-kendo--content">
+                <div class="app-kendo--content-horizontal">
+                    <kendo-checkbox class="app-kendo--checkbox"
+                        formControlName="noConfirmIB"  
+                        #noConfirmIB>
+                    </kendo-checkbox>
+                    <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="noConfirmIB">
+                        No
+                    </kendo-label>
+                </div>
+                </div>
+            </kendo-formfield>
+            </div>
+        </div>
+
+        <kendo-formfield>
+            <div class="app-kendo--content">
+            <kendo-label
+                class="app-kendo--label"
+                [for]="callDescription"
+                >Call Description</kendo-label>
+            <kendo-textarea
+                class="app-kendo--textarea"
+                placeholder="Type your message here.."
+                formControlName="callDescription"
+                #callDescription
+                [rows]="6"
+                resizable="vertical"></kendo-textarea>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">Call Description is required</kendo-formerror>
+        </kendo-formfield>
+        <!-- <kendo-formfield>
+            <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="productCategory">
+                Product Category
+            </kendo-label>
+            <kendo-textbox
+                class="app-kendo--dropdownlist"
+                formControlName="productCategory"
+                #productCategory
+                required>
+            </kendo-textbox>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">
+                Product category is required
+            </kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+            <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="leTag">
+                LE Tag
+            </kendo-label>
+            <kendo-textbox
+                class="app-kendo--dropdownlist"
+                formControlName="leTag"
+                #leTag>
+            </kendo-textbox>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">
+                LE Tag is required
+            </kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+            <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="location">
+                Location
+            </kendo-label>
+            <kendo-textbox
+                class="app-kendo--dropdownlist"
+                formControlName="location"
+                #location
+                required>
+            </kendo-textbox>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">
+                Location is required
+            </kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="ibStickerStatus">
+            IB Sticker Status
+            </kendo-label>
+            <kendo-dropdownlist
+            class="app-kendo--dropdownlist"
+            formControlName="ibStickerStatus"
+            #ibStickerStatus
+            [data]="dependantComboDataForIBStickerStatus"
+            textField="comboName"
+            valueField="comboId"
+            [valuePrimitive]="true">
+            </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            IB Sticker Status is required
+        </kendo-formerror>
+        </kendo-formfield> -->
+    </div>
+
+    <div class="app-screen--footer">
+        <button
+        kendoButton
+        class="app-save--button"
+        (click)="submit()"
+        [disabled]="isSaveDisabled">
+        Save
+        </button>
+        <button
+        kendobutton
+        class="app-cancel--button"
+        (click)="onBackClickHandle()">
+        Cancel
+        </button>
+    </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+  <kendo-loader type="converging-spinner"
+                themeColor="info"
+                size="medium"></kendo-loader>
+  <div>Loading details....</div>
+</div>  

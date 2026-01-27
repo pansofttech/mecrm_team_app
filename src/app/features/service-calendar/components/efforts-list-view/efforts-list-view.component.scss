@@ -1,0 +1,32 @@
+.load-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--body-grey, #69727b);
+  font-size: var(--text-size-01);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+}
+.app-kendo-form--row-container {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  gap:1rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+.app-kendo--checkbox {
+  flex-basis: 20%;
+}
+.app-kendo--label-horizontal {
+  flex-basis: 80%;
+}
+
+.flex-basis-25{
+  flex-basis: 25%;
+}
+.flex-basis-50{
+  flex-basis: 50%;
+}
