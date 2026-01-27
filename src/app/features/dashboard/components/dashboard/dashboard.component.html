@@ -1,0 +1,56 @@
+<div class="landing-page-main">
+  <kendo-appbar class="dashboard-header--container">
+    <kendo-appbar-section>
+      <button kendoButton fillMode="flat"
+       (click)="drawer.toggle()">
+        <kendo-svg-icon [icon]="menuIcon"></kendo-svg-icon>
+      </button>
+    </kendo-appbar-section>
+    <div class="dashboard--title">
+      <img src="assets/content/images/dashboard-images/dashboard--ecrm-logo.png" alt="" class="dashboard-ecrm-logo" />
+      ECRM
+    </div>
+    <kendo-appbar-section>
+      <kendo-badge-container class="dashboard--badge-container">
+        <button kendoButton fillMode="flat" (click)="onNotificationClick()">
+          <!-- <img src="assets/content/images/dashboard-images/dashboard-logo.png" alt="" class="dashboard-logo" /> -->
+            <section class="notification-icon">
+              <i class="fa-solid fa-bell"></i>
+              <span *ngIf="unseenCount > 0" 
+                class="badge bounce-once">
+                  {{ unseenCount }}
+              </span>
+            </section>
+        </button>
+      </kendo-badge-container>
+    </kendo-appbar-section>
+  </kendo-appbar>
+
+  <app-dashboard-cards></app-dashboard-cards>
+  <app-dashboard-list></app-dashboard-list>
+</div>
+
+<kendo-drawer-container class="dashboard--menu-container">
+  <kendo-drawer
+    #drawer
+    [mode]="'overlay'"
+    [expanded]="false"
+    class="fullscreen-drawer"
+  >
+  <ng-template kendoDrawerHeaderTemplate>
+    <div *ngIf="expandMode">
+      <div class="dashboard--menu-drawer-header">  
+        <button class="dashboard-menu-user-initial-icon" kendoButton fillMode="outline">
+          <img src="assets/content/images/dashboard-images/dashboard-logo.png" alt="" class="dashboard-logo" />   
+        </button>
+        <div class="dashboard--menu-drawer-username">{{ getEmployeeName() }}</div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template kendoDrawerFooterTemplate>
+    <div *ngIf="expandMode" class="dashboard--menu-drawer-footer">
+      <app-logout-component></app-logout-component>
+    </div>
+  </ng-template>
+  </kendo-drawer>
+</kendo-drawer-container>

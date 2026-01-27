@@ -1,0 +1,139 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+      "ecrm-frontend": {
+        "projectType": "application",
+        "schematics": {
+          "@schematics/angular:component": {
+            "style": "scss"
+          }
+        },
+        "root": "",
+        "sourceRoot": "src",
+        "prefix": "app",
+        "architect": {
+          "build": {
+            "builder": "@angular-devkit/build-angular:browser",
+            "options": {
+              "outputPath": "dist/ecrm-frontend",
+              "index": "src/index.html",
+              "main": "src/main.ts",
+              "polyfills": ["zone.js"],
+              "tsConfig": "tsconfig.app.json",
+              "inlineStyleLanguage": "scss",
+              "assets": ["src/favicon.ico", "src/assets"],
+              "styles": [
+                {
+                  "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+                },
+                "src/styles.scss",
+                "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+              ],
+              "scripts": []
+            },
+            "configurations": {
+              "production": {
+                "budgets": [
+                  {
+                    "type": "initial",
+                    "maximumWarning": "5mb",
+                    "maximumError": "6mb"
+                  },
+                  {
+                    "type": "anyComponentStyle",
+                    "maximumWarning": "2mb",
+                    "maximumError": "1mb"
+                  }
+                ],
+                "outputHashing": "all",
+                "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.prod.ts"
+                  }
+                ]
+              },
+              "staging": {
+                "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.staging.ts"
+                  }
+                ]
+              },
+              "development": {
+                "buildOptimizer": false,
+                "optimization": false,
+                "vendorChunk": true,
+                "extractLicenses": false,
+                "sourceMap": true,
+                "namedChunks": true,
+                "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.ts"
+                  }
+                ]
+              }
+            },
+            "defaultConfiguration": "development"
+          },
+          "serve": {
+            "builder": "@angular-devkit/build-angular:dev-server",
+            "configurations": {
+              "production": {
+                "browserTarget": "ecrm-frontend:build:production"
+              },
+              "development": {
+                "browserTarget": "ecrm-frontend:build:development"
+              }
+            },
+            "defaultConfiguration": "development"
+          },
+          "extract-i18n": {
+            "builder": "@angular-devkit/build-angular:extract-i18n",
+            "options": {
+              "browserTarget": "ecrm-frontend:build"
+            }
+          },
+          "test": {
+            "builder": "@angular-devkit/build-angular:karma",
+            "options": {
+              "polyfills": ["zone.js", "zone.js/testing"],
+              "tsConfig": "tsconfig.spec.json",
+              "inlineStyleLanguage": "scss",
+              "assets": ["src/favicon.ico", "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "node_modules/@fortawesome/fontawesome-free/webfonts",
+                  "output": "webfonts"
+                }
+              ],
+              "styles": [
+                {
+                  "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+                },
+                "src/styles.scss"
+              ],
+              "scripts": []
+            }
+          },
+          "lint": {
+            "builder": "@angular-eslint/builder:lint",
+            "options": {
+              "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            }
+          },
+          "deploy": {
+            "builder": "angular-cli-ghpages:deploy"
+          }
+        }
+      }
+    },
+    "cli": {
+      "schematicCollections": ["@angular-eslint/schematics"],
+      "analytics": "d69400f7-1779-4c03-88a7-97b2c307528a"
+    }
+  }

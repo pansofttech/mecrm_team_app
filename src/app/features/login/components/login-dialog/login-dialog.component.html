@@ -1,0 +1,23 @@
+<button kendoButton *ngIf="!opened" (click)="open()">Open dialog</button>
+    <kendo-dialog class="login-dialog--kendo-dialog"
+                 title=""
+                 *ngIf="opened"
+                 (close)="close('cancel')"
+                 [width]=" 330"
+                >
+               <div class="login-dialog--img-container">
+                  <img src="assets/content/images/login-images/ellipse.svg"  alt="Outer Image" class="login-dialog--outer-image"/>
+                   <img src="assets/content/images/login-images/lock.svg" alt="Inner Image" class="login-dialog--inner-image"/>
+               </div>
+
+              <div class="login-dialog--dialog-title">Locked</div>
+
+              <div class="login-dialog--dialog-content">
+                 Because of three continous
+                 failure your account is locked 
+              </div>
+
+      <kendo-dialog-actions class="login-dialog--kendo-dialog-actions">
+          <button kendoButton (click)="close('no')" class="login-dialog--dialog-button">Got It</button>
+     </kendo-dialog-actions>
+  </kendo-dialog>

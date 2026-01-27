@@ -1,0 +1,62 @@
+<div class="app-locked--container">
+  <!-- <div class="app-screen--header">
+    Enquiry Description
+  </div> -->
+  <div class="app-screen--header-new">
+    <div class="app-screen--info-header-left">
+      <span class="header-text">Enquiry Description</span>
+      <span class="header-line"></span>
+    </div>
+  </div>
+</div>
+<div class="app-kendo-form--container" [formGroup]="enquiryDescription">
+    <kendo-formfield>
+    <div class="app-kendo--content">
+      <!-- <kendo-label
+        class="app-kendo--label"
+        [for]="enterdescription"
+        >Enter Description</kendo-label> -->
+      <div class="app-kendo--textarea-wrapper">
+        <kendo-label
+          class="app-kendo--label"
+          [for]="enterdescription"
+        >Enter Description</kendo-label>
+        <button 
+            type="button" 
+            class="mic-icon-btn" 
+            (click)="commonService.startListeningAndPatch(enquiryDescription ,'enterDescription');">
+          <img src="assets/content/images/microphone.svg" alt="mic" />
+        </button>
+      </div>    
+      <kendo-textarea
+        class="app-kendo--textarea"
+        placeholder="Type  your message here.."
+        formControlName="enterDescription"
+        #enterdescription
+        [rows]="6"
+        resizable="vertical" required></kendo-textarea>
+    </div>
+    <kendo-formerror class="app-kendo--error-msg">Enter description is required</kendo-formerror>
+    </kendo-formfield>
+    <kendo-formfield>
+    <div class="app-kendo--content">
+      <kendo-label class="app-kendo--label" [for]="attachment">Attachment</kendo-label>
+      <kendo-fileselect
+        class="app-kendo--fileupload"
+        formControlName="attachment"
+        #attachment></kendo-fileselect>
+    </div>
+    <kendo-formerror class="app-kendo--error-msg">Attachment is required</kendo-formerror>
+    <div *ngFor="let file of myFiles; let i = index"
+      class="app-kendo-attachment-files">
+      <div (click)="downloadAttachment(i)">{{ file.name }}</div>
+    </div>
+  </kendo-formfield>
+</div>
+<div class="app-screen--loader" *ngIf="showEnqDescAPILoader">
+  <kendo-loader
+    type="converging-spinner"
+    themeColor="info"
+    size="medium"></kendo-loader>
+  <div>Loading contact details....</div>
+</div>

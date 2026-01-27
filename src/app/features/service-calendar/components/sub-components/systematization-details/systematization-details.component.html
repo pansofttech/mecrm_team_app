@@ -1,0 +1,133 @@
+<div class="app-screen--header">
+  Systematization Details
+</div>
+
+<div class="app-kendo-form--container"
+    [formGroup]="systematizationDetails"
+    *ngIf="!showAPILoader">
+    <kendo-formfield>
+      <div class="app-kendo--content">
+        <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="systemHandle">
+          System Handle
+        </kendo-label>
+        <kendo-textbox
+          class="app-kendo--dropdownlist"
+          formControlName="systemHandle"
+          #systemHandle>
+        </kendo-textbox>
+      </div>
+      <kendo-formerror class="app-kendo--error-msg">
+        System Handle is required
+      </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="classification">
+            Classification
+          </kendo-label>
+          <kendo-dropdownlist
+            class="app-kendo--dropdownlist"
+            formControlName="classification"
+            #classification
+            [data]="dependantComboDataForClassification"
+            textField="comboName"
+            valueField="comboId"
+            [valuePrimitive]="true"
+            required>
+          </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Classification is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="manufacturer">
+            Manufacturer
+          </kendo-label>
+          <kendo-textbox
+            class="app-kendo--dropdownlist"
+            formControlName="manufacturer"
+            #manufacturer>
+          </kendo-textbox>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Manufacturer is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="installbaseProduct">
+            Installbase Product
+          </kendo-label>
+          <kendo-dropdownlist
+            class="app-kendo--dropdownlist"
+            formControlName="installbaseProduct"
+            #installbaseProduct
+            [data]="dependantOnLoadDataForProductFiltered"
+            textField="comboName"
+            valueField="comboId"
+            [filterable]="true"
+            [valuePrimitive]="true"
+            (filterChange)="handleProductFilter($event)"
+            [virtual]="virtual"
+            required>
+          </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Installbase Product is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="applicationCode">
+            Application Code
+          </kendo-label>
+          <kendo-dropdownlist
+            class="app-kendo--dropdownlist"
+            formControlName="applicationCode"
+            #applicationCode
+            [data]="dependantComboDataForApplication"
+            textField="comboName"
+            valueField="comboId"
+            [valuePrimitive]="true"
+            required>
+          </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Application code is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="complexity">
+            Complexity
+          </kendo-label>
+          <kendo-dropdownlist
+            class="app-kendo--dropdownlist"
+            formControlName="complexity"
+            #complexity
+            [data]="dependantComboDataForComplexity"
+            textField="comboName"
+            valueField="comboId"
+            [valuePrimitive]="true"
+            required>
+          </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Complexity is required
+        </kendo-formerror>
+    </kendo-formfield>
+</div>
+<div class="app-screen--loader" *ngIf="showAPILoader">
+    <kendo-loader
+      type="converging-spinner"
+      themeColor="info"
+      size="medium"></kendo-loader>
+    <div>Loading systematizaton details....</div>
+</div>

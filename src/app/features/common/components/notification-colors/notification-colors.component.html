@@ -1,0 +1,38 @@
+<div class="app-screen--info-header-right">
+  <!-- <img src="assets/content/images/color-pallete-white.svg" alt="->" width="20" height="20"    
+    kendoPopoverAnchor
+    [popover]="notificationColorPopover"      
+    (click)="closePopover(0)"
+    showOn="click"/> -->
+
+    <i class="fa-solid fa-palette"
+      kendoPopoverAnchor
+      [popover]="notificationColorPopover"      
+      (click)="closePopover(0)"
+      showOn="click"></i>
+  
+  <kendo-popover
+    class="kendo-popover"
+    #notificationColorPopover
+    position="left"
+    [width]="popoverWidth"
+    [callout]="true">
+    
+    <ng-template kendoPopoverTitleTemplate>
+      <div class="kendo-popover-title-wrapper">
+        <span class="kendo-popover-title">Color Signification</span>
+        <span class="kendo-popover-title" (click)="closePopover(0)"> <i class="fa-solid fa-xmark"></i> </span>
+      </div>
+    </ng-template>
+
+    <ng-template kendoPopoverBodyTemplate>
+      <ul class="item-list">
+        <li *ngFor="let item of data" class="item-box">
+          <div class="color-box" [style.background-color]="item.color"></div>
+          <strong>{{ item.name }}</strong>
+        </li>
+      </ul>
+    </ng-template>
+
+  </kendo-popover>
+</div>

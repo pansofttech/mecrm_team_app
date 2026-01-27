@@ -1,0 +1,86 @@
+<div class="app-container">
+  <div class="app-locked--container">
+    <app-navigation-bar
+      [title]="'Previous Interactions'"
+      [showRefresh]="true"
+      (backClick)="onBackClickHandle()"
+      (refreshClick)="onReset()">
+    </app-navigation-bar>
+    <!-- <div class="app-screen--header">Enquiry - {{ id }}</div> -->
+    <div class="app-screen--header-new">
+      <div class="app-screen--info-header-left">
+        <span class="header-text">Enquiry - {{ id }}</span>
+        <span class="header-line"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-scrollable--container" *ngIf="!showEnquiryHistoryAPILoader">
+    <div *ngIf="filteredCards.length > 0">
+      <div *ngFor="let a of filteredCards" class="app-enquiry-details-listview--cards">
+        <kendo-card class="app-enquiry-details-listview--kendo-card">
+          <div class="app-enquiry-details-listview--kendo-card-header">
+            <div class="app-enquiry-details-listview--kendo-card-number">
+              {{ a?.remarks }}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-splitter">
+            <kendo-splitter orientation="horizontal"></kendo-splitter>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-content">
+
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+              <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                    Updated Date
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-sold">
+                    {{ commonService.displayDateFormat(a.updDate) }}
+              </div>
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+              <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                    Mode of Contact
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-sold">
+                    {{ a.modeOfContact }}
+              </div>
+            </div>  
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+              <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                Updated By
+              </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{ a.updatedBy }}
+            </div>
+          </div>
+          </div>
+          
+        </kendo-card>
+      </div>
+
+      <div class="app-enquiry-details-listview--kendo-pager">
+        <kendo-datapager
+          class="app-enquiry-details-listview--kendo-datapager"
+          [pageSize]="pageSize"
+          [skip]="skip"
+          [total]="contactCards.length"
+          (pageChange)="onPageChange($event)">
+        </kendo-datapager>
+      </div>
+    </div>
+
+    <div *ngIf="filteredCards.length === 0" class="app-disclaimer--card">
+      <div class="app-disclaimer--content">
+        <h5> No previous interactions </h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-screen--loader" *ngIf="showEnquiryHistoryAPILoader">
+    <kendo-loader
+      type="converging-spinner"
+      themeColor="info"
+      size="medium"></kendo-loader>
+    <div>Loading details....</div>
+  </div>
+</div>

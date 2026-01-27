@@ -1,0 +1,120 @@
+<div class="app-container">
+  <div class="app-locked--container">
+    <app-navigation-bar
+      [title]="'Service Calendar'"
+      [showRefresh]="true"
+      (backClick)="onBackClickHandle()"
+      (refreshClick)="onRefresh()">
+    </app-navigation-bar>
+    <div class="app-screen--content">
+      <div class="app-screen--stepper-new">
+        <div class="app-screen--stepper-container-new"
+            (click)="onStepperClick(0)" [ngClass]="{'selected': isServiceRequestSelected}">
+          <div> SR </div>
+        </div>
+        <div class="app-screen--stepper-container-new"
+             (click)="onStepperClick(1)" [ngClass]="{'selected': isEffortsSelected}">
+          <div> Effort Log </div>
+        </div>
+        <div *ngIf="servicePrerequisites[0]? servicePrerequisites[0].isPartsRequestShow: false" class="app-screen--stepper-container-new"
+             (click)="onStepperClick(2)" [ngClass]="{'selected': isPRSelected}">
+          <div> PR </div>
+        </div>
+        <div *ngIf="isPrimaryEngineerForTask" class="app-screen--stepper-container-new"
+            (click)="onStepperClick(3)" [ngClass]="{'selected': isCallActionSelected}">
+          <div> Call Action </div>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let a of schCallCards;" class="margin-0-5">
+      <kendo-card *ngIf="!isSRIDInfoSelected" class="app-kendo-info-card">
+        <div class="app-enquiry-details-listview--kendo-card-content" (click)="onSRIDInfoClick()">
+            <div class="app-kendo-info-card--content">
+              Call details of SRID {{ selectedSRID }}
+            </div>
+            <div class="app-kendo-info-card--expand-icon" style="color:#8d8d8d;">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+      </kendo-card>
+      <kendo-card *ngIf="isSRIDInfoSelected" class="app-enquiry-details-listview--kendo-card">
+        <div class="app-enquiry-details-listview--kendo-card-content" (click)="onSRIDInfoClick()">
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              SRID
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-comments">
+              <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                {{ selectedSRID }}
+              </div>
+              <div class="app-kendo-info-card--collapse-icon">
+                <i class="fa-solid fa-chevron-up"></i>
+              </div>
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              UEU
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold ">
+              {{ a.ueu }}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Site
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold ">
+              {{ a.siteName }}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Call Category
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold ">
+              {{ a.callCategory }}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Call Type
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold ">
+              {{ a.callType }}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Status
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold ">
+              {{ a.status }}
+            </div>
+          </div>
+        </div>
+      </kendo-card>
+    </div>
+  </div>
+
+  <ion-content scrollEvents="true" (ionScroll)="onScroll()">
+    <app-service-request *ngIf="currentStep === 0" [srid]="selectedSRID"
+                        [servicePrerequisites]="servicePrerequisites"
+                        [srlcDetails]="srlcDetails"></app-service-request>
+    <app-efforts-list-view *ngIf="currentStep === 1" [srid]="selectedSRID" [currentDate]="currentDate"
+                           [engeffortListCards]="engeffortListCards"
+                           [filteredEngeffortListCards]="filteredEngeffortListCards"
+                           [filteredOtherDaysEngeffortListCards]="filteredOtherDaysEngeffortListCards"
+                           [servicePrerequisites]="servicePrerequisites"
+                           [srlcDetails]="srlcDetails"
+                           (srlcRefresh)="onSave()"></app-efforts-list-view>
+    <app-parts-request *ngIf="currentStep === 2" [srid]="selectedSRID"
+                       [servicePrerequisites]="servicePrerequisites"></app-parts-request>
+    <app-call-action *ngIf="currentStep === 3" [srid]="selectedSRID"
+                       [servicePrerequisites]="servicePrerequisites"
+                       [srlcDetails]="srlcDetails"
+                       [moduleDetails]="moduleDetails"
+                       [otherTasksDetails]="otherTasksDetails"
+                       (moduleDetailsCardChange)="updateModuleDetailsCard($event)"></app-call-action>
+  </ion-content>
+</div>

@@ -1,0 +1,253 @@
+<div class="app-locked--container">
+    <div class="app-screen--info-header">
+      <div class="app-screen--info-header-left">
+        Add Parts
+      </div>
+      <div class="app-screen--info-header-right" (click)="onBackClick()">
+        <img src="assets/content/images/backward.svg" />
+        <span>Back</span>
+      </div>
+    </div>
+</div>
+
+<div *ngIf="!showAPILoader">
+      <div class="part-details-cards--container" *ngIf="searchPartsDetailsCard.length > 0 && !showAPILoader">
+        <div *ngFor="let a of searchPartsDetailsCard;let i=index;" class="part-details-listview--cards"
+             (click)="onCardClick($event)">
+          <kendo-card class="app-enquiry-details-listview--kendo-card">
+            <div class="header">
+              <div class="sub-title-left">
+                <div class="sub-title sub-title-content-left">
+                  Part No.:
+                </div>
+                <div class="sold sold-content-left">
+                  {{ a.partNo}}
+                </div>
+              </div>
+              <div class="qty-card">
+                <button class="qty-btn" (click)="decreaseQuantity(i)">
+                  <i class="fa-solid fa-minus"></i>
+                </button>
+                <span>{{ getPartQuantity(i) }}</span>
+                <button class="qty-btn" (click)="increaseQuantity(i)">
+                  <i class="fa-solid fa-plus" ></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="total-header">
+              <div class="sub-title-left">
+                <div class="sub-title sub-title-total">
+                  Option:
+                </div>
+                <div class="sold sold-content-total">
+                  {{ a.option }}
+                </div>
+              </div>
+            </div>
+
+            <div class="total-header">
+              <div class="sub-title-left">
+                <div class="sub-title sub-title-total">
+                  PL:
+                </div>
+                <div class="sold sold-content-total">
+                  {{ a.productLine }}
+                </div>
+              </div>
+            </div>
+
+            <div class="total-header">
+              <div class="sub-title-left">
+                <div class="sub-title sub-title-total">
+                  ULP:
+                </div>
+                <div class="sold sold-content-total">
+                  {{ commonService.displayNumberFormat(a.price) &nbsp;&nbsp;}} {{ a.price? a.currencyName:''}}
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="!a.isDescOpen" class="total-header">
+              <div class="sub-title-left">
+                <div class="sub-title sub-title-total">
+                  Description:
+                </div>
+                <div class="app-enquiry-details-listview--kendo-card-comments" (click)="onDescriptionClick(i)">
+                  <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                    {{ a.description | slice:0:30 }} .....
+                  </div>
+                  <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                    <img (click)="onDescriptionClick(i)" src="assets/content/images/down.svg" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="a.isDescOpen" class="total-header">
+              <div class="sub-title-left">
+                <div class="sub-title sub-title-total">
+                  Description:
+                </div>
+                <div class="app-enquiry-details-listview--kendo-card-comments" (click)="onDescriptionClick(i)">
+                  <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                    {{ a.description }}
+                  </div>
+                  <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                    <img (click)="onDescriptionClick(i)" src="assets/content/images/up.svg" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </kendo-card>
+        </div>
+      </div>
+
+      <div *ngIf="searchPartsDetailsCard.length === 0 && !showAPILoader" class="app-disclaimer--card">
+        <div class="app-disclaimer--content">
+          <h5>No parts found for search details</h5>
+        </div>
+      </div>
+
+    <div class="parts-request-search-container">
+      <div class="draggable-tab">
+        <div class="draggable-image">
+          <img *ngIf="isSearchTabOpen" (click)="onSearchClick()" src="assets/content/images/down.svg" />
+          <img *ngIf="!isSearchTabOpen" (click)="onSearchClick()" src="assets/content/images/up.svg" />
+        </div>
+      </div>
+      <div *ngIf="isSearchTabOpen" class="opened-draggable-tab-container" [formGroup]="partsSearchForm">
+        <kendo-formfield>
+          <div class="search-entity">
+            <div class="search-parameter"> Manufacturer </div>
+            <div class="search-parameter-details">
+              <div class="app-enquiry-details-listview--searchbox">
+                <kendo-combobox class="app-kendo--search-textbox"
+                                formControlName="manufacturer"
+                                [data]="filteredManufacturerData"
+                                [textField]="'comboName'"
+                                [valueField]="'comboId'"
+                                [filterable]="true"
+                                (filterChange)="onFilterChange($event,'Manufacturer')"
+                                placeholder=""
+                                [virtual]="virtual">
+                </kendo-combobox>
+              </div>
+            </div>
+          </div>
+          <kendo-formerror class="app-kendo--error-msg">
+            Manufacturer is required
+          </kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <div class="search-entity">
+            <div class="search-parameter"> Supplier </div>
+            <div class="search-parameter-details">
+              <div class="app-enquiry-details-listview--searchbox">
+                <kendo-combobox class="app-kendo--search-textbox"
+                                formControlName="supplier"
+                                [data]="filteredSupplierData"
+                                [textField]="'comboName'"
+                                [valueField]="'comboId'"
+                                [filterable]="true"
+                                (filterChange)="onFilterChange($event,'Supplier')"
+                                placeholder=""
+                                [virtual]="virtual">
+                </kendo-combobox>
+              </div>
+            </div>
+          </div>
+          <kendo-formerror class="app-kendo--error-msg">
+            Supplier is required
+          </kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <div class="search-entity">
+            <div class="search-parameter"> Part No. </div>
+            <div class="search-parameter-details">
+              <div class="app-enquiry-details-listview--searchbox">
+                <kendo-textbox formControlName="partNo"
+                               placeholder=" "
+                               class="app-kendo--search-textbox">
+                </kendo-textbox>
+              </div>
+            </div>
+          </div>
+          <kendo-formerror class="app-kendo--error-msg">
+            Part No. is required
+          </kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <div class="search-entity">
+            <div class="search-parameter"> Product Line </div>
+            <div class="search-parameter-details">
+              <div class="app-enquiry-details-listview--searchbox">
+                <kendo-textbox formControlName="productLine"
+                               placeholder=" "
+                               class="app-kendo--search-textbox">
+                </kendo-textbox>
+              </div>
+            </div>
+          </div>
+          <kendo-formerror class="app-kendo--error-msg">
+            Product Line is required
+          </kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <div class="search-entity">
+            <div class="search-parameter"> Description </div>
+            <div class="search-parameter-details">
+              <div class="app-enquiry-details-listview--searchbox">
+                <kendo-textbox formControlName="description"
+                               placeholder=" "
+                               class="app-kendo--search-textbox">
+                </kendo-textbox>
+              </div>
+            </div>
+          </div>
+          <kendo-formerror class="app-kendo--error-msg">
+            Description is required
+          </kendo-formerror>
+        </kendo-formfield>
+
+        <div class="search-entity-buttons">
+          <button class="app-general--button app-button-small"
+                  (click)="onPartsSearchClick()"
+                  kendobutton>
+            Search
+          </button>
+          <button class="app-general--button app-button-small"
+                  (click)="onPartsSearchClear()"
+                  kendobutton>
+            Clear
+          </button>
+        </div>
+      </div>
+      <div *ngIf="!isSearchTabOpen" class="closed-draggable-tab-container">
+        <div class="closed-search-entity">
+          <div class="app-enquiry-details-listview--searchbox" (click)="onSearchClick()">
+            <kendo-textbox placeholder="Search"
+                           [readonly]="true"
+                           class="app-enquiry-details-listview--kendo-textbox">
+              <ng-template kendoTextBoxPrefixTemplate>
+                <img src="assets/content/images/search.svg"
+                     alt="new"
+                     class="app-enquiry-details-listview--search-icon" />
+              </ng-template>
+            </kendo-textbox>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+    <kendo-loader type="converging-spinner"
+                  themeColor="info"
+                  size="medium"></kendo-loader>
+    <div>{{ loaderMessage }}</div>
+</div>

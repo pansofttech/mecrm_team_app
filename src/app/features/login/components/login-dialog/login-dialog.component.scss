@@ -1,0 +1,53 @@
+
+.login-dialog--img-container{
+    position: relative;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    }
+    .login-dialog--inner-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+    .login-dialog--dialog-title{
+    color: #262626;
+    text-align: center;
+    font-family: Lato;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 0.4rem;
+    }
+    .login-dialog--dialog-content{
+    color: #827E7E;
+    text-align: center;
+    font-family: Lato;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0.5rem 2rem 2rem 2rem;
+    }
+    .login-dialog--kendo-dialog-actions{
+    border-color: white;
+    }
+    .login-dialog--dialog-button{
+    border-radius: 6px;
+    background: #C3DBE9;
+    box-shadow: 0px 2.767px 2.214px 0px rgba(0, 0, 0, 0.02), 0px 6.65px 5.32px 0px rgba(0, 0, 0, 0.03), 0px 12.522px 10.017px 0px rgba(0, 0, 0, 0.04);
+    color: #0F0F0F;
+    font-family: Lato;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 27px; /* 150% */
+    margin: 2rem;
+    }
+    
+    
+    
+    

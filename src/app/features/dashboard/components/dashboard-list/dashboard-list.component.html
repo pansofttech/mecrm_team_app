@@ -1,0 +1,30 @@
+<div class="dashboard-landingPage--container">
+  <div class="dashboard-landingPage--title">Dashboard</div>
+  <kendo-card class="sales-card">
+    <div class="sales-card-text-content">
+      <p class="sales-card--title">We are Coming Soon. Stay In Touch</p>
+      <div class="sales-card--subtitle">Know more</div>
+    </div>
+    <div>
+      <img src="../../../../../assets/content/images/dashboard-images/landing-page--sales-logo.svg" alt="sales-logo" />
+    </div>
+  </kendo-card>
+  <div *ngIf="commonService.alertData.length > 0" class="dashboard-landingPage--title" 
+        style="padding-top: 1.25rem;">
+        Alerts
+  </div>
+  <div *ngIf="commonService.alertData.length > 0">
+      <section *ngFor="let a of commonService.alertData" class="app-dashboard--notification">
+        <section class="app-dashboard--notification-content-left">      
+          <fa-icon
+            class="dashboard-quickLink-card--image"
+            [icon]="['fas', getIconName(a.icon)]">
+          </fa-icon>    
+          {{ a.notification }}
+        </section>
+        <section class="app-dashboard--notification-content-right">
+          <i class="fa-solid fa-spinner fade-spinner" style="font-size: medium;"></i>
+        </section>
+      </section>
+  </div>
+</div>

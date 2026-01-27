@@ -1,0 +1,275 @@
+<div class="app-locked--sub-container" *ngIf="!showAPILoader">
+  <div class="app-screen--info-header">
+    <div class="app-screen--info-header-left">
+      Effort Details
+    </div>
+    <!-- <div class="app-screen--info-header-right">
+      {{ currentDate }} -->
+      <!-- <img *ngIf="isEditEffortOpen"
+        (click)="isEditEffortOpen = false"
+        src="assets/content/images/backward.svg"/> -->
+    <!-- </div> -->
+
+    <div *ngIf="isEditEffortOpen" class="app-screen--info-header-right" (click)="EditEffortClose()">
+      <img src="assets/content/images/backward.svg" />
+      <span>Back</span>
+    </div>
+    
+  </div>
+</div>
+
+<div>
+  <div *ngIf="!isEditEffortOpen">
+    <div *ngFor="let a of filteredEngeffortListCards; let i = index" class="app-enquiry-details-listview--cards">
+      <kendo-card class="app-enquiry-details-listview--kendo-card">
+        <div class="app-enquiry-details-listview--kendo-card-header">
+          <div class="app-enquiry-details-listview--kendo-card-number">
+            {{ a.name }}
+          </div>
+          <div *ngIf="iseditable(i, filteredEngeffortListCards)">
+            <!-- <img src="assets/content/images/edit.svg"
+                 alt="new"
+                 (click)="addEffort(i, filteredEngeffortListCards)" /> -->
+            <i class="fa-solid fa-pen" (click)="addEffort(i, filteredEngeffortListCards)" ></i>
+          </div>
+        </div>
+        <div class="app-enquiry-details-listview--kendo-splitter">
+          <kendo-splitter orientation="horizontal"></kendo-splitter>
+        </div>
+        <div class="app-enquiry-details-listview--kendo-card-content">
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Task
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{a.taskType}}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Schedule Date
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{ commonService.displayDateFormat(a.ondate) }}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Effort Hours
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{a.effortHours}}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Travel Hours
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{a.travelHours}}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Remarks
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{a.remarks}}
+            </div>
+          </div>
+        </div>
+      </kendo-card>
+    </div>
+
+    <div *ngIf="!isOtherEffortsOpen && filteredOtherDaysEngeffortListCards.length > 0" class="load-more" (click)="onOtherEffortsClick()">
+      Load all efforts &nbsp;
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+
+    <div *ngIf="isOtherEffortsOpen && filteredOtherDaysEngeffortListCards.length > 0" class="load-more" (click)="onOtherEffortsClick()">
+      Close other efforts &nbsp;
+      <i class="fa-solid fa-chevron-up"></i>
+    </div>
+
+    <div *ngFor="let a of filteredOtherDaysEngeffortListCards; let i = index" class="app-enquiry-details-listview--cards">
+      <!-- <div class="app-enquiry-details-listview--kendo-card-comments">
+        <div class="app-disclaimer--content">
+          Other Efforts
+        </div>
+        <div class="app-enquiry-details-listview--kendo-card-comments-right">
+          <img *ngIf="isOtherEffortsOpen" (click)="onOtherEffortsClick()" src="assets/content/images/up.svg" />
+          <img *ngIf="!isOtherEffortsOpen" (click)="onOtherEffortsClick()" src="assets/content/images/down.svg" />
+        </div>
+      </div> -->
+
+      <kendo-card *ngIf="isOtherEffortsOpen" class="app-enquiry-details-listview--kendo-card">
+        <div class="app-enquiry-details-listview--kendo-card-header">
+          <div class="app-enquiry-details-listview--kendo-card-number">
+            {{ a.name }}
+          </div>
+          <div *ngIf="iseditable(i, filteredOtherDaysEngeffortListCards)">
+            <!-- <img src="assets/content/images/edit.svg"
+                 alt="new"
+                 (click)="addEffort(i, filteredOtherDaysEngeffortListCards)" /> -->
+            <i class="fa-solid fa-pen" (click)="addEffort(i, filteredOtherDaysEngeffortListCards)" ></i>
+          </div>
+        </div>
+        <div class="app-enquiry-details-listview--kendo-splitter">
+          <kendo-splitter orientation="horizontal"></kendo-splitter>
+        </div>
+        <div class="app-enquiry-details-listview--kendo-card-content">
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Task
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{a.taskType}}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Schedule Date
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{ commonService.displayDateFormat(a.ondate) }}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Effort Hours
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{a.effortHours}}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Travel Hours
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{a.travelHours}}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Remarks
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold">
+              {{a.remarks}}
+            </div>
+          </div>
+        </div>
+      </kendo-card>
+    </div>
+
+    <kendo-window
+      *ngIf="showCSRPopup"
+      (close)="onCSRPopupClose()"
+      [minWidth]="200"
+      [width]="350"
+      [style.left.px]="popupPosition.x"
+      [style.top.px]="popupPosition.y"
+      class="app-attachment-popup">
+
+        <kendo-window-titlebar>
+            <span class="k-window-title">{{ title }}</span>
+            <button kendoWindowCloseAction></button>
+        </kendo-window-titlebar>   
+
+        <div class="app-comments--container" [formGroup]="csrGenerateForm">
+          <kendo-label class="app-kendo--label">
+            Call Status in CSR should be? 
+          </kendo-label>
+          <div class="app-kendo-form--row-container">
+            <kendo-formfield class="flex-basis-50">
+              <div class="app-kendo--content">
+                <div class="app-kendo--content-horizontal">
+                    <kendo-checkbox class="app-kendo--checkbox"
+                        formControlName="completedCheckBox"  
+                        #completedCheckBox>
+                    </kendo-checkbox>
+                    <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="completedCheckBox">
+                      Completed
+                    </kendo-label>
+                </div>
+              </div>
+            </kendo-formfield>
+      
+            <kendo-formfield class="flex-basis-50">
+              <div class="app-kendo--content">
+                <div class="app-kendo--content-horizontal">
+                    <kendo-checkbox class="app-kendo--checkbox"
+                        formControlName="inProgressCheckBox"  
+                        #inProgressCheckBox>
+                    </kendo-checkbox>
+                    <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="inProgressCheckBox">
+                      In Progress
+                    </kendo-label>
+                </div>
+              </div>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        <button kendoButton class="app-save--button"
+          (click)="generateCSRFromPopUp()">
+          Generate CSR
+        </button>
+    </kendo-window>
+
+    <div class="app-screen--footer">
+      <div class="app-comments--container" [formGroup]="csrGenerateForm">
+        <kendo-formfield>
+          <div class="app-comments--content">
+            <div class="app-kendo--textarea-wrapper">
+              <kendo-label
+                class="app-kendo--label"
+                [for]="csrComments"
+                >CSR Comments:</kendo-label>
+              <button 
+                  type="button" 
+                  class="mic-icon-btn" 
+                  (click)="startListeningCSRComments();">
+                  <img src="assets/content/images/microphone.svg" alt="mic" />
+              </button>
+            </div>
+            <kendo-textarea class="app-kendo--textarea"
+                            placeholder="Type your message here.."
+                            formControlName="csrComments"
+                            [readonly]="!(servicePrerequisites[0]? servicePrerequisites[0].isGenerateCSR: false)"
+                            #csrComments
+                            [rows]="5"
+                            [ngModel]="servicePrerequisites[0]? servicePrerequisites[0].serviceComments: ''"
+                            resizable="vertical"></kendo-textarea>
+          </div>
+          <kendo-formerror class="app-kendo--error-msg">CSR comments is required</kendo-formerror>
+        </kendo-formfield>
+      </div>
+      <button kendoButton class="app-save--button"
+              [disabled]="!(servicePrerequisites[0]? servicePrerequisites[0].isGenerateCSR: false)"
+              (click)="generateCSR($event)">
+        Generate CSR
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isEditEffortOpen">
+    <app-service-efforts [srid]="srid" [engeffortListCards]="otherEngEffortsList"
+                         [effortCardDetails]="effortCardDetails"
+                         (onBackClickHandle)="EditEffortClose()">
+    </app-service-efforts>
+  </div>
+
+  <div *ngIf="filteredEngeffortListCards.length === 0 && !showAPILoader" class="app-disclaimer--card">
+    <div class="app-disclaimer--content">
+      <h5>No Effort Details Found</h5>
+    </div>
+  </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+  <kendo-loader type="converging-spinner"
+                themeColor="info"
+                size="medium"></kendo-loader>
+  <div>Loading details....</div>
+</div>  

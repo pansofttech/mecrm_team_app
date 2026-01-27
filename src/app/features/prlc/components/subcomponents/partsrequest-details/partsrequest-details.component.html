@@ -1,0 +1,285 @@
+<div class="app-screen--header-new">
+    <div class="app-screen--info-header-left">
+      <span class="header-text">Request Details</span>
+      <span class="header-line"></span>
+    </div>
+</div>
+
+<div class="app-kendo-form--container" [formGroup]="prDetails" *ngIf="!showAPILoader">
+    <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label" [for]="requestedBy">
+                Requested By
+            </kendo-label>
+            <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="requestedBy"
+                #requestedBy
+                [data]="dependantComboDataForRequestedByDetails"
+                textField="comboName"
+                valueField="comboId"
+                [filterable]="true"
+                [valuePrimitive]="true"
+                [virtual]="virtual">
+            </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Requested by is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label" [for]="respDept">
+                Responsible Department
+            </kendo-label>
+            <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="respDept"
+                #respDept
+                textField="comboName"
+                valueField="comboId"
+                [filterable]="true"
+                [data]="dependantComboDataForRespDeptDetails"
+                [valuePrimitive]="true">
+            </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Responsible Dept. is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label" [for]="requestedReason">
+                Request Reason
+            </kendo-label>
+            <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="requestedReason"
+                #requestedReason
+                textField="comboName"
+                valueField="comboId"
+                [data]="dependantComboDataForRequestedReasonDetails"
+                [valuePrimitive]="true">
+            </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Request reason is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label" [for]="prType">
+                PR Type
+            </kendo-label>
+            <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="prType"
+                #prType
+                textField="comboName"
+                valueField="comboId"
+                [data]="dependantComboDataForPRType"
+                [valuePrimitive]="true">
+            </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            PR Type is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label" [for]="requestedDate">
+                Requested Date
+            </kendo-label>
+            <kendo-datepicker
+              class="app-kendo--dropdownlist"
+              formControlName="requestedDate" 
+              #requestedDate
+              placeholder="dd-MMM-yyyy"
+              format="dd-MMM-yyyy">
+            </kendo-datepicker>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+          Requested date is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+</div>
+
+<div class="app-screen--header-new">
+    <div class="app-screen--info-header-left">
+      <span class="header-text">Order Details</span>
+      <span class="header-line"></span>
+    </div>
+</div>
+
+<div class="app-kendo-form--container" [formGroup]="prDetails" *ngIf="!showAPILoader">
+    <div style="display: flex; flex-direction: row; gap: 0.2rem;">
+        <kendo-formfield class="fb-50">
+            <div class="app-kendo--content">
+                <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="iono">
+                    IO No./ SRID
+                </kendo-label>
+                <kendo-textbox
+                    class="app-kendo--dropdownlist"
+                    formControlName="iono"
+                    #iono>
+                </kendo-textbox>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">
+                IO No./SRID is required
+            </kendo-formerror>
+        </kendo-formfield>
+        <kendo-formfield class="fb-50">
+            <div class="app-kendo--content">
+                <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="srid">
+                </kendo-label>
+                <kendo-textbox
+                    class="app-kendo--dropdownlist"
+                    formControlName="srid"
+                    #srid>
+                </kendo-textbox>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">
+                IO No./SRID is required
+            </kendo-formerror>
+        </kendo-formfield>
+    </div>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label" [for]="ueu">
+                UEU
+            </kendo-label>
+            <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="ueu"
+                #ueu
+                textField="comboName"
+                valueField="comboId"
+                [filterable]="true"
+                [data]="dependantComboDataForUEU"
+                [valuePrimitive]="true">
+            </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            UEU is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label" [for]="ueuSite">
+                UEU Site
+            </kendo-label>
+            <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="ueuSite"
+                #ueuSite
+                textField="comboName"
+                valueField="comboId"
+                [filterable]="true"
+                [data]="dependantComboDataForUEUSite"
+                [valuePrimitive]="true">
+            </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            UEU site is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label" [for]="deliverTo">
+                Deliver To
+            </kendo-label>
+            <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="deliverTo"
+                #deliverTo
+                textField="comboName"
+                valueField="comboId"
+                [filterable]="true"
+                [data]="dependantComboDataForDeliverTo"
+                [valuePrimitive]="true">
+            </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Deliver to is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label" [for]="deliveryLocation">
+                Deliver Location
+            </kendo-label>
+            <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="deliveryLocation"
+                #deliveryLocation
+                textField="comboName"
+                valueField="comboId"
+                [filterable]="true"
+                [data]="dependantComboDataForDeliveryLocation"
+                [valuePrimitive]="true">
+            </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Deliver location is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label" [for]="contactPerson">
+                Contact Person
+            </kendo-label>
+            <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="contactPerson"
+                #contactPerson
+                textField="comboName"
+                valueField="comboId"
+                [filterable]="true"
+                [data]="dependantComboDataForContactPerson"
+                [valuePrimitive]="true">
+            </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Contact person is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+            <kendo-label class="app-kendo--label" [for]="procMode">
+                Procurement Mode
+            </kendo-label>
+            <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="procMode"
+                #procMode
+                textField="comboName"
+                valueField="comboId"
+                [data]="dependantComboDataForProcMode"
+                [valuePrimitive]="true">
+            </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Procurement mode is required
+        </kendo-formerror>
+    </kendo-formfield>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+    <kendo-loader
+        type="converging-spinner"
+        themeColor="info"
+        size="medium">
+    </kendo-loader>
+    <div>Loading part request details...</div>
+</div>

@@ -1,0 +1,110 @@
+<div class="app-locked--container">
+    <div class="app-screen--info-header">
+      <div class="app-screen--info-header-left">
+        Add Modules from Sales Config
+      </div>
+      <div class="app-screen--info-header-right" (click)="onBackClick()">
+        <img src="assets/content/images/backward.svg" />
+        <span>Back</span>
+      </div>
+    </div>
+</div>
+
+<div class="app-scrollable--container" *ngIf="!showAPILoader">
+    <div class="part-details-cards--container" *ngIf="ibSalesConfigDetailsCard.length > 0 && !showAPILoader">
+      <div *ngFor="let a of ibSalesConfigDetailsCard;let i=index;" class="part-details-listview--cards"
+           (click)="onCardClick($event)">
+        <kendo-card class="app-enquiry-details-listview--kendo-card">
+          <div class="header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-content-left">
+                Supplier:
+              </div>
+              <div class="sold sold-content-left">
+                {{ a.supplierName}}
+              </div>
+            </div>
+            <div class="sub-title-right" (click)="addPartsToList(i)">
+              <img src="assets/content/images/add-circular-button.svg" alt="new" width="20" height="20" />
+            </div>
+          </div>
+
+          <div class="header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-content-left">
+                Part No.:
+              </div>
+              <div class="sold sold-content-left">
+                {{ a.partNo}}
+              </div>
+            </div>
+          </div>
+
+          <div class="header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-content-left">
+                Option:
+              </div>
+              <div class="sold sold-content-left">
+                {{ a.option }}
+              </div>
+            </div>
+
+            <div class="sub-title-right">
+              <div class="sub-title sub-title-content-right">
+                PL:
+              </div>
+              <div class="sold sold-content-right">
+                {{ a.productLine }}
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!a.isDescOpen" class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Description:
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-comments" (click)="onDescriptionClick(i)">
+                <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                  {{ a.description | slice:0:30 }} .....
+                </div>
+                <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                  <img (click)="onDescriptionClick(i)" src="assets/content/images/down.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="a.isDescOpen" class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Description:
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-comments" (click)="onDescriptionClick(i)">
+                <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                  {{ a.description }}
+                </div>
+                <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                  <img (click)="onDescriptionClick(i)" src="assets/content/images/up.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </kendo-card>
+      </div>
+    </div>
+
+    <div *ngIf="ibSalesConfigDetailsCard.length === 0 && !showAPILoader" class="app-disclaimer--card">
+      <div class="app-disclaimer--content">
+        <h5>No modules found from sales config</h5>
+      </div>
+    </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+    <kendo-loader type="converging-spinner"
+                  themeColor="info"
+                  size="medium"></kendo-loader>
+    <div>{{ loaderMessage }}</div>
+</div>

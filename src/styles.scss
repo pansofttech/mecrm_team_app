@@ -1,0 +1,1052 @@
+@import './assets/content/css/text.scss';
+@import './assets/content/css/sizes.scss';
+@import url('./assets//content/css/colors.scss');
+
+// styles.scss
+$kendo-color-primary: #5cb5c1;
+@import 'node_modules/@progress/kendo-theme-default/scss/all.scss';
+
+@font-face {
+  font-family: 'Lato';
+  src: url('assets/content/fonts/Lato/Lato-Black.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('assets/content/fonts/Montserrat/montserrat-regular.woff2') format('woff2'),
+       url('assets/content/fonts/Montserrat/montserrat-regular.woff') format('woff'),
+       url('assets/content/fonts/Montserrat/montserrat-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('assets/content/fonts/Montserrat/montserrat-semibold.woff2') format('woff2'),
+       url('assets/content/fonts/Montserrat/montserrat-semibold.woff') format('woff'),
+       url('assets/content/fonts/Montserrat/montserrat-semibold.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('assets/content/fonts/Montserrat/montserrat-bold.woff2') format('woff2'),
+       url('assets/content/fonts/Montserrat/montserrat-bold.woff') format('woff'),
+       url('assets/content/fonts/Montserrat/montserrat-bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  box-sizing: border-box;
+}
+
+html, body, app-root, ion-app, ion-router-outlet, ion-content {
+  height: 100%;
+  display: block;
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-family-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+//Kendo Styles
+.k-stepper .k-step-label .k-step-text {
+  text-align: center;
+  font-family: var(--font-family-text);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: var(--font-weight-semibold);
+  line-height: 0.75rem; /* 120% */
+  letter-spacing: 0.0375rem;
+  text-transform: capitalize;
+  overflow: auto;
+  text-wrap: wrap;
+}
+.k-stepper{
+  padding: 0.5rem;
+}
+.k-stepper .k-step-current .k-step-indicator,
+.k-stepper .k-step-done .k-step-indicator,
+.k-progressbar .k-selected,
+.k-stepper .k-step-done:hover .k-step-indicator,
+.k-stepper .k-step-current:hover .k-step-indicator {
+  border-color: var(--primary-color);
+  color: var(--primary-white);
+  background-color: var(--primary-color);
+}
+.k-progress-status-wrap .k-progress-end,
+.k-progressbar .k-progressbar-horizontal {
+    border: none !important;
+    background: none !important;
+    color: var(--primary-white);
+    background-color: white;
+}
+:host ::ng-deep .k-button-flat-primary {
+  color: var(--primary-color) !important;
+}
+.k-input-inner{
+  font-weight: var(--font-weight-semibold);
+}
+.k-table-md{
+  font-size: var(--text-size-02) !important;
+  font-weight: var(--font-weight-bolder) !important;
+}
+
+.k-checkbox {
+  border-color: var(--primary-color) !important;
+  background-color: #ffffff;
+}
+.k-button-text{
+  font-family: var(--font-family-text);
+  font-weight: var(--font-weight-semibold);
+}
+
+//General Screen Styles
+.app-screen--content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.app-screen--header {
+  color: var(--primary-white);
+  font-size: var(--text-size-1);
+  font-weight: var(--font-weight-bolder);
+  line-height: 1.75rem;
+  flex: 1 0 0;
+  margin: 0rem 0rem 1rem 0rem;
+  padding:0.5rem 0.5rem 0.5rem 1rem;
+  background-color: var(--secondary-color);
+}
+.app-screen--info-header {
+  display: flex;
+  justify-content: space-between; 
+  color: #FFFFFF;
+  font-size: var(--text-size-1);
+  font-weight: var(--font-weight-bolder);
+  line-height: 1.75rem;
+  margin: 0rem 0rem 0rem 0rem;
+  margin-bottom: 0.30rem;
+  padding:0.5rem;
+  background-color: var(--secondary-color);
+}
+.app-screen--info-header-left{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 0.5rem;
+  gap: 0.35rem;
+  flex: 1;
+}
+.app-screen--info-header-right{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 0.5rem ;
+  margin-left: 1.25rem ;
+  gap: 0.25rem;
+}
+.app-screen--info-tab {
+  display: flex;
+  justify-content: space-between; 
+  color: var(--colors-brand-black, #1C1B1B);
+  font-size: var(--text-size-01);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+  margin: 0rem 0.5rem 0rem 0.5rem;
+  padding:1rem 0rem 0rem 0rem;
+}
+.app-screen--info-tab-left{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap:0.25rem;
+}
+.app-screen--info-tab-right{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: 1.25rem ;
+  margin-right: 0.50rem;
+  gap:0.25rem;
+}
+.app-screen-history--header {
+  background-color: var(--secondary-color);
+  display: flex;
+  margin: 0rem 0rem 0rem 0rem;
+}
+.app-screen--header-button {
+  background: var(--primary-color);
+  color: var(--primary-white);
+  margin: 0.5rem;
+  margin-right:1rem;
+  border-radius: 5px;
+}
+.app-screen--header-tag {
+  max-width: 2.5rem;
+  min-height: 0.1875rem;
+  flex-shrink: 0;
+  border-radius: 0.1875rem;
+  background: var(--primary-color);
+}
+.app-screen--loader {
+  position: absolute;
+  top: 20rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-family: var(--font-family-text);
+  font-size: var(--text-size-01);
+  font-weight: var(--font-weight-bolder);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 50vh;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 9999;
+}
+.app-disclaimer--card{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}
+.app-disclaimer--content{
+  color: #383838;
+  font-size: var(--text-size-1);
+  font-style: normal;
+}
+.app-screen--notification{
+  color: var(--primary-black);
+  background-color: #edf5ff;
+  border-left: 5px solid #0043ce;
+  border-radius: 10px;
+  padding:1rem;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.5rem 1rem;
+  font-size: var(--text-size-02);
+  font-weight: var(--font-weight-bolder);
+}
+.app-screen--notification-amber{
+    font-size: var(--text-size-02);
+    font-weight: var(--font-weight-bolder);
+    color: var(--primary-black);
+    background-color: #fac4c3;
+    border-left: 5px solid #FF0000;
+    border-radius: 10px;
+    padding:1rem;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0.5rem 1rem;
+}
+.app-screen--notification-content-left{
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: left;
+  gap: 1rem;
+}
+.app-screen--notification-content-right{
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: right;
+  gap: 1rem;
+}
+
+//App Icon Styling
+.app-icon-light{
+  color: var(--primary-white);
+}
+.app-icon-dark{
+  color: var(--primary-black);
+}
+
+//Enquiry Kendo Card Styles
+.app-enquiry-details-listview--vertical-splitter {
+  margin-right: 1rem;
+}
+.app-enquiry-details-listview--splitter {
+  height: 40px;
+  width: 0%;
+}
+.app-enquiry-details-listview--kendo-pager {
+  margin: 0 1rem;
+}
+.app-enquiry-details-listview--kendo-datapager {
+  margin-left: 3rem;
+  color: var(--primary-color);
+  border: 0px;
+  background-color: white;
+}
+.app-enquiry-details-listview--searchbox {
+  margin: 1rem 1rem;
+}
+.app-enquiry-details-listview--kendo-textbox {
+  border-radius: 19.5px;
+  background: var(--neutral-4, #f2f2f2);
+  color: var(--neutral-1, #343434);
+  font-size: var(--text-size-1);
+  font-style: normal;
+  font-weight: var(--font-weight-semibold);
+  line-height: 24px;
+}
+.app-enquiry-details-listview--search-icon {
+  margin: 0 6px 0 8px;
+}
+.app-enquiry-details-listview--cards {
+  margin: 1rem;
+}
+.app-enquiry-details-listview--kendo-card {
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.05);
+  width: 100% !important;
+}
+.app-enquiry-details-listview--kendo-card-header {
+  display: flex;
+  margin: 0.5rem 1rem;
+  font-size: var(--text-size-01);
+}
+.app-enquiry-details-listview--kendo-card-content {
+  display: flex;
+  margin: 1rem;
+  flex-direction: column;
+  gap: 0.313rem;
+}
+.app-enquiry-details-listview--kendo-card-number {
+  color: var(--primary-color);
+  font-family: var(--font-family-text);
+  font-size: var(--text-size-01);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+  flex: 1 0 0;
+}
+.app-enquiry-details-listview--kendo-splitter {
+  margin: 0 1rem;
+}
+.app-enquiry-details-listview--kendo-card-sold-details {
+  display: flex;
+  gap: 1rem;
+}
+.app-enquiry-details-listview--kendo-card-sub-title {
+  color: var(--body-grey, #69727b);
+  font-size: var(--text-size-03);
+  font-style: normal;
+  font-weight: var(--font-weight-normal);
+  line-height: normal;
+  flex-basis: 30%;
+}
+.app-enquiry-details-listview--kendo-card-sold {
+  color: #383838;
+  font-size: var(--text-size-03);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+  flex-basis: 70%;
+}
+.app-enquiry-details-listview--information-outline-card {
+  border-radius: 4px;
+  background: rgba(92, 181, 193, 0.12);
+  margin: 0 1rem 1rem 1rem;
+  display: flex;
+  padding: 4px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 0.35rem;
+}
+.app-enquiry-details-listview--information {
+  border-radius: 6px;
+  font-family: var(--font-family-text);
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  margin-left: 4px;
+}
+.app-enquiry-details-listview--kendo-card-comments {
+  display: flex;
+  color: #383838;
+  font-family: var(--font-family-text);
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+  flex-basis: 70%;
+  justify-content: space-between;
+}
+.app-enquiry-details-listview--kendo-card-comments-left {
+  color: #383838;
+  font-size: var(--text-size-03);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+  align-items: flex-start;
+}
+.app-enquiry-details-listview--kendo-card-comments-right {
+  color: #383838;
+  font-family: var(--font-family-text);
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+  align-items: flex-end;
+}  
+
+//App Locked Scrollable Container Styles
+.app-container {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  height: 100vh;
+}
+.app-locked--container {
+  position: sticky;
+  top: 0rem;
+  width: 100%;
+  z-index: 2;
+  background-color: white;
+}
+.app-locked--sub-container{
+  position: sticky;
+  top: 0rem;
+  width: 100%;
+  z-index: 1;
+}
+.app-scrollable--container {
+  overflow-y: auto;
+}
+.app-screen--locked-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--primary-white);
+}
+
+
+//Kendo Form Field Styles
+.app-kendo-form--container {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 1.5rem;
+  margin-top:0.25rem;
+  gap: 1rem;
+}
+.app-kendo--content {
+  display: flex;
+  min-width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.app-kendo--content-horizontal {
+  display: flex;
+  min-width: 100%;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.app-kendo-forms--subcontent{
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+}
+.app-kendo-forms--subcontent-left{
+  flex: 1;
+  padding-right: 1rem;
+}
+.app-kendo-forms--subcontent-right{
+  flex: 1;
+}
+.app-kendo--label {
+  display: flex;
+  margin: -0.1rem;
+  color: var(--primary-black);
+  font-size: var(--text-size-01);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: 150%; /* 1.3125rem */
+  letter-spacing: 0.00438rem;
+}
+.app-kendo--textbox {
+  width: 100%;
+  min-height: 39px;
+  margin-top: 0.5rem;
+  border-radius: var(--Corners, 0.5rem);
+  border: 1px solid var(--primary-color);
+  background: white;
+}
+.app-kendo--textarea{
+  width: 100%;
+  height: 7.20094rem;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  border: 1px solid #5CB5C1;
+}
+.app-kendo--dropdownlist {
+  border-radius: var(--Corners, 0.5rem);
+  border: 1px solid var(--primary-color);
+  background: white;
+  min-height: 39px;
+}
+.app-kendo--checkbox {
+  flex-basis: 70%;
+}
+.app-kendo--label-horizontal {
+  flex-basis: 30%;
+}
+.app-kendo--fileupload{
+  width: 100%;
+}
+.app-kendo-attachment-files{
+  width: 100%;
+  padding: 1rem;
+  cursor: pointer;
+  border: solid #EBEBEB 0.5px;
+  box-sizing: border-box;
+}
+.app-kendo--error-msg {
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-family: var(--font-family-text);
+}
+.app-stepper--error-msg {
+  font-size: var(--text-size-04);
+  font-style: normal;
+  font-family: var(--font-family-text);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+
+//Comments Styling
+.app-comments--container {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 0.5rem;
+  margin-top: 0rem;
+  margin-bottom: 0.25rem;
+  gap: 1rem;
+}
+.app-comments--content {
+  display: flex;
+  min-width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.app-comments--label {
+  display: flex;
+  margin: -0.1rem;
+  color: var(--primary-black);
+  font-size: var(--text-size-01);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+}
+.app-comments--grid {
+  display: flex;
+  margin: -0.1rem;
+  margin-bottom: 0;
+  color: var(--primary-white);
+  background-color: var(--primary-color);
+  font-size: var(--text-size-01);
+  padding: 0.5rem;
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: 150%;
+  letter-spacing: 0.00438rem;
+}
+.app-comments--textarea {
+  width: 100%;
+  height: 7.20094rem;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  border: 1px solid var(--primary-color);
+}
+.app-comments--error-msg {
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-family: var(--font-family-text);
+}
+
+
+//Custom Stepper Styling
+.app-screen--stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.25rem 0.5rem 0.25rem;
+  background-color: var(--secondary-color);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.app-screen--stepper-container {
+  flex: 1;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  margin: 0 0.5rem;
+  transition: all 0.2s ease-out;
+  color: #FFFFFF;
+  background-color: var(--secondary-color);
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+}
+.app-screen--stepper-container-content {
+  font-size: var(--text-size-1);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: 1.75rem;
+}
+.app-screen--stepper-container.selected {
+  background-color: var(--quaternary-color);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-weight: var(--font-weight-bolder);
+}
+
+/* New Stepper Styling*/
+.app-screen--stepper-new {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  margin: 0.5rem;
+  margin-bottom: 0rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  border-radius: 10px;
+  background-color: #F1F2F6;
+  //box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.app-screen--stepper-container-new {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 0.30rem 0.30rem;
+  margin: 0;
+  transition: all 0.2s ease-out;
+  background-color: none;
+  white-space: nowrap;
+  font-size: var(--text-size-01);
+  font-weight: var(--font-weight-bolder);
+  line-height: 1.75rem;
+  color: #8d8d8d;
+  position: relative;
+  border-radius: 10px;
+}
+
+/* Selected Stepper*/
+.app-screen--stepper-container-new.selected {
+  background: var(--primary-white);
+  //box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 0.30rem 0.70rem;
+  color: var(--primary-black);
+  border: none;
+}
+
+
+//Footer and Buttons Styling
+.app-screen--footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+.app-cancel--button {
+  width: 100%;
+  min-height: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  background-color: #fff;
+  text-align: center;
+  font-size: var(--text-size-01);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: 1.25rem; /* 142.857% */
+  letter-spacing: 0.0175rem;
+}
+.app-general--button {
+  width: 100%;
+  min-height: 3rem;
+  border-radius: 0.5rem;
+  background: var(--primary-color);
+  border: 1px solid #fff;
+  box-shadow: 0px 4px 20px 0px rgba(191, 191, 191, 0.25);
+  color: var(--primary-white);
+  text-align: center;
+  font-size: var(--text-size-01);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: 1.25rem; /* 142.857% */
+  letter-spacing: 0.0175rem;
+}
+.app-save--button {
+  width: 100%;
+  min-height: 3rem;
+  border-radius: 0.5rem;
+  background: rgb(92, 184, 92);
+  border: 1px solid #fff;
+  color: var(--primary-white);
+  text-align: center;
+  font-size: var(--text-size-01);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: 1.25rem; /* 142.857% */
+  letter-spacing: 0.0175rem;
+}
+.app-reject-button{
+  background-color: rgb(221, 53, 53);
+}
+.app-approval-button{
+  background-color: rgb(92, 184, 92);
+}
+
+
+//Margin Styles
+.margin-0-25{
+  margin: 0.25rem;
+}
+.margin-0-5{
+  margin: 0.5rem;
+}
+.margin-1{
+  margin: 1rem;
+}
+.margin-bottom-1{
+  margin-bottom: 1rem;
+}
+.margin-bottom-0-25{
+  margin-bottom: 0.25rem;
+}
+.margin-bottom-0-5{
+  margin-bottom: 0.5rem;
+}
+.margin-top-1{
+  margin-top: 1rem;
+}
+.margin-top-0-25{
+  margin-top: 0.25rem;
+}
+.margin-top-0-5{
+  margin-top: 0.5rem;
+}
+.no-margin{
+  margin: 0rem;
+}
+
+
+//Padding Styles
+.padding-bottom-1{
+  padding-bottom: 1rem;
+}
+.padding-bottom-0-25{
+  padding-bottom: 0.25rem;
+}
+.padding-bottom-0-5{
+  padding-bottom: 0.5rem;
+}
+.padding-top-1{
+  padding-top: 1rem;
+}
+.padding-top-0-25{
+  padding-top: 0.25rem;
+}
+.padding-top-0-5{
+  padding-top: 0.5rem;
+}
+.no-padding{
+  padding: 0rem;
+}
+
+//flex-basis Styling
+.fb-10{
+  flex-basis: 10%;
+}
+.fb-20{
+  flex-basis: 20%;
+}
+.fb-30{
+  flex-basis: 30%;
+}
+.fb-315{
+  flex-basis: 31.5%;
+}
+.fb-35{
+  flex-basis: 35%;
+}
+.fb-375{
+  flex-basis: 37.5%;
+}
+.fb-39{
+  flex-basis: 39%;
+}
+.fb-40{
+  flex-basis: 40%;
+}
+.fb-45{
+  flex-basis: 45%;
+}
+.fb-50{
+  flex-basis: 50%;
+}
+.fb-55{
+  flex-basis: 55%;
+}
+.fb-60{
+  flex-basis: 60%;
+}
+.fb-61{
+  flex-basis: 61%;
+}
+.fb-625{
+  flex-basis: 62.5%;
+}
+.fb-65{
+  flex-basis: 65%;
+}
+.fb-685{
+  flex-basis: 68.5%;
+}
+.fb-70{
+  flex-basis: 70%;
+}
+.fb-80{
+  flex-basis: 80%;
+}
+.fb-90{
+  flex-basis: 90%;
+}
+.fb-100{
+  flex-basis: 100%;
+}
+
+//Screen Size Based Styling
+@media only screen and (min-width: 600px) {
+  .short-title {
+    display: none;
+  }
+}
+@media only screen and (max-width: 599px) {
+  .long-title {
+    display: none;
+  }
+}
+
+
+//Kendo Popover Styles
+.kendo-popover-overflow {
+  white-space: nowrap;
+  overflow: auto;
+  text-overflow: ellipsis;
+}
+.kendo-popover-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.kendo-popover-title {
+  color: var(--secondary-selected);
+  font-weight: var(--font-weight-bolder);
+}
+.kendo-popover-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+}
+.kendo-popover-container {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+.kendo-popover ul {
+  padding-inline-start: 20px;
+}
+
+
+//Grid Styles
+.app-kendo-grid{
+  margin: 0.5rem 1rem 1rem 1rem;
+  font-size: var(--text-size-02);
+  font-weight: var(--font-weight-bolder); 
+}
+
+//Text Area Microphone Styling
+.app-kendo--textarea-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.mic-icon-btn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: transparent;
+  border: none;
+  padding: 1px;             
+  border-radius: 50%;      
+  cursor: pointer;
+}
+.mic-icon-btn img {
+  width: 18px;             
+  height: 18px;
+}
+.mic-icon-btn:active {
+  background: rgba(0,0,0,0.1);
+}
+
+//Dashboard Notification
+.app-dashboard--notification{
+  color: rgba(32, 137, 156, 1);
+  padding:0.75rem 0.75rem 0.75rem 0rem;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0rem;
+  font-weight: var(--font-weight-bolder);
+  font-size: var(--text-size-1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.app-dashboard--notification-content-left{
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: left;
+  gap: 1rem;
+}
+.app-dashboard--notification-content-right{
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: right;
+  gap: 1rem;
+}
+
+//fa icons
+.bounce-once {
+  display: inline-block;
+  animation: bounce 1s ease;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+  transform: translateY(0);
+}
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+.fade-spinner {
+  font-size: 15px;
+  color: #2196f3;
+  animation: fadeInOut 1.5s infinite, spin 1s linear infinite;
+}
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.2; }
+  50%      { opacity: 1; }
+}
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+//App Screen New Header
+.app-screen--header-new {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+}
+.app-screen--header-new .header-text {
+  color: var(--header-grey);
+  font-size: var(--text-size-1);
+  line-height: 1.75rem;
+  font-weight: var(--font-weight-bolder);
+  white-space: nowrap;
+}
+.app-screen--header-new .header-line {
+  flex: 1;
+  height: 1.1px;
+  background: linear-gradient(to right, var(--primary-black), transparent);
+  opacity: 0.3;
+}
+//Header Style Ends
+
+/*Info Icon Styling*/
+.app-kendo-info-card--collapse-icon{
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+}
+.app-kendo-info-card--expand-icon{
+  position: absolute;
+  top: 0.87rem;
+  right: 1rem;
+  font-size: var(--text-size-02);
+}
+.app-kendo-info-card{
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.05);
+  width: 100% !important;
+}
+.app-kendo-info-card--content{
+  font-size: var(--text-size-02);
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+  color: #8d8d8d;
+}
+/*Info Icon Styling Ends*/
