@@ -1,0 +1,81 @@
+<div class="app-container">
+  <div class="app-locked--container">
+    <app-navigation-bar
+      [title]="'Sales Parts Management'"
+      [showRefresh]="true"
+      (backClick)="onBackClickHandle()"
+      (refreshClick)="onReset()">
+    </app-navigation-bar>
+    <div class="app-screen--header-new">
+      <div class="app-screen--info-header-left">
+        <span class="header-text">Supplier List</span>
+        <span class="header-line"></span>
+      </div>
+    </div>
+  </div>
+
+  <ion-content>
+    <div *ngIf="!showSPMAPILoader">  
+      <div *ngFor="let a of supplierCards" class="app-enquiry-details-listview--cards">
+          <kendo-card class="app-enquiry-details-listview--kendo-card">
+                <div class="app-enquiry-details-listview--kendo-card-header">
+                  <div class="app-enquiry-details-listview--kendo-card-number" style="font-size: var(--text-size-1);">
+                    {{ a.supplierName }}
+                  </div>
+                  <div>
+                    <!-- <img
+                      src="assets/content/images/edit.svg"
+                      alt="new"
+                      (click)="navigateById(a.supplierId)" /> -->
+                    <i class="fa-solid fa-pen" (click)="navigateById(a.supplierId)" ></i>
+                  </div>
+                </div>
+          
+                <div class="app-enquiry-details-listview--kendo-splitter">
+                  <kendo-splitter orientation="horizontal"></kendo-splitter>
+                </div>
+          
+                <div class="app-enquiry-details-listview--kendo-card-content">
+                  <div class="app-enquiry-details-listview--kendo-card-sold-details">
+                    <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                      Remarks
+                    </div>
+                    <div *ngIf="a.remarks" class="app-enquiry-details-listview--kendo-card-sold">
+                      <ng-container *ngFor="let remarks of a.remarksMessage">
+                        By {{ remarks.author }} <br/> 
+                        {{ remarks.timestamp }} <br/>
+                        {{ remarks.content }} <br/>
+                        <br/>
+                      </ng-container> 
+                    </div>
+                  </div>
+                  <div class="app-enquiry-details-listview--kendo-card-sold-details" style="align-items: center;">
+                    <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                      Attachment
+                    </div>
+                    <div class="app-enquiry-details-listview--kendo-card-sold"
+                    (click)="onClickSuppAttachment(a.supplierDocId, commonService.docSrcTypeSuppAttachment, a.attachmentGuId? a.attachmentGuId: '', $event)">
+                      <i class="fa-solid fa-paperclip"></i>
+                    </div>
+                  </div>
+                </div>
+          </kendo-card>     
+      </div>
+
+      <app-attachment-pop-up 
+        [showAttachmentPopup]="showSuppAttachment"
+        (attachmentPopupClose)="onCloseAttachmentPopup()"
+        title = "Supplier Attachments"
+        [attachmentPopupDetails]="attachmentPopupDetails">
+      </app-attachment-pop-up>
+    </div>
+  </ion-content>
+  
+  <div class="app-screen--loader" *ngIf="showSPMAPILoader">
+    <kendo-loader
+      type="converging-spinner"
+      themeColor="info"
+      size="medium"></kendo-loader>
+    <div>Loading Supplier details...</div>
+  </div>
+</div>

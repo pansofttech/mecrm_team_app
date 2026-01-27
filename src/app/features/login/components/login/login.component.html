@@ -1,0 +1,167 @@
+<!-- eslint-disable @angular-eslint/template/elements-content -->
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<div class="login-page--main-container">
+  <kendo-card class="login-page--kendo-card" *ngIf="!showLoader && isUserLoggedOut && !isOTPScreen">
+    <div class="login-page--logo-img">
+      <img src="assets/content/images/login-images/Group-img.svg" alt="new" />
+    </div>
+
+    <div class="login-page--form-container">
+      <form
+        [formGroup]="loginForm"
+        (keydown.enter)="onEnterPressed()"
+        class="login-page--login-form">
+        <div class="login-page--formfield">
+          <div class="login-page--formfield-user">
+            <kendo-formfield>
+              <kendo-textbox
+                class="login-page--textbox"
+                formControlName="username"
+                #username
+                required
+                placeholder="Username">
+                <ng-template kendoTextBoxPrefixTemplate>
+                  <img
+                    src="assets/content/images/login-images/profile.svg"
+                    alt="new"
+                    class="login-page--user-img" /> </ng-template
+              ></kendo-textbox>
+              <kendo-formerror class="login-page-kendo-form-error"
+                >Username is required</kendo-formerror
+              >
+            </kendo-formfield>
+          </div>
+
+          <kendo-formfield>
+            <kendo-textbox
+              #textbox
+              placeholder="Password"
+              [clearButton]="true"
+              class="login-page--textbox"
+              [type]="inputType"
+              formControlName="password">
+              <ng-template kendoTextBoxSuffixTemplate>
+                <button 
+                  kendoButton 
+                  type="button" 
+                  look="clear" 
+                  [svgIcon]="eyeIcon"
+                  (click)="togglePasswordVisibility()"></button>
+              </ng-template>
+              <ng-template kendoTextBoxPrefixTemplate>
+                <img
+                  src="assets/content/images/login-images/password.svg"
+                  alt="new"
+                  class="login-page--profile-img" />
+                <div></div>
+              </ng-template>
+            </kendo-textbox>
+            <kendo-formerror class="login-page-kendo-form-error">
+              Password is required
+            </kendo-formerror>
+          </kendo-formfield>
+
+          <div class="login-page--forgot-div">
+            <a class="login-page--forgot-link" (click)="onForgotPasswordClick()">
+              Forgot your password?
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <button
+            kendoButton
+            class="login-page--signin-button"
+            [disabled]="loginForm.invalid"
+            (click)="onSubmit()">
+            Sign In
+          </button>
+        </div>
+      </form>
+    </div>
+  </kendo-card>
+
+  <kendo-card class="login-page--kendo-card" *ngIf="!showLoader && !isUserLoggedOut && isOTPScreen">
+    <div class="login-page--otp-img">
+      <img src="assets/content/images/login-images/otp-generation-verification.png" alt="new" width="200" height="200"/>
+    </div>
+    
+    <div class="login-page--form-container">
+      <div class="otp-container">
+          <p class="otp-title">OTP Verification</p>
+          <p class="otp-subtext">
+            OTP sent to your registered <b>{{ otpMethod == "phone"? "Mobile Number": "Email" }}</b>
+          </p>
+
+          <div class="otp-inputs">
+            <input
+              *ngFor="let ctrl of otpControls; let i = index"
+              type="tel"
+              maxlength="1"
+              class="otp-box"
+              [formControl]="ctrl"
+              (input)="onOtpInput($event, i)"
+              (keydown)="onOtpKeyDown($event, i)" />
+          </div>
+
+          <p class="otp-timer">
+            OTP expires in <b>{{ countdown }}s</b>
+          </p>
+
+          <div class="otp-resend">
+            <div class="resend-primary">
+              <span class="muted">
+                Didn’t get code?
+              </span>
+
+              <button
+                kendoButton
+                look="flat"
+                class="link-btn"
+                [disabled]="!canResend"
+                (click)="resendOtp(otpMethod)">
+                
+                Resend 
+                <span *ngIf="coolDownRemaining > 0">
+                  ({{ coolDownRemaining }}s)
+                </span>
+              </button>
+            </div>
+
+            <button
+              kendoButton
+              look="flat"
+              class="switch-btn"
+              [disabled]="!canResend"
+              (click)="resendOtp(otpMethod === 'email' ? 'phone' : 'email')">
+              Send code to
+              {{ otpMethod === 'email' ? 'mobile number' : 'email' }}
+            </button>
+          </div>
+
+          <button
+            kendoButton
+            class="login-page--signin-button"
+            [disabled]="!isOtpComplete"
+            (click)="verifyOtp()">
+            Verify OTP
+          </button>
+
+          <div>
+            <a routerLink="/login" class="forgotpassword-page--forgot-link">
+              <i class="fa fa-arrow-left"> </i> &nbsp;
+              Back to Login Page
+            </a>
+          </div>
+        </div>
+    </div>
+  </kendo-card>
+
+  <div class="app-screen--loader" *ngIf="showLoader">
+    <kendo-loader
+      type="converging-spinner"
+      themeColor="info"
+      size="medium"></kendo-loader>
+    <div>{{ loaderMessage }}</div>
+  </div>
+</div>

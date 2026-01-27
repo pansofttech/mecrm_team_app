@@ -1,0 +1,123 @@
+<div class="app-container">
+  <div class="app-locked--container">
+    <app-navigation-bar
+      [title]="'Parts Requisition Worklist'"
+      [showRefresh]="true"
+      (backClick)="onBackClickHandle()"
+      (refreshClick)="onReset()">
+    </app-navigation-bar>
+
+    <div class="app-screen--content">
+      <div class="app-screen--stepper-new">
+        <div class="app-screen--stepper-container-new"
+             (click)="onStepperClick(0)" [ngClass]="{'selected': isPRDetailsSelected}">
+          <div> Details </div>
+        </div>
+        <div class="app-screen--stepper-container-new"
+             (click)="onStepperClick(1)" [ngClass]="{'selected': isPRCommentsSelected}">
+          <div> Comments </div>
+        </div>
+        <div class="app-screen--stepper-container-new"
+            (click)="onStepperClick(2)" [ngClass]="{'selected': isPRListSelected}">
+          <div> List </div>
+        </div>
+      </div>
+    </div>
+    <div class="margin-0-5">
+      <kendo-card *ngIf="!isPRIDInfoSelected" class="app-kendo-info-card">
+        <div class="app-enquiry-details-listview--kendo-card-content" (click)="onPRIDInfoClick()">
+            <div class="app-kendo-info-card--content">
+              Call details of PRID {{ selectedPRID }}
+            </div>
+            <div class="app-kendo-info-card--expand-icon" style="color:#8d8d8d;">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+      </kendo-card>
+      <kendo-card *ngIf="isPRIDInfoSelected" class="app-enquiry-details-listview--kendo-card">
+        <div class="app-enquiry-details-listview--kendo-card-content" (click)="onPRIDInfoClick()">
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              PRID
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-comments">
+              <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                {{ selectedPRID }}
+              </div>
+              <div class="app-kendo-info-card--collapse-icon">
+                <i class="fa-solid fa-chevron-up"></i>
+              </div>
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              PR Type
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold ">
+              Order Form
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              IO No.
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold ">
+              HP496948523(3/6)/25
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-sold-details">
+            <div class="app-enquiry-details-listview--kendo-card-sub-title">
+              Status
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold ">
+              Management Approval
+            </div>
+          </div>
+        </div>
+      </kendo-card>
+    </div>
+  </div>
+
+  <ion-content scrollEvents="true" (ionScroll)="onScroll()">
+    <app-partsrequest-details *ngIf="currentStep === 0"         
+    [prDetails]="currentGroup"
+    [prInfoCard]="prInfoCard"></app-partsrequest-details>
+    <app-approval-comments *ngIf="currentStep === 1"
+    [prApprovalComments]="currentGroup"
+    [prInfoCard]="prInfoCard"></app-approval-comments>
+    <app-partsrequest-list *ngIf="currentStep === 2"
+    [completionDetails]="currentGroup"
+    [prInfoCard]="prInfoCard"
+    [partsListCards]="partsListCards"></app-partsrequest-list>
+    <div *ngIf="(currentStep === 1 || currentStep === 2) && !showAPILoader" class="app-screen--footer">
+        <button
+            kendoButton
+            class="app-save--button"
+            (click)="submit()"
+            [disabled]="isSaveDisabled">
+            Approve
+        </button>
+        <button
+            kendoButton
+            class="app-save--button app-reject-button"
+            (click)="submit()"
+            [disabled]="isSaveDisabled">
+            Reject
+        </button>
+        <button
+            kendobutton
+            class="app-cancel--button"
+            (click)="onBackClickHandle()">
+            Cancel
+        </button>
+    </div>
+  </ion-content>
+
+  <div class="app-screen--loader" *ngIf="showAPILoader">
+      <kendo-loader
+        type="converging-spinner"
+        themeColor="info"
+        size="medium"></kendo-loader>
+      <div>Loading details...</div>
+  </div>
+</div>

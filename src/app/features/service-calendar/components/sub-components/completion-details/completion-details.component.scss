@@ -1,0 +1,22 @@
+.app-kendo-form--row-container {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  gap:1rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+.app-kendo--checkbox {
+  flex-basis: 40%;
+}
+
+.app-kendo--label-horizontal {
+  flex-basis: 60%;
+}
+
+.flex-basis-25{
+  flex-basis: 25%;
+}
+.flex-basis-50{
+  flex-basis: 50%;
+}

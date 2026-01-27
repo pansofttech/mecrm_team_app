@@ -1,0 +1,72 @@
+<div class="app-screen--header">
+  Customer Delay
+</div>
+
+<div class="app-kendo-form--container"
+    [formGroup]="customerDelayDetails"
+    *ngIf="!showAPILoader">
+    <kendo-formfield>
+      <div class="app-kendo--content-horizontal">
+        <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="leDelay">
+            LE Delay
+        </kendo-label>
+        <kendo-checkbox class="app-kendo--checkbox"
+        formControlName="leDelay"
+        #leDelay>
+        </kendo-checkbox>
+      </div>
+      <kendo-formerror class="app-kendo--error-msg"
+        >LE Delay is required</kendo-formerror
+      >
+    </kendo-formfield>
+
+    <kendo-formfield>
+      <div class="app-kendo--content">
+        <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="leDelayRecoverDate"
+          >LE Delay Recovery Date</kendo-label
+        >
+        <kendo-datepicker
+            class="app-kendo--dropdownlist"
+            formControlName="leDelayRecoverDate"
+            #leDelayRecoverDate
+            placeholder="dd-MMM-yyyy">
+        </kendo-datepicker>
+      </div>
+      <kendo-formerror class="app-kendo--error-msg"
+        >LE Delay Recovery Date is required</kendo-formerror
+      >
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <div class="app-kendo--textarea-wrapper">
+            <kendo-label
+              class="app-kendo--label"
+              [for]="leDelayHoldRemarks"
+            >LE Delay Hold Remarks</kendo-label>
+            <button 
+                type="button" 
+                class="mic-icon-btn" 
+                (click)="commonService.startListeningAndPatch(customerDelayDetails ,'leDelayHoldRemarks');">
+              <img src="assets/content/images/microphone.svg" alt="mic" />
+            </button>
+          </div>  
+          <kendo-textarea
+            class="app-kendo--textarea"
+            placeholder="Type  your message here.."
+            formControlName="leDelayHoldRemarks"
+            #leDelayHoldRemarks
+            [rows]="6"
+            resizable="vertical"></kendo-textarea>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">LE Delay Remarks is required</kendo-formerror>
+    </kendo-formfield>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+  <kendo-loader
+    type="converging-spinner"
+    themeColor="info"
+    size="medium"></kendo-loader>
+  <div>Loading hold details....</div>
+</div>

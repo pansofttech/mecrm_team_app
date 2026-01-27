@@ -1,0 +1,34 @@
+.worksheet-download--container {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 1rem;
+    gap: 1rem;
+  }
+  .worksheet-download-content{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(251, 251, 252);
+    border-radius: 20px;
+  }
+  .worksheet-download-button{
+    border: 2px solid #5cb5c1;
+    border-radius: 20px;
+    background-color: white;
+    padding: 0.7rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color:#5cb5c1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap:0.5rem;
+    cursor: pointer;
+  }
+  .worksheet-download-button :hover {
+    background-color: #f0f0f0;
+}

@@ -1,0 +1,49 @@
+// .service-calendar--back-img {
+//   cursor: pointer;
+// }
+// .service-calendar--front-img {
+//   cursor: pointer;
+//   transform: rotate(180deg);
+//   padding-top: 0.25rem;
+// }
+// .service-calendar-date{
+//   padding-bottom: 0.25rem;
+//   color: #FFFFFF;
+// }
+.service-calendar-container{
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--secondary-color);;
+  margin-bottom: 0.3rem;
+}
+.service-calendar-date-container{
+  display: flex;
+  align-items: center;
+  font-weight: var(--font-weight-bolder);
+  color: var(--primary-white);
+  line-height: 1.75rem;
+}
+.service-kendo-calendar-pop-up-icon{
+  padding-left: 1rem;
+}
+.service-kendo-calendar-pop-up{
+  display: flex;
+  align-items: flex-end;
+  position: fixed;
+  top: 7rem;
+  left: 1rem;
+  right: 0;
+  z-index: 1000; 
+}
+
+.double-chevron{
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.app-screen--header-new {
+  padding-bottom: 0rem;
+}

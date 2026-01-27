@@ -1,0 +1,41 @@
+name: OTA Deploy
+
+on:
+  push:
+    branches: [dev, staging, main]
+
+jobs:
+  ota:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - run: npm ci
+
+      - name: Set environment
+        run: |
+          if [[ $GITHUB_REF == "refs/heads/dev" ]]; then
+            echo "CAP_CHANNEL=dev" >> $GITHUB_ENV
+            echo "NG_ENV=development" >> $GITHUB_ENV
+          elif [[ $GITHUB_REF == "refs/heads/staging" ]]; then
+            echo "CAP_CHANNEL=staging" >> $GITHUB_ENV
+            echo "NG_ENV=staging" >> $GITHUB_ENV
+          else
+            echo "CAP_CHANNEL=production" >> $GITHUB_ENV
+            echo "NG_ENV=production" >> $GITHUB_ENV
+          fi
+
+      - run: npm run build -- --configuration $NG_ENV
+      - run: npx cap sync
+
+      - name: Upload OTA
+        run: |
+          npx capawesome live-update upload \
+            --channel $CAP_CHANNEL \
+            --bundle-dir www
+        env:
+          CAPAWESOME_TOKEN: ${{ secrets.CAPAWESOME_TOKEN }}

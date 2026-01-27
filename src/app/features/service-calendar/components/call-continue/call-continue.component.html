@@ -1,0 +1,38 @@
+<div class="app-locked--container" *ngIf="!showAPILoader">
+  <div class="app-screen--info-header">
+    <div class="app-screen--info-header-left">
+      Continue
+    </div>
+    <div class="app-screen--info-header-right" (click)="onBackClickHandle()">
+      <img src="assets/content/images/backward.svg" />
+      <span>Back</span>
+    </div>
+  </div>
+</div>
+
+<div class="app-scrollable--container" *ngIf="!showAPILoader">
+  <div class="app-screen--content">
+    <div class="app-screen--footer">
+      <button
+        kendoButton
+        class="app-save--button"
+        (click)="submit()">
+        Submit
+      </button>
+      <button
+        kendobutton
+        class="app-cancel--button"
+        (click)="onBackClickHandle()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+  <kendo-loader
+    type="converging-spinner"
+    themeColor="info"
+    size="medium"></kendo-loader>
+  <div>{{ loaderMessage }}</div>
+</div>   

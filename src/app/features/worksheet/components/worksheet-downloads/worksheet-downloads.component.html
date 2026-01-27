@@ -1,0 +1,29 @@
+<div class="app-screen--header">
+    Worksheet Downloads
+    <div class="app-screen--header-tag"></div>
+</div>
+<div
+    class="worksheet-download--container"
+    *ngIf="!showWorksheetAPILoader">
+    <div class="worksheet-download-content">
+        Quote Comparision File
+        <button class="worksheet-download-button"> 
+            <img src="assets/worksheet-download-icon.svg" alt="->"/> 
+            Download 
+        </button>
+    </div>
+    <div class="worksheet-download-content">
+        WS Item Download
+        <button class="worksheet-download-button"> 
+            <img src="assets/worksheet-download-icon.svg" alt="->"/> 
+            Download 
+        </button>
+    </div>
+</div>
+<div class="app-screen--loader" *ngIf="showWorksheetAPILoader">
+    <kendo-loader
+      type="converging-spinner"
+      themeColor="info"
+      size="medium"></kendo-loader>
+    <div>Loading worksheet download details...</div>
+</div>

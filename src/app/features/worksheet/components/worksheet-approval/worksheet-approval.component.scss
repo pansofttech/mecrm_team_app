@@ -1,0 +1,46 @@
+/*Info Icon Styling*/
+.card-selection-addition-icon{
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+}
+.card-selection-info-expand-icon{
+  position: absolute;
+  top: 0.87rem;
+  right: 1rem;
+  font-size: var(--text-size-02);
+}
+.app-enquiry-details-listview--kendo-info-card{
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.05);
+  width: 100% !important;
+}
+.app-info-card--content{
+  font-size: var(--text-size-02);
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+  color: #8d8d8d;
+}
+.app-enquiry-details-listview--cards {
+  margin: 0.5rem;
+}
+/*Info Icon Styling Ends*/
+
+.app-locked--container {
+  position: sticky;
+  top: 0rem;
+  width: 100%;
+  z-index: 2;
+  // background-color: #F8F9FE;
+}
+.app-container {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  height: 100vh;
+  // background-color: #F8F9FE
+}
+.app-scrollable--container {
+  overflow-y: auto;
+  flex: 1;
+}

@@ -1,0 +1,202 @@
+<div class="app-screen--header">
+      Installation Details
+</div>
+
+<div class="app-kendo-form--container"
+    [formGroup]="installationDetails"
+    *ngIf="!showAPILoader">
+    <kendo-formfield>
+      <div class="app-kendo--content">
+        <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="productSerialNo">
+          Product Serial No.
+        </kendo-label>
+        <kendo-textbox
+          class="app-kendo--dropdownlist"
+          formControlName="productSerialNo"
+          #productSerialNo
+          required>
+        </kendo-textbox>
+      </div>
+      <kendo-formerror class="app-kendo--error-msg">
+        Product Serial No. is required
+      </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="sapNo">
+            SAP No.
+          </kendo-label>
+          <kendo-textbox
+            class="app-kendo--dropdownlist"
+            formControlName="sapNo"
+            #sapNo>
+          </kendo-textbox>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            SAP No. is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="productCategory">
+            Product Category
+          </kendo-label>
+          <kendo-textbox
+            class="app-kendo--dropdownlist"
+            formControlName="productCategory"
+            #productCategory
+            required>
+          </kendo-textbox>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Product category is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="leTag">
+            LE Tag
+          </kendo-label>
+          <kendo-textbox
+            class="app-kendo--dropdownlist"
+            formControlName="leTag"
+            #leTag>
+          </kendo-textbox>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            LE Tag is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="location">
+            Location
+          </kendo-label>
+          <kendo-textbox
+            class="app-kendo--dropdownlist"
+            formControlName="location"
+            #location
+            required>
+          </kendo-textbox>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Location is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="principalWarrantyStart">
+            Principal Warranty
+          </kendo-label>
+          <kendo-datepicker
+            class="app-kendo--dropdownlist"
+            formControlName="principalWarrantyStart"
+            #principalWarrantyStart
+            placeholder="dd-MMM-yyyy"
+            format="dd-MMM-yyyy">
+          </kendo-datepicker>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Principal warranty start date is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-datepicker
+            class="app-kendo--dropdownlist"
+            formControlName="principalWarrantyEnd"
+            #principalWarrantyEnd
+            placeholder="dd-MMM-yyyy"
+            format="dd-MMM-yyyy">
+          </kendo-datepicker>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Principal warranty end date should be greater than start date
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="clientWarrantyStart">
+            Client Warranty
+          </kendo-label>
+          <kendo-datepicker
+            class="app-kendo--dropdownlist"
+            formControlName="clientWarrantyStart"
+            #clientWarrantyStart
+            placeholder="dd-MMM-yyyy"
+            format="dd-MMM-yyyy">
+          </kendo-datepicker>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Client warranty start date is required
+        </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+      <div class="app-kendo--content">
+        <kendo-datepicker
+          class="app-kendo--dropdownlist"
+          formControlName="clientWarrantyEnd"
+          #clientWarrantyEnd
+          placeholder="dd-MMM-yyyy"
+          format="dd-MMM-yyyy">
+        </kendo-datepicker>
+      </div>
+      <kendo-formerror class="app-kendo--error-msg">
+          Client warranty end date should be greater than start date
+      </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+      <div class="app-kendo--content">
+        <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="ibStickerStatus">
+          IB Sticker Status
+        </kendo-label>
+        <kendo-dropdownlist
+          class="app-kendo--dropdownlist"
+          formControlName="ibStickerStatus"
+          #ibStickerStatus
+          [data]="dependantComboDataForIBStickerStatus"
+          textField="comboName"
+          valueField="comboId"
+          [valuePrimitive]="true">
+        </kendo-dropdownlist>
+      </div>
+      <kendo-formerror class="app-kendo--error-msg">
+          IB Sticker Status is required
+      </kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+      <div class="app-kendo--content">
+        <kendo-label class="app-kendo--label" [for]="ibStickerAttachment">Attachment</kendo-label>
+        <kendo-fileselect
+          class="app-kendo--fileupload"
+          formControlName="ibStickerAttachment"
+          #ibStickerAttachment>
+        </kendo-fileselect>
+      </div>
+      <kendo-formerror class="app-kendo--error-msg">
+        IB Sticker Attachment is required
+      </kendo-formerror>
+      <div *ngFor="let file of IBStickerAttachment; let i = index"
+        class="app-kendo-attachment-files">
+        <div (click)="downloadAttachment(i)">{{ file.name }}</div>
+      </div>
+    </kendo-formfield>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+    <kendo-loader
+      type="converging-spinner"
+      themeColor="info"
+      size="medium"></kendo-loader>
+    <div>Loading completion details....</div>
+</div>

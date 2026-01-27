@@ -1,0 +1,59 @@
+.kendo-card-content{
+  display: flex;
+  align-items: center;
+}
+.kendo-card-exp-content{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.kendo-card-content--title{
+  color: #383838;
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+}
+.kendo-card-content--sub-title{
+  color: var(--body-grey, #69727b);
+  font-size: var(--text-size-03);
+  font-style: normal;
+  font-weight: var(--font-weight-normal);
+  line-height: normal;
+}
+.kendo-card-content--value{
+  color: #383838;
+  font-size: var(--text-size-02);
+  font-style: normal;
+  font-weight: var(--font-weight-bolder);
+  line-height: normal;
+}
+.kendo-card-content-left{
+  display: flex;
+  justify-content: left;
+  gap:0.1rem;
+}
+.kendo-card-content-right{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap:0.1rem;
+}
+
+/* Default: show short label, hide full label */
+.label-full {
+  display: none;
+}
+.label-short {
+  display: inline;
+}
+@media (min-width: 345px) {
+  .label-full {
+    display: inline;
+  }
+  .label-short {
+    display: none;
+  }
+}

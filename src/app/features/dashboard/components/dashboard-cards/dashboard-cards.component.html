@@ -1,0 +1,23 @@
+<div class="dashboard-quickLink-card--container">
+    <div class="dashboard-quicklink-header--content">
+      <div class="dashboard-card--title">Quick Links</div>
+      <div class="dashboard-card--username">Hi, {{ getEmployeeFirstName() }}</div>
+    </div>
+    <div class="dashboard-module-card--container">
+      <div class="modules--grid-container">
+        <ng-container *ngFor="let a of cards">
+          <kendo-card
+            class="dashboard-module--cards"
+            *ngIf="showCards(a)"
+            (click)="handleCardNavigate(a)"
+            [ngStyle]="{ background: 'rgba(235, 243, 244, 0.4)' }">
+            <fa-icon
+              class="dashboard-quickLink-card--image"
+              [icon]="['fas', getIconName(a.image)]">
+            </fa-icon>
+            <div class="dashboard-module--label">{{ a.text }}</div>
+          </kendo-card>
+        </ng-container>
+      </div>
+    </div>
+</div>

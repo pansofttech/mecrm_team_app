@@ -1,0 +1,79 @@
+<div class="app-locked--container" *ngIf="!showAPILoader">
+  <div class="app-screen--info-header">
+    <div class="app-screen--info-header-left">
+      Hold
+    </div>
+    <div class="app-screen--info-header-right" (click)="onBackClickHandle()">
+      <img src="assets/content/images/backward.svg" />
+      <span>Back</span>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!showAPILoader"> 
+  <kendo-stepper
+    [steps]="steps"
+    stepType="full"
+    [linear]="false"
+    [(currentStep)]="currentStep"
+    cssClass="enquiry-details-content--stepper"
+    (stepSelect)="onStepSelect($event)">
+  </kendo-stepper>
+
+  <div class="app-screen--content">
+    <form class="k-form k-form-md" [formGroup]="callHoldForm">
+      <app-customer-delay
+        *ngIf="currentStep === 0"
+        [customerDelayDetails]="currentGroup"></app-customer-delay>
+      <app-other-reasons
+        *ngIf="currentStep === 1"
+        [otherReasonsDetails]="currentGroup"></app-other-reasons>
+      <app-parts-required
+        *ngIf="currentStep === 2"
+        [partsRequiredDetails]="currentGroup"></app-parts-required>
+      <app-po-required
+        *ngIf="currentStep === 3"
+        [poRequiredDetails]="currentGroup"></app-po-required>
+    </form>
+    <div class="app-screen--footer">
+      <button
+        kendobutton
+        class="app-general--button"
+        (click)="next()"
+        *ngIf="currentStep !== (isPORequired? 3: 2) && isEditable">
+        Next
+      </button>
+      <button
+        kendoButton
+        class="app-save--button"
+        (click)="submit()"
+        *ngIf="currentStep === (isPORequired? 3: 2) && isEditable">
+        Submit
+      </button>
+      <button
+        kendobutton
+        class="app-cancel--button"
+        *ngIf="currentStep === 0 && isEditable"
+        (click)="onBackClickHandle()">
+        Cancel
+      </button>
+      <button
+        kendobutton
+        class="app-cancel--button"
+        *ngIf="currentStep !== 0 && isEditable"
+        (click)="prev()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+  <kendo-loader
+    type="converging-spinner"
+    themeColor="info"
+    size="medium"></kendo-loader>
+  <div>{{ loaderMessage }}</div>
+</div>    
+  
+  

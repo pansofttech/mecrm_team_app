@@ -1,0 +1,74 @@
+<div class="app-container">
+  <div class="app-locked--container" *ngIf="!showAPILoader">
+    <app-navigation-bar
+      [title]="'Enquiry Details'"
+      [showRefresh]="true"
+      (backClick)="onBackClickHandle()"
+      (refreshClick)="onReset()">
+    </app-navigation-bar>
+
+    <kendo-stepper
+      [steps]="steps"
+      stepType="full"
+      [linear]="false"
+      [(currentStep)]="currentStep"
+      cssClass="enquiry-details-content--stepper"
+      (stepSelect)="onStepSelect($event)">
+    </kendo-stepper>
+  </div>
+
+  <div class="app-scrollable--container" *ngIf="!showAPILoader">
+    <div class="app-screen--content">
+      <form class="k-form k-form-md" [formGroup]="enquiryCaptureForm">
+        <app-contact-details
+          *ngIf="currentStep === 0"
+          [contactDetails]="currentGroup"></app-contact-details>
+        <app-enquiry-details-forms
+          *ngIf="currentStep === 1"
+          [enquiryDetailsForms]="currentGroup"></app-enquiry-details-forms>
+        <app-enquiry-description
+          *ngIf="currentStep === 2"
+          [enquiryDescription]="currentGroup"></app-enquiry-description>
+      </form>
+      <div class="app-screen--footer">
+        <button
+          kendobutton
+          class="app-general--button"
+          (click)="next()"
+          *ngIf="currentStep !== 2">
+          Next
+        </button>
+        <button
+          kendoButton
+          class="app-save--button"
+          (click)="submit()"
+          *ngIf="currentStep === 2">
+          Save
+        </button>
+        <button
+          kendobutton
+          class="app-cancel--button"
+          *ngIf="currentStep === 0"
+          (click)="onReset()">
+          Cancel
+        </button>
+        <button
+          kendobutton
+          class="app-cancel--button"
+          *ngIf="currentStep !== 0"
+          (click)="prev()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-screen--loader" *ngIf="showAPILoader">
+    <kendo-loader
+      type="converging-spinner"
+      themeColor="info"
+      size="medium"></kendo-loader>
+    <div>Creating enquiry....</div>
+  </div>
+</div>
+

@@ -1,0 +1,190 @@
+<div class="app-locked--container">
+  <div *ngIf="isModuleDetailsOpen" class="app-screen--info-header">
+    <div class="app-screen--info-header-left">
+      Module Details
+    </div>
+    <div class="app-screen--info-header-right">
+      <div *ngIf="!isModuleDetailsEditOpen && isEditable && !isAddModulesFromSalesConfigOpen" 
+           class="app-screen--info-header-right" (click)="onAddModulesFromSalesConfigClick()">
+           <span style="font-size: 12px;">Add from sales config</span>
+      </div>
+      <img *ngIf="!isModuleDetailsEditOpen && isEditable"
+           src="assets/content/images/delete.svg" alt="new" width="25" height="25"
+           (click)="onDeleteAddedCards()" />
+      <div *ngIf="isModuleDetailsEditOpen" 
+           class="app-screen--info-header-right" (click)="onBackClickHandle('edit')">
+           <img src="assets/content/images/backward.svg" />
+           <span>Back</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!showAPILoader">
+  <div *ngIf="isModuleDetailsOpen" [formGroup]="moduleDetails">
+    <kendo-formfield>
+      <kendo-textbox
+        formControlName="dummyModuleControl"
+        #dummyModuleControl
+        hidden>
+      </kendo-textbox>
+      <kendo-formerror class="app-stepper--error-msg">
+        Model No. and Serial No. is required for all modules
+      </kendo-formerror>
+    </kendo-formfield>
+  </div>
+
+  <div *ngIf="isModuleDetailsOpen">
+    <div *ngIf="moduleDetailsCard.length > 0 && !showAPILoader && !isModuleDetailsEditOpen">
+      <div *ngFor="let a of moduleDetailsCard;let i=index;" class="app-enquiry-details-listview--cards">
+        <kendo-card class="app-enquiry-details-listview--kendo-card"
+                    [ngClass]="{'selected-card': a.isCardSelected}">
+          <div class="app-enquiry-details-listview--kendo-card-header">
+            <div class="app-enquiry-details-listview--kendo-card-number">
+              {{ a.moduleName }}
+            </div>
+            <div *ngIf="isEditable" class="card-two-options">
+              <div>
+                <!-- <img src="assets/content/images/edit.svg"
+                alt="new"
+                (click)="onModuleEdit(i)"/> -->
+                <i class="fa-solid fa-pen" (click)="onModuleEdit(i)" ></i>
+              </div>
+              <div>
+                <input type="radio"
+                kendoRadioButton
+                [checked]="a.isCardSelected"
+                (click)="isCardSelected(i)" />
+              </div>
+            </div>  
+          </div>
+
+          <div class="app-enquiry-details-listview--kendo-splitter">
+            <kendo-splitter orientation="horizontal"></kendo-splitter>
+          </div>
+
+          <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Model No.:
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.modelNo }}
+              </div>
+            </div>
+          </div>
+
+          <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Part No.:
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.partNo }}
+              </div>
+            </div>
+          </div>
+
+          <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Serial No.:
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.serialNo }}
+              </div>
+            </div>
+          </div>
+
+          <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Version:
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.versionNo }}
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!a.isDescOpen" class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Notes:
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-comments" (click)="onDescriptionClick(i)">
+                <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                  {{ a.notes | slice:0:30 }} .....
+                </div>
+                <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                  <img (click)="onDescriptionClick(i)" src="assets/content/images/down.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="a.isDescOpen" class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Notes:
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-comments" (click)="onDescriptionClick(i)">
+                <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                  {{ a.notes }}
+                </div>
+                <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                  <img (click)="onDescriptionClick(i)" src="assets/content/images/up.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </kendo-card>
+      </div>
+    </div>
+
+    <app-module-details-edit
+      *ngIf="isModuleDetailsEditOpen"
+      [srid]="srid"
+      [svcModuleDetails]="moduleDetailsCard"
+      [index]="selectedIndex"
+      (onBackClick)="onBackClickHandle('edit')">
+    </app-module-details-edit>
+
+    <div *ngIf="moduleDetailsCard.length === 0 && !showAPILoader && !isModuleDetailsEditOpen" class="app-disclaimer--card">
+      <div class="app-disclaimer--content">
+        <h5>No module details found</h5>
+      </div>
+    </div>
+    
+    <div *ngIf="isEditable" class="app-control--container">
+      <div class="app-screen--footer" *ngIf="!showAPILoader && !isModuleDetailsEditOpen">
+        <div class="parts-request-add-button" *ngIf="isModuleDetailsOpen">
+          <img src="assets/content/images/add-circular-button.svg" alt="new" width="60" height="60"
+               (click)="onAddPartsClick()" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-parts-search 
+    *ngIf="!isModuleDetailsOpen && !isModuleDetailsEditOpen && !isAddModulesFromSalesConfigOpen"
+    [srid]="srid"
+    [addedPartsDetailsCard]="modulePartsCard"
+    (onBackClickHandle)="onBackClickHandle('add')">
+  </app-parts-search>
+
+  <app-installbase-modules-salesconfig 
+    *ngIf="!isModuleDetailsOpen && !isModuleDetailsEditOpen && !isModulePartsAddOpen"
+    [srid]="srid"
+    [installBaseId]="installBaseId"
+    [addedPartsDetailsCard]="modulePartsCard"
+    (onBackClickHandle)="onBackClickHandle('add')">
+  </app-installbase-modules-salesconfig>
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+  <kendo-loader type="converging-spinner"
+                themeColor="info"
+                size="medium"></kendo-loader>
+  <div>{{ loaderMessage }}</div>
+</div> 

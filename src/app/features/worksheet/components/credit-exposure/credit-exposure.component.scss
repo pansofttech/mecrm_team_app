@@ -1,0 +1,21 @@
+.credit-exposure-balance-container{
+    font-size: var(--text-size-02);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0rem 1rem 1rem 1rem;
+}
+.credit-exposure-balance-card{
+    display: flex;
+    position: relative;
+    left: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    padding-right: 0.5rem;
+}
+.credit-exposure-credit-balance-card{
+    border: 1px solid black;
+    padding: 0.25rem;
+    border-radius: 5px;
+}

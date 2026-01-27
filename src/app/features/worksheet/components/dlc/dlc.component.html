@@ -1,0 +1,144 @@
+<div class="app-container">
+  <!-- <div class="app-locked--sub-container">
+    <div class="app-screen--header">
+      DLC
+    </div>
+  </div> -->
+
+  <div class="app-scrollable--container" *ngIf="!showWorksheetAPILoader">
+    <div *ngFor="let a of WorksheetDLCDetailsCard; let i = index" class="app-enquiry-details-listview--cards">
+      <kendo-card class="app-enquiry-details-listview--kendo-card">
+        <div class="header" style="margin-top: 0.5rem;">
+          <div class="sub-title">
+            <div class="sub-title sub-title-content">
+              Supplier:
+            </div>
+            <div class="sold sold-content-left">
+              {{a.supplierName}}
+            </div>
+          </div>
+        </div>
+
+        <div class="header">
+          <div class="sub-title-left">
+            <div class="sub-title sub-title-content-left">
+              Part No.:
+            </div>
+            <div class="sold sold-content-left">
+              {{a.partNo}}
+            </div>
+          </div>
+        </div>
+
+        <div class="header">
+          <div class="sub-title-left">
+            <div class="sub-title sub-title-content-left">
+              Option:
+            </div>
+            <div class="sold sold-content-left">
+              {{a.options}}
+            </div>
+          </div>
+
+          <div class="sub-title-right">
+            <div class="sub-title sub-title-content-right">
+              PL:
+            </div>
+            <div class="sold sold-content-right">
+              {{a.productLine}}
+            </div>
+          </div>
+        </div>
+
+        <div class="header">
+          <div class="sub-title-left">
+            <div class="sub-title sub-title-content-left">
+              USILP:
+            </div>
+            <div class="sold sold-content-left">
+              {{ a.isAllowEdit? commonService.displayDecimalFormat(a.sellIn): ''}} &nbsp; {{a.isAllowEdit && a.sellIn? WorksheetPrerequisites[0].quoteCurrencyName: ''}}
+            </div>
+          </div>
+          <div class="sub-title-right">
+            <div class="sub-title sub-title-content-right">
+              Qty.:
+            </div>
+            <div class="sold sold-content-right">
+              {{a.qty}}
+            </div>
+          </div>
+        </div>
+
+        <div class="header">
+          <div class="sub-title-left">
+            <div class="sub-title sub-title-content-left">
+              TSOLP:
+            </div>
+            <div class="sold sold-content-left">
+              {{ commonService.displayDecimalFormat(a.sellOutValue)}} &nbsp; {{ a.sellOutValue? WorksheetPrerequisites[0].quoteCurrencyName: ''}}
+            </div>
+          </div>
+          <div class="sub-title-right">
+            <img *ngIf="!a.isDescriptionOpen" (click)="isDescOpened(i)" src="assets/content/images/down.svg"/>
+            <img *ngIf="a.isDescriptionOpen" (click)="isDescOpened(i)" src="assets/content/images/up.svg"/>
+          </div>
+        </div>
+
+        <div *ngIf="a.isDescriptionOpen" class="app-enquiry-details-listview--kendo-splitter">
+          <kendo-splitter orientation="horizontal"></kendo-splitter>
+        </div>
+
+        <div *ngIf="a.isDescriptionOpen" class="header">
+          <div class="sub-title">
+            <div class="sub-title sub-title-content">
+              Description:
+            </div>
+            <div class="sold sold-content">
+              {{a.description}}
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="a.isDescriptionOpen" class="header">
+          <div class="sub-title">
+            <div class="sub-title sub-title-content">
+              Remarks:
+            </div>
+            <div class="sold sold-content">
+              {{a.remarks}}
+            </div>
+          </div>
+        </div>
+      </kendo-card>
+    </div>
+
+    <div *ngIf="WorksheetDLCDetailsCard.length > 0" class="app-enquiry-details-listview--cards">
+      <kendo-card class="app-enquiry-details-listview--kendo-card">
+        <div class="header" style="margin-top: 0.5rem;">
+          <div class="sub-title">
+            <div class="sub-title sub-title-content">
+              Total:
+            </div>
+            <div class="sold sold-content-left">
+              {{ commonService.displayDecimalFormat(DLCTotalCost)}} &nbsp; {{ DLCTotalCost? WorksheetPrerequisites[0].quoteCurrencyName: ''}}
+            </div>
+          </div>
+        </div>
+      </kendo-card>
+    </div>
+
+    <div *ngIf="WorksheetDLCDetailsCard.length === 0 && !showWorksheetAPILoader" class="app-disclaimer--card">
+      <div class="app-disclaimer--content">
+        <h5> No deal level cost</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-screen--loader" *ngIf="showWorksheetAPILoader">
+    <kendo-loader
+      type="converging-spinner"
+      themeColor="info"
+      size="medium"></kendo-loader>
+    <div>Loading DLC details...</div>
+  </div>
+</div>

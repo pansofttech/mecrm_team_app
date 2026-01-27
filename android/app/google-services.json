@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "820020117711",
+    "project_id": "mecrm-c28ac",
+    "storage_bucket": "mecrm-c28ac.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820020117711:android:09d7b6604c59772ac477ba",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGbp0shqX-hJQrxyEO8IGq6C2qtG40iIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

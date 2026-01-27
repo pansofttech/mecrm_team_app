@@ -1,0 +1,174 @@
+<div class="app-kendo-form--container" [formGroup]="serviceEffortsForm">
+      <div class="app-kendo-forms--subcontent">
+        <div class="app-kendo-forms--subcontent-left">
+          <kendo-formfield>
+            <div class="app-kendo--content">
+              <kendo-label class="app-kendo--label" [for]="startTime"
+                >Start Time</kendo-label>
+              <kendo-timepicker class="app-kendo--textbox"
+                formControlName="startTime"
+                placeholder=" "
+                [format]="'HH:mm'"
+                [steps]="{ minute: 30 }"
+                #startTime>
+              </kendo-timepicker>
+            </div>
+          </kendo-formfield>
+        </div>
+
+        <div class="app-kendo-forms--subcontent-right">
+          <kendo-formfield>
+            <div class="app-kendo--content">
+              <kendo-label class="app-kendo--label" [for]="endTime"
+                >End Time</kendo-label>
+              <kendo-timepicker class="app-kendo--textbox"
+                formControlName="endTime"
+                placeholder=" "
+                [format]="'HH:mm'"
+                [steps]="{ minute: 30 }"
+                #endTime>
+              </kendo-timepicker>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg"
+              >End time should be less than start time</kendo-formerror
+            >
+          </kendo-formfield>
+        </div>
+      </div>
+
+      <div class="app-kendo-forms--subcontent">
+        <div class="app-kendo-forms--subcontent-left">
+          <kendo-formfield>
+            <div class="app-kendo--content">
+              <kendo-label class="app-kendo--label" [for]="efforthours"
+                >Effort Hours</kendo-label
+              >
+              <kendo-textbox class="app-kendo--textbox"
+              formControlName="efforthours"
+              [readonly]="true"
+              #efforthours>
+              </kendo-textbox>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg"
+              >Effort hours is required</kendo-formerror
+            >
+          </kendo-formfield>
+        </div>
+        <div class="app-kendo-forms--subcontent-right">
+          <kendo-formfield>
+            <div class="app-kendo--content">
+              <kendo-label class="app-kendo--label" [for]="travelhours"
+                >Travel Hours</kendo-label
+              >
+              <kendo-textbox class="app-kendo--textbox"
+              formControlName="travelhours"
+              #travelhours>
+              </kendo-textbox>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg"
+              >Travel hours is required</kendo-formerror
+            >
+          </kendo-formfield>
+        </div>
+      </div>
+
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label" [for]="effortremarks"
+            >Remarks</kendo-label
+          >
+          <kendo-textarea
+            placeholder="Type your message here.."
+            formControlName="effortremarks"
+            #effortremarks
+            class="app-kendo--textarea"
+            [rows]="6"
+            resizable="vertical"></kendo-textarea>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg"
+          >Effort remarks is required</kendo-formerror
+        >
+      </kendo-formfield>
+</div>
+
+<div *ngIf="engeffortListCards.length > 0" class="app-screen--info-header">
+      <div class="app-screen--info-header-left">
+        Other Efforts
+      </div>
+      <div class="app-screen--info-header-right">
+        <img *ngIf="!isPrevEffortsOpen" (click)="isPrevEffortsOpen = !isPrevEffortsOpen" src="assets/content/images/down-white.svg"/>
+        <img *ngIf="isPrevEffortsOpen" (click)="isPrevEffortsOpen = !isPrevEffortsOpen"src="assets/content/images/up-white.svg"/>
+      </div>
+</div>
+
+<div *ngIf="isPrevEffortsOpen">
+      <div *ngFor="let a of engeffortListCards; let i = index" class="app-enquiry-details-listview--cards">
+        <kendo-card class="app-enquiry-details-listview--kendo-card">
+          <div class="app-enquiry-details-listview--kendo-card-header">
+            <div class="app-enquiry-details-listview--kendo-card-number">
+              {{ a.name }}
+            </div>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-splitter">
+            <kendo-splitter orientation="horizontal"></kendo-splitter>
+          </div>
+          <div class="app-enquiry-details-listview--kendo-card-content">
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+              <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                Task
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-sold">
+                {{a.taskType}}
+              </div>
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+              <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                Schedule Date
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-sold">
+                {{a.ondate}}
+              </div>
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+              <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                Effort Hours
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-sold">
+                {{a.effortHours}}
+              </div>
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+              <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                Travel Hours
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-sold">
+                {{a.travelHours}}
+              </div>
+            </div>
+            <div class="app-enquiry-details-listview--kendo-card-sold-details">
+              <div class="app-enquiry-details-listview--kendo-card-sub-title">
+                Remarks
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-sold">
+                {{a.remarks}}
+              </div>
+            </div>
+          </div>
+        </kendo-card>
+      </div>
+</div>
+
+<div class="app-screen--footer">
+      <button
+        kendoButton
+        class="app-save--button"
+        (click)="submit()">
+        Save
+      </button>
+      <button
+        kendobutton
+        class="app-cancel--button"
+        (click)="onCancel()">
+        Cancel
+      </button>
+</div>  

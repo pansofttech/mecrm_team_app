@@ -1,0 +1,76 @@
+<div class="app-container">
+  <div class="app-locked--container" *ngIf="!showAPILoader">
+    <app-navigation-bar
+      [title]="'Notifications'"
+      [showRefresh]="false"
+      (backClick)="onBackClickHandle()">
+    </app-navigation-bar>
+  </div>
+
+  <ion-content scrollEvents="true">
+    <div *ngIf="commonService.notificationData.length === 0" class="app-disclaimer--card ">
+        <div class="app-disclaimer--content notification-screen">
+            <section class="notification-icon">
+                <i class="fa-solid fa-bell bounce-once"></i>
+                <span class="badge bounce-once">0</span>
+            </section>
+            <p class="no-notification">No Notifications</p>
+        </div>
+    </div>
+
+    <!-- <div *ngIf="commonService.notificationData.length > 0"> 
+       <div *ngFor="let a of commonService.notificationData" class="app-enquiry-details-listview--cards">
+           <kendo-card class="app-enquiry-details-listview--kendo-card">
+              <div class="notification-card">
+                <div class="notification-card-left">
+                  <div class="notification-title">
+                    {{a.notificationTitle}}
+                  </div>
+                  <div class="notification-body">
+                    {{ a.notificationBody }}
+                  </div>
+                </div>
+
+                <div class="notification-card-right">
+                  <img
+                  src="assets/content/images/chevron.svg"
+                  alt="edit" />
+                </div>
+              </div>
+           </kendo-card> 
+       </div>
+    </div> -->
+
+    <div *ngIf="commonService.notificationData.length > 0">
+        <section *ngFor="let a of commonService.notificationData" class="app-dashboard--notification" 
+          >
+          <section class="app-dashboard--notification-content-left" (click)="onNotificationClick(a.notificationId)"> 
+            <div class="notification-card-left">
+              <div class="notification-module-icon">
+                  <i class="fa" [ngClass]="'fa-' + a.notificationModule"></i>
+              </div>
+              <div class="notification-card-content">
+                <div class="notification-title">
+                  {{a.notificationTitle}}
+                </div>
+                <div class="notification-body">
+                  {{ a.notificationBody }}
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="app-dashboard--notification-content-right" style="padding-right: 0.5rem;">
+            <i *ngIf="a.actioned == false" class="fa fa-circle" aria-hidden="true" style="font-size: small;color:#DC3545;"></i>
+          </section>
+        </section>
+    </div>
+  </ion-content>
+
+  <div class="app-screen--loader" *ngIf="showAPILoader">
+    <kendo-loader
+      type="converging-spinner"
+      themeColor="info"
+      size="medium"></kendo-loader>
+    <div>Loading Notifications...</div>
+  </div>
+</div>

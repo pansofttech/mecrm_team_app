@@ -1,0 +1,174 @@
+<div class="app-locked--container">
+  <!-- <div class="app-screen--header">
+    Enquiry - {{ enqId }}
+  </div> -->
+  <div class="app-screen--header-new">
+    <div class="app-screen--info-header-left">
+      <span class="header-text">Enquiry - {{ enqId }}</span>
+      <span class="header-line"></span>
+    </div>
+  </div>
+</div>  
+
+<div class="app-kendo-form--container" [formGroup]="enquiryUpdateForm">
+  <kendo-formfield>
+    <div class="app-kendo--content">
+      <kendo-label class="app-kendo--label" [for]="poexpecteddate"
+        >PO Expected Date</kendo-label
+      >
+      <kendo-datepicker
+        class="app-kendo--dropdownlist"
+        formControlName="poExpectedDate"
+        #poexpecteddate
+        placeholder="-select-"
+        formatPlaceholder="formatPattern"
+        format="dd/MM/yyyy"></kendo-datepicker>
+    </div>
+    <kendo-formerror class="app-kendo--error-msg"
+      >PO expected date is required</kendo-formerror
+    >
+  </kendo-formfield>
+  <kendo-formfield>
+    <div class="app-kendo--content">
+      <kendo-label class="app-kendo--label" [for]="dealposition"
+        >Deal Position</kendo-label
+      >
+      <kendo-dropdownlist
+        class="app-kendo--dropdownlist"
+        formControlName="dealPosition"
+        #dealposition
+        [data]="dealPositionList"
+        textField="comboName"
+        valueField="comboID"
+        [valuePrimitive]="true"></kendo-dropdownlist>
+    </div>
+    <kendo-formerror class="app-kendo--error-msg"
+      >Deal position is required</kendo-formerror
+    >
+  </kendo-formfield>
+  <kendo-formfield>
+    <div class="app-kendo--content">
+      <kendo-label class="app-kendo--label" [for]="probability"
+        >Probability</kendo-label
+      >
+      <kendo-dropdownlist
+        class="app-kendo--dropdownlist"
+        formControlName="probability"
+        #probability
+        [data]="probabilityList"
+        textField="comboName"
+        valueField="comboID"
+        [valuePrimitive]="true"></kendo-dropdownlist>
+    </div>
+    <kendo-formerror class="app-kendo--error-msg"
+      >Probability is required</kendo-formerror
+    >
+  </kendo-formfield>
+
+  <div class="enquiry-update-forms--content">
+    <kendo-label class="app-kendo--label" [for]="dealvalue" [for]="currency" >Deal Value / Currency</kendo-label>
+    <div class="app-kendo-forms--subcontent">
+      <kendo-numerictextbox class="app-kendo--dropdownlist"
+       formControlName="dealValue"
+       [format]="'#,##0'"
+       [decimals]="0"
+       [spinners]="false"
+       #dealvalue>
+      </kendo-numerictextbox>
+      <kendo-textbox class="app-kendo--dropdownlist"
+       formControlName="currency"
+       #currency
+      ></kendo-textbox>  
+    </div>
+  </div>
+</div>
+
+<!-- <div class="app-screen--info-header">
+    <div class="app-screen--info-header-left">
+      Interactions
+    </div>
+    <kendo-button
+      class="app-screen--info-header-right"
+      (click)="handleHistoryButton()"
+      >Previous Interactions
+    </kendo-button>
+</div>   -->
+<div class="app-screen--header-new">
+  <div class="app-screen--info-header-left">
+    <span class="header-text">Interactions</span>
+    <span class="header-line"></span>
+  </div>
+  <div class="app-screen--info-header-right">
+    <kendo-button
+      class="app-screen--info-header-right"
+      (click)="handleHistoryButton()"
+      >Previous Interactions
+    </kendo-button>
+  </div>
+</div>
+
+<div class="app-kendo-form--container" [formGroup]="enquiryUpdateForm">
+  <kendo-formfield>
+    <div class="app-kendo--content">
+      <kendo-label
+        class="app-kendo--label"
+        [for]="modeofcommunication"
+        >Mode of Communication</kendo-label
+      >
+      <kendo-dropdownlist
+        class="app-kendo--dropdownlist"
+        formControlName="modeOfCommunication"
+        #modeofcommunication
+        [data]="enquiryModeList"
+        textField="comboName"
+        valueField="comboID"
+        [valuePrimitive]="true"></kendo-dropdownlist>
+    </div>
+    <kendo-formerror class="app-kendo--error-msg"
+      >Mode of communication is required</kendo-formerror
+    >
+  </kendo-formfield>
+  <kendo-formfield>
+    <div class="app-kendo--content">
+      <!-- <kendo-label class="app-kendo--label" [for]="remarksValue"
+        >Remarks</kendo-label
+      > -->
+      <div class="app-kendo--textarea-wrapper">
+        <kendo-label
+          class="app-kendo--label"
+          [for]="remarksValue"
+        >Remarks</kendo-label>
+        <button 
+            type="button" 
+            class="mic-icon-btn" 
+            (click)="commonService.startListeningAndPatch(enquiryUpdateForm ,'remarksValue');">
+          <img src="assets/content/images/microphone.svg" alt="mic" />
+        </button>
+      </div>   
+      <kendo-textarea
+        placeholder="Type  your message here.."
+        formControlName="remarksValue"
+        #remarksValue
+        class="app-kendo--textarea"
+        [rows]="6"
+        resizable="vertical"></kendo-textarea>
+    </div>
+    <kendo-formerror class="app-kendo--error-msg"
+      >Remarks is required</kendo-formerror
+    >
+  </kendo-formfield>
+  <kendo-formfield>
+    <div class="app-kendo--content">
+      <kendo-label class="app-kendo--label" [for]="interaction_attachment"
+        >Attachment</kendo-label
+      >
+      <kendo-fileselect
+        class="app-kendo--fileupload"
+        formControlName="interaction_attachment"
+        #interaction_attachment></kendo-fileselect>
+    </div>
+    <kendo-formerror class="app-kendo--error-msg"
+      >Attachment is required</kendo-formerror
+    >
+  </kendo-formfield>
+</div>

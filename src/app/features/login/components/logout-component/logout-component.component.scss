@@ -1,0 +1,19 @@
+.logout-container {
+  font-size: var(--text-size-2);
+  font-weight: var(--font-weight-bolder);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  padding-left: 0.75rem;
+  position: relative;
+}
+.logout-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8px;   
+  right: 8px;
+  border-top: 1px solid #9c9c9c;
+}
+

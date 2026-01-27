@@ -1,0 +1,128 @@
+<div class="app-screen-content" *ngIf="!showWorksheetAPILoader">
+    <kendo-grid class="app-kendo-grid"
+    [data]="gridData" 
+    [pageSize]="15">
+        <ng-container *ngFor="let column of PaymentTermsQuoteColumns">
+          <kendo-grid-column
+            [field]="column.field"
+            [title]="column.title"
+            [width]="column.width"
+            [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF', 'text-align': 'center'}"
+            [filterable]="column.filterable !== false"
+            [sortable]="column.sortable !== false"
+            [hidden]="column.hidden === true"
+            *ngIf="!column.columns">
+          </kendo-grid-column>
+          <kendo-grid-column-group *ngIf="column.columns" [title]="column.title" 
+          [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+          >
+            <ng-container *ngFor="let nestedColumn of column.columns">
+              <kendo-grid-column
+                [field]="nestedColumn.field"
+                [title]="nestedColumn.title"
+                [width]="nestedColumn.width"
+                [format]="nestedColumn.format"
+                [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+                [filterable]="nestedColumn.filterable !== false"
+                [sortable]="nestedColumn.sortable !== false"
+                [hidden]="nestedColumn.hidden === true">
+              </kendo-grid-column>
+            </ng-container>
+          </kendo-grid-column-group>
+        </ng-container>
+    </kendo-grid>
+    <div *ngIf="creditExposureText !== '' && worksheetDetailsCard[0].totOutStanding > 0" class="credit-exposure-balance-container">
+      <div>Cust. Total Outstanding</div>
+      <div class="credit-exposure-balance-card">
+        <div class="credit-exposure-credit-balance-card"> 
+          {{ commonService.displayNumberFormat(worksheetDetailsCard[0].totOutStanding) }}
+        </div>
+        &nbsp;&nbsp;{{WorksheetPrerequisites[0]? WorksheetPrerequisites[0].baseCurrency: ''}}
+      </div> 
+    </div>
+    <div *ngIf="creditExposureText !== ''" class="app-screen--notification" 
+      [style.background-color]="backgroundColor" [style.border-left]="'5px solid' + leftBorderColor">
+      <div class="app-screen--notification-content-left">      
+        <!-- <img src="assets/content/images/notification-bell.svg" alt="N"/> -->
+        <i class="fa-solid fa-bell"></i>
+        {{creditExposureText}}
+      </div>
+    </div>
+    <div *ngIf="comparePaymentTerms()" class="app-screen--notification-amber" 
+      (click)="onClickShowPaymentTerms()">
+      <div class="app-screen--notification-content-left">      
+        <!-- <img src="assets/content/images/notification-bell.svg" alt="N"/> -->
+        <i class="fa-solid fa-bell"></i>
+        Payment terms is different in master and quote
+      </div>
+      <div class="app-screen--notification-content-right">
+        <img *ngIf="!showPaymentTerms" src="assets/content/images/down.svg" alt=">>"/>
+        <img *ngIf="showPaymentTerms" src="assets/content/images/up.svg" alt=">>"/>
+      </div>
+    </div>
+    <kendo-grid *ngIf="showPaymentTerms" 
+    class="app-kendo-grid"
+    [data]="gridData" 
+    [pageSize]="15"
+    >
+      <ng-container *ngFor="let column of PaymentTermsMasterColumns">
+        <kendo-grid-column
+          [field]="column.field"
+          [title]="column.title"
+          [width]="column.width"
+          [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+          [filterable]="column.filterable !== false"
+          [sortable]="column.sortable !== false"
+          [hidden]="column.hidden === true"
+          *ngIf="!column.columns">
+        </kendo-grid-column>
+        <kendo-grid-column-group *ngIf="column.columns" [title]="column.title" 
+        [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+        >
+          <ng-container *ngFor="let nestedColumn of column.columns">
+            <kendo-grid-column
+              [field]="nestedColumn.field"
+              [title]="nestedColumn.title"
+              [width]="nestedColumn.width"
+              [headerStyle]="{ 'background-color': 'var(--primary-color)' , 'color': '#FFFFFF'}"
+              [filterable]="nestedColumn.filterable !== false"
+              [sortable]="nestedColumn.sortable !== false"
+              [hidden]="nestedColumn.hidden === true">
+            </kendo-grid-column>
+          </ng-container>
+        </kendo-grid-column-group>
+      </ng-container>
+    </kendo-grid>
+    <div *ngIf="worksheetDetailsCard[0].reasonForWSApproval" class="app-screen--notification"
+      [style.background-color]="worksheetDetailsCard[0].approvalLevelBGColor" 
+      [style.border-left]="'5px solid' + worksheetDetailsCard[0].approvalLevelLBColor">
+      <div class="app-screen--notification-content-left">
+        <!-- <img src="assets/content/images/notification-bell.svg" alt="N"/> -->
+        <i class="fa-solid fa-bell"></i>
+        {{worksheetDetailsCard[0].reasonForWSApproval}}
+      </div>
+    </div>  
+    <div *ngIf="worksheetDetailsCard[0].pendingApprovalMsg" class="app-screen--notification">
+      <div class="app-screen--notification-content-left">
+        <!-- <img src="assets/content/images/notification-bell.svg" alt="N"/> -->
+        <i class="fa-solid fa-bell"></i>
+        {{worksheetDetailsCard[0].pendingApprovalMsg}}
+      </div>
+    </div> 
+    <div *ngIf="worksheetDetailsCard[0].isContractRateChanged" class="app-screen--notification">
+      <div class="app-screen--notification-content-left">
+        <!-- <img src="assets/content/images/notification-bell.svg" alt="N"/> -->
+        <i class="fa-solid fa-bell"></i>
+        Please check the manually modified quote prices
+      </div>
+    </div>
+</div>
+
+<div class="app-screen--loader" *ngIf="showWorksheetAPILoader">
+  <kendo-loader
+    type="converging-spinner"
+    themeColor="info"
+    size="medium"></kendo-loader>
+  <div>Loading credit exposure details...</div>
+</div>
+
