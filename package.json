@@ -13,26 +13,26 @@
   },
   "dependencies": {
     "@angular/animations": "18.2.14",
+    "@angular/cdk": "18.2.14",
     "@angular/common": "18.2.14",
     "@angular/compiler": "18.2.14",
     "@angular/core": "18.2.14",
     "@angular/forms": "18.2.14",
+    "@angular/localize": "18.2.14",
+    "@angular/material": "18.2.14",
     "@angular/platform-browser": "18.2.14",
     "@angular/platform-browser-dynamic": "18.2.14",
     "@angular/router": "18.2.14",
-    "@angular/material": "18.2.14",
-    "@angular/cdk": "18.2.14",
-    "@angular/localize": "18.2.14",
-
-    "@ionic/angular": "8.6.5",
-
-    "@capacitor/core": "6.2.1",
+    "@awesome-cordova-plugins/speech-recognition": "8.1.0",
+    "@capacitor-community/http": "1.4.1",
+    "@capacitor-community/sqlite": "6.0.2",
     "@capacitor/android": "6.2.1",
-    "@capacitor/ios": "6.2.1",
     "@capacitor/app": "6.0.2",
+    "@capacitor/core": "6.2.1",
     "@capacitor/device": "6.0.2",
     "@capacitor/filesystem": "6.0.3",
     "@capacitor/geolocation": "6.1.0",
+    "@capacitor/ios": "6.2.1",
     "@capacitor/keyboard": "6.0.4",
     "@capacitor/local-notifications": "6.1.2",
     "@capacitor/network": "6.0.3",
@@ -40,18 +40,14 @@
     "@capacitor/push-notifications": "6.0.0",
     "@capacitor/share": "6.0.3",
     "@capacitor/status-bar": "6.0.0",
-    "@capacitor-community/sqlite": "6.0.2",
-    "@capacitor-community/http": "1.4.1",
-
     "@capawesome/capacitor-live-update": "6.8.0",
-
     "@fortawesome/angular-fontawesome": "0.15.0",
     "@fortawesome/fontawesome-free": "7.0.0",
     "@fortawesome/fontawesome-svg-core": "6.4.0",
     "@fortawesome/free-brands-svg-icons": "6.4.0",
     "@fortawesome/free-regular-svg-icons": "6.4.0",
     "@fortawesome/free-solid-svg-icons": "6.4.0",
-
+    "@ionic/angular": "8.6.5",
     "@progress/kendo-angular-buttons": "16.11.0",
     "@progress/kendo-angular-common": "16.11.0",
     "@progress/kendo-angular-dateinputs": "16.11.0",
@@ -80,44 +76,37 @@
     "@progress/kendo-licensing": "1.3.5",
     "@progress/kendo-svg-icons": "3.1.0",
     "@progress/kendo-theme-default": "7.0.2",
-
     "capacitor-ssl-pinning": "0.0.14",
     "cordova-plugin-speechrecognition": "1.2.0",
-    "@awesome-cordova-plugins/speech-recognition": "8.1.0",
-
     "rxjs": "7.8.1",
     "tslib": "2.6.2",
     "zone.js": "0.14.10"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "18.2.14",
     "@angular-devkit/build-angular": "18.2.21",
-    "@angular/cli": "18.2.21",
-
     "@angular-eslint/builder": "16.3.1",
     "@angular-eslint/eslint-plugin": "16.3.1",
     "@angular-eslint/eslint-plugin-template": "16.3.1",
     "@angular-eslint/schematics": "18.2.1-alpha.6",
     "@angular-eslint/template-parser": "16.3.1",
-
+    "@angular/cli": "18.2.21",
+    "@angular/compiler-cli": "18.2.14",
     "@types/jasmine": "4.3.5",
+    "@types/node": "^25.0.10",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-
     "angular-cli-ghpages": "2.0.3",
     "eslint": "8.51.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.0.1",
-
     "jasmine-core": "4.6.0",
+    "javascript-obfuscator": "4.2.0",
     "karma": "6.4.0",
     "karma-chrome-launcher": "3.2.0",
     "karma-coverage": "2.2.0",
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.1.0",
-
-    "javascript-obfuscator": "4.2.0",
     "prettier-eslint": "16.1.2",
-    "typescript": "5.5.4"
+    "typescript": "~5.4.5"
   }
 }
