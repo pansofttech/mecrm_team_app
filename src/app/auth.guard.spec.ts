@@ -1,17 +1,46 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthGuard } from './auth.guard';
+import { LoginService } from './features/login/components/login/login.service';
 
-import { authGuard } from './auth.guard';
-
-describe('authGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => authGuard(...guardParameters));
+describe('AuthGuard', () => {
+  let guard: AuthGuard;
+  let router: jasmine.SpyObj<Router>;
+  let loginService: jasmine.SpyObj<LoginService>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    router = jasmine.createSpyObj('Router', ['navigate']);
+    loginService = jasmine.createSpyObj(
+      'LoginService',
+      [],
+      { employeeId: '' }
+    );
+
+    TestBed.configureTestingModule({
+      providers: [
+        AuthGuard,
+        { provide: Router, useValue: router },
+        { provide: LoginService, useValue: loginService }
+      ]
+    });
+
+    guard = TestBed.inject(AuthGuard);
   });
 
-  it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
+  it('should redirect to login if employeeId is empty', () => {
+    loginService.employeeId = '';
+
+    const result = guard.canActivate();
+
+    expect(result).toBeFalse();
+    expect(router.navigate).toHaveBeenCalled();
+  });
+
+  it('should allow navigation if employeeId exists', () => {
+    loginService.employeeId = '123';
+
+    const result = guard.canActivate();
+
+    expect(result).toBeTrue();
   });
 });
