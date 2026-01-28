@@ -4,7 +4,7 @@ import { environment } from './src/environments/environment';
 const config: CapacitorConfig = {
   appId: 'com.example.app',
   appName: 'MECRM',
-  webDir: 'dist/ecrm-frontend',
+  webDir: 'www',
   plugins: {
     StatusBar: {
       overlaysWebView: false,
