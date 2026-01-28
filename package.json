@@ -41,6 +41,7 @@
     "@capacitor/share": "6.0.3",
     "@capacitor/status-bar": "6.0.0",
     "@capawesome/capacitor-live-update": "6.8.0",
+    "@capawesome/cli": "^4.0.1",
     "@fortawesome/angular-fontawesome": "0.15.0",
     "@fortawesome/fontawesome-free": "7.0.0",
     "@fortawesome/fontawesome-svg-core": "6.4.0",
