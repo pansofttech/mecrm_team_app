@@ -1,0 +1,2127 @@
+[
+  {
+    "checksum": "795935e0382039a530a8165409b4ebe494fd047aa0f0573d7fc58bb50677626d",
+    "href": ".prettierignore",
+    "sizeInBytes": 547
+  },
+  {
+    "checksum": "f0615b90384d20a34e0fb08d9ffec9e304ed774d79a925c761c3a891b9c01787",
+    "href": ".prettierrc.json",
+    "sizeInBytes": 227
+  },
+  {
+    "checksum": "1358b1d9d935a54d56f382ccfd44badd27077322e272f5f548f509fdfbb66ec8",
+    "href": "app/app-routing.module.ts",
+    "sizeInBytes": 2732
+  },
+  {
+    "checksum": "60c12e5afa461aa8514c509b9c3f6be9ff0c9567b3722d52b1ee773300f2209b",
+    "href": "app/app.component.html",
+    "sizeInBytes": 31
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/app.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "e18b9ee1b5810846b025d89f143a200ce83105bbd43392993d4fc23e338554a9",
+    "href": "app/app.component.spec.ts",
+    "sizeInBytes": 1012
+  },
+  {
+    "checksum": "c96ab2c82c250bd2f969bb30f9fad559fc0a7807c4075ea2feaf77f7b4fb8143",
+    "href": "app/app.component.ts",
+    "sizeInBytes": 4901
+  },
+  {
+    "checksum": "1a469d815cfaae26bf12d1a70cdd669a9794e79f7f4859a84b86244d38e6279c",
+    "href": "app/app.module.ts",
+    "sizeInBytes": 3055
+  },
+  {
+    "checksum": "5cdeaf9f2a4ff2b5a76d4f6817925e836f4e8463ac73fd3af1c32bf00753176e",
+    "href": "app/auth.guard.spec.ts",
+    "sizeInBytes": 1194
+  },
+  {
+    "checksum": "b30e900a2b94f74d3f8b86427dd3f286c25e80c2ecc77f01879d56162abd65e6",
+    "href": "app/auth.guard.ts",
+    "sizeInBytes": 575
+  },
+  {
+    "checksum": "3d2f28dbaf1177fb70ee9df981fb21407248996fdbeee1d87b345a13dcf7c674",
+    "href": "app/core/Constants.ts",
+    "sizeInBytes": 1190
+  },
+  {
+    "checksum": "424719b05729e73fc8e22dd150a8d4debdbb89891172b3070cf64c198d63b0a4",
+    "href": "app/core/services/config.service.ts",
+    "sizeInBytes": 749
+  },
+  {
+    "checksum": "44811b6e586a8119aca485d8d5a65be48a66a8f51a1c4d3c5721bb1422530959",
+    "href": "app/core/services/http.service.ts",
+    "sizeInBytes": 7331
+  },
+  {
+    "checksum": "3fbbb83ba543dc19d1249f34043bea8f14aacf3d0299670d6822401a3e1147ed",
+    "href": "app/core/services/loader.service.ts",
+    "sizeInBytes": 453
+  },
+  {
+    "checksum": "006473c3fb4deee63d951043d98eb500e6ca3b35290835ea51b5c86bee1ecc14",
+    "href": "app/core/services/notification.service.ts",
+    "sizeInBytes": 727
+  },
+  {
+    "checksum": "8a9d3981131815498bbce6c2899929b5f9d0da1f05f01aed95ee60e4860c5df6",
+    "href": "app/features/common/common.module.ts",
+    "sizeInBytes": 1335
+  },
+  {
+    "checksum": "32842278a621c040c64a4337b955314e037d5ee17053552bc00ab998ef32fab4",
+    "href": "app/features/common/common.service.spec.ts",
+    "sizeInBytes": 357
+  },
+  {
+    "checksum": "ab202afb3aff542460ed2b694eb9f4a21ca60770056f2536d2d58ee980ce26bf",
+    "href": "app/features/common/common.service.ts",
+    "sizeInBytes": 18221
+  },
+  {
+    "checksum": "a1ec15260ce15491b858d5d59855f7e008b0c353cdd9700afc67c0266853a0cd",
+    "href": "app/features/common/components/attachment-pop-up/attachment-pop-up.component.html",
+    "sizeInBytes": 1196
+  },
+  {
+    "checksum": "2088998e96e105869586a8d7e0899e881fb562c1c0a87ecc01cef1e3a00e3200",
+    "href": "app/features/common/components/attachment-pop-up/attachment-pop-up.component.scss",
+    "sizeInBytes": 158
+  },
+  {
+    "checksum": "e957173474a87ae24c337981159929a822d50efa319aabd27f4ab2bd8aeed4a6",
+    "href": "app/features/common/components/attachment-pop-up/attachment-pop-up.component.spec.ts",
+    "sizeInBytes": 624
+  },
+  {
+    "checksum": "e4de346b497155330e3fbcc6e1ee95a694eda970560797d015eddbd417624808",
+    "href": "app/features/common/components/attachment-pop-up/attachment-pop-up.component.ts",
+    "sizeInBytes": 6280
+  },
+  {
+    "checksum": "ec5bcdcd16029492754b9a931bcf1137ccd858832f874cc9155053eae90cbfd1",
+    "href": "app/features/common/components/navigation-bar/navigation-bar.component.html",
+    "sizeInBytes": 352
+  },
+  {
+    "checksum": "50c69101c93c02c6da60ebae3686e83626b240d3b7de07d5a60cb4e4bb79e8d6",
+    "href": "app/features/common/components/navigation-bar/navigation-bar.component.scss",
+    "sizeInBytes": 391
+  },
+  {
+    "checksum": "750c54f10638c78cac9c64171672f5bde51a15254630fc683296cfc4ca5e3ad4",
+    "href": "app/features/common/components/navigation-bar/navigation-bar.component.spec.ts",
+    "sizeInBytes": 665
+  },
+  {
+    "checksum": "9cd011481c164957e15d4def4c0e94a8b745a1b4e4a9e097ed96b54a4cc23883",
+    "href": "app/features/common/components/navigation-bar/navigation-bar.component.ts",
+    "sizeInBytes": 570
+  },
+  {
+    "checksum": "14ab50029652f3931a0a0127a4738d03a0d98fe32907eb8054f7d1f65628c699",
+    "href": "app/features/common/components/notification/notification.component.html",
+    "sizeInBytes": 3027
+  },
+  {
+    "checksum": "088597f10bd56d3b1b833109ec9a086b7939b2eab7fcd31fdf9935fa6b595973",
+    "href": "app/features/common/components/notification/notification.component.scss",
+    "sizeInBytes": 2214
+  },
+  {
+    "checksum": "a9599b9ba595f71fdd6401f48ca992e47555cd12d9c2c996491b88d17a13feb5",
+    "href": "app/features/common/components/notification/notification.component.spec.ts",
+    "sizeInBytes": 657
+  },
+  {
+    "checksum": "f0b468f0469357ff1735a9a0aaf7b171d4d13b4bb00df8d8d9744461dabebaf8",
+    "href": "app/features/common/components/notification/notification.component.ts",
+    "sizeInBytes": 1986
+  },
+  {
+    "checksum": "811f8d1a179e4157eb645d26b8351f85c620b6b82a2d00da702d583d0d0b3d4c",
+    "href": "app/features/common/components/notification-colors/notification-colors.component.html",
+    "sizeInBytes": 1213
+  },
+  {
+    "checksum": "360ebe24d4dc53cc7e1254ca8051596ba531714ed3f8f29032953f023b141866",
+    "href": "app/features/common/components/notification-colors/notification-colors.component.scss",
+    "sizeInBytes": 319
+  },
+  {
+    "checksum": "2b784278b072a00e8293a5f47722b2ef5874124e96e8d2f5a19eb743c74cf5e5",
+    "href": "app/features/common/components/notification-colors/notification-colors.component.spec.ts",
+    "sizeInBytes": 644
+  },
+  {
+    "checksum": "cdfb35dc31355919c076354d5650385bf8a8934ba5f9ed83f92a904fef0bad9a",
+    "href": "app/features/common/components/notification-colors/notification-colors.component.ts",
+    "sizeInBytes": 999
+  },
+  {
+    "checksum": "441a80dc9ead0b22ee7fe888352d152d76fc4b9f849a61b95d986d279d39d6da",
+    "href": "app/features/common/components/parts-search/parts-search.component.html",
+    "sizeInBytes": 10470
+  },
+  {
+    "checksum": "ce9ddc9f99d8974ede0dc69d8195ff5be63be52d38c17f4ac03b5d3575f5c444",
+    "href": "app/features/common/components/parts-search/parts-search.component.scss",
+    "sizeInBytes": 5855
+  },
+  {
+    "checksum": "a9d4aeca417fcf7917a2d6082fae5765ca1b5c94764b0b5bf54894d399487831",
+    "href": "app/features/common/components/parts-search/parts-search.component.spec.ts",
+    "sizeInBytes": 651
+  },
+  {
+    "checksum": "4ab9bb9485659d8dddf932db688a997839c70ea17bcd410ed3cbb08839a8a22f",
+    "href": "app/features/common/components/parts-search/parts-search.component.ts",
+    "sizeInBytes": 8244
+  },
+  {
+    "checksum": "63521cb98d01060d6d3b09a89b525b9fb20519cb04af75bfa8b87ec77faea523",
+    "href": "app/features/dashboard/components/dashboard/dashboard.component.html",
+    "sizeInBytes": 2085
+  },
+  {
+    "checksum": "51c7ca91cb9c1c580dbc93d9603a07b190598d96d86cc45c5752eafc28b88760",
+    "href": "app/features/dashboard/components/dashboard/dashboard.component.scss",
+    "sizeInBytes": 2024
+  },
+  {
+    "checksum": "e66126509ea5c18701632f2470790f1e9237ead94befe64c423e4908d121f223",
+    "href": "app/features/dashboard/components/dashboard/dashboard.component.spec.ts",
+    "sizeInBytes": 580
+  },
+  {
+    "checksum": "97a48516769983e42e277d60ef75381840b4db48eb79f5fd34816af90a850ab6",
+    "href": "app/features/dashboard/components/dashboard/dashboard.component.ts",
+    "sizeInBytes": 1831
+  },
+  {
+    "checksum": "b96578fbec2339236749461db0d8a3716ae61955fc916745d38cfd0c5850a4dc",
+    "href": "app/features/dashboard/components/dashboard-cards/dashboard-cards.component.html",
+    "sizeInBytes": 909
+  },
+  {
+    "checksum": "f46e3e4cbe0b8dd300a6c6e03302bee33e4a6df1d1679ca52f2d92b74cb53037",
+    "href": "app/features/dashboard/components/dashboard-cards/dashboard-cards.component.scss",
+    "sizeInBytes": 2883
+  },
+  {
+    "checksum": "fc6c7587c672da51c57dc31468ed1c6964f9831b22d3ccca2e87cb2a03ec5683",
+    "href": "app/features/dashboard/components/dashboard-cards/dashboard-cards.component.spec.ts",
+    "sizeInBytes": 616
+  },
+  {
+    "checksum": "f37b77d2a3abcb499d6584a1bc0749e5cc4610604033a983aee3cbe7a0510b64",
+    "href": "app/features/dashboard/components/dashboard-cards/dashboard-cards.component.ts",
+    "sizeInBytes": 4011
+  },
+  {
+    "checksum": "d260fd35933776454466bd2f079f08e7a4c4817be568e4222ef763ae5f5a6072",
+    "href": "app/features/dashboard/components/dashboard-list/dashboard-list.component.html",
+    "sizeInBytes": 1251
+  },
+  {
+    "checksum": "11145be9ab053d6e74c16a8f60c757faec9d8a19533481807601f8d28c2b6cf0",
+    "href": "app/features/dashboard/components/dashboard-list/dashboard-list.component.scss",
+    "sizeInBytes": 1842
+  },
+  {
+    "checksum": "1824159ae0624525f45ff1d796dba1b8a1d9003f3bd74cce197a2ac3bed81b09",
+    "href": "app/features/dashboard/components/dashboard-list/dashboard-list.component.spec.ts",
+    "sizeInBytes": 609
+  },
+  {
+    "checksum": "bcd48589ae7e990128a5796cdc2f0381c64c63bfc194f4d32762dfb4c983c6f3",
+    "href": "app/features/dashboard/components/dashboard-list/dashboard-list.component.ts",
+    "sizeInBytes": 1589
+  },
+  {
+    "checksum": "062c8c03c0304b126fe527958bd4b32f8f39ddea332bf7f810965827f6037c04",
+    "href": "app/features/dashboard/dashboard-routing.module.ts",
+    "sizeInBytes": 881
+  },
+  {
+    "checksum": "57645651dcb79d12d907af14a872e02e6571d26c0c5ddb1bb28ea12c95af3dca",
+    "href": "app/features/dashboard/dashboard.module.ts",
+    "sizeInBytes": 1410
+  },
+  {
+    "checksum": "70e17fe5c51bd0a516f3be9bb4c14363031aebdf470a5f76da3758a688effb5f",
+    "href": "app/features/dashboard/data/mock.json",
+    "sizeInBytes": 1515
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/dashboard/index.ts",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "e2014427419f77fef039ff97f72ba6fb44094226c99b456aade641af94ed206b",
+    "href": "app/features/enquiry-details/components/contact-details/contact-details.component.html",
+    "sizeInBytes": 3006
+  },
+  {
+    "checksum": "177ae6e1c469d8de36d7ea56723c1de24cbb69489b230cc70c4c5741c45a6925",
+    "href": "app/features/enquiry-details/components/contact-details/contact-details.component.scss",
+    "sizeInBytes": 481
+  },
+  {
+    "checksum": "2b6a3b72edd7859b1826195a6c7254f056186c494f30a77e650ba737178c7245",
+    "href": "app/features/enquiry-details/components/contact-details/contact-details.component.spec.ts",
+    "sizeInBytes": 616
+  },
+  {
+    "checksum": "55bfd407b7700980cb18753b5d963c604f4056765b0c00c3faa48cad5a0946e7",
+    "href": "app/features/enquiry-details/components/contact-details/contact-details.component.ts",
+    "sizeInBytes": 3618
+  },
+  {
+    "checksum": "daf4d4f7842b2fc8124e6f1775e335af2db1cc51422bfbc4d70d5ba24df950e0",
+    "href": "app/features/enquiry-details/components/enquiry-description/enquiry-description.component.html",
+    "sizeInBytes": 2238
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/enquiry-details/components/enquiry-description/enquiry-description.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "630de8b568aeb4dc8811b565a715602a003d4106ac71f673260215f85e7fbc0a",
+    "href": "app/features/enquiry-details/components/enquiry-description/enquiry-description.component.spec.ts",
+    "sizeInBytes": 644
+  },
+  {
+    "checksum": "9c04b81dec6d9f8f2d71b5ae0ffbd20491c99a77144da1b52c50ffe0b910b9d7",
+    "href": "app/features/enquiry-details/components/enquiry-description/enquiry-description.component.ts",
+    "sizeInBytes": 4328
+  },
+  {
+    "checksum": "ff74e9e5b3d810188e131f68f08d74596f640efff9a353a3f8aea652c2e566b1",
+    "href": "app/features/enquiry-details/components/enquiry-details/enquiry-details.component.html",
+    "sizeInBytes": 2117
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/enquiry-details/components/enquiry-details/enquiry-details.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "f247110523d15bceab5e5089b027960dc9d7b7567397888ee9df2a703b2b38d4",
+    "href": "app/features/enquiry-details/components/enquiry-details/enquiry-details.component.spec.ts",
+    "sizeInBytes": 616
+  },
+  {
+    "checksum": "c4d4d7f40cef51336c89a4cf38a6529dec0bc957b72e186c792da71adff2e045",
+    "href": "app/features/enquiry-details/components/enquiry-details/enquiry-details.component.ts",
+    "sizeInBytes": 5959
+  },
+  {
+    "checksum": "177f0d216c9c255edf5b54e7e84586551e2c3f4bcc826587f67086d533c18bea",
+    "href": "app/features/enquiry-details/components/enquiry-details-forms/enquiry-details-forms.component.html",
+    "sizeInBytes": 4765
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/enquiry-details/components/enquiry-details-forms/enquiry-details-forms.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "b26e9d59115dd75cbf2e37a795c2492e7a69de8bda9b4da9907f0249933a7f75",
+    "href": "app/features/enquiry-details/components/enquiry-details-forms/enquiry-details-forms.component.spec.ts",
+    "sizeInBytes": 652
+  },
+  {
+    "checksum": "015495a48bfe6cc5513745a7aedf4ce9231d87444dbd6922ce4d9b2333fb9582",
+    "href": "app/features/enquiry-details/components/enquiry-details-forms/enquiry-details-forms.component.ts",
+    "sizeInBytes": 6268
+  },
+  {
+    "checksum": "6c4681bd32cd405f508014afab84cb12aec6602fe25fafb457b59e604beb744c",
+    "href": "app/features/enquiry-details/components/enquiry-details-history/enquiry-details-history.component.html",
+    "sizeInBytes": 3232
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/enquiry-details/components/enquiry-details-history/enquiry-details-history.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "8ce06fca01d40c2620796e88beff3533ef68d2af0ad93559ce39918b58281e64",
+    "href": "app/features/enquiry-details/components/enquiry-details-history/enquiry-details-history.component.ts",
+    "sizeInBytes": 3301
+  },
+  {
+    "checksum": "97a43d0cb7a76237805fe2a81e20455b49545a7df5f31f0d20ab411a361d5bd1",
+    "href": "app/features/enquiry-details/components/enquiry-details-list-view/enquiry-details-list-view.component.html",
+    "sizeInBytes": 4176
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/enquiry-details/components/enquiry-details-list-view/enquiry-details-list-view.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "fcb604967ae9c6ee01d6b4f2db445d571bba994c46e77b7ec5546553b24b7e0c",
+    "href": "app/features/enquiry-details/components/enquiry-details-list-view/enquiry-details-list-view.component.spec.ts",
+    "sizeInBytes": 674
+  },
+  {
+    "checksum": "26d17f925de35fda97536806f9049c45b71b9262498bcb0617b5bb0290deda6e",
+    "href": "app/features/enquiry-details/components/enquiry-details-list-view/enquiry-details-list-view.component.ts",
+    "sizeInBytes": 3408
+  },
+  {
+    "checksum": "d3c2d271fa1e852ffa33603d64383089a3b1519d4e4607d1bcee8f140fd42a40",
+    "href": "app/features/enquiry-details/components/enquiry-details-update/enquiry-details-update.component.html",
+    "sizeInBytes": 2391
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/enquiry-details/components/enquiry-details-update/enquiry-details-update.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "aa0a9ef50d3585eebd0bd702e22abac8576ea652d2100923b9ce1a5ef33a42c3",
+    "href": "app/features/enquiry-details/components/enquiry-details-update/enquiry-details-update.component.spec.ts",
+    "sizeInBytes": 659
+  },
+  {
+    "checksum": "0b988cf96e5225503f53b47cc647665be8679eedfd7ef5b66224836da46b6c63",
+    "href": "app/features/enquiry-details/components/enquiry-details-update/enquiry-details-update.component.ts",
+    "sizeInBytes": 12816
+  },
+  {
+    "checksum": "153fefd319df108194966b380acf1a4d9a68a015e46bf4cf01d7b5bdd6bffe73",
+    "href": "app/features/enquiry-details/components/enquiry-update/enquiry-update.component.html",
+    "sizeInBytes": 5529
+  },
+  {
+    "checksum": "583e846a46d8962d2dd3a4b8a4178c8258758a254a333536d1c2d603eb0161f9",
+    "href": "app/features/enquiry-details/components/enquiry-update/enquiry-update.component.scss",
+    "sizeInBytes": 418
+  },
+  {
+    "checksum": "9a793c5a04dfd39771f43e50ffc3e1bdc318a789814524bae796ea542f8fad56",
+    "href": "app/features/enquiry-details/components/enquiry-update/enquiry-update.component.spec.ts",
+    "sizeInBytes": 609
+  },
+  {
+    "checksum": "6137e905d2013c5e2117278eaaa4980fd5baf183c28a1aa3e91eabdcb70f9185",
+    "href": "app/features/enquiry-details/components/enquiry-update/enquiry-update.component.ts",
+    "sizeInBytes": 2337
+  },
+  {
+    "checksum": "5648ccc00e15f34b19bdfd0300dbeb7e7c8706c3a6d52fbdce11cfaf8111a1e1",
+    "href": "app/features/enquiry-details/enquiry-details.module.ts",
+    "sizeInBytes": 2029
+  },
+  {
+    "checksum": "334071fd4d532684545f22e58c3069db392c738c3627516272d2d05a81cf55d1",
+    "href": "app/features/enquiry-details/enquiry-details.service.ts",
+    "sizeInBytes": 10211
+  },
+  {
+    "checksum": "4d28b9f58604ce9752e88cc69dd285448fdee858d43c453dfd38985c63663328",
+    "href": "app/features/enquiry-details/enquiry-routing.module.ts",
+    "sizeInBytes": 1429
+  },
+  {
+    "checksum": "be3d8b03849aef581fbb5c7c99f871219179c6929e4fd69bb83b90875dfd049e",
+    "href": "app/features/enquiry-details/form-state.service.ts",
+    "sizeInBytes": 1102
+  },
+  {
+    "checksum": "c8e5b0192ed3711835351a486747411cf41bf02267a01156ca58df291afd4643",
+    "href": "app/features/login/components/email-login/email-login.component.html",
+    "sizeInBytes": 1749
+  },
+  {
+    "checksum": "ae6310251e36c47151a7b99f4a01536103f3346898847db1036dfce13c60a491",
+    "href": "app/features/login/components/email-login/email-login.component.scss",
+    "sizeInBytes": 2795
+  },
+  {
+    "checksum": "0ebf49984713aefd96eb1f239d6b43f6c1fb7e595b1c923d8e8cea7d9e3cc083",
+    "href": "app/features/login/components/email-login/email-login.component.spec.ts",
+    "sizeInBytes": 588
+  },
+  {
+    "checksum": "3682c86e4a01fe96adbbac2782083ee26c3750062a9707e889e986302965a739",
+    "href": "app/features/login/components/email-login/email-login.component.ts",
+    "sizeInBytes": 561
+  },
+  {
+    "checksum": "db2c6fbbf0fa393811b0e23396e5273033cc8051633f40b117fb1cdf26fea04b",
+    "href": "app/features/login/components/forgot-password/forgot-password.component.html",
+    "sizeInBytes": 5494
+  },
+  {
+    "checksum": "e2528b18c24c856c153df9ea339968988181a431d0a3cb8e27b523d2cd45b2c9",
+    "href": "app/features/login/components/forgot-password/forgot-password.component.scss",
+    "sizeInBytes": 3447
+  },
+  {
+    "checksum": "7813f72c036767ec71c1854726797987af246bf8fcc61a05143e106d8018fb58",
+    "href": "app/features/login/components/forgot-password/forgot-password.component.spec.ts",
+    "sizeInBytes": 616
+  },
+  {
+    "checksum": "1971f6907b2c04a7733b45de740e29eb7a64a1431d27fef756cdae286b468eaa",
+    "href": "app/features/login/components/forgot-password/forgot-password.component.ts",
+    "sizeInBytes": 5626
+  },
+  {
+    "checksum": "038e0e6cb198146eb7af80a344dc25507d3673a8b2f4b02b68f07de58b1145a2",
+    "href": "app/features/login/components/login/login.component.html",
+    "sizeInBytes": 5549
+  },
+  {
+    "checksum": "6bb604308dc16a41672a1cd83289846410521f6b606fc2bce76e84ed23e7e759",
+    "href": "app/features/login/components/login/login.component.scss",
+    "sizeInBytes": 4466
+  },
+  {
+    "checksum": "606e631f6db27098f5c0bdddfe1c19d620da89f2819407d04feda11e0e614de1",
+    "href": "app/features/login/components/login/login.component.spec.ts",
+    "sizeInBytes": 552
+  },
+  {
+    "checksum": "0213af7aef32753ff15bf5db5d223092175213b2091ded93489d73b357657c3b",
+    "href": "app/features/login/components/login/login.component.ts",
+    "sizeInBytes": 13752
+  },
+  {
+    "checksum": "13956957650b227c2ddb3be79a9ca6c447dee5559e9ec2ef5ebe1c1d75a8ba9a",
+    "href": "app/features/login/components/login/login.service.ts",
+    "sizeInBytes": 3098
+  },
+  {
+    "checksum": "c1196ab8c557320f8bc5b10fa519d8acf57dcefa79b1a779d0f74426a4cb4b2b",
+    "href": "app/features/login/components/login-dialog/login-dialog.component.html",
+    "sizeInBytes": 1079
+  },
+  {
+    "checksum": "886d6cd2e33627b996dce6e53841f7fb64aa8dd2e1f1ac9876dc063a607642a7",
+    "href": "app/features/login/components/login-dialog/login-dialog.component.scss",
+    "sizeInBytes": 1238
+  },
+  {
+    "checksum": "baf5beeddeda705af20eedcaa46253d1ec4b488a22b3f95d95a140aa37dd51b6",
+    "href": "app/features/login/components/login-dialog/login-dialog.component.spec.ts",
+    "sizeInBytes": 595
+  },
+  {
+    "checksum": "918ba9572a5c68c601a439e2700badafd3120a7d97f78832b63c75d2f327de10",
+    "href": "app/features/login/components/login-dialog/login-dialog.component.ts",
+    "sizeInBytes": 378
+  },
+  {
+    "checksum": "ba1c205865d27c29094fd73c16a01976c26a556fa4155386af5f468b5332ad4a",
+    "href": "app/features/login/components/logout-component/logout-component.component.html",
+    "sizeInBytes": 139
+  },
+  {
+    "checksum": "b367cb7555e60d55eef80639f1effd127cdc0e6932e208cf8af8c0f0a8337e62",
+    "href": "app/features/login/components/logout-component/logout-component.component.scss",
+    "sizeInBytes": 355
+  },
+  {
+    "checksum": "cd2470dd6c06d73f3540cc0b188855278432b9a8c190ebcec6d1fb818eb6c625",
+    "href": "app/features/login/components/logout-component/logout-component.component.spec.ts",
+    "sizeInBytes": 578
+  },
+  {
+    "checksum": "7913e89f394492d0049bd8d70fbdf53b73fc27af21577dc73b8fcd0bbafe1488",
+    "href": "app/features/login/components/logout-component/logout-component.component.ts",
+    "sizeInBytes": 437
+  },
+  {
+    "checksum": "45d86ab2f9a9f39bff80ad987f1c5e06342094b36ddf45d788e7c3f7a13b89cb",
+    "href": "app/features/login/components/reset-password/reset-password.component.html",
+    "sizeInBytes": 3964
+  },
+  {
+    "checksum": "71ef37f88b86887354a51b22e266a8b30887a8b4986c0cb916014551754d1975",
+    "href": "app/features/login/components/reset-password/reset-password.component.scss",
+    "sizeInBytes": 3114
+  },
+  {
+    "checksum": "dc24cfc5efba3085fee14bccdc26bfee869f95205450eeedbbefa12594bb98ef",
+    "href": "app/features/login/components/reset-password/reset-password.component.spec.ts",
+    "sizeInBytes": 609
+  },
+  {
+    "checksum": "c4a6a091a25b82ec480e8ff1e56b303eaad2fabf93e2533339b508718420eecf",
+    "href": "app/features/login/components/reset-password/reset-password.component.ts",
+    "sizeInBytes": 1542
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/login/index.ts",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "9dce85e96cf9a6b3a7e0c39d60cda13cff4a3c6f1bbb3fec99972852431eb622",
+    "href": "app/features/login/login-routing.module.ts",
+    "sizeInBytes": 1198
+  },
+  {
+    "checksum": "63a923826125c05fa3333c0d007994ae9cb77190fd0ccba2e30ac55e55875f43",
+    "href": "app/features/login/login.module.ts",
+    "sizeInBytes": 1654
+  },
+  {
+    "checksum": "47ad2483db6d77bd0a868d3598fd91827116cda21db385388861c2e72b356650",
+    "href": "app/features/prlc/components/partsrequest-approval/partsrequest-approval.component.html",
+    "sizeInBytes": 4873
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/prlc/components/partsrequest-approval/partsrequest-approval.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "fd8ee2b65d6ffacdbea279b984bc2617b7f5579809a04f85904639188993281f",
+    "href": "app/features/prlc/components/partsrequest-approval/partsrequest-approval.component.spec.ts",
+    "sizeInBytes": 714
+  },
+  {
+    "checksum": "3f0f0431c5c5838a5899cafd3bda11b85663c4802aa5e6060c6168ba25f0e64f",
+    "href": "app/features/prlc/components/partsrequest-approval/partsrequest-approval.component.ts",
+    "sizeInBytes": 11705
+  },
+  {
+    "checksum": "9cb4b99906066afba022ae9600953653bf16e26c3db56e870618e34655de6992",
+    "href": "app/features/prlc/components/partsrequest-worklist/partsrequest-worklist.component.html",
+    "sizeInBytes": 5979
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/prlc/components/partsrequest-worklist/partsrequest-worklist.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "3ff893e4012277a152c84ee5b3cd7d944020826f988818d0241520f70337bbaa",
+    "href": "app/features/prlc/components/partsrequest-worklist/partsrequest-worklist.component.spec.ts",
+    "sizeInBytes": 714
+  },
+  {
+    "checksum": "d8aca03172053c7c1f621fa05bd6173f295012f54ffe24083e71a0b42988a4d2",
+    "href": "app/features/prlc/components/partsrequest-worklist/partsrequest-worklist.component.ts",
+    "sizeInBytes": 3621
+  },
+  {
+    "checksum": "f94d167b73cc19c6ce53b675d7255c6e9f48fee6565d4bde8611b39c826d97b3",
+    "href": "app/features/prlc/components/subcomponents/approval-comments/approval-comments.component.html",
+    "sizeInBytes": 7481
+  },
+  {
+    "checksum": "001f4ee6986c1f96bce2b2704770fcacba6bb02866f0626a68fa63a54c1f1a8a",
+    "href": "app/features/prlc/components/subcomponents/approval-comments/approval-comments.component.scss",
+    "sizeInBytes": 1207
+  },
+  {
+    "checksum": "7a9ce882b4b99c0ed8e0f405cf1e62770c58710117e088e30eb3be270fb8df26",
+    "href": "app/features/prlc/components/subcomponents/approval-comments/approval-comments.component.spec.ts",
+    "sizeInBytes": 686
+  },
+  {
+    "checksum": "921b23c5646b506633db69585f2e33c04b60c6746ee866eb07491a3ae4b4a7d8",
+    "href": "app/features/prlc/components/subcomponents/approval-comments/approval-comments.component.ts",
+    "sizeInBytes": 1729
+  },
+  {
+    "checksum": "e788bbde7235ea1b516f1ecb043d43c7e37b9978463af690f7480ee9247a82b5",
+    "href": "app/features/prlc/components/subcomponents/partsrequest-details/partsrequest-details.component.html",
+    "sizeInBytes": 10330
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/prlc/components/subcomponents/partsrequest-details/partsrequest-details.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "2d220bf373adbe33277d91106a1ed33edd576247a0e94be2975033d50bc0ebc7",
+    "href": "app/features/prlc/components/subcomponents/partsrequest-details/partsrequest-details.component.spec.ts",
+    "sizeInBytes": 707
+  },
+  {
+    "checksum": "ea78f503f1babfb31d98c02b7933d0686e5d272d95e99bb0214b41992b742401",
+    "href": "app/features/prlc/components/subcomponents/partsrequest-details/partsrequest-details.component.ts",
+    "sizeInBytes": 5884
+  },
+  {
+    "checksum": "b5ea6e6f51b28a36102f9b8d7eb0c94bef93e8f65773556db4ba8bdc4ef5a625",
+    "href": "app/features/prlc/components/subcomponents/partsrequest-list/partsrequest-list.component.html",
+    "sizeInBytes": 8138
+  },
+  {
+    "checksum": "05d47a056e7afc5b6b16d239e4f5194e8bdb6ae628d2912e0dcb2df9d55f85cc",
+    "href": "app/features/prlc/components/subcomponents/partsrequest-list/partsrequest-list.component.scss",
+    "sizeInBytes": 1806
+  },
+  {
+    "checksum": "56c6de1eab2bf7677e7e915edadb1681aa03b788d86e060b5bc024800fb3216c",
+    "href": "app/features/prlc/components/subcomponents/partsrequest-list/partsrequest-list.component.spec.ts",
+    "sizeInBytes": 686
+  },
+  {
+    "checksum": "52c4bad293fccb83cf7d25560ae931381eb02efebf7ca2190b6571dab743f075",
+    "href": "app/features/prlc/components/subcomponents/partsrequest-list/partsrequest-list.component.ts",
+    "sizeInBytes": 1994
+  },
+  {
+    "checksum": "46007db352b3886e0d705279c8c17b22955465698f2187841b87ce26cba111fe",
+    "href": "app/features/prlc/prlc-routing.module.ts",
+    "sizeInBytes": 871
+  },
+  {
+    "checksum": "653657f912c29e07d6f17c2e995c26cfbeee416304a34b287f541b60a6010c0e",
+    "href": "app/features/prlc/prlc.module.ts",
+    "sizeInBytes": 1575
+  },
+  {
+    "checksum": "1c8bedb7f001540a265109d1e3716c6370bdca3ff6f8b727c9efb7487131bcef",
+    "href": "app/features/prlc/prlc.service.spec.ts",
+    "sizeInBytes": 363
+  },
+  {
+    "checksum": "93b02fb698f69a69f8637ffd910b3ab92eac8c32bd8597e25cd719d666c4e201",
+    "href": "app/features/prlc/prlc.service.ts",
+    "sizeInBytes": 9822
+  },
+  {
+    "checksum": "920bad81ee67cf15f9573fc1ba41fff026403418c7c52875baade151a62191a7",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-approval/salespartsmgt-approval.component.html",
+    "sizeInBytes": 8516
+  },
+  {
+    "checksum": "c85bb6f31ab9817e44785b2b41cc2637f16759d219865cfe81662e355ef0f67b",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-approval/salespartsmgt-approval.component.scss",
+    "sizeInBytes": 1241
+  },
+  {
+    "checksum": "eba11f96645c47b7eadb64d5fb04b9e376908d4432099ec656c8f3d2012acd37",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-approval/salespartsmgt-approval.component.spec.ts",
+    "sizeInBytes": 665
+  },
+  {
+    "checksum": "ed58246fc028ed86a6add62e78ee5c2278ba1f9846bbce274ab3dbd9faab4101",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-approval/salespartsmgt-approval.component.ts",
+    "sizeInBytes": 8740
+  },
+  {
+    "checksum": "dbc90f262e46ce92a76215013ca31849a5ada1d73a7b9ab5d99a9d5c26ffa541",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-supplier-list/salespartsmgt-supplier-list.component.html",
+    "sizeInBytes": 3469
+  },
+  {
+    "checksum": "08ff85e1932a27becc37355b44d70ed1abd43a42d4b852206ba24a2ff572bc28",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-supplier-list/salespartsmgt-supplier-list.component.scss",
+    "sizeInBytes": 53
+  },
+  {
+    "checksum": "233c4585ad6dc69b11ea73597fdc3b46d168697e3eb4888b581ba251e67475d7",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-supplier-list/salespartsmgt-supplier-list.component.spec.ts",
+    "sizeInBytes": 694
+  },
+  {
+    "checksum": "ebf02924cbedd0689e45b1203c874228c92374fbc6a34cf24dd3215a7ec1b757",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-supplier-list/salespartsmgt-supplier-list.component.ts",
+    "sizeInBytes": 3547
+  },
+  {
+    "checksum": "d87b8c4f7c0599a39d357ddb85bb6f9f54686abf54ff700c214a5d9a81c3cde7",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-worklist/salespartsmgt-worklist.component.html",
+    "sizeInBytes": 4627
+  },
+  {
+    "checksum": "d25e8bbd373eda6425bf657a47db5c688c7012bc4aa32cb3bbc4ea3ca7e9c095",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-worklist/salespartsmgt-worklist.component.scss",
+    "sizeInBytes": 121
+  },
+  {
+    "checksum": "3f627a2144fbb907d880e592d615a5514748f04d0ef3473442e816838604788c",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-worklist/salespartsmgt-worklist.component.spec.ts",
+    "sizeInBytes": 665
+  },
+  {
+    "checksum": "dc6a3c8dd1c2746364a491c47f0195d1ed4f88942c2b399726cbb0cdbb4eb444",
+    "href": "app/features/sales-parts-management/components/salespartsmgt-worklist/salespartsmgt-worklist.component.ts",
+    "sizeInBytes": 4030
+  },
+  {
+    "checksum": "7cd7c390ccbf49dbff55080b76ed5e7a929c270297eb4e72f0d1e2f9711a7cd9",
+    "href": "app/features/sales-parts-management/sales-parts-management-routing.module.ts",
+    "sizeInBytes": 935
+  },
+  {
+    "checksum": "6707437792117c9fc9d3b6bd0603c5f7aec2050db653b29e1f9f2d89e015084a",
+    "href": "app/features/sales-parts-management/sales-parts-management.module.ts",
+    "sizeInBytes": 1322
+  },
+  {
+    "checksum": "56078cce448f5c8292e58440409f6c76e5f3c53456ccd9842a54b584e71f0dfc",
+    "href": "app/features/sales-parts-management/sales-parts-management.service.spec.ts",
+    "sizeInBytes": 429
+  },
+  {
+    "checksum": "8232846f699ea251f9565e0a0fb8a68510c04ee219486139d34213bebfed421b",
+    "href": "app/features/sales-parts-management/sales-parts-management.service.ts",
+    "sizeInBytes": 4540
+  },
+  {
+    "checksum": "4f3e4be9ce5805116b81e58c1ae59096316d7bc8625300a3e4af0780dfc3b44f",
+    "href": "app/features/service-calendar/components/calendar/calendar.component.html",
+    "sizeInBytes": 7169
+  },
+  {
+    "checksum": "79d66fbe00682e1021ad8d43e46d154d68766b5e7d7fff9541afee64a80c9996",
+    "href": "app/features/service-calendar/components/calendar/calendar.component.scss",
+    "sizeInBytes": 975
+  },
+  {
+    "checksum": "319ab0653e8bb3f743b7cb4937aaf015278e28887003375fd71811fd3b95dc77",
+    "href": "app/features/service-calendar/components/calendar/calendar.component.spec.ts",
+    "sizeInBytes": 573
+  },
+  {
+    "checksum": "574ed7ac836aee79cff642ac558c4735f3c9754879a6719304138c52afad7a3d",
+    "href": "app/features/service-calendar/components/calendar/calendar.component.ts",
+    "sizeInBytes": 4024
+  },
+  {
+    "checksum": "b942cdaecc0edec5df9303e2a516b6d98a7836e3bbbbf675d7444d4de20ae3cc",
+    "href": "app/features/service-calendar/components/call-action/call-action.component.html",
+    "sizeInBytes": 3796
+  },
+  {
+    "checksum": "607e2e5840c6a39016741065a90d42ccf7757f2af1f50cc6eafbb0467b3e2fe9",
+    "href": "app/features/service-calendar/components/call-action/call-action.component.scss",
+    "sizeInBytes": 1383
+  },
+  {
+    "checksum": "6d5c1a162529d00f6d335a776dacfde08154ee4044bfafcfbc78226e98536f2d",
+    "href": "app/features/service-calendar/components/call-action/call-action.component.spec.ts",
+    "sizeInBytes": 644
+  },
+  {
+    "checksum": "6ff370fc9d9b6abdefffb098d22b8ecf13b63a15d0c8262312e86b38052423ba",
+    "href": "app/features/service-calendar/components/call-action/call-action.component.ts",
+    "sizeInBytes": 7486
+  },
+  {
+    "checksum": "54be09163a50ce0f6a57635aad1026a4dfdfbf5124ab0a3752ea90d8174f49ca",
+    "href": "app/features/service-calendar/components/call-completion/call-completion.component.html",
+    "sizeInBytes": 3717
+  },
+  {
+    "checksum": "553db9b8da248b7ed6d6ac9af1a5d6d5c73ad42737bfeae7284bbcf522894c35",
+    "href": "app/features/service-calendar/components/call-completion/call-completion.component.scss",
+    "sizeInBytes": 67
+  },
+  {
+    "checksum": "4e188b19ed1f3296fe4c5440840e5db0e6cab1a7f2def9764fe3771de3265963",
+    "href": "app/features/service-calendar/components/call-completion/call-completion.component.spec.ts",
+    "sizeInBytes": 672
+  },
+  {
+    "checksum": "c4002a521dde6d6f8ab1d923432e699af1b78d6bfcffb09ab4223cf5b29d8a90",
+    "href": "app/features/service-calendar/components/call-completion/call-completion.component.ts",
+    "sizeInBytes": 36104
+  },
+  {
+    "checksum": "5d7b99a7b0df3096746229573222285e09ee7c4520b5cb08a2be212d762be47d",
+    "href": "app/features/service-calendar/components/call-continue/call-continue.component.html",
+    "sizeInBytes": 1024
+  },
+  {
+    "checksum": "553db9b8da248b7ed6d6ac9af1a5d6d5c73ad42737bfeae7284bbcf522894c35",
+    "href": "app/features/service-calendar/components/call-continue/call-continue.component.scss",
+    "sizeInBytes": 67
+  },
+  {
+    "checksum": "daffde607d90f10ddca2f15e2c4e1bc6a8db231dcb96d3f5eb5c319c84049e09",
+    "href": "app/features/service-calendar/components/call-continue/call-continue.component.spec.ts",
+    "sizeInBytes": 658
+  },
+  {
+    "checksum": "918d641c093142ae63fb9f84142150dcac54af99706f8276457fec8ef101f3a0",
+    "href": "app/features/service-calendar/components/call-continue/call-continue.component.ts",
+    "sizeInBytes": 4234
+  },
+  {
+    "checksum": "67ea5e55231bffb73be073d6601218c8949a32eef1c9f1c41fb74029bc7de2a8",
+    "href": "app/features/service-calendar/components/call-field-visit/call-field-visit.component.html",
+    "sizeInBytes": 2306
+  },
+  {
+    "checksum": "553db9b8da248b7ed6d6ac9af1a5d6d5c73ad42737bfeae7284bbcf522894c35",
+    "href": "app/features/service-calendar/components/call-field-visit/call-field-visit.component.scss",
+    "sizeInBytes": 67
+  },
+  {
+    "checksum": "0c71231e3d46f0b5b766d1d50e66084c225536f97c8cab8b14dcc6b58f1da967",
+    "href": "app/features/service-calendar/components/call-field-visit/call-field-visit.component.spec.ts",
+    "sizeInBytes": 673
+  },
+  {
+    "checksum": "d3cfb6bba3e2dcb31e0d382787edb674dd254e0e6bdd45f992ca64b9d3906eb0",
+    "href": "app/features/service-calendar/components/call-field-visit/call-field-visit.component.ts",
+    "sizeInBytes": 4787
+  },
+  {
+    "checksum": "f0f5b93c297b36b78427466bf66b2662f2827b3b35ea631fd6f1179b130bcb5f",
+    "href": "app/features/service-calendar/components/call-hold/call-hold.component.html",
+    "sizeInBytes": 2310
+  },
+  {
+    "checksum": "553db9b8da248b7ed6d6ac9af1a5d6d5c73ad42737bfeae7284bbcf522894c35",
+    "href": "app/features/service-calendar/components/call-hold/call-hold.component.scss",
+    "sizeInBytes": 67
+  },
+  {
+    "checksum": "7f46e7bac84cba606a4a294a220bf3ae071cefd9f2ce1b71c71c6e9ed64e7c20",
+    "href": "app/features/service-calendar/components/call-hold/call-hold.component.spec.ts",
+    "sizeInBytes": 630
+  },
+  {
+    "checksum": "5906285e056c715e8b296fd95359e28923227caf1cd40ac4bb9314284c6ba22c",
+    "href": "app/features/service-calendar/components/call-hold/call-hold.component.ts",
+    "sizeInBytes": 10974
+  },
+  {
+    "checksum": "29211868f0244baeff38e367776d4ec7240817d93527476fc055adeda2c9254d",
+    "href": "app/features/service-calendar/components/csr-generator/csr-generator.component.html",
+    "sizeInBytes": 2666
+  },
+  {
+    "checksum": "881701bee376566736e79b193d6af7afc017597d9e437651e114682e5cb88af5",
+    "href": "app/features/service-calendar/components/csr-generator/csr-generator.component.scss",
+    "sizeInBytes": 861
+  },
+  {
+    "checksum": "7bb556281edea90404f104f1b43691126a52e83be7d653dcfaf9c67670cb3a61",
+    "href": "app/features/service-calendar/components/csr-generator/csr-generator.component.spec.ts",
+    "sizeInBytes": 602
+  },
+  {
+    "checksum": "d70d76c3bf0864aa4f7f93dca6e5a9664957ea7ee6ca1f99362eea256906551b",
+    "href": "app/features/service-calendar/components/csr-generator/csr-generator.component.ts",
+    "sizeInBytes": 8119
+  },
+  {
+    "checksum": "4896fe26a6bb1ac5f67086aea4f022f8aefc0d5462467fa5fd84435c9996d0dc",
+    "href": "app/features/service-calendar/components/efforts-list-view/efforts-list-view.component.html",
+    "sizeInBytes": 11830
+  },
+  {
+    "checksum": "0effd92490600ce85ff937bcd71e5d8f327d0e4b0491d22364e471077796311a",
+    "href": "app/features/service-calendar/components/efforts-list-view/efforts-list-view.component.scss",
+    "sizeInBytes": 621
+  },
+  {
+    "checksum": "760bb568446613e2253ab164dd922261e57c4c7417f65c65dafebbb6cb46dd32",
+    "href": "app/features/service-calendar/components/efforts-list-view/efforts-list-view.component.spec.ts",
+    "sizeInBytes": 624
+  },
+  {
+    "checksum": "067499a2be0c2d7e97940b08eb59e455252f44cfc1a81319ee91caa4c28fbf7a",
+    "href": "app/features/service-calendar/components/efforts-list-view/efforts-list-view.component.ts",
+    "sizeInBytes": 8315
+  },
+  {
+    "checksum": "bd58877487683bc91398f6ea9a633c28b87d0901c84b0d2e33805d0a4411f9f7",
+    "href": "app/features/service-calendar/components/parts-request/parts-request.component.html",
+    "sizeInBytes": 8463
+  },
+  {
+    "checksum": "6f8c59f6a8049a1fc37f7fed1473f73484594627ed2b9609ba29a8d5a635e56b",
+    "href": "app/features/service-calendar/components/parts-request/parts-request.component.scss",
+    "sizeInBytes": 5109
+  },
+  {
+    "checksum": "249c00e4b22532b6470a9088101d4b06c7bb82039f6cb97b0da27ceb717d401f",
+    "href": "app/features/service-calendar/components/parts-request/parts-request.component.spec.ts",
+    "sizeInBytes": 602
+  },
+  {
+    "checksum": "897a9a4587f8e6128bccf579a7b697f13c629d28fd93d2c4ba75f9b1e45344a3",
+    "href": "app/features/service-calendar/components/parts-request/parts-request.component.ts",
+    "sizeInBytes": 8243
+  },
+  {
+    "checksum": "8358920fe4cf30cc79697a100094a372af14528fd0903c6a7375d8109028c016",
+    "href": "app/features/service-calendar/components/service-efforts/service-efforts.component.html",
+    "sizeInBytes": 6611
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/service-calendar/components/service-efforts/service-efforts.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "3031eb557b81e79ff26d4802e20ab99143ac13b79746d937473f8534848260d0",
+    "href": "app/features/service-calendar/components/service-efforts/service-efforts.component.spec.ts",
+    "sizeInBytes": 616
+  },
+  {
+    "checksum": "3c65c106d24ce9fa87fb799ff5cb386acb4f5d4451218ed52b44a5c06f830e2e",
+    "href": "app/features/service-calendar/components/service-efforts/service-efforts.component.ts",
+    "sizeInBytes": 5967
+  },
+  {
+    "checksum": "febf6f5a093622f7fb0495eec44cbdf501b1ea5484e597d3b56ea7ca825d895e",
+    "href": "app/features/service-calendar/components/service-request/service-request.component.html",
+    "sizeInBytes": 10557
+  },
+  {
+    "checksum": "2d88a35f1ce40e7555b853a801cdb79a47557dc1a5224e082532b687d8fba4bc",
+    "href": "app/features/service-calendar/components/service-request/service-request.component.scss",
+    "sizeInBytes": 743
+  },
+  {
+    "checksum": "1ef4566911d4f9cfc0cc6b9f1131330b9a384bd7d6a6e132046135db583b54be",
+    "href": "app/features/service-calendar/components/service-request/service-request.component.spec.ts",
+    "sizeInBytes": 672
+  },
+  {
+    "checksum": "8b0386006ecca33682c395775a7d2b2a018dc482678e7e0abd4e42f6447b4b34",
+    "href": "app/features/service-calendar/components/service-request/service-request.component.ts",
+    "sizeInBytes": 8121
+  },
+  {
+    "checksum": "1ca3482c3d387b58e7d461200b909f31c212fc84fc513d5f9a52c454aa598757",
+    "href": "app/features/service-calendar/components/srlc/srlc.component.html",
+    "sizeInBytes": 5844
+  },
+  {
+    "checksum": "2c385e861edf258c4d46e777d0b23dd8f118b1ac4aa0cfb16e23798a1ad05420",
+    "href": "app/features/service-calendar/components/srlc/srlc.component.scss",
+    "sizeInBytes": 2027
+  },
+  {
+    "checksum": "40f0509e9042f6b65f5e25cea7eafbf85b22599c1acc55930663e0f772d905a1",
+    "href": "app/features/service-calendar/components/srlc/srlc.component.spec.ts",
+    "sizeInBytes": 545
+  },
+  {
+    "checksum": "83d9e4cb8d570f1a53595cb8680344e531ecab1032029168343ffab4348579ea",
+    "href": "app/features/service-calendar/components/srlc/srlc.component.ts",
+    "sizeInBytes": 6792
+  },
+  {
+    "checksum": "27cd1d1c9f970efbd3ddacce1e605cb640cc875c8e5b4957c3b5e3c929e0de37",
+    "href": "app/features/service-calendar/components/sub-components/completion-details/completion-details.component.html",
+    "sizeInBytes": 8266
+  },
+  {
+    "checksum": "dda50270f0d4e2a93564f58a69e6e477f33c34d560fbde355dcafe2cafd91bcc",
+    "href": "app/features/service-calendar/components/sub-components/completion-details/completion-details.component.scss",
+    "sizeInBytes": 351
+  },
+  {
+    "checksum": "030fde5f56a7703dbe9719ba7b2fb974993e13e27bd6453c212d62ee6a0acb9c",
+    "href": "app/features/service-calendar/components/sub-components/completion-details/completion-details.component.spec.ts",
+    "sizeInBytes": 693
+  },
+  {
+    "checksum": "fc4172723a1aa55512b569509478c0a9fe75abf4ff5a2d1aef3637342e6517dd",
+    "href": "app/features/service-calendar/components/sub-components/completion-details/completion-details.component.ts",
+    "sizeInBytes": 7920
+  },
+  {
+    "checksum": "7c18e3e6c9d61f8087acb020698c6fcb88bf39ea7d6de7de7a8773b6ecbd98b9",
+    "href": "app/features/service-calendar/components/sub-components/confirm-installbase/confirm-installbase.component.html",
+    "sizeInBytes": 732
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/service-calendar/components/sub-components/confirm-installbase/confirm-installbase.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "9f17890110f40f056112b6efe3f7db30232e54275cae31f6de684d47cae4beba",
+    "href": "app/features/service-calendar/components/sub-components/confirm-installbase/confirm-installbase.component.spec.ts",
+    "sizeInBytes": 700
+  },
+  {
+    "checksum": "3a6cdaf4b7039fca94b897184955658b1f85a81114f5d28f1a68b2e85f93bf8a",
+    "href": "app/features/service-calendar/components/sub-components/confirm-installbase/confirm-installbase.component.ts",
+    "sizeInBytes": 1413
+  },
+  {
+    "checksum": "72f669d877cddc1281e00ba97d88c7633366fbf136b39f716c153c46e7ae1403",
+    "href": "app/features/service-calendar/components/sub-components/customer-delay/customer-delay.component.html",
+    "sizeInBytes": 2516
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/service-calendar/components/sub-components/customer-delay/customer-delay.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "cd2907f1ef0fb175556d80709892f98830558be88ad2b3d90ea491dd3f0f5008",
+    "href": "app/features/service-calendar/components/sub-components/customer-delay/customer-delay.component.spec.ts",
+    "sizeInBytes": 665
+  },
+  {
+    "checksum": "93b6a049ef83372161fa0cd5bded2c57dfe8ee109baa971e7314ec2d134fc86e",
+    "href": "app/features/service-calendar/components/sub-components/customer-delay/customer-delay.component.ts",
+    "sizeInBytes": 2553
+  },
+  {
+    "checksum": "dbcf75e768c7800395a2f34fc76c70a6c1cfe3de4e3eb1779789a5d197f8d03f",
+    "href": "app/features/service-calendar/components/sub-components/installation-details/installation-details.component.html",
+    "sizeInBytes": 6949
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/service-calendar/components/sub-components/installation-details/installation-details.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "840eb513e6661e0b0f1a0f4b64ff09fda1b9dfdd6b220c8c4a1ed3e4a485439c",
+    "href": "app/features/service-calendar/components/sub-components/installation-details/installation-details.component.spec.ts",
+    "sizeInBytes": 707
+  },
+  {
+    "checksum": "5a9e070a71bd09b2409e9bcba1b16a8ec9dc910f3c53501c3747686bdcf12e8e",
+    "href": "app/features/service-calendar/components/sub-components/installation-details/installation-details.component.ts",
+    "sizeInBytes": 9112
+  },
+  {
+    "checksum": "f43584e4c8a914a912986f68b5286676209a103c410cabf5fa4ffa561192f1d3",
+    "href": "app/features/service-calendar/components/sub-components/installbase-modules-salesconfig/installbase-modules-salesconfig.component.html",
+    "sizeInBytes": 4260
+  },
+  {
+    "checksum": "4a6eabf0191c7542d31f74518f68ba513a8da6be7d6fb8c86ce3a3ce6a18ef2a",
+    "href": "app/features/service-calendar/components/sub-components/installbase-modules-salesconfig/installbase-modules-salesconfig.component.scss",
+    "sizeInBytes": 2262
+  },
+  {
+    "checksum": "ce467cd9b27c6f5993ce0535a85d08e1b836adadc4d78a8794b5220ec50fe3e4",
+    "href": "app/features/service-calendar/components/sub-components/installbase-modules-salesconfig/installbase-modules-salesconfig.component.spec.ts",
+    "sizeInBytes": 778
+  },
+  {
+    "checksum": "151e35c95e7b359a8cfea9dad22a814ef7efe662f89679a8606f1f720110dbfc",
+    "href": "app/features/service-calendar/components/sub-components/installbase-modules-salesconfig/installbase-modules-salesconfig.component.ts",
+    "sizeInBytes": 3618
+  },
+  {
+    "checksum": "a444c62a8a1cd08a5300b2af8140d6fad48670b10394c64e65580237b4987d01",
+    "href": "app/features/service-calendar/components/sub-components/module-details/module-details.component.html",
+    "sizeInBytes": 7320
+  },
+  {
+    "checksum": "1143d912509f9bf6ccd5407060915f52961b60b2acfab50bc5fc37384691a25a",
+    "href": "app/features/service-calendar/components/sub-components/module-details/module-details.component.scss",
+    "sizeInBytes": 2244
+  },
+  {
+    "checksum": "3f4fec1ae6d551387b8f00e2b0a761b0952bbd650f4c8b44b8c27dce6237754d",
+    "href": "app/features/service-calendar/components/sub-components/module-details/module-details.component.spec.ts",
+    "sizeInBytes": 665
+  },
+  {
+    "checksum": "67f888a122f631b297d213a8bb0df902386770eaac479743940928484cc38fbd",
+    "href": "app/features/service-calendar/components/sub-components/module-details/module-details.component.ts",
+    "sizeInBytes": 4963
+  },
+  {
+    "checksum": "061692f34a3781826d5bbd6ff4249b11225f4398db6ad2e3548edb3073886655",
+    "href": "app/features/service-calendar/components/sub-components/module-details-edit/module-details-edit.component.html",
+    "sizeInBytes": 4160
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/service-calendar/components/sub-components/module-details-edit/module-details-edit.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "7dc91e595504c4423d88b715866e039a05d5c5cbc3a9445c506dca23633677d1",
+    "href": "app/features/service-calendar/components/sub-components/module-details-edit/module-details-edit.component.spec.ts",
+    "sizeInBytes": 694
+  },
+  {
+    "checksum": "1025783813e593f3963a55b3c2bb0e211bec51ad0357c800632f864bee28622e",
+    "href": "app/features/service-calendar/components/sub-components/module-details-edit/module-details-edit.component.ts",
+    "sizeInBytes": 2890
+  },
+  {
+    "checksum": "f318120589f65f75e51f1cfb4ddd24defb715fea1402aee1bd5ae2dc41ec8359",
+    "href": "app/features/service-calendar/components/sub-components/other-reasons/other-reasons.component.html",
+    "sizeInBytes": 2600
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/service-calendar/components/sub-components/other-reasons/other-reasons.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "f1bfb6589c754b3a72fae88c5a74962ca633cd9e8ebfb7280e595a7485d202a9",
+    "href": "app/features/service-calendar/components/sub-components/other-reasons/other-reasons.component.spec.ts",
+    "sizeInBytes": 658
+  },
+  {
+    "checksum": "55a708f279d0579b61e1ad18659a72d5d6a2cf11d86d70f8b8d98caefd47e126",
+    "href": "app/features/service-calendar/components/sub-components/other-reasons/other-reasons.component.ts",
+    "sizeInBytes": 2561
+  },
+  {
+    "checksum": "e7efc14ce2b89819529fe8c830ac5e4bf0aa49667da276e6bbfb3ec2f6f47950",
+    "href": "app/features/service-calendar/components/sub-components/other-tasks/other-tasks.component.html",
+    "sizeInBytes": 5469
+  },
+  {
+    "checksum": "6a63287ac4e18be9dc01c22f5f42d2d94ccf49ce9292d34aa29dcffeb56a9bca",
+    "href": "app/features/service-calendar/components/sub-components/other-tasks/other-tasks.component.scss",
+    "sizeInBytes": 5176
+  },
+  {
+    "checksum": "8f40e0f92a0faf0409de0e42c75f2b71e7360e0aa835cbdb1772906db632df40",
+    "href": "app/features/service-calendar/components/sub-components/other-tasks/other-tasks.component.spec.ts",
+    "sizeInBytes": 644
+  },
+  {
+    "checksum": "fd9c8733ab605a151e6d473cf73c15ffcaee3293dbab5e301fec61dae4bfac3d",
+    "href": "app/features/service-calendar/components/sub-components/other-tasks/other-tasks.component.ts",
+    "sizeInBytes": 1962
+  },
+  {
+    "checksum": "b445c4582f79358cf76341c1a3b52c501be5ef095ec267ac062d24d1bf9437ad",
+    "href": "app/features/service-calendar/components/sub-components/other-tasks-edit/other-tasks-edit.component.html",
+    "sizeInBytes": 4624
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/service-calendar/components/sub-components/other-tasks-edit/other-tasks-edit.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "f8082ebf9b3230c8fadfcc1e9cdeec1fd7c00cd1b785b594cc75fd78270276fa",
+    "href": "app/features/service-calendar/components/sub-components/other-tasks-edit/other-tasks-edit.component.spec.ts",
+    "sizeInBytes": 673
+  },
+  {
+    "checksum": "8d772ac3c977288dd9386df7968d53fb08e24694aba13e0bd1413e6363dbd822",
+    "href": "app/features/service-calendar/components/sub-components/other-tasks-edit/other-tasks-edit.component.ts",
+    "sizeInBytes": 5313
+  },
+  {
+    "checksum": "0055483bfb3b69bd70226e72972e0cbfa518a106fcb0819de264e434c76e704e",
+    "href": "app/features/service-calendar/components/sub-components/parts-required/parts-required.component.html",
+    "sizeInBytes": 1997
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/service-calendar/components/sub-components/parts-required/parts-required.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "6e4b3b211b09ddbfcd74a5d91cc180db2faae5271459bd9c907e2781c1ecc425",
+    "href": "app/features/service-calendar/components/sub-components/parts-required/parts-required.component.spec.ts",
+    "sizeInBytes": 665
+  },
+  {
+    "checksum": "61f37e7379bce540da4aeee5943d24145ef8b033d7338d0997c85f952b3d099a",
+    "href": "app/features/service-calendar/components/sub-components/parts-required/parts-required.component.ts",
+    "sizeInBytes": 2595
+  },
+  {
+    "checksum": "10e053c232c661ec95d704d5cf594120da79605a4329cadf2ac0e1894ac22232",
+    "href": "app/features/service-calendar/components/sub-components/po-required/po-required.component.html",
+    "sizeInBytes": 1575
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/service-calendar/components/sub-components/po-required/po-required.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "916c0865fc6394388e40b3c75d1889021ad3f45e74ae782a0e6357c404db1b9a",
+    "href": "app/features/service-calendar/components/sub-components/po-required/po-required.component.spec.ts",
+    "sizeInBytes": 644
+  },
+  {
+    "checksum": "515f07c0ffdd85d7644ef8478c021dda44ae8323e499dbf9cb258a25b9f758a4",
+    "href": "app/features/service-calendar/components/sub-components/po-required/po-required.component.ts",
+    "sizeInBytes": 1853
+  },
+  {
+    "checksum": "f0296fca81e523c6723094db2683b1bc5b7301f3808387424bf030b9d7ea8ca6",
+    "href": "app/features/service-calendar/components/sub-components/service-survey/service-survey.component.html",
+    "sizeInBytes": 2471
+  },
+  {
+    "checksum": "b7eb7ba44253337a43ae5aa71f8f66ae7849a31e587a91236bf7f6bb8e6ae702",
+    "href": "app/features/service-calendar/components/sub-components/service-survey/service-survey.component.scss",
+    "sizeInBytes": 101
+  },
+  {
+    "checksum": "f515f337a0c93df1b5ccad5fc39ee4a6ecbcf9153e669a7be59e3011096c6d9f",
+    "href": "app/features/service-calendar/components/sub-components/service-survey/service-survey.component.spec.ts",
+    "sizeInBytes": 665
+  },
+  {
+    "checksum": "f99838ce882ad38620f43eeba68d9cbc32dfd428a063b3617e96060456987abd",
+    "href": "app/features/service-calendar/components/sub-components/service-survey/service-survey.component.ts",
+    "sizeInBytes": 2248
+  },
+  {
+    "checksum": "52d84332c2d26cf65a67185b66c43cd912f0bf365a86e43deedb09014be708ad",
+    "href": "app/features/service-calendar/components/sub-components/systematization-details/systematization-details.component.html",
+    "sizeInBytes": 4647
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/service-calendar/components/sub-components/systematization-details/systematization-details.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "b66ffa15daa1eddbb70c8b050896860419c418c58aef279201facb1df562360a",
+    "href": "app/features/service-calendar/components/sub-components/systematization-details/systematization-details.component.spec.ts",
+    "sizeInBytes": 728
+  },
+  {
+    "checksum": "cace042d7a31f8055e789164615ad79d1e0b37d54ed1e0db2646310e298c9bad",
+    "href": "app/features/service-calendar/components/sub-components/systematization-details/systematization-details.component.ts",
+    "sizeInBytes": 3974
+  },
+  {
+    "checksum": "de47a5db45aba1de7f6aa05035b99259700ee0eea281aaae7ddb44d1b2cac4bf",
+    "href": "app/features/service-calendar/service-calendar-routing.module.ts",
+    "sizeInBytes": 961
+  },
+  {
+    "checksum": "791e5456207c485b9a24693206570298ddaf9675aef4b04da0ad84e71ddba422",
+    "href": "app/features/service-calendar/service-calendar.module.ts",
+    "sizeInBytes": 4592
+  },
+  {
+    "checksum": "5b6a9daedd7e129adbe498aefbb22b2106f020474f832ffffdafc083fd5bbaf5",
+    "href": "app/features/service-calendar/service-calendar.service.ts",
+    "sizeInBytes": 31186
+  },
+  {
+    "checksum": "c5f27de4fdce199c7750efbaf67be61d51f0d90dbcb11719ba44c644c7ac51b3",
+    "href": "app/features/worksheet/components/credit-exposure/credit-exposure.component.html",
+    "sizeInBytes": 6048
+  },
+  {
+    "checksum": "0108553fc89b6619b596e3787cfd5f6f5a9d82545083c8ee1ad133dced970ede",
+    "href": "app/features/worksheet/components/credit-exposure/credit-exposure.component.scss",
+    "sizeInBytes": 501
+  },
+  {
+    "checksum": "0b87c058e4d6df2e40c9083dec0e4773fa27a6aa7f03af53d50eff1cb101b026",
+    "href": "app/features/worksheet/components/credit-exposure/credit-exposure.component.spec.ts",
+    "sizeInBytes": 616
+  },
+  {
+    "checksum": "30dd294b1401984de2220e1ed4232ec804d790852e212046e776c6b5a0682853",
+    "href": "app/features/worksheet/components/credit-exposure/credit-exposure.component.ts",
+    "sizeInBytes": 6806
+  },
+  {
+    "checksum": "2308475ebde12e8a55123abe7a004636b4cf7c8b44616b8d42bc9779934b4bc6",
+    "href": "app/features/worksheet/components/dlc/dlc.component.html",
+    "sizeInBytes": 4870
+  },
+  {
+    "checksum": "e3fb9385f81ede573edbeafef68efbce04854eb9694ec421f18c76ac696b315d",
+    "href": "app/features/worksheet/components/dlc/dlc.component.scss",
+    "sizeInBytes": 1247
+  },
+  {
+    "checksum": "788688f5cf8ee7b435caef2660e415a55903bccd444643497f6874b4e96b4fbe",
+    "href": "app/features/worksheet/components/dlc/dlc.component.spec.ts",
+    "sizeInBytes": 538
+  },
+  {
+    "checksum": "7c3275d88be8a408a9175a16184f481c073b9c76cdd18d0fc750ed55201ada69",
+    "href": "app/features/worksheet/components/dlc/dlc.component.ts",
+    "sizeInBytes": 1238
+  },
+  {
+    "checksum": "a2af3c69e3ee6d5a6bfd5b0c69d3092fd0cc59d4b9be3bc9c247b0aadd2eb061",
+    "href": "app/features/worksheet/components/drq-details/drq-details.component.html",
+    "sizeInBytes": 13334
+  },
+  {
+    "checksum": "45e7f77f0a9edbc21655a7cd009e1eb017eb7368e37c450d0f051b2536702ea7",
+    "href": "app/features/worksheet/components/drq-details/drq-details.component.scss",
+    "sizeInBytes": 560
+  },
+  {
+    "checksum": "e6abbd533f5d0913c4cc1463efe5541a269591890cebe24c64a33a4680b9354b",
+    "href": "app/features/worksheet/components/drq-details/drq-details.component.spec.ts",
+    "sizeInBytes": 588
+  },
+  {
+    "checksum": "d4871c5d44c1d9cc02af2b3033704a8253c8eb56316a0c48b929f8006717f622",
+    "href": "app/features/worksheet/components/drq-details/drq-details.component.ts",
+    "sizeInBytes": 8158
+  },
+  {
+    "checksum": "ed26e9361aa273896fc3aa704b7e3c62a2756f94302195eec190a6ef16d8a8a3",
+    "href": "app/features/worksheet/components/margin-details/margin-details.component.html",
+    "sizeInBytes": 13093
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "app/features/worksheet/components/margin-details/margin-details.component.scss",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "f0a3a90a4d2b661c13fca549b069571860be094aa7f7c2f510990a1e8273ad13",
+    "href": "app/features/worksheet/components/margin-details/margin-details.component.spec.ts",
+    "sizeInBytes": 609
+  },
+  {
+    "checksum": "d78c335516f31aa0182c5d047d23e05b7c6f2d923bf0aeaef90baacf9c95612e",
+    "href": "app/features/worksheet/components/margin-details/margin-details.component.ts",
+    "sizeInBytes": 42507
+  },
+  {
+    "checksum": "6f281586884f9ecc278354eb0922b694ea1cba1c1ad1ea815f2f50f1379a2050",
+    "href": "app/features/worksheet/components/price-details/price-details.component.html",
+    "sizeInBytes": 16847
+  },
+  {
+    "checksum": "cac2eec124d22975eb767a316e78b24733e236e9d72c62b0144f6a4fa03df92a",
+    "href": "app/features/worksheet/components/price-details/price-details.component.scss",
+    "sizeInBytes": 2464
+  },
+  {
+    "checksum": "f11e065bd52f3f9e4a50a9bc5e1c1661b33350652e51e50cf8b8a83c9d8b008a",
+    "href": "app/features/worksheet/components/price-details/price-details.component.spec.ts",
+    "sizeInBytes": 602
+  },
+  {
+    "checksum": "2b7d469c195f51a5f460855e81981363c6da2e1cf197b5095ba4b9904c7a13cb",
+    "href": "app/features/worksheet/components/price-details/price-details.component.ts",
+    "sizeInBytes": 3881
+  },
+  {
+    "checksum": "8d0d5bbb827d66593c9f77ff4137328f92e520be133667d703bd04020cb59ac8",
+    "href": "app/features/worksheet/components/worksheet-approval/worksheet-approval.component.html",
+    "sizeInBytes": 10464
+  },
+  {
+    "checksum": "865c9617c3fdf108cc315acceb94e74218eb034a69ed8141f8f3a126aa6661af",
+    "href": "app/features/worksheet/components/worksheet-approval/worksheet-approval.component.scss",
+    "sizeInBytes": 942
+  },
+  {
+    "checksum": "42184772c8f29edaf07d7ef52275abae9ee76fbf42e083e98bb59ea390f03096",
+    "href": "app/features/worksheet/components/worksheet-approval/worksheet-approval.component.spec.ts",
+    "sizeInBytes": 637
+  },
+  {
+    "checksum": "92d790ba527677ee4c0ee3452a19ab288b1a3ad7a2fe7ecaa70d629024547434",
+    "href": "app/features/worksheet/components/worksheet-approval/worksheet-approval.component.ts",
+    "sizeInBytes": 13366
+  },
+  {
+    "checksum": "69d4d62612f91ff13c7b95ad91411aafe5b590cc364590185ff9f7f33780cf15",
+    "href": "app/features/worksheet/components/worksheet-details/worksheet-details.component.html",
+    "sizeInBytes": 4945
+  },
+  {
+    "checksum": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "href": "app/features/worksheet/components/worksheet-details/worksheet-details.component.scss",
+    "sizeInBytes": 1
+  },
+  {
+    "checksum": "5618403f67c07b5f7419dce484e69510c3f1d204ceee02d8021ccb492e3a1b0c",
+    "href": "app/features/worksheet/components/worksheet-details/worksheet-details.component.spec.ts",
+    "sizeInBytes": 630
+  },
+  {
+    "checksum": "98f473f61116f57651d2c42a269912b845a1c5fd4da4e38d4baf18cfac760c37",
+    "href": "app/features/worksheet/components/worksheet-details/worksheet-details.component.ts",
+    "sizeInBytes": 3278
+  },
+  {
+    "checksum": "8b467cca7c1c513f6a2efe425374c470285ef5d98985d9153a9fd3e8f37d3139",
+    "href": "app/features/worksheet/components/worksheet-downloads/worksheet-downloads.component.html",
+    "sizeInBytes": 928
+  },
+  {
+    "checksum": "ea74477b4a0a3d7fa2bd5e42bac7d9d0b4f49e54e6fc02c6e119540877956fbd",
+    "href": "app/features/worksheet/components/worksheet-downloads/worksheet-downloads.component.scss",
+    "sizeInBytes": 837
+  },
+  {
+    "checksum": "85e931091e2395e4ee31669187f7d20a39d080e8224473cf285de77b5df1d2be",
+    "href": "app/features/worksheet/components/worksheet-downloads/worksheet-downloads.component.spec.ts",
+    "sizeInBytes": 644
+  },
+  {
+    "checksum": "3cd6cf79807ac6dce383079e2da8a8595277e6610f7d91bd044ae7ed2ff9bea4",
+    "href": "app/features/worksheet/components/worksheet-downloads/worksheet-downloads.component.ts",
+    "sizeInBytes": 417
+  },
+  {
+    "checksum": "c20640d02166ecbc20d36d0252b88bf669c7bc3a1591574cfe7378cf889c0574",
+    "href": "app/features/worksheet/worksheet-routing.module.ts",
+    "sizeInBytes": 615
+  },
+  {
+    "checksum": "f5c7816d659eb6c461871283fb45c7c25ef6f859a1bc85d97ba1fae3c8f4ec7a",
+    "href": "app/features/worksheet/worksheet.module.ts",
+    "sizeInBytes": 1831
+  },
+  {
+    "checksum": "f62ad410bec4246c7e3782f5c0b71eb7c20c3c49c7f4851bc079ba74da815f54",
+    "href": "app/features/worksheet/worksheet.service.ts",
+    "sizeInBytes": 25822
+  },
+  {
+    "checksum": "004b68742f3ce9525aaf33f8be1f92de7c1ea0f3fe3261aeebe19ede86c22c3b",
+    "href": "app/kendo.module.ts",
+    "sizeInBytes": 1886
+  },
+  {
+    "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "href": "assets/.gitkeep",
+    "sizeInBytes": 0
+  },
+  {
+    "checksum": "859f52ee7d5fe7a129c2c8aa46b6871967f864176237de4e60863257a943c32f",
+    "href": "assets/appsettings.json",
+    "sizeInBytes": 332
+  },
+  {
+    "checksum": "d4247edd795e153a01f3fd573d087f20a0c9738484875e239a4165b237b2155c",
+    "href": "assets/content/css/colors.scss",
+    "sizeInBytes": 431
+  },
+  {
+    "checksum": "14f305099b8ddeb6a0799e2e24b100ddd73dca2beb0718dc4390005524b419ec",
+    "href": "assets/content/css/sizes.scss",
+    "sizeInBytes": 1360
+  },
+  {
+    "checksum": "f4a1280cbc62cb2793e1ece75ea9597e83ecc549c4783e9fe292e819c571b99f",
+    "href": "assets/content/css/text.scss",
+    "sizeInBytes": 1753
+  },
+  {
+    "checksum": "abf64cfa14645043a7c33f76435125f8b3de79c510adb938a1c16085518d4341",
+    "href": "assets/content/fonts/Lato/Lato-Black.ttf",
+    "sizeInBytes": 69500
+  },
+  {
+    "checksum": "e1eb271de3a571d566e534d3e521cfa46becfc789821257bc347455167d586f3",
+    "href": "assets/content/fonts/Lato/Lato-BlackItalic.ttf",
+    "sizeInBytes": 72000
+  },
+  {
+    "checksum": "d7f0b7f2570f2f28b504da1181b4d71b1420b10be2c4fd690927f1c8ee3b19c3",
+    "href": "assets/content/fonts/Lato/Lato-Bold.ttf",
+    "sizeInBytes": 73332
+  },
+  {
+    "checksum": "e38611f4c0ff3251a58fe751991c39784d8f9be420b004891e0b9277228ec32f",
+    "href": "assets/content/fonts/Lato/Lato-BoldItalic.ttf",
+    "sizeInBytes": 77732
+  },
+  {
+    "checksum": "3be26bf6973f49df6a7dfd130041017354342bfbb023e6b9610b42daeba6de34",
+    "href": "assets/content/fonts/Lato/Lato-Italic.ttf",
+    "sizeInBytes": 75792
+  },
+  {
+    "checksum": "fb5343c4375c38b1c3026336d355335e6a5b8531cbc9c6506eb4b6f6d67c152f",
+    "href": "assets/content/fonts/Lato/Lato-Light.ttf",
+    "sizeInBytes": 77208
+  },
+  {
+    "checksum": "6d5176f3babd0ccba79845088f8e9ede5dbb7b408fb40161963daa95a71cef2e",
+    "href": "assets/content/fonts/Lato/Lato-LightItalic.ttf",
+    "sizeInBytes": 49080
+  },
+  {
+    "checksum": "e82542aed8293f49fc83c4aaea566b1f6b4fc7a9ab5da11e6fb9bc0973b5324b",
+    "href": "assets/content/fonts/Lato/Lato-Regular.ttf",
+    "sizeInBytes": 75152
+  },
+  {
+    "checksum": "fee1bd1daaa5efbcb93c8d074c61378dce155df0d32e00199b6a9457e427bc45",
+    "href": "assets/content/fonts/Lato/Lato-Thin.ttf",
+    "sizeInBytes": 69976
+  },
+  {
+    "checksum": "8130560da30ad6f19994fd410f71985acafca1576592235161ffb75757635594",
+    "href": "assets/content/fonts/Lato/Lato-ThinItalic.ttf",
+    "sizeInBytes": 48864
+  },
+  {
+    "checksum": "74ba064d03f1f1c4a952da936c3eb71866c34404916734de3cae73b34357e59e",
+    "href": "assets/content/fonts/Lato/OFL.txt",
+    "sizeInBytes": 4407
+  },
+  {
+    "checksum": "32539d5b22005106801461f4081575db09f35cfc34d2cca33c9599b3ed915f57",
+    "href": "assets/content/fonts/Montserrat/montserrat-bold.ttf",
+    "sizeInBytes": 44168
+  },
+  {
+    "checksum": "0011fc1aa19c054e332f7916f1f400eaea2cb8e74611008bbc8f4ea705b4ece1",
+    "href": "assets/content/fonts/Montserrat/montserrat-bold.woff",
+    "sizeInBytes": 20668
+  },
+  {
+    "checksum": "1c162da32d36f79b447183d7c9d7b3888c2e4d44abf36c63550898f8f32bcb88",
+    "href": "assets/content/fonts/Montserrat/montserrat-bold.woff2",
+    "sizeInBytes": 18844
+  },
+  {
+    "checksum": "2379e12d828fa2812c4b973bb02bab527c363d4f7f42fc3a39511ef8235f22f6",
+    "href": "assets/content/fonts/Montserrat/montserrat-regular.ttf",
+    "sizeInBytes": 44272
+  },
+  {
+    "checksum": "6331eaf0d3e9fa805925be6e9cdd411f3cd2034f685135adbe2105703df1a3a3",
+    "href": "assets/content/fonts/Montserrat/montserrat-regular.woff",
+    "sizeInBytes": 20644
+  },
+  {
+    "checksum": "1c9c85d0b73b7321eb8ed22e0b6bcd577478dd5f99d1379a5d4cea10884033ac",
+    "href": "assets/content/fonts/Montserrat/montserrat-regular.woff2",
+    "sizeInBytes": 18792
+  },
+  {
+    "checksum": "59d73c52bbbe8a98ad33f1631c72c4cf4045ea9cd6da8b9b70c92af3f075859e",
+    "href": "assets/content/fonts/Montserrat/montserrat-semibold.ttf",
+    "sizeInBytes": 44192
+  },
+  {
+    "checksum": "304d33996cd2bcd8007dc0e1adbdabeee7fc55d8f4481b6137a473f6875e05cc",
+    "href": "assets/content/fonts/Montserrat/montserrat-semibold.woff",
+    "sizeInBytes": 20608
+  },
+  {
+    "checksum": "7ea11ae0c63fa6b6504e77a15d057a53cef496d1401cb96c6c30eadf6e881aea",
+    "href": "assets/content/fonts/Montserrat/montserrat-semibold.woff2",
+    "sizeInBytes": 18740
+  },
+  {
+    "checksum": "15e590dedff479d5fcc57f58af514a519eba37c6fb3845059ecbe804bd955103",
+    "href": "assets/content/images/add-circular-button.svg",
+    "sizeInBytes": 316
+  },
+  {
+    "checksum": "4e2baaccb9fa3d131f4c91a04bb07032db00bf66a7bd136c5c50ca293c304ede",
+    "href": "assets/content/images/app-paper-clip-green.svg",
+    "sizeInBytes": 2669
+  },
+  {
+    "checksum": "1131b153cffed7d2d974936eea02eec3617c2069e34b9bdc7637c2f49c0d600f",
+    "href": "assets/content/images/app-paper-clip-white.svg",
+    "sizeInBytes": 2653
+  },
+  {
+    "checksum": "f884f3051b2bee9709a46ff18c009ae37da08cf00218676eaf2e6f282a3e5b65",
+    "href": "assets/content/images/app-paper-clip.svg",
+    "sizeInBytes": 2659
+  },
+  {
+    "checksum": "d8e966dae8ea4eea316a25073cbbc8c2335add036ae85bace617d701334a6eba",
+    "href": "assets/content/images/back.svg",
+    "sizeInBytes": 924
+  },
+  {
+    "checksum": "530d660eeaf3c8b18fd323c44868d0ead031f17becc82eeedb3fb9f2b742f5d8",
+    "href": "assets/content/images/backblack.svg",
+    "sizeInBytes": 924
+  },
+  {
+    "checksum": "cc45bbd58ef174852c098eade02993f109839f7dcbcfe3197269f3f1fe6aeb62",
+    "href": "assets/content/images/backward.svg",
+    "sizeInBytes": 368
+  },
+  {
+    "checksum": "16fc9ff68c046aa496757a623a7e78c20b85b2a7969e07090d8d81b6c1192168",
+    "href": "assets/content/images/calendar.svg",
+    "sizeInBytes": 4817
+  },
+  {
+    "checksum": "757f5278736939890c6f11ea8826d61822b3954ab891cf0fb260b8f8f9b61685",
+    "href": "assets/content/images/call-complete-disabled.svg",
+    "sizeInBytes": 305
+  },
+  {
+    "checksum": "9fd00d421d8554a26c6d7cbdfd0d0d1fd7e79527bff04f223cc567e9ca695205",
+    "href": "assets/content/images/call-complete.svg",
+    "sizeInBytes": 305
+  },
+  {
+    "checksum": "758491a83506e60a17e4136107671ca5a971f37708f51cf362e1ee686468174f",
+    "href": "assets/content/images/call-continue-disabled.svg",
+    "sizeInBytes": 610
+  },
+  {
+    "checksum": "300a2949a5ceb8b923750e7b947ce695db2a16407ebe8c13aa18b87dc397becd",
+    "href": "assets/content/images/call-continue.svg",
+    "sizeInBytes": 610
+  },
+  {
+    "checksum": "506050dfd3f8ce88c72e6dfcdede511fd6f3eb92f2ce286bd5eae8284dc06fcd",
+    "href": "assets/content/images/call-field-visit-disabled.svg",
+    "sizeInBytes": 1391
+  },
+  {
+    "checksum": "25e3708b5b8ddba1de31f3aad43a7a428bb7d8c48274bb74235d2d1ebe9558a4",
+    "href": "assets/content/images/call-field-visit.svg",
+    "sizeInBytes": 1391
+  },
+  {
+    "checksum": "b0b407758af831e5cb9ad67272d221ae1288c9e933fb873e94b13558f0e6be61",
+    "href": "assets/content/images/call-hold-disabled.svg",
+    "sizeInBytes": 1017
+  },
+  {
+    "checksum": "6a3333a4c355c0a851c332f339782940862c639e6cbc0a61e8aaffb9c6a6bc2c",
+    "href": "assets/content/images/call-hold.svg",
+    "sizeInBytes": 1017
+  },
+  {
+    "checksum": "430c14876d51b12fb16fbd7fe34145bb0a15492ac9da919c0ab9adcd12736dca",
+    "href": "assets/content/images/check.svg",
+    "sizeInBytes": 1055
+  },
+  {
+    "checksum": "0574353defd692a899bbe0b69c03ec583c1d5b9210127911b9b2745a30943a28",
+    "href": "assets/content/images/chevron.svg",
+    "sizeInBytes": 1510
+  },
+  {
+    "checksum": "3a51180f3e13f4a33fd81d2a988121604d2ad29faa61161df4036c28bd51d2c5",
+    "href": "assets/content/images/color-pallete-white.svg",
+    "sizeInBytes": 629
+  },
+  {
+    "checksum": "c9e031d2e9bf8fbcb4eb168f83136e7bd9446389f9b1c8e03e9fba15ae89abf2",
+    "href": "assets/content/images/dashboard-images/dashboard--ecrm-logo.png",
+    "sizeInBytes": 13279
+  },
+  {
+    "checksum": "16fc9ff68c046aa496757a623a7e78c20b85b2a7969e07090d8d81b6c1192168",
+    "href": "assets/content/images/dashboard-images/dashboard-calendar-icon.svg",
+    "sizeInBytes": 4817
+  },
+  {
+    "checksum": "1ed4636a8d83951e2b1786ec9daadcbefaf8f7e268935201e8e477dd14516a00",
+    "href": "assets/content/images/dashboard-images/dashboard-enquiry-icon.svg",
+    "sizeInBytes": 1149
+  },
+  {
+    "checksum": "8ad3f7f0b81f8d897ccff20763299c1e2964e28647cdbc06feb3dffaa48e621b",
+    "href": "assets/content/images/dashboard-images/dashboard-logo.png",
+    "sizeInBytes": 9951
+  },
+  {
+    "checksum": "d777385f05ca1978e7634481bfa905ca91dfd2a05ebb18b9465b91ab87f56f3a",
+    "href": "assets/content/images/dashboard-images/dashboard-MyTask-icon.svg",
+    "sizeInBytes": 2449
+  },
+  {
+    "checksum": "c89a8eb4809f93c79f2c73124d58d1fcfffa7cc85075cb8a706976b6974722b0",
+    "href": "assets/content/images/dashboard-images/dashboard-overtime-icon.svg",
+    "sizeInBytes": 1529
+  },
+  {
+    "checksum": "a0e07d1dcd0864f1781ffeb8f4099b4faf349f9c50bbdc9f62d8f161ed91774c",
+    "href": "assets/content/images/dashboard-images/dashboard-page-flow-right-bottom.svg",
+    "sizeInBytes": 2655
+  },
+  {
+    "checksum": "8c88410a5f898dc06294892195018375f803d2c74d1b6f719ff44740c0f8d7d2",
+    "href": "assets/content/images/dashboard-images/dashboard-quickaction-sales-icon.svg",
+    "sizeInBytes": 1411
+  },
+  {
+    "checksum": "257e75ce45d8eb5066d3356ba9d3bb738fcd2984da6265aa87db3682da68dd14",
+    "href": "assets/content/images/dashboard-images/dashboard-quicklink-enquiry-icon.svg",
+    "sizeInBytes": 2905
+  },
+  {
+    "checksum": "2bd4ad36bbc2bba7b8a9825b6823309ae2dec07427cda047b93bf912f4436b11",
+    "href": "assets/content/images/dashboard-images/dashboard-sales-icon.svg",
+    "sizeInBytes": 1456
+  },
+  {
+    "checksum": "8862e8695fc5ec7c8686ef76e9b7595cfb8eab6b17fa8f2c83935703f51b83ae",
+    "href": "assets/content/images/dashboard-images/dashboard-telephone-icon.svg",
+    "sizeInBytes": 1973
+  },
+  {
+    "checksum": "60aae42bcdc696fe334ac075fc49264eb047745cd5b7bb21c5676e78e1e4a15d",
+    "href": "assets/content/images/dashboard-images/dashboard-trackers-icon.svg",
+    "sizeInBytes": 4789
+  },
+  {
+    "checksum": "bb502f9b7e55c49f519524da1d82ec0bdc8e231282b2ce7304e635ebdebacc93",
+    "href": "assets/content/images/dashboard-images/dashboard-update-icon.svg",
+    "sizeInBytes": 769
+  },
+  {
+    "checksum": "c6b0b417b89307d9fe91deffa6c307b75754a4e4abfcb7e3965c2ed3b72f7098",
+    "href": "assets/content/images/dashboard-images/landing-page--sales-logo.svg",
+    "sizeInBytes": 176510
+  },
+  {
+    "checksum": "bd56b4182517a9263b7c78336195ca98cb879833bd2aaa886afb8c3d0e407f2f",
+    "href": "assets/content/images/dashboard-images/landing-page-header-bckground.svg",
+    "sizeInBytes": 529
+  },
+  {
+    "checksum": "a74cfe6c943290e3091e8b9dfa8de0ce9f8468537f37cbd03ff8510014ed78f0",
+    "href": "assets/content/images/delete.svg",
+    "sizeInBytes": 199
+  },
+  {
+    "checksum": "0a9080c1ce8f72f90c2252bac1bbad11d99d169f6430595cfc61bb5027c27d43",
+    "href": "assets/content/images/down-grey.svg",
+    "sizeInBytes": 845
+  },
+  {
+    "checksum": "d14c74eb7b5aa341db9aa806a20e4c82e41b10b83609aed163ee94c252858ca8",
+    "href": "assets/content/images/down-white.svg",
+    "sizeInBytes": 849
+  },
+  {
+    "checksum": "86ae292f65be2961afe9d9a200c75fc0e177446f03862e440c51b6c3a96faa0e",
+    "href": "assets/content/images/down.svg",
+    "sizeInBytes": 850
+  },
+  {
+    "checksum": "eef2f53196967a2f7b253c358c47f70c87cf3d7ac7e7a4f46c1c6794292f26d3",
+    "href": "assets/content/images/download.svg",
+    "sizeInBytes": 2326
+  },
+  {
+    "checksum": "59a0e9162d1402f7772bf67b549720f8c6e2f1ef96204deee3b216fbc82e8dfa",
+    "href": "assets/content/images/edit.svg",
+    "sizeInBytes": 615
+  },
+  {
+    "checksum": "beb20f920e2e852ab33b0ddadaf671760d163d19284c3ce3f1ac79cf355a81b3",
+    "href": "assets/content/images/email.svg",
+    "sizeInBytes": 501
+  },
+  {
+    "checksum": "2d60833fafe8ba14a09f4cb43f5d93aa93e3c3a5dd56f5d6e1c69d79ec618b41",
+    "href": "assets/content/images/error.svg",
+    "sizeInBytes": 1054
+  },
+  {
+    "checksum": "bdc05e448fd14a66ca15caf32d98ab27d3fe2de653b66a81640bbb875322817c",
+    "href": "assets/content/images/favicon.png",
+    "sizeInBytes": 2440
+  },
+  {
+    "checksum": "df295a8ed68551fc7c75e485d477279618c05e14bfd17bf2057c887f75116cdc",
+    "href": "assets/content/images/front.svg",
+    "sizeInBytes": 1962
+  },
+  {
+    "checksum": "47a46703611fb7ec47094893a30dba689895befe6d1cc1086a07bb25611a3519",
+    "href": "assets/content/images/info-grey.svg",
+    "sizeInBytes": 534
+  },
+  {
+    "checksum": "785e44d1a01a4e8e3316897ba76272492969a3d8d9853323db3a8aab97eb7c8b",
+    "href": "assets/content/images/info.svg",
+    "sizeInBytes": 519
+  },
+  {
+    "checksum": "a02aa54096465f39df80e5ac2949f3eec032c67efc8af342b51b47c2f36c2e0d",
+    "href": "assets/content/images/invalid.svg",
+    "sizeInBytes": 991
+  },
+  {
+    "checksum": "b53280d0eeffdb904fccfd5d265ec3e6e2c7c2313c59223b371130db39695368",
+    "href": "assets/content/images/location.svg",
+    "sizeInBytes": 819
+  },
+  {
+    "checksum": "38394f6ddb988042727716d290caaa828938d6440e5d6e83600d961f1f29494c",
+    "href": "assets/content/images/login-images/ellipse.svg",
+    "sizeInBytes": 420
+  },
+  {
+    "checksum": "58da73a2714c34e4113b4ad6391e40df11706622fbdf6de7635118a860ccecf9",
+    "href": "assets/content/images/login-images/Group-img.svg",
+    "sizeInBytes": 21847
+  },
+  {
+    "checksum": "6d55bdfaa45ba96a1174ceaa2ba642e13f9d5112166dbf41edddeb3d98786792",
+    "href": "assets/content/images/login-images/lock.svg",
+    "sizeInBytes": 1195
+  },
+  {
+    "checksum": "96a5b427102d8554a87793ae6233e5284cc8b7661eadc40eb7bebce5c232693f",
+    "href": "assets/content/images/login-images/login-page-flow-bottom.svg",
+    "sizeInBytes": 1940
+  },
+  {
+    "checksum": "56058b26784787c0f6204774e1c9c5927f4fd764ea1d25f0ff08e88b711ee1b9",
+    "href": "assets/content/images/login-images/login-page-flow-left-middle.svg",
+    "sizeInBytes": 1437
+  },
+  {
+    "checksum": "08d06047bdaa2734f2878b46755360f6212900717a12774e6d97c53ba145ab7f",
+    "href": "assets/content/images/login-images/login-page-flow-right-bottom.svg",
+    "sizeInBytes": 2654
+  },
+  {
+    "checksum": "832f6dcccdd9effa67536a80b52620b9e07df71abd66a37d07887b87a8a4f575",
+    "href": "assets/content/images/login-images/login-page-flow-right-top.svg",
+    "sizeInBytes": 3282
+  },
+  {
+    "checksum": "96069a0aee095a25064bcb85b652e49a737e882c0e9ec656b45f855d697555fc",
+    "href": "assets/content/images/login-images/login-page-flow.svg",
+    "sizeInBytes": 1010
+  },
+  {
+    "checksum": "f0b3c3754ffe60d3db61866c02778204287184234b8560160080c0290208bf47",
+    "href": "assets/content/images/login-images/logout.svg",
+    "sizeInBytes": 1591
+  },
+  {
+    "checksum": "4dda6aa329174bdfbf39fdeea1451d8d11a6fc1414b7d6b4fa4415d7edb4c700",
+    "href": "assets/content/images/login-images/otp-generation-verification.png",
+    "sizeInBytes": 459035
+  },
+  {
+    "checksum": "b22a757afb156a88549d6e203ffa533d8361c359919c54aae4d47428df8e5291",
+    "href": "assets/content/images/login-images/password.svg",
+    "sizeInBytes": 741
+  },
+  {
+    "checksum": "119494d246e2e30240b93714ac174384a25d78282580e30d397a92fa5e9bbbac",
+    "href": "assets/content/images/login-images/profile.svg",
+    "sizeInBytes": 1144
+  },
+  {
+    "checksum": "477d4087bd9121200f874f1c10fca1449d90e239c86825ffeda7197a755ce251",
+    "href": "assets/content/images/microphone.svg",
+    "sizeInBytes": 753
+  },
+  {
+    "checksum": "3d03046c32b76c4453d2c09eba9ba73df42049af99adc392d78e76e89ab8ef70",
+    "href": "assets/content/images/notification-bell.svg",
+    "sizeInBytes": 2051
+  },
+  {
+    "checksum": "4fc6c1a7802532725af460fe3dcd9af1a41d9fc0353e8b954d6e2236d75aec89",
+    "href": "assets/content/images/phone.svg",
+    "sizeInBytes": 4644
+  },
+  {
+    "checksum": "e77c220e6e354ca9b6c038115cf74286bb131cc3b8f97f34b8a0d622d72bfe4e",
+    "href": "assets/content/images/price.svg",
+    "sizeInBytes": 540
+  },
+  {
+    "checksum": "06a15e3f76c7ce125550c1c178a1a1d63e07f0d4377acae33e72534b60072693",
+    "href": "assets/content/images/reset.svg",
+    "sizeInBytes": 837
+  },
+  {
+    "checksum": "16ca8deacf7a2fce73e2e70975bab42148f22cc2964a2f82b9d3e7ecb745476d",
+    "href": "assets/content/images/resetblack.svg",
+    "sizeInBytes": 837
+  },
+  {
+    "checksum": "bbff0046879c0b5a948e4b21c256c19ee5e6c39c6da09c16dff12f8188e141d7",
+    "href": "assets/content/images/search.svg",
+    "sizeInBytes": 1102
+  },
+  {
+    "checksum": "87e9db889b902d78106a50835f53a971eada85ea2669b17dfa3d8088b47ad2d0",
+    "href": "assets/content/images/uncheck.svg",
+    "sizeInBytes": 1055
+  },
+  {
+    "checksum": "27c1625ce7f651912be78f1663a77d398d312110435c072267ab8de3879a5685",
+    "href": "assets/content/images/up-grey.svg",
+    "sizeInBytes": 831
+  },
+  {
+    "checksum": "15893c6a17b7a664459fe3e3d19bc728e8da51cb6cebbb398e575e73b220f7d9",
+    "href": "assets/content/images/up-white.svg",
+    "sizeInBytes": 835
+  },
+  {
+    "checksum": "13eec1d3b77390349f0cd4b5ac984fdca801210e62e34f7ecbb92fb161d35a9a",
+    "href": "assets/content/images/up.svg",
+    "sizeInBytes": 836
+  },
+  {
+    "checksum": "abf64cfa14645043a7c33f76435125f8b3de79c510adb938a1c16085518d4341",
+    "href": "assets/fonts/Lato/Lato-Black.ttf",
+    "sizeInBytes": 69500
+  },
+  {
+    "checksum": "e1eb271de3a571d566e534d3e521cfa46becfc789821257bc347455167d586f3",
+    "href": "assets/fonts/Lato/Lato-BlackItalic.ttf",
+    "sizeInBytes": 72000
+  },
+  {
+    "checksum": "d7f0b7f2570f2f28b504da1181b4d71b1420b10be2c4fd690927f1c8ee3b19c3",
+    "href": "assets/fonts/Lato/Lato-Bold.ttf",
+    "sizeInBytes": 73332
+  },
+  {
+    "checksum": "e38611f4c0ff3251a58fe751991c39784d8f9be420b004891e0b9277228ec32f",
+    "href": "assets/fonts/Lato/Lato-BoldItalic.ttf",
+    "sizeInBytes": 77732
+  },
+  {
+    "checksum": "3be26bf6973f49df6a7dfd130041017354342bfbb023e6b9610b42daeba6de34",
+    "href": "assets/fonts/Lato/Lato-Italic.ttf",
+    "sizeInBytes": 75792
+  },
+  {
+    "checksum": "fb5343c4375c38b1c3026336d355335e6a5b8531cbc9c6506eb4b6f6d67c152f",
+    "href": "assets/fonts/Lato/Lato-Light.ttf",
+    "sizeInBytes": 77208
+  },
+  {
+    "checksum": "6d5176f3babd0ccba79845088f8e9ede5dbb7b408fb40161963daa95a71cef2e",
+    "href": "assets/fonts/Lato/Lato-LightItalic.ttf",
+    "sizeInBytes": 49080
+  },
+  {
+    "checksum": "e82542aed8293f49fc83c4aaea566b1f6b4fc7a9ab5da11e6fb9bc0973b5324b",
+    "href": "assets/fonts/Lato/Lato-Regular.ttf",
+    "sizeInBytes": 75152
+  },
+  {
+    "checksum": "fee1bd1daaa5efbcb93c8d074c61378dce155df0d32e00199b6a9457e427bc45",
+    "href": "assets/fonts/Lato/Lato-Thin.ttf",
+    "sizeInBytes": 69976
+  },
+  {
+    "checksum": "8130560da30ad6f19994fd410f71985acafca1576592235161ffb75757635594",
+    "href": "assets/fonts/Lato/Lato-ThinItalic.ttf",
+    "sizeInBytes": 48864
+  },
+  {
+    "checksum": "14b8609fd8281cb961730de7d3b2964dcc6e0e395e759b1422e52e39a0fdc6b2",
+    "href": "assets/fonts/Lato/OFL.txt",
+    "sizeInBytes": 4500
+  },
+  {
+    "checksum": "32539d5b22005106801461f4081575db09f35cfc34d2cca33c9599b3ed915f57",
+    "href": "assets/fonts/Montserrat/montserrat-bold.ttf",
+    "sizeInBytes": 44168
+  },
+  {
+    "checksum": "0011fc1aa19c054e332f7916f1f400eaea2cb8e74611008bbc8f4ea705b4ece1",
+    "href": "assets/fonts/Montserrat/montserrat-bold.woff",
+    "sizeInBytes": 20668
+  },
+  {
+    "checksum": "1c162da32d36f79b447183d7c9d7b3888c2e4d44abf36c63550898f8f32bcb88",
+    "href": "assets/fonts/Montserrat/montserrat-bold.woff2",
+    "sizeInBytes": 18844
+  },
+  {
+    "checksum": "2379e12d828fa2812c4b973bb02bab527c363d4f7f42fc3a39511ef8235f22f6",
+    "href": "assets/fonts/Montserrat/montserrat-regular.ttf",
+    "sizeInBytes": 44272
+  },
+  {
+    "checksum": "6331eaf0d3e9fa805925be6e9cdd411f3cd2034f685135adbe2105703df1a3a3",
+    "href": "assets/fonts/Montserrat/montserrat-regular.woff",
+    "sizeInBytes": 20644
+  },
+  {
+    "checksum": "1c9c85d0b73b7321eb8ed22e0b6bcd577478dd5f99d1379a5d4cea10884033ac",
+    "href": "assets/fonts/Montserrat/montserrat-regular.woff2",
+    "sizeInBytes": 18792
+  },
+  {
+    "checksum": "59d73c52bbbe8a98ad33f1631c72c4cf4045ea9cd6da8b9b70c92af3f075859e",
+    "href": "assets/fonts/Montserrat/montserrat-semibold.ttf",
+    "sizeInBytes": 44192
+  },
+  {
+    "checksum": "304d33996cd2bcd8007dc0e1adbdabeee7fc55d8f4481b6137a473f6875e05cc",
+    "href": "assets/fonts/Montserrat/montserrat-semibold.woff",
+    "sizeInBytes": 20608
+  },
+  {
+    "checksum": "7ea11ae0c63fa6b6504e77a15d057a53cef496d1401cb96c6c30eadf6e881aea",
+    "href": "assets/fonts/Montserrat/montserrat-semibold.woff2",
+    "sizeInBytes": 18740
+  },
+  {
+    "checksum": "f4b6aa8301fceec38769c0b8d39c489fc626c221e4e6a89832aee520729a3459",
+    "href": "environments/environment.prod.ts",
+    "sizeInBytes": 81
+  },
+  {
+    "checksum": "d4c0b688682b395d300b32d015aa6303542a3407eaa6725084ed1c88b216e6ff",
+    "href": "environments/environment.staging.ts",
+    "sizeInBytes": 79
+  },
+  {
+    "checksum": "d0b9ce4bfbc4b490c364c22083bb95fc644d0a66f3694b17609cea43255c20b6",
+    "href": "environments/environment.ts",
+    "sizeInBytes": 75
+  },
+  {
+    "checksum": "2d0a4f5a77c788b084919b1b8cad5713d9dfc3388ef29969c4cb66c28092e683",
+    "href": "favicon.ico",
+    "sizeInBytes": 948
+  },
+  {
+    "checksum": "973d5e95cad2bb329aba0a5041ccefd01dddae525361c352ca9ac31ba77ba9d5",
+    "href": "index.html",
+    "sizeInBytes": 790
+  },
+  {
+    "checksum": "2b872ef7777d57ebda269a36d195f1b66148e4ae7659c3f4039c82279a6d8c7f",
+    "href": "main.ts",
+    "sizeInBytes": 259
+  },
+  {
+    "checksum": "151f6726f51f7b791d9c28ee2f381594ee1810e896ae291f9936da121817cf97",
+    "href": "styles.scss",
+    "sizeInBytes": 22904
+  },
+  {
+    "checksum": "a5da48f4b212334536a9355e37f628fec1411d3fe2062eda29f7bfe11abc273d",
+    "href": "test.ts",
+    "sizeInBytes": 316
+  },
+  {
+    "checksum": "d18bb196a38f1181f33811a9c6bf56ea7b19ff781ffcf4c00ea638b9c0ba0fa2",
+    "href": "web.config",
+    "sizeInBytes": 428
+  }
+]
