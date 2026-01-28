@@ -2,7 +2,7 @@ const JavaScriptObfuscator = require('javascript-obfuscator');
 const fs = require('fs');
 const path = require('path');
 
-const dist = path.join(__dirname, '..', 'dist', 'ecrm-frontend');
+const dist = path.join(__dirname, '../www');
 
 function walk(dir) {
   let results = [];
