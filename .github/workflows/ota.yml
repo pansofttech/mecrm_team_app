@@ -10,11 +10,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - run: npm ci
+      - name: Install dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Set environment
         run: |
@@ -29,8 +33,11 @@ jobs:
             echo "NG_ENV=production" >> $GITHUB_ENV
           fi
 
-      - run: npm run build -- --configuration $NG_ENV
-      - run: npx cap sync
+      - name: Build Angular app
+        run: npm run build -- --configuration $NG_ENV
+
+      - name: Capacitor sync
+        run: npx cap sync
 
       - name: Upload OTA
         run: |
@@ -39,3 +46,4 @@ jobs:
             --bundle-dir www
         env:
           CAPAWESOME_TOKEN: ${{ secrets.CAPAWESOME_TOKEN }}
+          
