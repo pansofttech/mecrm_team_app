@@ -39,11 +39,6 @@ jobs:
       - name: Capacitor sync
         run: npx cap sync
 
-      - name: Generate OTA bundle
-        run: npx @capawesome/cli apps:liveupdates:bundle
-        env:
-          CAPAWESOME_TOKEN: ${{ secrets.CAPAWESOME_TOKEN }}
-
       - name: Upload OTA
         run: npx @capawesome/cli apps:liveupdates:upload --channel $CAP_CHANNEL
         env:
