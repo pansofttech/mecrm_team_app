@@ -40,6 +40,6 @@ jobs:
         run: npx cap sync
 
       - name: Upload OTA
-        run: npx @capawesome/cli apps:liveupdates:upload --channel $CAP_CHANNEL
+        run: npx @capawesome/cli apps:liveupdates:upload dist/ecrm-frontend --channel $CAP_CHANNEL
         env:
           CAPAWESOME_TOKEN: ${{ secrets.CAPAWESOME_TOKEN }}
