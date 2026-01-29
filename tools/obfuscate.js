@@ -2,15 +2,7 @@ const JavaScriptObfuscator = require('javascript-obfuscator');
 const fs = require('fs');
 const path = require('path');
 
-const angularJson = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '../angular.json'), 'utf8')
-);
-
-const projectName = angularJson.defaultProject;
-const outputPath =
-  angularJson.projects[projectName].architect.build.options.outputPath;
-
-const dist = path.join(__dirname, '..', outputPath);
+const dist = path.join(__dirname, '..', 'dist', 'ecrm-frontend');
 
 function walk(dir) {
   let results = [];
