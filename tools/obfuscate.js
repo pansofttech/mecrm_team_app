@@ -2,7 +2,15 @@ const JavaScriptObfuscator = require('javascript-obfuscator');
 const fs = require('fs');
 const path = require('path');
 
-const dist = path.join(__dirname, '../www');
+const angularJson = JSON.parse(
+  fs.readFileSync(path.join(__dirname, '../angular.json'), 'utf8')
+);
+
+const projectName = angularJson.defaultProject;
+const outputPath =
+  angularJson.projects[projectName].architect.build.options.outputPath;
+
+const dist = path.join(__dirname, '..', outputPath);
 
 function walk(dir) {
   let results = [];
