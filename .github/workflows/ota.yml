@@ -41,7 +41,10 @@ jobs:
 
       - name: Upload OTA
         run: |
-          npx @capawesome/cli apps:liveupdates:upload dist/ecrm-frontend --channel $CAP_CHANNEL
+             npx @capawesome/cli apps:liveupdates:upload \
+              --path dist/ecrm-frontend \
+              --app-id ${{ secrets.CAPAWESOME_APP_ID }} \
+              --channel $CAP_CHANNEL
         env:
           CAPAWESOME_TOKEN: ${{ secrets.CAPAWESOME_TOKEN }}
           CAPAWESOME_APP_ID: ${{ secrets.CAPAWESOME_APP_ID }}
