@@ -1,6 +1,6 @@
 {
   "name": "ecrm-frontend",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "prettier": "npx prettier --write ."
+    "prettier": "npx prettier --write .",
+    "set:version": "capacitor-set-version --version $npm_package_version --build 1"
   },
   "dependencies": {
     "@angular/animations": "18.2.14",

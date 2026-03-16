@@ -16,6 +16,7 @@ import { Device } from '@capacitor/device';
 import { Platform } from '@ionic/angular';
 // import { Http  } from '@capacitor-community/http';
 import { ConfigService } from './core/services/config.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -49,8 +50,20 @@ export class AppComponent implements OnInit{
       });
       this.isBackHandlerRegistered = true;
     }
+    
+    const obs = await this.commonService.checkVersion();
+    obs.subscribe((res: any) => {
+      if (res.forceUpdate) {
+        alert('Please update the app to continue.');
+        window.location.href = res.storeUrl;
+      }
+    });
+
     this.initializePushNotifications();
     this.commonService.initDB();
+
+
+
     await this.syncOta();
     this.listenToResume();
   }
@@ -142,7 +155,14 @@ export class AppComponent implements OnInit{
 
   private async syncOta() {
     try {
-      await LiveUpdate.sync();
+      const result = await LiveUpdate.getCurrentBundle();
+      console.log('Current Bundle Details:', result); 
+
+      console.log('Initiating sync for channel:', environment.capChannel);
+      await LiveUpdate.sync({
+        channel: environment.capChannel
+      });
+      console.log('Sync process initiated successfully');
     } catch (err) {
       console.warn('OTA sync failed:', err);
     }

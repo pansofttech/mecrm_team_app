@@ -17,6 +17,8 @@ import { CapacitorSQLite, SQLiteConnection, SQLiteDBConnection } from '@capacito
 import { Network } from '@capacitor/network';
 import { lastValueFrom } from 'rxjs';
 import { guid } from '@progress/kendo-angular-common';
+import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 
 export interface AttachmentFileInfo
 {
@@ -68,6 +70,7 @@ export class CommonService implements OnDestroy{
   public postGenerateCSRUrl = `${this.configService.apiUrl}/api/ServiceCalendar/GenerateCSRPath`;
   private getCSRDownloadFileUrl = `${this.configService.apiUrl}/api/UploadDownload/GetCSRDownloadFile`;
   private postUploadCSRUrl = `${this.configService.apiUrl}/api/ServiceCalendar/UploadCSR`;
+  private postCheckAppVersionUrl = `${this.configService.apiUrl}/api/Login/CheckVersion`;
 
   docSrcTypeSuppAttachment: number = 58;
   docSrcTypeAttachment: number = 22;
@@ -522,6 +525,23 @@ export class CommonService implements OnDestroy{
               });
           });
     });
+  }
+
+  public async checkVersion() {
+    let version = '1.0.0';
+    let platform = 'web';
+
+    if (Capacitor.isNativePlatform()) {
+      const info = await App.getInfo();
+      version = info.version;
+      platform = this.platform.is('android') ? 'android' : 'ios';
+    }
+    const body = {
+      platform: platform,
+      version: version
+    };
+    console.log('Checking app version with body:', body);
+    return this.http.post(this.postCheckAppVersionUrl, body);
   }
 
   public convertBlobToBase64(blob: Blob) {
