@@ -28,6 +28,7 @@ export enum AppRoutePaths {
   SalesPartsManagementApproval = 'sales-parts-management-approval',
   PartsRequestWorkList = 'parts-requisition-worklist',
   PartsRequestApproval = 'parts-request-approval',
+  ForceUpdate = 'force-update',
 }
 
 export enum EcrmUserAdminRoutePath {

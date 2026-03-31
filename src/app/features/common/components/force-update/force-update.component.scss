@@ -1,0 +1,62 @@
+.force-update--main-container {
+  background:
+    url('../../../../../assets/content/images/login-images/login-page-flow.svg') bottom 0 left 0 no-repeat,
+    url('../../../../../assets/content/images/login-images/login-page-flow-bottom.svg') bottom 0 right 4rem no-repeat,
+    url('../../../../../assets/content/images/login-images/login-page-flow-left-middle.svg') top 25rem left 0 no-repeat,
+    url('../../../../../assets/content/images/login-images/login-page-flow-right-top.svg') top 5rem right 0 no-repeat,
+    url('../../../../../assets/content/images/login-images/login-page-flow-right-bottom.svg') bottom 8rem right 0 no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.force-update--kendo-card {
+  width: 100%;
+  max-width: 420px;
+  border: none;
+  background-color: transparent !important;
+  text-align: center;
+}
+
+.force-update--icon {
+  display: flex;
+  justify-content: center;
+  margin: -2rem 0 1rem 0;
+}
+
+.force-update--content {
+  margin: 0 39px;
+}
+
+.force-update--title {
+  font-size: var(--text-size-4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary-black);
+  margin-bottom: 10px;
+}
+
+.force-update--message {
+  font-size: var(--text-size-01);
+  color: #666;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.force-update--info {
+  background: #f7f7f7;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 22px;
+  font-size: var(--text-size-01);
+  color: #555;
+}
+
+.force-update--note {
+  font-size: 12px;
+  color: #999;
+  margin-top: 15px;
+  line-height: 1.4;
+}

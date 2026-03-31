@@ -14,8 +14,9 @@ import {
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { Device } from '@capacitor/device';
 import { Platform } from '@ionic/angular';
-// import { Http  } from '@capacitor-community/http';
 import { ConfigService } from './core/services/config.service';
+import { AppRoutePaths } from './core/Constants';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -49,8 +50,10 @@ export class AppComponent implements OnInit{
       });
       this.isBackHandlerRegistered = true;
     }
+
     this.initializePushNotifications();
     this.commonService.initDB();
+
     await this.syncOta();
     this.listenToResume();
   }
@@ -142,15 +145,43 @@ export class AppComponent implements OnInit{
 
   private async syncOta() {
     try {
-      await LiveUpdate.sync();
+      const result = await LiveUpdate.getCurrentBundle();
+      console.log('Current Bundle Details:', result); 
+
+      console.log('Initiating sync for channel:', environment.capChannel);
+      await LiveUpdate.sync({
+        channel: environment.capChannel
+      });
+      console.log('Sync process initiated successfully');
     } catch (err) {
       console.warn('OTA sync failed:', err);
+    }
+  }
+
+  private async checkAppVersion() {
+    try {
+      const obs = await this.commonService.checkVersion();
+      obs.subscribe((res: any) => {
+        console.log('Checking app version with body:', res);
+        if (res.forceUpdate) {
+          // Navigate to force update component with store URL as query parameter
+          this.router.navigate([`/${AppRoutePaths.ForceUpdate}`], { state: { storeUrl: res.storeUrl }});
+        }
+        else{
+          this.router.navigate([`/${AppRoutePaths.Dashboard}`]);
+        }
+      });
+    } catch (error) {
+      console.warn('Version check failed:', error);
     }
   }
 
   private listenToResume() {
     CapacitorApp.addListener('resume', async () => {
       await this.syncOta();
+      await this.checkAppVersion();
     });
+
+    this.checkAppVersion();
   }
 }
