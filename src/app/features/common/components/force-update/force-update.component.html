@@ -1,0 +1,40 @@
+<div class="force-update--main-container">
+  <kendo-card class="force-update--kendo-card">
+
+    <div class="force-update--icon">
+      <img
+        src="assets/content/images/login-images/force-update.png"
+        width="250"
+        height="250"
+        alt="update" />
+    </div>
+
+    <div class="force-update--content">
+
+      <h1 class="force-update--title">App Update Required</h1>
+
+      <p class="force-update--message">
+        A new version of the app is available. Please update to continue
+        using the application.
+      </p>
+
+      <div class="force-update--info">
+        You will be redirected to the app store shortly...
+      </div>
+
+      <button
+        kendoButton
+        class="login-page--signin-button"
+        (click)="redirectToStore()"
+        [disabled]="!storeUrl">
+        Update Now
+      </button>
+
+      <p class="force-update--note">
+        This app requires the latest version to continue.
+      </p>
+
+    </div>
+
+  </kendo-card>
+</div>

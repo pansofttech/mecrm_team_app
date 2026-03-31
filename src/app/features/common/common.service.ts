@@ -528,7 +528,7 @@ export class CommonService implements OnDestroy{
   }
 
   public async checkVersion() {
-    let version = '1.0.0';
+    let version = '1.0.1';
     let platform = 'web';
 
     if (Capacitor.isNativePlatform()) {
@@ -536,11 +536,17 @@ export class CommonService implements OnDestroy{
       version = info.version;
       platform = this.platform.is('android') ? 'android' : 'ios';
     }
+
+    // if (platform == 'web') {
+    //   const info = await App.getInfo();
+    //   version = info.version;
+    //   platform = 'android';
+    // }
+
     const body = {
       platform: platform,
       version: version
     };
-    console.log('Checking app version with body:', body);
     return this.http.post(this.postCheckAppVersionUrl, body);
   }
 

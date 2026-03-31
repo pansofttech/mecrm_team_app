@@ -9,19 +9,22 @@ import { CommonService } from './common.service';
 import { AttachmentPopUpComponent } from './components/attachment-pop-up/attachment-pop-up.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { IonicModule } from '@ionic/angular';
+import { ForceUpdateComponent } from './components/force-update/force-update.component';
 
 @NgModule({
   declarations: [
     NotificationColorsComponent,
     AttachmentPopUpComponent,
     NotificationComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    ForceUpdateComponent
   ],
   exports: [
     NotificationColorsComponent, 
     AttachmentPopUpComponent,
     NotificationComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    ForceUpdateComponent
   ],
   imports: [
     CommonModule,

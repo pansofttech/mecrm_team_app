@@ -5,6 +5,7 @@ import { EnquiryDetailsComponent } from './features/enquiry-details/components/e
 import { LoginComponent } from './features/login/components/login/login.component';
 import { DashboardComponent } from './features/dashboard/components/dashboard/dashboard.component';
 import { NotificationComponent } from './features/common/components/notification/notification.component';
+import { ForceUpdateComponent } from './features/common/components/force-update/force-update.component';
 import { CalendarComponent } from './features/service-calendar/components/calendar/calendar.component';
 import { WorksheetDetailsComponent } from './features/worksheet/components/worksheet-details/worksheet-details.component';
 import { SalespartsmgtWorklistComponent } from './features/sales-parts-management/components/salespartsmgt-worklist/salespartsmgt-worklist.component';
@@ -32,6 +33,14 @@ const routes: Routes = [
   {
     path: AppRoutePaths.Notification,
     component: NotificationComponent,
+    loadChildren: () =>
+      import('./features/common/common.module').then(
+        m => m.CommonFeaturesModule
+      ),
+  },
+  {
+    path: AppRoutePaths.ForceUpdate,
+    component: ForceUpdateComponent,
     loadChildren: () =>
       import('./features/common/common.module').then(
         m => m.CommonFeaturesModule
