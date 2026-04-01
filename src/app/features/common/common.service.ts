@@ -530,11 +530,14 @@ export class CommonService implements OnDestroy{
   public async checkVersion() {
     let version = '1.0.1';
     let platform = 'web';
+    console.log('Checking app platform', Capacitor.isNativePlatform());
+    console.log('Checking app version', App.getInfo());
 
     if (Capacitor.isNativePlatform()) {
       const info = await App.getInfo();
       version = info.version;
       platform = this.platform.is('android') ? 'android' : 'ios';
+      console.log('Checking app version, platform:', platform, 'version:', version);
     }
 
     // if (platform == 'web') {
