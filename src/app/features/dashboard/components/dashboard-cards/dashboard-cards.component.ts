@@ -1,23 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import quickCards from '../../data/mock.json';
 import moduleCards from '../../data/mock.json';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { AppRoutePaths } from 'src/app/core/Constants';
 import { LoginService } from 'src/app/features/login/components/login/login.service';
 import { CommonService } from 'src/app/features/common/common.service';
 
-type quickCards = {
-  image: string;
-  text: string;
-  path: string;
-};
-
 type moduleCards = {
   image: string;
   text: string;
 };
+
+type QuickCard = {
+  image: string;
+  text: string;
+  path: string;
+  color: string;
+  innerColor: string;
+  module: string;
+  description: string;
+};
+
 @Component({
   selector: 'app-dashboard-cards',
   templateUrl: './dashboard-cards.component.html',
@@ -27,18 +31,16 @@ export class DashboardCardsComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private commonService: CommonService
+    public commonService: CommonService
   ) {}
 
-  cards!: quickCards[];
+  @Input() cards: QuickCard[] = [];
   moduleCards!: moduleCards[];
-  userPrivileges: string[] = [];
+  showAll: boolean = false;
   private popstateSubscription?: Subscription;
 
   ngOnInit(): void {
     this.popstateSubscription = this.commonService.handleNavigationEvents(this.router.events);
-    this.cards = [quickCards.quickCards][0];
-    this.userPrivileges = this.loginService.privileges;
     this.moduleCards = [moduleCards.moduleCards][0];
   }
 
@@ -86,41 +88,12 @@ export class DashboardCardsComponent implements OnInit, OnDestroy {
     }
   }
 
-  showCards(cardType: any): boolean {
-    // If the card type is 'Funnel Update', show it only if the user has the 'prvViewSales' privilege.
-    if(cardType.text === 'Enquiry'){
-      return !(
-        !this.userPrivileges?.includes('prvViewSales')
-      );
-    }
-    else if(cardType.text === 'Funnel Update'){
-      return !(
-        !this.userPrivileges?.includes('prvViewSales')
-      );
-    }
-    else if(cardType.text === 'Worksheet'){
-      return !(
-        !this.userPrivileges?.includes('prvViewSales')
-      );
-    }
-    else if(cardType.text === 'Service Calls'){
-      return !(
-        !this.userPrivileges?.includes('prvSvcFS')
-      );
-    }
-    else if(cardType.text === 'Sales Parts Management'){
-      return !(
-        !this.userPrivileges?.includes('prvSalesPartsMgmt')
-      );
-    }
-    else if(cardType.text === 'Parts Requisition Worklist'){
-      return !(
-        !this.userPrivileges?.includes('prvViewPR')
-      );
-    }
-    else{
-      return true;
-    }
+  toggleShowAll(): void {
+    this.showAll = !this.showAll;
+  }
+
+  getDisplayedCards(): QuickCard[] {
+    return this.showAll ? this.cards : this.cards.slice(0, 4);
   }
 
   getEmployeeName(): string {

@@ -21,7 +21,8 @@ export class PartsrequestApprovalComponent implements OnInit, OnDestroy{
   currentStep!: number;
   selectedPRID: number = 0;
   selectedSRID: number = 0;
-
+  stepName: string = '';
+  
   isPRDetailsSelected: boolean = false;
   isPRCommentsSelected: boolean = false;
   isPRListSelected: boolean = false;
@@ -130,15 +131,19 @@ export class PartsrequestApprovalComponent implements OnInit, OnDestroy{
     this.isPRCommentsSelected = false;
     this.isPRListSelected = false;
     this.currentStep = currentStep;
-  
+    this.stepName = '';
+
     if(currentStep == 0){
       this.isPRDetailsSelected = true;
+      this.stepName = 'Details';
     }
     if(currentStep == 1){
       this.isPRCommentsSelected = true;
+      this.stepName = 'Comments';
     }
     else if(currentStep == 2){
       this.isPRListSelected = true;
+      this.stepName = 'List';
     }
   }
 

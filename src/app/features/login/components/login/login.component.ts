@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, firstValueFrom } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -36,6 +38,7 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
   public eyeIcon: SVGIcon = eyeIcon;
   public showLoader = true;
   public loaderMessage = '';
+  public showSplashScreen = true;
   private popstateSubscription?: Subscription;
   public isUserLoggedOut: boolean = true;
   public isOTPScreen: boolean = false;
@@ -54,6 +57,8 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
   coolDownTimer: any;
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
     private loginService: LoginService,
     private loaderService: LoaderService,
     private commonService: CommonService,
@@ -67,6 +72,13 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    this.renderer.addClass(this.document.body, 'login-page');
+
+    // Show splash screen for 3 seconds
+    setTimeout(() => {
+      this.showSplashScreen = false;
+    }, 1000);
+
     this.popstateSubscription = this.commonService.handleNavigationEvents(this.router.events);
     this.loaderService.loaderState.subscribe(res => {
       this.showLoader = res;
@@ -83,8 +95,25 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
         // this.onSubmit();
         this.loginService.getLoginUserDetails(userData.username)
         .subscribe((data: any) =>{
+          if(data?.length > 0){
           this.onHandleAfterSignin(data);
           this.loaderService.hideLoader();
+          }
+          else{
+            Preferences.remove({ key: 'userData' });
+            this.router.navigate(['/login']);
+            this.isUserLoggedOut = true;
+            this.loaderService.hideLoader();
+            return;
+          }
+          this.loaderService.hideLoader();
+        },
+        error => {
+          Preferences.remove({ key: 'userData' });
+          this.router.navigate(['/login']);
+          this.isUserLoggedOut = true;
+          this.loaderService.hideLoader();
+          return;
         });
         this.isUserLoggedOut = false;
       }
@@ -94,6 +123,7 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.popstateSubscription?.unsubscribe();
+    this.renderer.removeClass(this.document.body, 'login-page');
   }
 
   public ngAfterViewInit(): void {
@@ -296,7 +326,7 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
             notificationType,
             'center',
             'bottom'
-          );        
+          );
         },
         error => {
           this.loaderService.hideLoader();

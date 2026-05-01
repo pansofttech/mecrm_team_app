@@ -2,17 +2,18 @@
   <div class="app-locked--container">
     <app-navigation-bar
       [title]="'Previous Interactions'"
+      [subtitle]="'Enquiry - ' + id"
       [showRefresh]="true"
       (backClick)="onBackClickHandle()"
       (refreshClick)="onReset()">
     </app-navigation-bar>
     <!-- <div class="app-screen--header">Enquiry - {{ id }}</div> -->
-    <div class="app-screen--header-new">
+    <!-- <div class="app-screen--header-new">
       <div class="app-screen--info-header-left">
         <span class="header-text">Enquiry - {{ id }}</span>
         <span class="header-line"></span>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <div class="app-scrollable--container" *ngIf="!showEnquiryHistoryAPILoader">

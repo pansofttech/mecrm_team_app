@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 import { environment } from './src/environments/environment';
 
 const config: CapacitorConfig = {
-  appId: 'com.example.app',
+  appId: 'com.pansofttech.mecrm',
   appName: 'MECRM',
   webDir: 'dist/ecrm-frontend',
   plugins: {
@@ -14,7 +14,7 @@ const config: CapacitorConfig = {
       androidIsEncryption: true,
     },
     Keyboard: {
-      resize: "body",
+      resize: "native",
       resizeOnFullScreen: true
     },
     LiveUpdate: {

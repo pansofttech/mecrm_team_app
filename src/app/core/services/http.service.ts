@@ -61,48 +61,47 @@ export class HttpService {
         };
 
         // ----------- SSL PINNING (Mobile only) -----------
-        if (this.isNative()) {
-          console.log("📱 Native environment detected — using Capacitor HTTP");
+        // (Uncomment this without miss to enable SSL Pinning for Mobile)
+        // if (this.isNative()) {
+        //   return from(this.validateCertificate()).pipe(
+        //     switchMap(() => {
+        //       console.log("🔐 SSL Pinning Passed — making API request:", {
+        //         method,
+        //         url,
+        //         headers,
+        //         body,
+        //         params: options.params
+        //       });
 
-          return from(this.validateCertificate()).pipe(
-            switchMap(() => {
-              console.log("🔐 SSL Pinning Passed — making API request:", {
-                method,
-                url,
-                headers,
-                body,
-                params: options.params
-              });
-
-              return from(
-                Http.request({
-                  method,
-                  url,
-                  headers,
-                  data: body,
-                  params: options.params || {}
-                })
-                  .then(res => {
-                    console.log("✅ Native HTTP Success:", res);
-                    return res.data;
-                  })
-                  .catch(err => {
-                    console.error("❌ Native HTTP Error BEFORE handler:", err);
-                    throw err;
-                  })
-              ).pipe(
-                catchError(err => {
-                  console.error("⚠️ Error passed into handler:", err);
-                  return this.handleError(err, method, url, body, options);
-                })
-              );
-            }),
-            catchError(err => {
-              console.error("🚫 SSL Pinning Failed — blocking request:", err);
-              return throwError(() => err);
-            })
-          );
-        }
+        //       return from(
+        //         Http.request({
+        //           method,
+        //           url,
+        //           headers,
+        //           data: body,
+        //           params: options.params || {}
+        //         })
+        //           .then(res => {
+        //             console.log("✅ Native HTTP Success:", res);
+        //             return res.data;
+        //           })
+        //           .catch(err => {
+        //             console.error("❌ Native HTTP Error BEFORE handler:", err);
+        //             throw err;
+        //           })
+        //       ).pipe(
+        //         catchError(err => {
+        //           console.error("⚠️ Error passed into handler:", err);
+        //           return this.handleError(err, method, url, body, options);
+        //         })
+        //       );
+        //     }),
+        //     catchError(err => {
+        //       console.error("🚫 SSL Pinning Failed — blocking request:", err);
+        //       return throwError(() => err);
+        //     })
+        //   );
+        // }
 
 
         // ----------- Browser request --------------

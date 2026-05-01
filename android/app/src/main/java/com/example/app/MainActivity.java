@@ -1,4 +1,4 @@
-package com.example.app;
+package com.pansofttech.mecrm;
 
 import com.getcapacitor.BridgeActivity;
 import android.os.Bundle;

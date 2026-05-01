@@ -2,6 +2,7 @@
   <div class="app-locked--container">
     <app-navigation-bar
       [title]="'Parts Requisition Worklist'"
+      [subtitle]="stepName"
       [showRefresh]="true"
       (backClick)="onBackClickHandle()"
       (refreshClick)="onReset()">
@@ -90,11 +91,13 @@
     [prInfoCard]="prInfoCard"
     [partsListCards]="partsListCards"></app-partsrequest-list>
     <div *ngIf="(currentStep === 1 || currentStep === 2) && !showAPILoader" class="app-screen--footer">
+      <div class="app-action-buttons--container">
         <button
             kendoButton
-            class="app-save--button"
+            class="app-save--button app-approval-button"
             (click)="submit()"
             [disabled]="isSaveDisabled">
+            <i class="fa-solid fa-check"></i>
             Approve
         </button>
         <button
@@ -102,9 +105,11 @@
             class="app-save--button app-reject-button"
             (click)="submit()"
             [disabled]="isSaveDisabled">
+            <i class="fa-solid fa-xmark"></i>
             Reject
         </button>
-        <button
+      </div>
+      <button
             kendobutton
             class="app-cancel--button"
             (click)="onBackClickHandle()">

@@ -12,7 +12,7 @@ import {
   FaIconLibrary,
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
-import { faBullhorn, faLineChart,faWrench,faTruck,faMoneyBill } from '@fortawesome/free-solid-svg-icons';
+import { faBullhorn, faLineChart,faWrench,faTruck,faMoneyBill,faCogs,faListCheck,faFilter,faBoxesStacked, faHome, faBarChart } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,6 @@ import { faBullhorn, faLineChart,faWrench,faTruck,faMoneyBill } from '@fortaweso
 })
 export class DashboardModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faBullhorn, faLineChart,faWrench,faTruck,faMoneyBill);
+    library.addIcons(faBullhorn, faLineChart,faWrench,faTruck,faMoneyBill, faCogs, faListCheck, faFilter, faBoxesStacked, faHome, faBarChart);
   }
 }

@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   padding: 5px;
+  font-size: var(--text-size-02);
 }
 .color-box {
   width: 12px;
@@ -18,3 +19,9 @@
   font-weight: var(--font-weight-semibold);
   font-size: var(--text-size-02);
 }
+.notification-colors-icon{
+  color: var(--primary-white);
+  font-size: var(--text-size-02);
+  padding-right:0.25rem;
+}
+

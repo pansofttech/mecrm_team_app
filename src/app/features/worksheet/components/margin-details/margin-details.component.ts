@@ -785,6 +785,17 @@ export class MarginDetailsComponent {
       this.itemToDisplay = dataItem;
   }
 
+  getProductSerial(product: string | null): string {
+    if (!product) return '';
+    const match = product.match(/^(\d+)\./);
+    return match ? match[1] : '';
+  }
+
+  getProductName(product: string | null): string {
+    if (!product) return '';
+    return product.replace(/^\d+\.\s*/, '').trim();
+  }
+
   closePopover(rowIndex: number): void {
     if(rowIndex >= this.skip){
       rowIndex = rowIndex - (this.pageNumber * this.skip);

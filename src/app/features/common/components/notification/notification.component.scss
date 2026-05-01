@@ -1,4 +1,4 @@
-//Notification Icon
+// NOTIFICATION ICON (empty state)
 .notification-icon {
   position: relative;
   color: #757575;
@@ -14,23 +14,17 @@
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-  transform: translateY(0);
-}
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-10px);
-  }
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-20px); }
+  60% { transform: translateY(-10px); }
 }
 
 .notification-icon .badge {
   position: absolute;
   top: -7px;
-  right: 35px;       
-  background: red;
-  color: white;
+  right: 35px;
+  background: #DC3545;
+  color: var(--primary-white);
   font-size: var(--text-size-01);
   font-weight: bold;
   border-radius: 50%;
@@ -38,73 +32,214 @@
   line-height: 1;
 }
 
-.notification-screen{
-   padding-top: 3rem;
+.notification-screen {
+  padding-top: 3rem;
 }
 
-//Notification Card
-.notification-card{
-  display: flex;
-  justify-content: space-between;
-}
-.notification-module-icon{
-  width: 40px;           
-  height: 40px;
-  border-radius: 50%;    
-  background-color: #EBF3F4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-color);              
-  font-size: larger;
-}
-.notification-card-left{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: left;
-  gap: 0.10rem;
-  padding-left: 0.75rem;
-}
-.notification-card-content{
-  align-items: center;
-  justify-content: left;
-  padding: 0.75rem;
-}
-.notification-card-right{
-  align-items: center;
-  justify-content: right;
-  padding: 1rem;
-}
-.app-enquiry-details-listview--kendo-card{
-  border-radius: 15px;
-}
-
-.no-notification{
+.no-notification {
   color: #757575;
   font-size: var(--text-size-1);
 }
 
-.app-enquiry-details-listview--kendo-card-content {
+// TABS - using global app-screen--stepper-new classes
+.notification-tab-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.notification-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 1px 1px;
+  border-radius: 50%;
+  background: #DC3545;
+  color: var(--primary-white);
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  margin-left: 0.2rem;
+}
+
+// EMPTY STATE
+.notification-empty-state {
   display: flex;
-  margin: 0.25rem;
   flex-direction: column;
-  gap: 0.313rem;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
 }
-.notification-title {
-  color: var(--primary-color);
-  font-size: var(--text-size-2);
-  font-style: normal;
+
+.notification-empty-img {
+  width: 180px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.notification-empty-title {
+  font-size: var(--text-size-1);
   font-weight: var(--font-weight-bolder);
-  line-height: normal;
-  flex: 1 0 0;
-  padding-bottom: 0.25rem;
+  color: var(--header-grey);
+  margin: 0 0 0.5rem 0;
 }
-.notification-body {
-  color: var(--body-grey, #69727b);
+
+.notification-empty-subtitle {
   font-size: var(--text-size-02);
-  font-style: normal;
+  font-weight: var(--font-weight-semibold);
+  color: #999999;
+  margin: 0;
+  line-height: 1.5;
+}
+
+// CARD LIST
+.notification-list {
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+// SWIPE WRAPPER
+.notification-card-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.notification-swipe-action {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #28a745;
+  border-radius: 1rem 0 0 1rem;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  z-index: 1;
+}
+
+.notification-card-wrapper.swiped .notification-swipe-action {
+  transform: translateX(0);
+}
+
+.notification-card-wrapper.swiped .notification-card-item {
+  transform: translateX(64px);
+}
+
+.notification-tick-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+// CARD ITEM (matches dashboard-cards style)
+.notification-card-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #fdfdfd;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.2s ease;
+  border: 1px solid transparent;
+  position: relative;
+  z-index: 2;
+
+  &:active {
+    background: #f2f7fa;
+    border-color: #e0e8f0;
+  }
+}
+
+// ICON CIRCLE
+.notification-card-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.notification-card-icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 25%;
+  background-color: #EBF3F4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  font-size: 1.3rem;
+}
+
+// ACTION REQUIRED CHIP
+.notification-action-required {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.15rem 0.55rem;
+  border-radius: 2rem;
+  background: rgba(220, 53, 69, 0.12);
+  color: #DC3545;
+  font-size: 0.7rem;
   font-weight: var(--font-weight-bolder);
-  line-height: normal;
-  flex-basis: 100%;
+  margin-bottom: 0.2rem;
+  margin-left: -0.25rem;
+}
+
+// TEXT CONTENT
+.notification-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.notification-card-title {
+  font-size: 0.85rem;
+  font-weight: var(--font-weight-bolder);
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.notification-card-body {
+  font-size: 0.8rem;
+  color: #999999;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+// RIGHT SIDE
+.notification-card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.notification-unread-dot {
+  font-size: 9px;
+  color: #DC3545;
+}
+
+.notification-chevron {
+  color: #cccccc;
+  font-size: 0.8rem;
 }

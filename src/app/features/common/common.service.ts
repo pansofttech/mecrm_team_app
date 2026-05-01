@@ -10,7 +10,7 @@ import { LoginService } from '../login/components/login/login.service';
 import { ConfigService } from 'src/app/core/services/config.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { Preferences } from '@capacitor/preferences';
-import { SpeechRecognition } from '@awesome-cordova-plugins/speech-recognition/ngx';
+import { SpeechRecognition } from '@capacitor-community/speech-recognition';
 import { Geolocation } from '@capacitor/geolocation';
 import { Platform } from '@ionic/angular';
 import { CapacitorSQLite, SQLiteConnection, SQLiteDBConnection } from '@capacitor-community/sqlite';
@@ -47,10 +47,14 @@ export interface AlertDetails
 
 export interface NotificationDetails
 {
-  notificationId: string,
+  notificationId: number,
   notificationTitle: string,
   notificationBody: string,
+  notificationIcon: string | null,
+  iconColor: string | null,
+  iconInnerColor: string | null,
   notificationModule: string,
+  notificationPath: string | null,
   actioned: boolean,
 }
 
@@ -66,11 +70,12 @@ export class CommonService implements OnDestroy{
   private updatePushNotificationRegistryUrl = `${this.configService.apiUrl}/api/Common/UpdatePushNotificationRegistry`;
   private updatePushNotificationTrackerUrl = `${this.configService.apiUrl}/api/Common/UpdatePushNotificationTracker`;
   private postPushNotificationToDeviceUrl = `${this.configService.apiUrl}/api/Common/PushNotificationToDevice`;
-  private GetNotActionedNotificationUrl = `${this.configService.apiUrl}/api/Common/GetNotActionedNotification`;
+  private GetAllNotificationUrl = `${this.configService.apiUrl}/api/Common/GetAllNotification`;
   public postGenerateCSRUrl = `${this.configService.apiUrl}/api/ServiceCalendar/GenerateCSRPath`;
   private getCSRDownloadFileUrl = `${this.configService.apiUrl}/api/UploadDownload/GetCSRDownloadFile`;
   private postUploadCSRUrl = `${this.configService.apiUrl}/api/ServiceCalendar/UploadCSR`;
   private postCheckAppVersionUrl = `${this.configService.apiUrl}/api/Login/CheckVersion`;
+  private postGUIComponentsUrl = `${this.configService.apiUrl}/api/Common/GetMblGUIComponents`;
 
   docSrcTypeSuppAttachment: number = 58;
   docSrcTypeAttachment: number = 22;
@@ -112,17 +117,25 @@ export class CommonService implements OnDestroy{
 
   public notificationData: NotificationDetails[] = [
     // {
-    //   notificationId: "id-1",
-    //   notificationTitle: "CSR Updated",
-    //   notificationBody: "CSR has been successfully updated for SRID 163589",
-    //   notificationModule: "wrench",
+    //   notificationId: 1,
+    //   notificationTitle: "Path Test Notification",
+    //   notificationBody: "Funnel Update is required for Enquiry 163589",
+    //   notificationModule: "Sales",
+    //   notificationIcon: "line-chart",
+    //   iconColor: "var(--primary-icon-outer)",
+    //   iconInnerColor: "var(--primary-icon)",
+    //   notificationPath: "enquiry-listview",
     //   actioned: false
     // },
     // {
-    //   notificationId: "id-2",
-    //   notificationTitle: "CSR Updated",
-    //   notificationBody: "CSR has been successfully updated for SRID 163590",
-    //   notificationModule: "line-chart",
+    //   notificationId: 2,
+    //   notificationTitle: "Path Test Notification",
+    //   notificationBody: "Worksheet Approval is required for Enquiry 163589",
+    //   notificationModule: "Sales",
+    //   notificationIcon: "list-check",
+    //   iconColor: "var(--secondary-icon-outer)",
+    //   iconInnerColor: "var(--secondary-icon)",
+    //   notificationPath: "worksheet-details",
     //   actioned: false
     // }
   ]
@@ -135,7 +148,6 @@ export class CommonService implements OnDestroy{
     private notificationService: NotificationService,
     private loginService: LoginService,
     private configService: ConfigService,
-    private speechRecognition: SpeechRecognition,
     private platform: Platform
   ) {
     this.sqlite = new SQLiteConnection(CapacitorSQLite);
@@ -273,22 +285,75 @@ export class CommonService implements OnDestroy{
   }
 
   //speech to text
+  // ── Speech recognition state ─────────────────────────────────────────────────
+  // Sentinel returned when a second tap cancels an in-progress session
+  private readonly SPEECH_STOPPED = '__speech_stopped__';
+  private _isSpeechListening = false;
+  // ─────────────────────────────────────────────────────────────────────────────
+
   async startListening(): Promise<string> {
-    if (this.platform.is('cordova') || this.platform.is('capacitor')) {
-      await this.speechRecognition.requestPermission();
-      return new Promise((resolve) => {
-        this.speechRecognition.startListening()
-          .subscribe(matches => {
-            resolve(matches && matches.length ? matches[0] : '');
-          });
+    console.log('[Speech] startListening — isListening:', this._isSpeechListening);
+
+    // Second tap: stop active session; the first promise will resolve with results
+    if (this._isSpeechListening) {
+      console.log('[Speech] Second tap — stopping active session');
+      try { await SpeechRecognition.stop(); } catch (e) { console.warn('[Speech] stop() error:', e); }
+      return this.SPEECH_STOPPED;
+    }
+
+    // Check / request permission
+    let permStatus = await SpeechRecognition.checkPermissions();
+    console.log('[Speech] permission status:', permStatus.speechRecognition);
+    if (permStatus.speechRecognition === 'denied') {
+      throw 'Speech Recognition permission is denied. Please enable it in Settings → Privacy & Security → Speech Recognition.';
+    }
+    if (permStatus.speechRecognition !== 'granted') {
+      permStatus = await SpeechRecognition.requestPermissions();
+      console.log('[Speech] after request — permission status:', permStatus.speechRecognition);
+      if (permStatus.speechRecognition !== 'granted') {
+        throw 'Speech Recognition permission was not granted.';
+      }
+    }
+
+    this._isSpeechListening = true;
+    try {
+      console.log('[Speech] calling SpeechRecognition.start()');
+      const result = await SpeechRecognition.start({
+        popup: false,
+        partialResults: false,
+        maxResults: 1,
       });
-    } else {
-      return '';
+      console.log('[Speech] SpeechRecognition.start() result:', JSON.stringify(result));
+      return result.matches && result.matches.length > 0 ? result.matches[0] : '';
+    } catch (err: any) {
+      console.error('[Speech] SpeechRecognition.start() error:', err);
+      throw err;
+    } finally {
+      this._isSpeechListening = false;
     }
   }
 
   async startListeningAndPatch(form: FormGroup, fieldName: string) {
-    const speechContent = await this.startListening();
+    console.log('[Speech] startListeningAndPatch — field:', fieldName, 'form contains:', form.contains(fieldName));
+    let speechContent: string;
+    try {
+      speechContent = await this.startListening();
+    } catch (err: any) {
+      console.error('[Speech] startListeningAndPatch error:', err);
+      this.notificationService.showNotification(
+        typeof err === 'string' ? err : 'Speech Recognition failed. Please try again.',
+        'error'
+      );
+      return;
+    }
+
+    // Second tap stopped the session — first call will handle the patch
+    if (speechContent === this.SPEECH_STOPPED) {
+      console.log('[Speech] Session stopped by second tap — skipping patch on this call');
+      return;
+    }
+
+    console.log('[Speech] startListeningAndPatch — speechContent:', JSON.stringify(speechContent));
 
     if (form.contains(fieldName)) {
       const currentValue = form.get(fieldName)?.value || '';
@@ -296,9 +361,10 @@ export class CommonService implements OnDestroy{
         ? currentValue + '\n' + speechContent
         : speechContent;
 
+      console.log('[Speech] patching field:', fieldName, 'newValue:', JSON.stringify(newValue));
       form.patchValue({ [fieldName]: newValue });
     } else {
-      console.warn(`Field "${fieldName}" does not exist in the form`);
+      console.warn(`[Speech] Field "${fieldName}" does not exist in the form`);
     }
   }
 
@@ -350,12 +416,12 @@ export class CommonService implements OnDestroy{
     return this.http.post(this.updatePushNotificationTrackerUrl, notificationList);
   }
 
-  getNotActionedNotification() {
-    return this.http.post(this.GetNotActionedNotificationUrl, this.loginService.employeeId as number);
+  getAllNotification() {
+    return this.http.post(this.GetAllNotificationUrl, this.loginService.employeeId as number);
   }
 
   updateNotificationData() {
-    this.getNotActionedNotification().subscribe((data: any) => {
+    this.getAllNotification().subscribe((data: any) => {
         this.notificationData = data;
       },
       error => {
@@ -364,14 +430,21 @@ export class CommonService implements OnDestroy{
     );
   }
 
-  postPushNotificationToDevice(NotificationTitle: string, NotificationBody: string, NotificationIcon: string){
+  postPushNotificationToDevice(
+    NotificationTitle: string, 
+    NotificationBody: string, 
+    NotificationModule: string, 
+    NotificationIcon: string | null = null, 
+    NotificationPath: string | null = null) {
     const body = {
       "DeviceToken": this.DeviceToken? this.DeviceToken: '',
       "DeviceID": this.DeviceID? this.DeviceID: '',
       "LoginID": this.loginService.employeeId? this.loginService.employeeId as number: 0,
       "NotificationTitle": NotificationTitle? NotificationTitle: '',
       "NotificationBody": NotificationBody? NotificationBody: '',
-      "NotificationModule": NotificationIcon? NotificationIcon: 'ic_stat_notification'
+      "NotificationModule": NotificationModule? NotificationModule: '',
+      "NotificationIcon": NotificationIcon? NotificationIcon: 'ic_stat_notification',
+      "NotificationPath": NotificationPath? NotificationPath: '',
     };
     return this.http.post(this.postPushNotificationToDeviceUrl, body);
   }
@@ -513,7 +586,7 @@ export class CommonService implements OnDestroy{
                     'success', 'center', 'bottom'
                 );
                 if(notificationMessage === 'CSR Updated Successfully'){
-                  this.postPushNotificationToDevice('CSR Updated Successfully', 'CSR Updated for SRID ' + body.SRID, 'wrench').subscribe();
+                  this.postPushNotificationToDevice('CSR Updated Successfully', 'CSR Updated for SRID ' + body.SRID, 'Service Calls' ,'wrench', 'service-calendar').subscribe();
                 }
                 this.getAlertData();
               },
@@ -551,6 +624,13 @@ export class CommonService implements OnDestroy{
       version: version
     };
     return this.http.post(this.postCheckAppVersionUrl, body);
+  }
+
+  public async getGUIComponents(empId: number) {
+    const body = {
+      EmpId: empId
+    };
+    return this.http.post(this.postGUIComponentsUrl, body);
   }
 
   public convertBlobToBase64(blob: Blob) {

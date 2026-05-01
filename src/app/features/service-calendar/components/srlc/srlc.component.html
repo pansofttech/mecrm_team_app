@@ -2,6 +2,7 @@
   <div class="app-locked--container">
     <app-navigation-bar
       [title]="'Service Calendar'"
+      [subtitle]="stepName"
       [showRefresh]="true"
       (backClick)="onBackClickHandle()"
       (refreshClick)="onRefresh()">

@@ -2,6 +2,7 @@
   <div class="app-locked--container" *ngIf="!showAPILoader">
     <app-navigation-bar
       [title]="'Enquiry Details'"
+      [subtitle]="steps[currentStep].label"
       [showRefresh]="true"
       (backClick)="onBackClickHandle()"
       (refreshClick)="onReset()">
@@ -48,6 +49,7 @@
             class="app-save--button"
             (click)="submit()"
             *ngIf="currentStep === 3">
+            <i class="fa-solid fa-floppy-disk"></i>
             Save
         </button>
         <button

@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class NavigationBarComponent {
   @Input() title: string = '';
+  @Input() subtitle: string = '';
   @Input() showRefresh: boolean = false;
 
   @Output() backClick = new EventEmitter<void>();

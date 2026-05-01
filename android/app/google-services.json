@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:820020117711:android:09d7b6604c59772ac477ba",
+        "mobilesdk_app_id": "1:820020117711:android:afa8cbe1f0a65d38c477ba",
         "android_client_info": {
-          "package_name": "com.example.app"
+          "package_name": "com.pansofttech.mecrm"
         }
       },
       "oauth_client": [],

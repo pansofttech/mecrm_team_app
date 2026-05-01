@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild  } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InputType, TextBoxComponent } from '@progress/kendo-angular-inputs';
@@ -13,7 +14,7 @@ import { LoginService } from '../login/login.service';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit, AfterViewInit{
+export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy {
   username: string = '';
   authCode: string = '';
   changeType: string = '';
@@ -32,15 +33,18 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit{
   @ViewChild("newPassword") public newPassword!: TextBoxComponent;
   @ViewChild("confirmPassword") public confirmPassword!: TextBoxComponent;
 
-  constructor(    
+  constructor(
     private route: ActivatedRoute,
     private router: Router,
     private loginService: LoginService,
     private loaderService: LoaderService,
     private notificationService: NotificationService,
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
   ) {}
   
   public ngOnInit(): void {
+    this.renderer.addClass(this.document.body, 'forgot-password-page');
     this.route.queryParams.subscribe(params => {
       this.username = params['UN'];
       this.authCode = params['AuthCode'];
@@ -161,6 +165,10 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit{
         'error', 'center', 'bottom'
       );
     }
+  }
+
+  public ngOnDestroy(): void {
+    this.renderer.removeClass(this.document.body, 'forgot-password-page');
   }
 
 }

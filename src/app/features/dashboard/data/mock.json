@@ -3,32 +3,56 @@
     {
       "image": "line-chart",
       "text": "Enquiry",
-      "path": "enquiry-details"
+      "path": "enquiry-details",
+      "color": "var(--primary-icon-outer)",
+      "innerColor": "var(--primary-icon)",
+      "module": "Sales",
+      "description":"Add new enquiry"
     },
     {
-      "image": "line-chart",
+      "image": "filter",
       "text": "Funnel Update",
-      "path": "enquiry-listview"
+      "path": "enquiry-listview",
+      "color": "var(--secondary-icon-outer)",
+      "innerColor": "var(--secondary-icon)",
+      "module": "Sales",
+      "description":"Update sales funnel"
     },
     {
       "image": "wrench",
       "text": "Service Calls",
-      "path": "service-calendar"
+      "path": "service-calendar",
+      "color": "var(--tertiary-icon-outer)",
+      "innerColor": "var(--tertiary-icon)",
+      "module": "Service",
+      "description":"Update service calls"
     },
     {
-      "image": "line-chart",
+      "image": "list-check",
       "text": "Worksheet",
-      "path": "worksheet-details"
+      "path": "worksheet-details",
+      "color": "var(--quaternary-icon-outer)",
+      "innerColor": "var(--quaternary-icon)",
+      "module": "Sales",
+      "description":"Update/Approve worksheet"
     },
     {
-      "image": "line-chart",
+      "image": "boxes-stacked",
       "text": "Sales Parts Management",
-      "path": "sales-parts-management"
+      "path": "sales-parts-management",
+      "color": "var(--tertiary-icon-outer)",
+      "innerColor": "var(--tertiary-icon)",
+      "module": "Sales",
+      "description":"Approve parts"
     },
     {
-      "image": "wrench",
+      "image": "cogs",
       "text": "Parts Requisition Worklist",
-      "path": "parts-requisition-worklist"
+      "path": "parts-requisition-worklist",
+      "color": "var(--quinary-icon-outer)",
+      "innerColor": "var(--quinary-icon)",
+      "module": "Service",
+      "description":"Approve parts requisition"
     }
   ],
 

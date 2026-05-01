@@ -1,23 +1,18 @@
 <div *ngIf="!showWorksheetAPILoader">
-  <div class="app-screen--info-header">
-    <div class="app-screen--info-header-left">
-      Margin
-    </div>
+
+  <div class="margin-download-btn" *ngIf="isProductGridOpen">
     <kendo-button class="app-screen--info-header-right"
       (click)="marginExcelDownload()"> 
       <kendo-loader *ngIf="isDownloadloaderVisible" size="small"> </kendo-loader>
       <!-- <img src="assets/content/images/download.svg" alt="->" width="12" height="12"/>  -->
-      <i class="fa-solid fa-download"></i>
-      <span>&nbsp;Download</span> 
+      <i class="fa-solid fa-download" style="font-size:var(--text-size-02);"></i>
+      <span style="font-family: var(--font-family-text); font-size:var(--text-size-02);">
+        &nbsp;Download
+      </span> 
     </kendo-button>
   </div>
 
   <div *ngIf="isProductGridOpen"> 
-    <div class="app-screen--info-header">
-      <div class="app-screen--info-header-left">
-        Product List
-      </div>
-    </div>
     <kendo-grid 
     class="app-kendo-grid"
     [kendoGridBinding]="marginProductGridDetails" 
@@ -95,17 +90,18 @@
   </div>
 
   <div *ngIf="isSupplierGridOpen"> 
-    <div class="app-screen--info-header">
-      <div class="app-screen--info-header-left">
-        {{ selectedProduct }}
+    <div class="app-secondary-header">
+      <div class="app-secondary-header-left">
+        <div class="app-secondary-header--badge">{{ getProductSerial(selectedProduct) }}</div>
+        <div class="app-secondary-header-name">{{ getProductName(selectedProduct) }}</div>
       </div>
-      <div class="app-screen--info-header-right" 
+      <button class="app-secondary-header--btn"
         (click)="onSuppProdClick('Product',null,null)">
-        <!-- <img src="assets/content/images/backward.svg"/> -->
-         <i class="fa-solid fa-backward"></i>
+        <i class="fa-solid fa-chevron-left app-secondary-header--btn-icon"></i>
         <span>Back</span>
-      </div>
-    </div> 
+      </button>
+    </div>
+
 
     <kendo-grid
     class="app-kendo-grid"
@@ -183,21 +179,21 @@
   </div>
 
   <div *ngIf="isPartsGridOpen"> 
-    <div class="app-screen--info-header">
-      <div class="app-screen--info-header-left">
-        {{selectedProduct}}
-      </div>
+    <div class="app-secondary-header">
+      <div class="app-secondary-header--badge">{{ getProductSerial(selectedProduct) }}</div>
+      <div class="app-secondary-header-name">{{ getProductName(selectedProduct) }}</div>
     </div>
-    <div class="app-screen--info-header">
-      <div class="app-screen--info-header-left">
-        {{selectedSupplier}}
+    <div class="app-secondary-header-row">
+      <div class="app-secondary-header-left">
+        <i class="fa-solid fa-building app-secondary-header-icon"></i>
+        <span class="app-secondary-header-name">{{selectedSupplier}}</span>
       </div>
-      <div class="app-screen--info-header-right" 
+      <button class="app-secondary-header--btn"
         (click)="onSuppProdClick('Supplier',selectedSupplier, selectedProduct)">
-        <img src="assets/content/images/backward.svg"/>
-        <span>Back</span>      
-      </div>
-    </div> 
+        <i class="fa-solid fa-chevron-left app-secondary-header--btn-icon"></i>
+        <span>Back</span>
+      </button>
+    </div>
     
     <kendo-grid
       class="app-kendo-grid"
@@ -368,7 +364,6 @@
       </kendo-grid-column> -->
 
     </kendo-grid>
-
   </div>
 </div>
 

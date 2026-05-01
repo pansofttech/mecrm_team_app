@@ -1,8 +1,6 @@
 <div class="app-scrollable--container" *ngIf="!showAPILoader">
     <div class="app-screen--info-tab">
           <div class="app-screen--info-tab-left"> 
-          </div>
-          <div class="app-screen--info-tab-right"> 
             <input
               kendoRadioButton
               type="radio"
@@ -14,6 +12,8 @@
               [for]="selectall"
               text="Select all"
             ></kendo-label>
+          </div>
+          <div class="app-screen--info-tab-right"> 
           </div>
     </div>
     <div *ngFor="let a of partsListCards; let i = index" class="app-enquiry-details-listview--cards">

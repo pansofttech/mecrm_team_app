@@ -2,30 +2,28 @@
   <div class="app-locked--container">
     <app-navigation-bar
       [title]="'Sales Parts Management'"
+      [subtitle]="supplierCards.length > 0 ? supplierCards[0].supplierName ? supplierCards[0].supplierName : '' : ''"
       [showRefresh]="true"
       (backClick)="onBackClickHandle()"
       (refreshClick)="onReset()">
     </app-navigation-bar>
 
-    <div *ngIf="supplierCards.length > 0 && !showSPMAPILoader" class="app-screen--header-new">
-      <div class="app-screen--info-header-left">
-        <!-- {{ supplierCards[0].supplierName }} -->
-        <span class="header-text">{{ supplierCards[0].supplierName }}</span>
-        <span class="header-line"></span>
-      </div>
+    <!-- <div *ngIf="supplierCards.length > 0 && !showSPMAPILoader" class="app-screen--header-new">
+      <div class="app-screen--info-header-left"> -->
+        <!-- <span class="header-text">{{ supplierCards[0].supplierName }}</span>
+        <span class="header-line"></span> -->
+      <!-- </div>
       <div class="app-screen--info-header-right" *ngFor="let a of supplierCards"
-      (click)="onClickSuppAttachment(a.supplierDocId, commonService.docSrcTypeSuppAttachment, a.attachmentGuId? a.attachmentGuId: '', $event)">
+        (click)="onClickSuppAttachment(a.supplierDocId, commonService.docSrcTypeSuppAttachment, a.attachmentGuId? a.attachmentGuId: '', $event)">
         <i class="fa-solid fa-paperclip"></i>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <ion-content>
     <div class="app-scrollable--container" *ngIf="!showSPMAPILoader">
         <div class="app-screen--info-tab">
-          <div class="app-screen--info-tab-left"> 
-          </div>
-          <div class="app-screen--info-tab-right"> 
+          <div class="app-screen--info-tab-left">
             <input
               kendoRadioButton
               type="radio"
@@ -36,7 +34,14 @@
             <kendo-label
               [for]="selectall"
               text="Select all"
+              [ngStyle]="{'color':'#424242'}"
             ></kendo-label>
+          </div>
+          <div class="app-screen--info-tab-right"> 
+            <div *ngFor="let a of supplierCards"
+              (click)="onClickSuppAttachment(a.supplierDocId, commonService.docSrcTypeSuppAttachment, a.attachmentGuId? a.attachmentGuId: '', $event)">
+              <i class="fa-solid fa-paperclip" style="color:#424242"></i>
+            </div>
           </div>
         </div>
 
@@ -216,20 +221,25 @@
       </div>
     </form>
 
-    <button
-      *ngIf=isApprovalAccess
-      kendobutton
-      class="app-save--button app-approval-button"
-      (click)="updatePriceValidation('Approved')">
-      Approve
-    </button>
-    <button
-      *ngIf=isRejectAccess
-      kendobutton
-      class="app-save--button app-reject-button"
-      (click)="updatePriceValidation('Rejected')">
-      Reject
-    </button>
+    <div class="app-action-buttons--container">
+      <button
+        *ngIf=isApprovalAccess
+        kendobutton
+        class="app-save--button app-approval-button"
+        (click)="updatePriceValidation('Approved')">
+        <i class="fa-solid fa-check"></i>
+        Approve
+      </button>
+      <button
+        *ngIf=isRejectAccess
+        kendobutton
+        class="app-save--button app-reject-button"
+        (click)="updatePriceValidation('Rejected')">
+        <i class="fa-solid fa-xmark"></i>
+        Reject
+      </button>
+    </div>
+    
     <button
       kendobutton
       class="app-cancel--button"

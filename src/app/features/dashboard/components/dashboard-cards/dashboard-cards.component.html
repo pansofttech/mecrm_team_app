@@ -1,23 +1,54 @@
 <div class="dashboard-quickLink-card--container">
     <div class="dashboard-quicklink-header--content">
       <div class="dashboard-card--title">Quick Links</div>
-      <div class="dashboard-card--username">Hi, {{ getEmployeeFirstName() }}</div>
+      <div class="dashboard-card--see-all" (click)="toggleShowAll()">
+        {{ showAll ? 'Show less' : 'See all' }}
+      </div>
     </div>
     <div class="dashboard-module-card--container">
-      <div class="modules--grid-container">
-        <ng-container *ngFor="let a of cards">
-          <kendo-card
-            class="dashboard-module--cards"
-            *ngIf="showCards(a)"
-            (click)="handleCardNavigate(a)"
-            [ngStyle]="{ background: 'rgba(235, 243, 244, 0.4)' }">
-            <fa-icon
-              class="dashboard-quickLink-card--image"
-              [icon]="['fas', getIconName(a.image)]">
-            </fa-icon>
-            <div class="dashboard-module--label">{{ a.text }}</div>
-          </kendo-card>
+      <div class="dashboard-cards--list">
+        <ng-container *ngFor="let a of getDisplayedCards()">
+          <div
+            class="dashboard-card--item"
+            (click)="handleCardNavigate(a)">
+            <div class="dashboard-card--icon-wrapper">
+              <div class="dashboard-card--icon-circle" [ngStyle]="{ backgroundColor: a.color }">
+                <fa-icon
+                  class="dashboard-card--icon" [ngStyle]="{ color: a.innerColor }"
+                  [icon]="['fas', getIconName(a.image)]">
+                </fa-icon>
+              </div>
+            </div>
+            <div class="dashboard-card--content">
+              <div class="dashboard-card--title-text">{{ a.text }}</div>
+              <div class="dashboard-card--description">{{ a.description }}</div>
+            </div>
+            <div class="dashboard-card--arrow">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
         </ng-container>
       </div>
     </div>
+</div>
+
+<div class="dashboard-landingPage--container">
+  <div *ngIf="commonService.alertData.length > 0" class="dashboard-landingPage--title" 
+        style="padding-top: 1.25rem;">
+        Alerts
+  </div>
+  <div *ngIf="commonService.alertData.length > 0">
+      <section *ngFor="let a of commonService.alertData" class="app-dashboard--notification">
+        <section class="app-dashboard--notification-content-left">      
+          <fa-icon
+            class="dashboard-quickLink-card--image"
+            [icon]="['fas', getIconName(a.icon)]">
+          </fa-icon>    
+          {{ a.notification }}
+        </section>
+        <section class="app-dashboard--notification-content-right">
+          <i class="fa-solid fa-spinner fade-spinner" style="font-size: medium;"></i>
+        </section>
+      </section>
+  </div>
 </div>

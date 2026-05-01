@@ -27,6 +27,7 @@ export class SrlcComponent implements OnInit, OnDestroy{
   isSRIDInfoSelected: boolean = false;
   selectedSRID: number = 0;
   currentDate: string = '';
+  stepName: string = '';
 
   engeffortListCards: engEffortsList[] = [];
   filteredEngeffortListCards: engEffortsList[] = [];
@@ -120,18 +121,23 @@ export class SrlcComponent implements OnInit, OnDestroy{
       this.isPRSelected = false;
       this.isCallActionSelected = false;
       this.currentStep = currentStep;
+      this.stepName = '';
   
       if(currentStep == 0){
         this.isServiceRequestSelected = true;
+        this.stepName = 'Service Request';
       }
       if(currentStep == 1){
         this.isEffortsSelected = true;
+        this.stepName = 'Effort Log';
       }
       else if(currentStep == 2){
         this.isPRSelected = true;
+        this.stepName = 'Parts Request';
       }
       else if(currentStep == 3){
         this.isCallActionSelected = true;
+        this.stepName = 'Call Action';
       }
     }
 

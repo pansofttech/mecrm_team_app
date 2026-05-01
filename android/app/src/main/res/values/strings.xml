@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">MECRM</string>
     <string name="title_activity_main">MECRM</string>
-    <string name="package_name">com.example.app</string>
-    <string name="custom_url_scheme">com.example.app</string>
+    <string name="package_name">com.pansofttech.mecrm</string>
+    <string name="custom_url_scheme">com.pansofttech.mecrm</string>
 </resources>

@@ -4,6 +4,7 @@
   <div class="app-locked--container">
     <app-navigation-bar
       [title]="'Service Calendar'"
+      [subtitle]="'Scheduled Calls'"
       [showRefresh]="true"
       (backClick)="onBackClickHandle()"
       (refreshClick)="onRefresh()">
@@ -27,19 +28,6 @@
         (ngModelChange)="updateServiceCalendarDate($event)"
         [showOtherMonthDays]="false"
       ></kendo-calendar>
-    </div>
-
-    <!-- <div class="app-screen--info-header">
-      <div class="app-screen--info-header-left">
-        Scheduled Calls
-      </div>
-    </div> -->
-
-    <div class="app-screen--header-new" *ngIf="schCallCards.length > 0 && !showAPILoader">
-      <div class="app-screen--info-header-left">
-        <span class="header-text">Scheduled Calls</span>
-        <span class="header-line"></span>
-      </div>
     </div>
   </div>
 

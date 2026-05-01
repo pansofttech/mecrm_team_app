@@ -1,12 +1,14 @@
 <div class="app-locked--container">
-    <div class="app-screen--info-header">
-      <div class="app-screen--info-header-left">
-        Add Parts
+    <div class="app-secondary-header">
+      <div class="app-secondary-header-left">
+        <i class="fa-solid fa-cogs app-secondary-header-icon"></i>
+        <div class="app-secondary-header-name">Add Parts</div>
       </div>
-      <div class="app-screen--info-header-right" (click)="onBackClick()">
-        <img src="assets/content/images/backward.svg" />
+      <button class="app-secondary-header--btn"
+        (click)="onBackClick()">
+        <i class="fa-solid fa-chevron-left app-secondary-header--btn-icon"></i>
         <span>Back</span>
-      </div>
+      </button>
     </div>
 </div>
 

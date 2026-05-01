@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutePaths } from './core/Constants';
+import { AuthGuard } from './auth.guard';
 import { EnquiryDetailsComponent } from './features/enquiry-details/components/enquiry-details/enquiry-details.component';
 import { LoginComponent } from './features/login/components/login/login.component';
 import { DashboardComponent } from './features/dashboard/components/dashboard/dashboard.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   {
     path: AppRoutePaths.Dashboard,
     component: DashboardComponent,
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./features/dashboard/dashboard.module').then(
         m => m.DashboardModule
@@ -33,6 +35,7 @@ const routes: Routes = [
   {
     path: AppRoutePaths.Notification,
     component: NotificationComponent,
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./features/common/common.module').then(
         m => m.CommonFeaturesModule
@@ -41,6 +44,7 @@ const routes: Routes = [
   {
     path: AppRoutePaths.ForceUpdate,
     component: ForceUpdateComponent,
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./features/common/common.module').then(
         m => m.CommonFeaturesModule
@@ -49,6 +53,7 @@ const routes: Routes = [
   {
     path: AppRoutePaths.EnquiryDetails,
     component: EnquiryDetailsComponent,
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./features/enquiry-details/enquiry-details.module').then(
         m => m.EnquiryDetailsModule
@@ -57,6 +62,7 @@ const routes: Routes = [
   {
     path: AppRoutePaths.ServiceCalendar,
     component: CalendarComponent,
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./features/service-calendar/service-calendar.module').then(
         m => m.ServiceCalendarModule
@@ -65,6 +71,7 @@ const routes: Routes = [
   {
     path: AppRoutePaths.WorksheetDetails,
     component: WorksheetDetailsComponent,
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./features/worksheet/worksheet.module').then(
         m => m.WorksheetModule
@@ -73,6 +80,7 @@ const routes: Routes = [
   {
     path: AppRoutePaths.SalesPartsManagementList,
     component: SalespartsmgtWorklistComponent,
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./features/sales-parts-management/sales-parts-management.module').then(
         m => m.SalesPartsManagementModule

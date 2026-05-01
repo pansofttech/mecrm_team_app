@@ -27,7 +27,6 @@ import { IconsModule } from '@progress/kendo-angular-icons';
 import { PDFViewerModule } from '@progress/kendo-angular-pdfviewer';
 import { PopoverModule } from "@progress/kendo-angular-tooltip";
 import { IonicModule } from '@ionic/angular';
-import { SpeechRecognition } from '@awesome-cordova-plugins/speech-recognition/ngx';
 
 export function initializeApp(configService: ConfigService) {
   return () => configService.loadConfig();
@@ -71,7 +70,6 @@ export function initializeApp(configService: ConfigService) {
     AuthGuard,
     DatePipe,
     DecimalPipe,
-    SpeechRecognition
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

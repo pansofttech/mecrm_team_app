@@ -2,6 +2,7 @@
   <div class="app-locked--container">
     <app-navigation-bar
       [title]="'Worksheet'"
+      [subtitle]="stepName"
       [showRefresh]="true"
       (backClick)="onBackClickHandle()"
       (refreshClick)="onReset()">
@@ -188,22 +189,27 @@
         kendobutton
         class="app-save--button"
         (click)="saveWorksheet()">
+        <i class="fa-solid fa-floppy-disk"></i>
         Save
       </button>
-      <button
-        *ngIf="worksheetDetailsCard[0].isAccessWSApproval"
-        kendobutton
-        class="app-save--button app-approval-button"
-        (click)="approveWorksheet()">
-        Approve
-      </button>
-      <button
-        *ngIf="worksheetDetailsCard[0].isAccessWSApproval"
-        kendobutton
-        class="app-save--button app-reject-button"
-        (click)="rejectWorksheet()">
-        Reject
-      </button>
+      <div *ngIf="worksheetDetailsCard[0].isAccessWSApproval" class="app-action-buttons--container">
+        <button
+          *ngIf="worksheetDetailsCard[0].isAccessWSApproval"
+          kendobutton
+          class="app-save--button app-approval-button"
+          (click)="approveWorksheet()">
+          <i class="fa-solid fa-check"></i>
+          Approve
+        </button>
+        <button
+          *ngIf="worksheetDetailsCard[0].isAccessWSApproval"
+          kendobutton
+          class="app-save--button app-reject-button"
+          (click)="rejectWorksheet()">
+          <i class="fa-solid fa-xmark"></i>
+          Reject
+        </button>
+      </div>
       <button
         kendobutton
         class="app-cancel--button"

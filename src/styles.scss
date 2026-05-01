@@ -41,10 +41,62 @@ $kendo-color-primary: #5cb5c1;
   font-display: swap;
 }
 
+:root {
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+}
+
+@supports (padding-top: constant(safe-area-inset-top)) {
+  :root {
+    --safe-area-inset-top: constant(safe-area-inset-top);
+    --safe-area-inset-right: constant(safe-area-inset-right);
+    --safe-area-inset-bottom: constant(safe-area-inset-bottom);
+    --safe-area-inset-left: constant(safe-area-inset-left);
+  }
+}
+
 body {
   margin: 0;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   box-sizing: border-box;
+  padding-top: var(--safe-area-inset-top);
+  padding-right: var(--safe-area-inset-right);
+  padding-bottom: var(--safe-area-inset-bottom);
+  padding-left: var(--safe-area-inset-left);
+  background-image: linear-gradient(95deg, #8DBA22 0%, #37A6DB 100%);
+  background-repeat: no-repeat;
+  background-size: 100% var(--safe-area-inset-top);
+  background-position: top left;
+}
+
+body.login-page {
+ background: linear-gradient(
+    135deg,
+    #8DBA22 0%,
+    #37A6DB 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 50%;
+  background-position: top left;
+}
+
+body.forgot-password-page {
+  background: linear-gradient(
+    135deg,
+    #8DBA22 0%,
+    #37A6DB 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 50%;
+  background-position: top left;
+}
+
+body.dashboard-page {
+  background-image: linear-gradient(95deg, #8DBA22 0%, #37A6DB 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: top left;
 }
 
 html, body, app-root, ion-app, ion-router-outlet, ion-content {
@@ -59,14 +111,18 @@ html, body, app-root, ion-app, ion-router-outlet, ion-content {
 html, body {
   height: 100%;
   margin: 0;
-  padding: 0;
 }
 
-body{
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
+::ng-deep ion-content {
+  --background: #f5f6f7;
+  --padding-top: 0.75rem;
+  --padding-end: 0.75rem;
+  --padding-bottom: calc(var(--safe-area-inset-bottom) + 2.5rem);
+  --padding-start: 0.75rem;
+}
+
+ion-content::part(scroll) {
+  padding-bottom: calc(var(--safe-area-inset-bottom) + 2.5rem);
 }
 
 //Kendo Styles
@@ -175,7 +231,7 @@ body{
   font-weight: var(--font-weight-bolder);
   line-height: normal;
   margin: 0rem 0.5rem 0rem 0.5rem;
-  padding:1rem 0rem 0rem 0rem;
+  padding:1rem 1rem 0rem 1rem;
 }
 .app-screen--info-tab-left{
   display: flex;
@@ -283,12 +339,96 @@ body{
   gap: 1rem;
 }
 
+//New Header Styles
+.app-secondary-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: var(--secondary-color);
+  padding: 0.75rem 1rem;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.app-secondary-header--badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: var(--primary-white);
+  color: var(--secondary-color);
+  font-weight: var(--font-weight-bolder);
+  font-size: var(--text-size-02);
+  flex-shrink: 0;
+}
+
+.app-secondary-header-name {
+  color: var(--primary-white);
+  font-size: var(--text-size-02);
+  font-weight: var(--font-weight-bolder);
+  flex: 1;
+}
+
+.app-secondary-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--secondary-color);
+  padding: 0.5rem 1rem 0.75rem 1rem;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.app-secondary-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.app-secondary-header-icon {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--text-size-01);
+  flex-shrink: 0;
+}
+
+.app-secondary-header--btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: color-mix(in srgb, var(--secondary-contrast-color) 80%, transparent);
+  color: var(--primary-white);
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  font-size: var(--text-size-02);
+  font-weight: var(--font-weight-bolder);
+  font-family: var(--font-family-text);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.app-secondary-header--btn-icon {
+  font-size: var(--text-size-03);
+}
+
 //App Icon Styling
 .app-icon-light{
   color: var(--primary-white);
 }
 .app-icon-dark{
-  color: var(--primary-black);
+  color: var(--header-grey);
 }
 
 //Enquiry Kendo Card Styles
@@ -303,17 +443,19 @@ body{
   margin: 0 1rem;
 }
 .app-enquiry-details-listview--kendo-datapager {
-  margin-left: 3rem;
+  display: flex;
+  justify-content: center;
   color: var(--primary-color);
   border: 0px;
-  background-color: white;
+  border-radius: 20px;
+  background-color: #f5f6f7;
 }
 .app-enquiry-details-listview--searchbox {
   margin: 1rem 1rem;
 }
 .app-enquiry-details-listview--kendo-textbox {
-  border-radius: 19.5px;
-  background: var(--neutral-4, #f2f2f2);
+  border-radius: 10px;
+  background-color: white;
   color: var(--neutral-1, #343434);
   font-size: var(--text-size-1);
   font-style: normal;
@@ -322,6 +464,7 @@ body{
 }
 .app-enquiry-details-listview--search-icon {
   margin: 0 6px 0 8px;
+  color: #6D6D6D;
 }
 .app-enquiry-details-listview--cards {
   margin: 1rem;
@@ -444,6 +587,7 @@ body{
 }
 .app-scrollable--container {
   overflow-y: auto;
+  padding-bottom: calc(var(--safe-area-inset-bottom) + 2rem);
 }
 .app-screen--locked-footer {
   position: sticky;
@@ -658,7 +802,6 @@ body{
   white-space: nowrap;
   border-radius: 10px;
   background-color: #F1F2F6;
-  //box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .app-screen--stepper-container-new {
@@ -668,27 +811,28 @@ body{
   align-items: center;
   text-align: center;
   justify-content: center;
-  padding: 0.30rem 0.30rem;
+  padding: 0.30rem 0.70rem;
   margin: 0;
-  transition: all 0.2s ease-out;
-  background-color: none;
+  transition: background 0.2s ease-out, color 0.2s ease-out, box-shadow 0.2s ease-out;
+  background-color: transparent;
   white-space: nowrap;
-  font-size: var(--text-size-01);
+  font-size: var(--text-size-02);
   font-weight: var(--font-weight-bolder);
-  line-height: 1.75rem;
+  line-height: 1.25rem;
   color: #8d8d8d;
   position: relative;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 /* Selected Stepper*/
 .app-screen--stepper-container-new.selected {
   background: var(--primary-white);
-  //box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   padding: 0.30rem 0.70rem;
   color: var(--primary-black);
   border: none;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.10);
 }
 
 
@@ -698,6 +842,13 @@ body{
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
+}
+.app-action-buttons--container {
+  display: flex;
+  gap: 0.5rem;
+  button {
+    flex: 1;
+  }
 }
 .app-cancel--button {
   width: 100%;
@@ -743,10 +894,14 @@ body{
   letter-spacing: 0.0175rem;
 }
 .app-reject-button{
-  background-color: rgb(221, 53, 53);
+  background-color: var(--primary-white);
+  color: rgb(221, 53, 53);
+  border: 1px solid rgb(221, 53, 53);
 }
 .app-approval-button{
-  background-color: rgb(92, 184, 92);
+  background-color: var(--primary-white);
+  color: rgb(92, 184, 92);
+  border: 1px solid rgb(92, 184, 92);
 }
 
 
@@ -893,6 +1048,7 @@ body{
 }
 .kendo-popover-title {
   color: var(--secondary-selected);
+  font-size: var(--text-size-01);
   font-weight: var(--font-weight-bolder);
 }
 .kendo-popover-wrapper {

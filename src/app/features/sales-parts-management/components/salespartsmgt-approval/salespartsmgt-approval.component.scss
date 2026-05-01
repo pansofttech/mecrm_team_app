@@ -64,3 +64,10 @@
 .sub-title-total{
   flex-basis: 31.5%;
 }
+
+::ng-deep ion-content {
+  --background: #f5f6f7;
+  padding: 0.75rem !important;
+}
+
+

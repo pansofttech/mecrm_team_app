@@ -2,6 +2,7 @@
   <div class="app-locked--container" *ngIf="!showAPILoader">
     <app-navigation-bar
       [title]="'Enquiry Details'"
+      [subtitle]="steps[currentStep].label"
       [showRefresh]="true"
       (backClick)="onBackClickHandle()"
       (refreshClick)="onReset()">
@@ -17,6 +18,7 @@
     </kendo-stepper>
   </div>
 
+<ion-content>
   <div class="app-scrollable--container" *ngIf="!showAPILoader">
     <div class="app-screen--content">
       <form class="k-form k-form-md" [formGroup]="enquiryCaptureForm">
@@ -43,6 +45,7 @@
           class="app-save--button"
           (click)="submit()"
           *ngIf="currentStep === 2">
+          <i class="fa-solid fa-floppy-disk"></i>
           Save
         </button>
         <button
@@ -62,6 +65,7 @@
       </div>
     </div>
   </div>
+</ion-content>
 
   <div class="app-screen--loader" *ngIf="showAPILoader">
     <kendo-loader

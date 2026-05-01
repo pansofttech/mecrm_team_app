@@ -20,6 +20,7 @@ import { WorksheetService, EnquiryDetails, WorkSheetSO, EnquiryProductsSO,
 export class WorksheetApprovalComponent implements OnInit, OnDestroy{
   private popstateSubscription?: Subscription;
   currentStep!: number;
+  stepName!: string;
   showAPILoader = false;
   loaderMessage!: string;
   isCreditExposureSelected: boolean = false;
@@ -215,23 +216,28 @@ export class WorksheetApprovalComponent implements OnInit, OnDestroy{
     this.isMarginSelected = false;
     this.isDRQSelected = false;
     this.currentStep = currentStep;
+    this.stepName = '';
 
     if(currentStep == 0){
       this.isCreditExposureSelected = true;
+      this.stepName = 'Credit Exposure';
     }
     else if(currentStep == 1){
       this.isDLCSelected = true;
+      this.stepName = 'Deal Level Costs';
     }
     else if(currentStep == 2){
       this.isDRQSelected = true;
+      this.stepName = 'DRQ Details';
     }
     else if(currentStep == 3){
       this.isPriceDetailsSelected = true;
+      this.stepName = 'Price Details';
     }
     else if(currentStep == 4){
       this.isMarginSelected = true;
+      this.stepName = 'Margin Details';
     }
-
   }
 
   approveWorksheet(){

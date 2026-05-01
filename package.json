@@ -24,8 +24,8 @@
     "@angular/platform-browser": "18.2.14",
     "@angular/platform-browser-dynamic": "18.2.14",
     "@angular/router": "18.2.14",
-    "@awesome-cordova-plugins/speech-recognition": "8.1.0",
     "@capacitor-community/http": "1.4.1",
+    "@capacitor-community/speech-recognition": "^6.0.1",
     "@capacitor-community/sqlite": "6.0.2",
     "@capacitor/android": "6.2.1",
     "@capacitor/app": "6.0.2",
@@ -79,7 +79,6 @@
     "@progress/kendo-svg-icons": "3.1.0",
     "@progress/kendo-theme-default": "7.0.2",
     "capacitor-ssl-pinning": "0.0.14",
-    "cordova-plugin-speechrecognition": "1.2.0",
     "rxjs": "7.8.1",
     "tslib": "2.6.2",
     "zone.js": "0.14.10"
