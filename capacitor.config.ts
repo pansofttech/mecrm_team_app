@@ -22,6 +22,22 @@ const config: CapacitorConfig = {
       defaultChannel: environment.capChannel
     }
   },
+  platforms: {
+    ios: {
+      plugins: {
+        StatusBar: {
+          overlaysWebView: false,
+        },
+      },
+    },
+    android: {
+      plugins: {
+        StatusBar: {
+          overlaysWebView: true,
+        },
+      },
+    },
+  },
 };
 
 export default config;

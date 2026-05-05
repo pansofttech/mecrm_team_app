@@ -66,7 +66,7 @@ body {
   padding-left: var(--safe-area-inset-left);
   background-image: linear-gradient(95deg, #8DBA22 0%, #37A6DB 100%);
   background-repeat: no-repeat;
-  background-size: 100% var(--safe-area-inset-top);
+  background-size: 100% 20%;
   background-position: top left;
 }
 
@@ -95,7 +95,7 @@ body.forgot-password-page {
 body.dashboard-page {
   background-image: linear-gradient(95deg, #8DBA22 0%, #37A6DB 100%);
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: 100% 50%;
   background-position: top left;
 }
 

@@ -159,10 +159,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onSignOut(): void {
-    const userConfirmed = confirm('Are you sure you want to sign out?');
-    if (userConfirmed) {
+    // const userConfirmed = confirm('Are you sure you want to sign out?');
+    // if (userConfirmed) {
       this.commonService.handleLogout();
-    }
+    // }
   }
 
   showCards(cardType: QuickCard): boolean {

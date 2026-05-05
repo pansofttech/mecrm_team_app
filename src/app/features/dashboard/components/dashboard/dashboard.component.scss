@@ -361,7 +361,7 @@
   cursor: pointer;
   color: #333333;
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.2s ease;
   width: 100%;
   text-align: left;
@@ -431,9 +431,9 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #666666;
+  color: #868686;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: var(--font-weight-bold);
   transition: all 0.2s ease;
   width: 100%;
   text-align: left;
@@ -446,7 +446,7 @@
   &.active {
     background: #e8f2f7;
     color: #327790;
-    font-weight: 600;
+    font-weight:  var(--font-weight-bold);
     border-left: 3px solid #49AFCD;
     padding-left: calc(1rem - 3px);
   }
@@ -462,6 +462,7 @@
 }
 
 .drawer-submenu-text {
+  font-weight: var(--font-weight-semibold) !important;
   font-family: var(--font-family-text) !important;
   flex: 1;
 }
@@ -484,7 +485,7 @@
   padding: 0.75rem 1.5rem;
   color: #333333;
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
   transition: all 0.2s ease;
 

@@ -121,7 +121,8 @@ export class AppComponent implements OnInit{
   async configureStatusBar() {
     if (Capacitor.isNativePlatform()) {
       try {
-        await StatusBar.setOverlaysWebView({ overlay: false });
+        const isAndroid = Capacitor.getPlatform() === 'android';
+        await StatusBar.setOverlaysWebView({ overlay: isAndroid });
       } catch (error) {
         console.warn('Error configuring status bar:', error);
       }
