@@ -3,7 +3,8 @@
   flex-direction: column;
   height: 100vh;
   width: 100%;
-  background: #ffffff;
+  background: var(--primary-white);
+  overflow-x: hidden;
 }
 
 /* GRADIENT SECTION - TOP 20% */
@@ -155,6 +156,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding: 1.5rem 1.75rem;
+  overflow-x: hidden;
   overflow-y: auto;
   position: relative;
   z-index: 10;

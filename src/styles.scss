@@ -92,6 +92,17 @@ body.forgot-password-page {
   background-position: top left;
 }
 
+body.force-update--page {
+ background: linear-gradient(
+    135deg,
+    #8DBA22 0%,
+    #37A6DB 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 50%;
+  background-position: top left;
+}
+
 body.dashboard-page {
   background-image: linear-gradient(95deg, #8DBA22 0%, #37A6DB 100%);
   background-repeat: no-repeat;

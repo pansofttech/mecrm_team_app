@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-force-update',
@@ -11,7 +13,9 @@ export class ForceUpdateComponent implements OnInit {
   isLoading: boolean = true;
 
   constructor(    
+    @Inject(DOCUMENT) private document: Document,
     private router: Router,
+    private renderer: Renderer2
   ){
     const navigation = this.router.getCurrentNavigation();
     if(navigation?.extras.state){
@@ -20,6 +24,7 @@ export class ForceUpdateComponent implements OnInit {
   }
   
   ngOnInit(): void {
+      this.renderer.addClass(this.document.body, 'force-update--page');
   }
 
   redirectToStore(): void {
