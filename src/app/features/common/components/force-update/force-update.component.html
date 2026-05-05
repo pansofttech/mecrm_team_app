@@ -1,40 +1,53 @@
 <div class="force-update--main-container">
-  <kendo-card class="force-update--kendo-card">
-
-    <div class="force-update--icon">
-      <img
-        src="assets/content/images/login-images/force-update.png"
-        width="250"
-        height="250"
-        alt="update" />
+  <!-- GRADIENT SECTION - TOP -->
+  <div class="force-update--gradient-section">
+    <img src="assets/content/images/dashboard-images/dashboard--ecrm-logo.png" alt="Logo" class="force-update--header-logo" />
+    <div class="force-update--header-content">
+      <h1 class="force-update--header-title">
+        <span class="force-update--header-hey">Update</span>
+        <span class="force-update--header-welcome">Required</span>
+      </h1>
     </div>
+  </div>
 
-    <div class="force-update--content">
-
-      <h1 class="force-update--title">App Update Required</h1>
-
-      <p class="force-update--message">
-        A new version of the app is available. Please update to continue
-        using the application.
-      </p>
-
-      <div class="force-update--info">
-        You will be redirected to the app store shortly...
+  <!-- WHITE FORM SECTION - BOTTOM -->
+  <div class="force-update--form-section">
+    <kendo-card class="force-update--kendo-card">
+      <!-- CARD HEADER -->
+      <div class="force-update--card-header">
+        <h2 class="force-update--signin-heading">App Update</h2>
+        <p class="force-update--subtext">
+          A new version of the app is available for download
+        </p>
       </div>
 
-      <button
-        kendoButton
-        class="login-page--signin-button"
-        (click)="redirectToStore()"
-        [disabled]="!storeUrl">
-        Update Now
-      </button>
+      <div class="force-update--form-container">
+        <div class="force-update--content">
+          <div class="force-update--icon">
+            <img
+              src="assets/content/images/login-images/force-update.png"
+              width="150"
+              height="150"
+              alt="update" />
+          </div>
 
-      <p class="force-update--note">
-        This app requires the latest version to continue.
-      </p>
 
-    </div>
 
-  </kendo-card>
+
+          <button
+            kendoButton
+            class="force-update--signin-button"
+            (click)="redirectToStore()"
+            [disabled]="!storeUrl">
+            <i class="fas fa-download"></i>
+            Update Now
+          </button>
+
+          <p class="force-update--note">
+            You will be redirected to the app store shortly...
+          </p>
+        </div>
+      </div>
+    </kendo-card>
+  </div>
 </div>

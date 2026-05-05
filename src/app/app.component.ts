@@ -122,7 +122,7 @@ export class AppComponent implements OnInit{
     if (Capacitor.isNativePlatform()) {
       try {
         const isAndroid = Capacitor.getPlatform() === 'android';
-        await StatusBar.setOverlaysWebView({ overlay: isAndroid });
+        await StatusBar.setOverlaysWebView({ overlay: true });
       } catch (error) {
         console.warn('Error configuring status bar:', error);
       }
@@ -272,6 +272,7 @@ export class AppComponent implements OnInit{
           this.router.navigate([`/${AppRoutePaths.ForceUpdate}`], { state: { storeUrl: res.storeUrl }});
         }
         else {
+                this.router.navigate([`/${AppRoutePaths.ForceUpdate}`]);
           // Only navigate to Dashboard if not already authenticated on a page
           // Check if user is logged in and not on login page
           const currentUrl = this.router.url;
@@ -280,7 +281,6 @@ export class AppComponent implements OnInit{
           if (isOnLoginPage) {
             this.router.navigate([`/${AppRoutePaths.Dashboard}`]);
           }
-          // If already on a protected route, don't navigate away
         }
       });
     } catch (error) {

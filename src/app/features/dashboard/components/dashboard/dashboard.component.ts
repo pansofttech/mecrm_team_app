@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   quickCardsData: QuickCard[] = [];
   filteredQuickCards: QuickCard[] = [];
   userPrivileges: string[] = [];
+  userRole: string = '';
   @ViewChild('drawer') drawer!: DrawerComponent;
 
   public items: Array<DrawerItem> = [
@@ -60,6 +61,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // Initialize user privileges
     this.userPrivileges = this.loginService.privileges;
+
+    // Fetch user role
+    try {
+      const observable = await this.commonService.getUserRole();
+      observable.subscribe((response: any) => {
+        if (response && Array.isArray(response) && response.length > 0) {
+          this.userRole = response[0].role || '';
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching user role:', error);
+    }
 
     // Extract quick cards data
     const obs = await this.commonService.getGUIComponents(this.loginService.employeeId as number);
@@ -163,6 +176,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // if (userConfirmed) {
       this.commonService.handleLogout();
     // }
+  }
+
+  getUserRole(): string {
+    return this.userRole || 'N/A';
   }
 
   showCards(cardType: QuickCard): boolean {

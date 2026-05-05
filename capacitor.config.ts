@@ -7,7 +7,7 @@ const config: CapacitorConfig = {
   webDir: 'dist/ecrm-frontend',
   plugins: {
     StatusBar: {
-      overlaysWebView: false,
+      overlaysWebView: true,
     },
     CapacitorSQLite: {
       iosIsEncryption: true,
@@ -21,22 +21,6 @@ const config: CapacitorConfig = {
       appId: '7d9faee0-6da0-4227-96e4-82d1b3a204af',
       defaultChannel: environment.capChannel
     }
-  },
-  platforms: {
-    ios: {
-      plugins: {
-        StatusBar: {
-          overlaysWebView: false,
-        },
-      },
-    },
-    android: {
-      plugins: {
-        StatusBar: {
-          overlaysWebView: true,
-        },
-      },
-    },
   },
 };
 

@@ -68,6 +68,7 @@ export class CommonService implements OnDestroy{
   private downloadAttachmentUrl = `${this.configService.apiUrl}/api/UploadDownload/DownloadAttachment`;
   private updateMenuUsageUrl = `${this.configService.apiUrl}/api/Common/UpdateMenuUsage`;
   private updatePushNotificationRegistryUrl = `${this.configService.apiUrl}/api/Common/UpdatePushNotificationRegistry`;
+  private deregisterPushNotificationRegistryUrl = `${this.configService.apiUrl}/api/Common/DeregisterPushNotificationRegistry`;
   private updatePushNotificationTrackerUrl = `${this.configService.apiUrl}/api/Common/UpdatePushNotificationTracker`;
   private postPushNotificationToDeviceUrl = `${this.configService.apiUrl}/api/Common/PushNotificationToDevice`;
   private GetAllNotificationUrl = `${this.configService.apiUrl}/api/Common/GetAllNotification`;
@@ -76,6 +77,7 @@ export class CommonService implements OnDestroy{
   private postUploadCSRUrl = `${this.configService.apiUrl}/api/ServiceCalendar/UploadCSR`;
   private postCheckAppVersionUrl = `${this.configService.apiUrl}/api/Login/CheckVersion`;
   private postGUIComponentsUrl = `${this.configService.apiUrl}/api/Common/GetMblGUIComponents`;
+  private postUserRoleUrl = `${this.configService.apiUrl}/api/Common/GetUserRole`;
 
   docSrcTypeSuppAttachment: number = 58;
   docSrcTypeAttachment: number = 22;
@@ -259,6 +261,7 @@ export class CommonService implements OnDestroy{
     });
     this.loginService.employeeId = '';
     this.navigationMap.clear();
+    this.deregisterPushNotificationRegistry();
     //Handling preferences
     const { value } = await Preferences.get({ key: 'userData' });
     if (value) {
@@ -397,6 +400,14 @@ export class CommonService implements OnDestroy{
       "LoginID": this.loginService.employeeId? this.loginService.employeeId as number: 0
     };
     return this.http.post(this.updatePushNotificationRegistryUrl, body);
+  }
+
+  deregisterPushNotificationRegistry() {
+    const body = {
+      "LoginID": this.loginService.employeeId? this.loginService.employeeId as number: 0,
+      "Platform": this.Platform? this.Platform: ''
+    };
+    return this.http.post(this.deregisterPushNotificationRegistryUrl, body);
   }
 
   updPushNotificationTracker() {
@@ -601,8 +612,8 @@ export class CommonService implements OnDestroy{
   }
 
   public async checkVersion() {
-    let version = '1.0.1';
-    let platform = 'web';
+    let version;
+    let platform;
     console.log('Checking app platform', Capacitor.isNativePlatform());
     console.log('Checking app version', App.getInfo());
 
@@ -610,12 +621,12 @@ export class CommonService implements OnDestroy{
       const info = await App.getInfo();
       version = info.version;
       platform = this.platform.is('android') ? 'android' : 'ios';
-      console.log('Checking app version, platform:', platform, 'version:', version);
     }
 
     // if (platform == 'web') {
     //   const info = await App.getInfo();
-    //   version = info.version;
+    //   console.log('Checking app version', App.getInfo());
+    //   version = '1.0.1';
     //   platform = 'android';
     // }
 
@@ -631,6 +642,13 @@ export class CommonService implements OnDestroy{
       EmpId: empId
     };
     return this.http.post(this.postGUIComponentsUrl, body);
+  }
+
+  public getUserRole() {
+    const body = {
+      EmpId: this.loginService.employeeId
+    };
+    return this.http.post(this.postUserRoleUrl, body);
   }
 
   public convertBlobToBase64(blob: Blob) {

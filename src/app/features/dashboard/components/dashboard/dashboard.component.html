@@ -9,7 +9,7 @@
       
       <div class="dashboard-logo-section">
         <img src="assets/content/images/dashboard-images/dashboard--ecrm-logo.png" alt="" class="dashboard-ecrm-logo" />
-        <span>ECRM</span>
+        <span>ECRM <span class="pro-badge">PRO</span></span>
       </div>
       
       <kendo-badge-container class="dashboard-badge-container">
@@ -49,7 +49,7 @@
         <div class="drawer-user-initials">{{ getEmployeeInitials() }}</div>
         <div class="drawer-user-info">
           <div class="drawer-user-name">{{ getEmployeeName() }}</div>
-          <div class="drawer-user-role">CRM Administrator</div>
+          <div class="drawer-user-role">{{ getUserRole() }}</div>
         </div>
       </div>
     </div>
