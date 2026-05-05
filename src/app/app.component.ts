@@ -86,6 +86,7 @@ export class AppComponent implements OnInit{
 
     this.notificationInterval = setInterval(() => {
       this.commonService.updateNotificationData();
+      this.checkAppVersion();
     }, 3000);
 
     await this.syncOta();
@@ -272,7 +273,6 @@ export class AppComponent implements OnInit{
           this.router.navigate([`/${AppRoutePaths.ForceUpdate}`], { state: { storeUrl: res.storeUrl }});
         }
         else {
-                this.router.navigate([`/${AppRoutePaths.ForceUpdate}`]);
           // Only navigate to Dashboard if not already authenticated on a page
           // Check if user is logged in and not on login page
           const currentUrl = this.router.url;
@@ -294,6 +294,6 @@ export class AppComponent implements OnInit{
       await this.checkAppVersion();
     });
 
-    this.checkAppVersion();
+    //this.checkAppVersion();
   }
 }
