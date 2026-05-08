@@ -625,7 +625,15 @@ export class WorksheetService {
     } else {
       formData.priceDetails.wsattachment = '';
     }  
-        
+
+    const grossSPQC = (this.worksheetDetailsCard[0].soTotRateWOPLCQC ?? 0) + 
+                      (this.worksheetDetailsCard[0].plcqc ?? 0) +  
+                      (this.worksheetDetailsCard[0].soTotRateWOPLCQC?? 0 > 0?
+                        (this.worksheetDetailsCard[0].advancedTraining ?? 0) +  
+                        (this.worksheetDetailsCard[0].otherCommitments ?? 0) + 
+                        (this.worksheetDetailsCard[0].gstExemptionValue == "" || this.worksheetDetailsCard[0].gstExemptionValue == null? 0 : this.worksheetDetailsCard[0].gstExemptionValue)
+                      : 0);
+  
     // const body1 = {
     //   enqId: enqID,
     //   worksheetId: this.worksheetDetailsCard[0].workSheetId,
@@ -692,7 +700,7 @@ export class WorksheetService {
     body.append("milestoneGuid", "" as string);
     body.append("milestoneSouceTypeId", "65");
     body.append("lstConfigItems", this.configItems as unknown as string);
-    body.append("_GrossSP", ((this.worksheetDetailsCard[0].grossSPQC ?? 0) < 0.05 ? 0 :(this.worksheetDetailsCard[0].grossSPQC ?? 0).toFixed(2)).toString());
+    body.append("_GrossSP", grossSPQC as string);
     body.append("_GrossSPBC", this.worksheetDetailsCard[0].grossSPBC as string);
     body.append("_NetSP", (((this.worksheetDetailsCard[0].quoteValueQC ?? 0) - (this.worksheetDetailsCard[0].discountValue ?? 0)).toFixed(2)).toString());
     body.append("_NetSPBC", (((this.worksheetDetailsCard[0].quoteValueBC ?? 0) - (this.worksheetDetailsCard[0].discountValueBC ?? 0)).toFixed(2)).toString());
