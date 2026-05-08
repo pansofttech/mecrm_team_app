@@ -118,6 +118,67 @@
     </div>
   </div>
 
+  <div class="login-page--layout" *ngIf="!showLoader && !isUserLoggedOut && isTenantSelectionScreen">
+    <div class="login-page--gradient-section">
+      <img src="assets/content/images/dashboard-images/dashboard--ecrm-logo.png" alt="Logo" class="header-logo" />
+      <div class="login-page--header-content">
+        <h1 class="login-page--header-title">
+          <span class="header-hey">Select</span>
+          <span class="header-welcome">Your Tenant</span>
+        </h1>
+      </div>
+    </div>
+
+    <!-- BOTTOM SECTION - WHITE FORM -->
+    <div class="login-page--form-section">
+      <kendo-card class="login-page--kendo-card">
+        <div class="login-page--card-header">
+          <h2 class="login-page--signin-heading">Choose Tenant</h2>
+          <p class="login-page--subtext">
+            {{ isForgotPasswordFlow ? 'Select tenant to reset password.' : 'Multiple organizations found. Select one to continue.' }}
+          </p>
+        </div>
+
+        <div class="login-page--form-container">
+          <div class="tenant-selection-container">
+            <div class="tenant-list">
+              <div *ngFor="let tenant of tenants" 
+                   class="tenant-item"
+                   [class.selected]="selectedTenant === tenant.tenantId"
+                   (click)="selectedTenant = tenant.tenantId">
+                <div class="tenant-radio">
+                  <input type="radio" 
+                         [value]="tenant.tenantId" 
+                         [checked]="selectedTenant === tenant.tenantId"
+                         (change)="selectedTenant = tenant.tenantId">
+                </div>
+                <div class="tenant-info">
+                  <span class="tenant-name">{{ tenant.tenantName }}</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              kendoButton
+              class="login-page--signin-button"
+              [disabled]="!selectedTenant"
+              (click)="onTenantSelected()">
+              <i class="fas fa-arrow-right"></i>
+              Continue
+            </button>
+
+            <div class="login-page--forgot-div">
+              <a class="login-page--forgot-link" (click)="onCancelTenantSelection()">
+                <i class="fa fa-arrow-left"></i>
+                Back to Login
+              </a>
+            </div>
+          </div>
+        </div>
+      </kendo-card>
+    </div>
+  </div>
+
   <div class="login-page--layout" *ngIf="!showLoader && !isUserLoggedOut && isOTPScreen">
     <div class="login-page--gradient-section">
       <img src="assets/content/images/dashboard-images/dashboard--ecrm-logo.png" alt="Logo" class="header-logo" />

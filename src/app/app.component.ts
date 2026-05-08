@@ -29,6 +29,7 @@ export class AppComponent implements OnInit{
   title = 'ecrm-frontend';
   private isBackHandlerRegistered = false;
   private notificationInterval: any;
+  private appCheckUpdateInterval: any;
   private pendingNotificationPath: string | null = null;
   private pendingNotificationModule: string | null = null;
 
@@ -81,16 +82,24 @@ export class AppComponent implements OnInit{
       this.isBackHandlerRegistered = true;
     }
 
-    this.initializePushNotifications();
     this.commonService.initDB();
 
-    this.notificationInterval = setInterval(() => {
-      this.commonService.updateNotificationData();
+    this.appCheckUpdateInterval = setInterval(() => {
       this.checkAppVersion();
-    }, 3000);
+    }, 15000);
 
     await this.syncOta();
     this.listenToResume();
+
+    // Subscribe to post-login initialization
+    this.commonService.postLoginInitialize$.subscribe(() => {
+      this.initializePostLoginServices();
+    });
+
+    // Subscribe to logout cleanup
+    this.commonService.postLogoutCleanup$.subscribe(() => {
+      this.cleanupPostLoginServices();
+    });
   }
 
   // enableSSLPinning() {
@@ -263,25 +272,55 @@ export class AppComponent implements OnInit{
     }
   }
 
+  // Initialize post-login services (push notifications, version check interval)
+  private initializePostLoginServices() {
+    console.log('Initializing post-login services...');
+    this.initializePushNotifications();
+
+    // Start version check interval after login
+    if (this.notificationInterval) {
+      clearInterval(this.notificationInterval);
+    }
+    this.notificationInterval = setInterval(() => {
+      this.commonService.updateNotificationData();
+    }, 3000);
+  }
+
+  // Cleanup post-login services on logout
+  private cleanupPostLoginServices() {
+    console.log('Cleaning up post-login services...');
+    if (this.notificationInterval) {
+      clearInterval(this.notificationInterval);
+      this.notificationInterval = null;
+    }
+  }
+
   private async checkAppVersion() {
     try {
       const obs = await this.commonService.checkVersion();
       obs.subscribe((res: any) => {
         console.log('Checking app version with body:', res);
         if (res.forceUpdate) {
-          // Navigate to force update component with store URL as query parameter
-          this.router.navigate([`/${AppRoutePaths.ForceUpdate}`], { state: { storeUrl: res.storeUrl }});
-        }
-        else {
-          // Only navigate to Dashboard if not already authenticated on a page
-          // Check if user is logged in and not on login page
           const currentUrl = this.router.url;
-          const isOnLoginPage = currentUrl.includes(AppRoutePaths.Login);
-          
-          if (isOnLoginPage) {
-            this.router.navigate([`/${AppRoutePaths.Dashboard}`]);
-          }
+          const isOnForceUpdatePage = currentUrl.includes(AppRoutePaths.ForceUpdate);
+
+          console.log('isOnForceUpdatePage:', isOnForceUpdatePage);
+          console.log('currentUrl:', currentUrl);
+
+          if (isOnForceUpdatePage) return;
+          this.zone.run(() => {
+            this.router.navigate([AppRoutePaths.ForceUpdate],{state: {storeUrl: res.storeUrl}});
+          });
         }
+        // else {
+        //   const currentUrl = this.router.url;
+        //   const isOnLoginPage = currentUrl.includes(AppRoutePaths.Login);
+        //   const isForgotPasswordPage = currentUrl.includes(AppRoutePaths.ForgotPassword);
+          
+        //   if (!isOnLoginPage && !isForgotPasswordPage) {
+        //     this.router.navigate([`/${AppRoutePaths.Dashboard}`]);
+        //   }
+        // }
       });
     } catch (error) {
       console.warn('Version check failed:', error);
@@ -291,9 +330,7 @@ export class AppComponent implements OnInit{
   private listenToResume() {
     CapacitorApp.addListener('resume', async () => {
       await this.syncOta();
-      await this.checkAppVersion();
+      //await this.checkAppVersion();
     });
-
-    //this.checkAppVersion();
   }
 }

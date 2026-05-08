@@ -42,12 +42,18 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
   private popstateSubscription?: Subscription;
   public isUserLoggedOut: boolean = true;
   public isOTPScreen: boolean = false;
+  public isTenantSelectionScreen: boolean = false;
   private userPhone: string = '';
   private userEmail: string = '';
   public otpMethod: string = 'phone';
   otpControls = Array.from({ length: 6 }, () => new FormControl(''));
   countdown = 120;
   timer: any;
+
+  // Tenant Selection Properties
+  public tenants: any[] = [];
+  public selectedTenant: number | null = null;
+  public isForgotPasswordFlow: boolean = false;  // Track if tenant selection is for forgot password
 
   resendCount = 0;
   maxResend = 3;
@@ -84,6 +90,7 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
       this.showLoader = res;
     });
     const { value } = await Preferences.get({ key: 'userData' });
+    
     if (value) {
       const userData = JSON.parse(value);
       this.loginForm.patchValue({
@@ -92,7 +99,6 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
       })
       if(userData.loggedIn){
         this.loaderService.showLoader();
-        // this.onSubmit();
         this.loginService.getLoginUserDetails(userData.username)
         .subscribe((data: any) =>{
           if(data?.length > 0){
@@ -117,7 +123,13 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
         });
         this.isUserLoggedOut = false;
       }
+      else if (!userData.loggedIn) {
+        this.isUserLoggedOut = true;
+        this.commonService.handleLogout();
+        this.loaderService.hideLoader();
+      }
     }
+
     this.loaderService.hideLoader();
   }
 
@@ -162,6 +174,10 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
       this.commonService.updPushNotificationRegistry().subscribe();
       this.commonService.navigationMap.set('/', '/dashboard');
       this.commonService.currentUrl = '/dashboard';
+      
+      // Trigger post-login initialization (push notifications, version check, etc.)
+      this.commonService.triggerPostLoginInitialize();
+      
       this.router.navigate([AppRoutePaths.Dashboard]);
     } else {
       this.notificationService.showNotification(
@@ -251,11 +267,30 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
         this.loginService.loginUser(
           this.loginForm.value.username,
           this.loginForm.value.password,
-          userIPAddress
+          userIPAddress,
+          this.selectedTenant || 0
         )
       );
 
+      // Handle tenant selection requirement
+      if (data.requireTenantSelection && data.tenants && data.tenants.length > 0) {
+        this.tenants = data.tenants;
+        this.isTenantSelectionScreen = true;
+        this.isUserLoggedOut = false;
+        this.loaderService.hideLoader();
+        return;
+      }
+
+      if(data.autoLogin && data.tenantId){
+        this.selectedTenant = data.tenantId;
+        await this.onSubmit();
+        this.loaderService.hideLoader();
+        return;
+      }
+
       if (!data.otpEnabled) {
+        this.isTenantSelectionScreen = false;
+        this.selectedTenant = null;
         this.onHandleAfterSignin(data);
         return;
       }
@@ -280,6 +315,8 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
       this.maxAttempts = data.maxAttempts;
       this.countdown = data.expiry;
       this.coolDownPeriod = data.coolDownPeriod;
+      this.isTenantSelectionScreen = false;
+      this.selectedTenant = null;
       this.isUserLoggedOut = false;
       this.isOTPScreen = true;
       this.startTimer();
@@ -310,32 +347,107 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
-  public onForgotPasswordClick() {
-    this.loaderMessage = "Sending password reset link"
-    this.loaderService.showLoader();
-    this.loginService.forgotPassword(
-        this.loginForm.value.username
-      )
-      .subscribe(
-        (data:any) => {
-          this.loaderService.hideLoader();
-          const notificationMessage = data.outPut;
-          const notificationType = data.outPut.startsWith('Change') ? 'success' : 'error';
-          this.notificationService.showNotification(
-            notificationMessage,
-            notificationType,
-            'center',
-            'bottom'
-          );
-        },
-        error => {
-          this.loaderService.hideLoader();
-          this.notificationService.showNotification(
-            error.error.text,
-            'error', 'center', 'bottom'
-          );
-        }
+  // Handle tenant selection confirmation for both login and forgot password flows
+  async onTenantSelected() {
+    if (!this.selectedTenant) {
+      this.notificationService.showNotification(
+        'Please select a tenant',
+        'error',
+        'center',
+        'bottom'
       );
+      return;
+    }
+
+    if (this.isForgotPasswordFlow) {
+      await this.onForgotPasswordClick();
+    } else {
+      await this.onSubmit();
+    }
+  }
+
+  // Cancel tenant selection and go back
+  onCancelTenantSelection() {
+    this.isTenantSelectionScreen = false;
+    this.selectedTenant = null;
+    this.tenants = [];
+    this.isForgotPasswordFlow = false;
+    this.isUserLoggedOut = true;
+    if (!this.isForgotPasswordFlow) {
+      this.loginForm.reset();
+    }
+  }
+
+  public async onForgotPasswordClick() {
+    this.loaderMessage = "Sending password reset link";
+    this.loaderService.showLoader();
+
+    try {
+      const data: any = await firstValueFrom(
+        this.loginService.forgotPassword(
+          this.loginForm.value.username,
+          this.selectedTenant || 0
+        )
+      );
+
+      // Handle tenant selection requirement
+      if (data.requireTenantSelection && data.tenants && data.tenants.length > 0) {
+        this.tenants = data.tenants;
+        this.isTenantSelectionScreen = true;
+        this.isForgotPasswordFlow = true;
+        this.isUserLoggedOut = false;
+        this.loaderService.hideLoader();
+        return;
+      }
+
+      // Handle auto-login scenario (only 1 tenant)
+      if (data.autoLogin && data.tenantId) {
+        this.selectedTenant = data.tenantId;
+        await this.onForgotPasswordClick();
+        return;
+      }
+
+      // Handle the actual forgot password response
+      const notificationMessage = data.outPut || data.message || 'Password reset link sent successfully';
+      const notificationType = notificationMessage.toLowerCase().includes('change') || 
+                              notificationMessage.toLowerCase().includes('success') ? 'success' : 'error';
+      
+      this.notificationService.showNotification(
+        notificationMessage,
+        notificationType,
+        'center',
+        'bottom'
+      );
+
+      // Reset tenant selection state
+      this.selectedTenant = null;
+      this.isForgotPasswordFlow = false;
+
+      // Navigate back to login if error response
+      if (notificationType === 'error') {
+        this.isTenantSelectionScreen = false;
+        this.isUserLoggedOut = true;
+        this.router.navigate(['/login']);
+      }
+
+    } catch (error: any) {
+      this.notificationService.showNotification(
+        error?.error?.text || error?.error?.message || 'Failed to send reset link',
+        'error',
+        'center',
+        'bottom'
+      );
+
+      // Reset tenant selection state on error
+      this.selectedTenant = null;
+      this.isForgotPasswordFlow = false;
+      this.isTenantSelectionScreen = false;
+      this.isUserLoggedOut = true;
+      this.router.navigate(['/login']);
+
+    } finally {
+      this.loaderService.hideLoader();
+    }
   }
 
   onEnterPressed() {

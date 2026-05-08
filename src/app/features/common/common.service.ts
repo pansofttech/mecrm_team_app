@@ -4,7 +4,7 @@ import { HttpService } from 'src/app/core/services/http.service';
 import { DatePipe } from '@angular/common';
 import { DecimalPipe } from '@angular/common';
 import { Router, NavigationStart } from '@angular/router';
-import { filter, Subscription } from 'rxjs';
+import { filter, Subscription, Subject } from 'rxjs';
 import { AppRoutePaths } from 'src/app/core/Constants';
 import { LoginService } from '../login/components/login/login.service';
 import { ConfigService } from 'src/app/core/services/config.service';
@@ -95,6 +95,10 @@ export class CommonService implements OnDestroy{
   public DeviceID: string | null = null;
   public Platform: string | null = null;
   public AppVersion: string = '1.0.0';
+  
+  // Events for post-login and logout lifecycle
+  public postLoginInitialize$ = new Subject<void>();
+  public postLogoutCleanup$ = new Subject<void>();
 
   //SQlLite
   private sqlite: SQLiteConnection;
@@ -240,6 +244,16 @@ export class CommonService implements OnDestroy{
     return false;
   }
 
+  // Trigger post-login initialization (push notifications, version check)
+  triggerPostLoginInitialize() {
+    this.postLoginInitialize$.next();
+  }
+
+  // Trigger post-logout  cleanup (clear sensitive data, push notification interval)
+  triggerPostLogoutCleanup() {
+    this.postLogoutCleanup$.next();
+  }
+
   async handleLogout() {
     this.loginService.logoutUser().subscribe((data: any) => {
       if (data) {
@@ -259,19 +273,22 @@ export class CommonService implements OnDestroy{
         'error', 'center', 'bottom'
       );
     });
+    await lastValueFrom(this.deregisterPushNotificationRegistry());
     this.loginService.employeeId = '';
     this.navigationMap.clear();
-    this.deregisterPushNotificationRegistry();
     //Handling preferences
-    const { value } = await Preferences.get({ key: 'userData' });
-    if (value) {
-      const userData = JSON.parse(value);  
-      userData.loggedIn = false;
-      await Preferences.set({
-        key: 'userData',
-        value: JSON.stringify(userData),
-      });
-    }
+    // const { value } = await Preferences.get({ key: 'userData' });
+    // if (value) {
+    //   const userData = JSON.parse(value);  
+    //   userData.loggedIn = false;
+    //   userData.jwtoken = '';
+    //   await Preferences.set({
+    //     key: 'userData',
+    //     value: JSON.stringify(userData),
+    //   });
+    // }
+    Preferences.remove({ key: 'userData' });
+    this.triggerPostLogoutCleanup();
     this.router.navigate([AppRoutePaths.Login]);
   }
 
@@ -432,13 +449,15 @@ export class CommonService implements OnDestroy{
   }
 
   updateNotificationData() {
-    this.getAllNotification().subscribe((data: any) => {
-        this.notificationData = data;
-      },
-      error => {
-        console.log('Error pulling notification', error);
-      }
-    );
+    if(this.loginService.employeeId != ''){
+      this.getAllNotification().subscribe((data: any) => {
+          this.notificationData = data;
+        },
+        error => {
+          console.log('Error pulling notification', error);
+        }
+      );
+    }
   }
 
   postPushNotificationToDevice(
@@ -614,21 +633,12 @@ export class CommonService implements OnDestroy{
   public async checkVersion() {
     let version;
     let platform;
-    console.log('Checking app platform', Capacitor.isNativePlatform());
-    console.log('Checking app version', App.getInfo());
 
     if (Capacitor.isNativePlatform()) {
       const info = await App.getInfo();
       version = info.version;
       platform = this.platform.is('android') ? 'android' : 'ios';
     }
-
-    // if (platform == 'web') {
-    //   const info = await App.getInfo();
-    //   console.log('Checking app version', App.getInfo());
-    //   version = '1.0.1';
-    //   platform = 'android';
-    // }
 
     const body = {
       platform: platform,

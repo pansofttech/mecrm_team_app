@@ -26,13 +26,18 @@ export class LoginService {
     private configService: ConfigService,
   ) {}
 
-  loginUser(username: string,password: string,userIP: string) {
+  loginUser(username: string, password: string, userIP: string, tenantID: number) {
     const body = {
       username: username,
       password: password,
-      userIP: userIP
+      userIP: userIP,
+      tenantID: tenantID
     }
-    return this.http.post(this.loginUrl, body);
+
+    // Pass headers as plain object, not HttpHeaders class
+    const headers = tenantID && tenantID > 0 ? { 'TenantId': tenantID.toString() } : {};
+
+    return this.http.post(this.loginUrl, body, { headers });
   }
 
   getEmployeeName(): string {
@@ -50,10 +55,11 @@ export class LoginService {
     return this.http.post(this.logoutUrl, body);
   }
 
-  authenticateUser(Username: string, AuthCode: string){
+  authenticateUser(Username: string, AuthCode: string, TenantID: number){
     const body = {
       UserName: Username,
-      AuthCode: AuthCode
+      AuthCode: AuthCode,
+      TenantID: TenantID
     }
     return this.http.post(this.authenticateUserUrl, body);
   }
@@ -65,20 +71,22 @@ export class LoginService {
     return this.http.post(this.getLoginUserDetailsUrl, body);
   }
 
-  forgotPassword(Username: string){
+  forgotPassword(Username: string, tenantID: number = 0){
     const body = {
       UserName: Username,
-      LinkedUrl: location.protocol + '//' + location.host + '/' + AppRoutePaths.ForgotPassword
+      LinkedUrl: location.protocol + '//' + location.host + '/' + AppRoutePaths.ForgotPassword,
+      TenantID: tenantID
     }
     return this.http.post(this.forgotPasswordUrl, body);
   }
 
-  updatePassword(Username: string, AuthCode: string, NewPassword: string, ChangeType: string){
+  updatePassword(Username: string, AuthCode: string, NewPassword: string, ChangeType: string, TenantID: number){
     const body = {
       UserName: Username,
       AuthCode: AuthCode,
       NewPassword: NewPassword,
-      Type: ChangeType
+      Type: ChangeType,
+      TenantID: TenantID
     }
     return this.http.post(this.updatePasswordUrl, body);
   }

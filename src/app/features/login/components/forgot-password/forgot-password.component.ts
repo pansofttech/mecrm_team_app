@@ -18,6 +18,7 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
   username: string = '';
   authCode: string = '';
   changeType: string = '';
+  tenantID: number = 0;
   loginForm!: FormGroup;
   invalid =false;
   isLengthValid = false;
@@ -49,6 +50,7 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
       this.username = params['UN'];
       this.authCode = params['AuthCode'];
       this.changeType = params['CT'];
+      this.tenantID = params['TenantID'];
     });
     this.loginForm = new FormGroup({
       createpassword: new FormControl('', [Validators.required]),
@@ -108,7 +110,7 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
   checkUserAuthentication(){
     if(this.changeType !== 'Changepwd'){
       this.loaderService.showLoader();
-      this.loginService.authenticateUser(this.username, this.authCode)
+      this.loginService.authenticateUser(this.username, this.authCode, this.tenantID)
       .subscribe((data: any) => {
         this.loaderService.hideLoader();
         this.userAuthenticated = data.outPut === 'Success'? true: false;
@@ -135,7 +137,8 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
         this.username, 
         this.authCode? this.authCode: '', 
         this.loginForm.value.createpassword, 
-        this.changeType? this.changeType: ''
+        this.changeType? this.changeType: '',
+        this.tenantID
       ).subscribe((data: any) => {
         this.loaderService.hideLoader();
         const notificationMessage = data.outPut;

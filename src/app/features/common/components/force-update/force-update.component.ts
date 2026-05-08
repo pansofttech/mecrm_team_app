@@ -24,7 +24,7 @@ export class ForceUpdateComponent implements OnInit {
   }
   
   ngOnInit(): void {
-      this.renderer.addClass(this.document.body, 'force-update--page');
+    this.renderer.addClass(this.document.body, 'force-update--page');
   }
 
   redirectToStore(): void {

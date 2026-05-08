@@ -54,11 +54,16 @@ export class HttpService {
         const userData = pref.value ? JSON.parse(pref.value) : null;
         const token = userData?.jwtoken;
 
-        const headers = {
-          'Content-Type': 'application/json', 
-          ...(options.headers || {}),
-          ...(token ? { Authorization: `Bearer ${token}` } : {})
-        };
+        // Build headers - do NOT set Content-Type for FormData (let Angular handle it)
+        let headerObj: any = {};
+        if (!(body instanceof FormData)) {
+          headerObj['Content-Type'] = 'application/json';
+        }
+        headerObj = { ...headerObj, ...(options.headers || {}) };
+        if (token) {
+          headerObj['Authorization'] = `Bearer ${token}`;
+        }
+        const headers = new HttpHeaders(headerObj);
 
         // ----------- SSL PINNING (Mobile only) -----------
         // (Uncomment this without miss to enable SSL Pinning for Mobile)
@@ -106,7 +111,7 @@ export class HttpService {
 
         // ----------- Browser request --------------
         return this.http.request(method, url, {
-          headers: new HttpHeaders(headers),
+          headers: headers,  // Already HttpHeaders object
           body,
           params: options.params
         }).pipe(
@@ -170,7 +175,7 @@ export class HttpService {
           this.isRefreshing = true;
           this.refreshTokenSubject.next(null);
 
-          return this.refreshToken(userData.refreshToken, userData.username, userData.empId).pipe(
+          return this.refreshToken(userData?.jwtoken, userData.refreshToken, userData.username, userData.empId).pipe(
             switchMap((res: any) => {
               this.isRefreshing = false;
 
@@ -204,10 +209,11 @@ export class HttpService {
     );
   }
 
-  private refreshToken(refresh: string, username: string, loginId: number) {
+  private refreshToken(jwtoken: string, refresh: string, username: string, loginId: number) {
     const url = `${this.config.apiUrl}/api/Login/CheckRefreshToken`;
 
     const body = {
+      accessToken: jwtoken,
       refreshToken: refresh,
       username,
       loginId,
@@ -218,8 +224,13 @@ export class HttpService {
     return this.post(url, body);
   }
 
-  private forceLogout() {
-    Preferences.remove({ key: 'userData' });
+  private async forceLogout() {
+    const { value: userDataValue } = await Preferences.get({ key: 'userData' });
+    if (userDataValue) {
+      const userData = JSON.parse(userDataValue);
+      userData.loggedIn = false;
+      await Preferences.set({ key: 'userData', value: JSON.stringify(userData) });
+    }    
     this.notify.showNotification("Session Out", "error", "center", "bottom");
     this.router.navigate(['/login']);
   }
