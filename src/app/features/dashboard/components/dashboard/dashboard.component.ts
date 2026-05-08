@@ -78,16 +78,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const obs = await this.commonService.getGUIComponents(this.loginService.employeeId as number);
     obs.subscribe((data: any) => {
       this.quickCardsData = data || [];
-      // Extract unique modules from all cards (before filtering)
+      // Filter cards based on privileges for display
+      this.filteredQuickCards = this.quickCardsData.filter(card => this.showCards(card));
+      // Extract unique modules from filtered cards only
       const modules = new Set<string>();
-      this.quickCardsData.forEach((card: QuickCard) => {
+      this.filteredQuickCards.forEach((card: QuickCard) => {
         if (card.module) {
           modules.add(card.module);
         }
       });
       this.uniqueModules = Array.from(modules).sort();
-      // Filter cards based on privileges for display
-      this.filteredQuickCards = this.quickCardsData.filter(card => this.showCards(card));
     });
   }
 
