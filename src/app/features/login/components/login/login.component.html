@@ -124,7 +124,7 @@
       <div class="login-page--header-content">
         <h1 class="login-page--header-title">
           <span class="header-hey">Select</span>
-          <span class="header-welcome">Your Organization</span>
+          <span class="header-welcome">Organization</span>
         </h1>
       </div>
     </div>
@@ -163,13 +163,12 @@
               class="login-page--signin-button"
               [disabled]="!selectedTenant"
               (click)="onTenantSelected()">
-              <i class="fas fa-arrow-right"></i>
               Continue
             </button>
 
             <div class="login-page--forgot-div">
               <a class="login-page--forgot-link" (click)="onCancelTenantSelection()">
-                <i class="fa fa-arrow-left"></i>
+                <i class="fa fa-arrow-left forgotpassword-page--forgot-link-back-icon"> </i>
                 Back to Login
               </a>
             </div>

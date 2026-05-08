@@ -191,6 +191,7 @@
   font-weight: var(--font-weight-bolder);
   color: #ffffff;
   letter-spacing: -1px;
+  text-align: left;
 
   @media (max-width: 480px) {
     font-size: 2.5rem;
@@ -643,7 +644,7 @@
 }
 
 .tenant-name {
-  font-size: 0.95rem;
+  font-size: var(--text-size-01);
   font-weight: var(--font-weight-bold);
   color: #1a1a1a;
   display: block;
