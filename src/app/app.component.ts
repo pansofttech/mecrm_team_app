@@ -38,7 +38,14 @@ export class AppComponent implements OnInit{
     const target = event.target as HTMLElement;
     const isInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA'
       || target.tagName === 'SELECT' || (target as any).isContentEditable;
-    if (!isInput && Capacitor.isNativePlatform()) {
+
+    // Do not hide keyboard while interacting with Kendo dropdown popups/lists.
+    // On iOS this can interrupt tap selection inside popup items.
+    const isKendoInteractive = !!target.closest(
+      '.k-popup, .k-animation-container, .k-list, .k-list-item, .k-dropdownlist, .k-input, .k-picker'
+    );
+
+    if (!isInput && !isKendoInteractive && Capacitor.isNativePlatform()) {
       Keyboard.hide().catch(() => {});
     }
   }

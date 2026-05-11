@@ -22,6 +22,10 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>MECRM uses the microphone to capture your voice input for speech-to-text fields.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>MECRM uses speech recognition to convert your voice into text in form fields.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
