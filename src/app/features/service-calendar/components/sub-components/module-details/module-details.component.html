@@ -1,21 +1,22 @@
 <div class="app-locked--container">
-  <div *ngIf="isModuleDetailsOpen" class="app-screen--info-header">
-    <div class="app-screen--info-header-left">
-      Module Details
+  <div *ngIf="isModuleDetailsOpen" class="app-secondary-header">
+    <div class="app-secondary-header-left">
+      <i class="fa-solid fa-barcode app-secondary-header-icon"></i>
+      <div class="app-secondary-header-name">Module Details</div>
     </div>
-    <div class="app-screen--info-header-right">
+    <div class="app-secondary-header-right">
       <div *ngIf="!isModuleDetailsEditOpen && isEditable && !isAddModulesFromSalesConfigOpen" 
-           class="app-screen--info-header-right" (click)="onAddModulesFromSalesConfigClick()">
-           <span style="font-size: 12px;">Add from sales config</span>
+          class="app-secondary-header-name" (click)="onAddModulesFromSalesConfigClick()">
+          Add from sales config
       </div>
       <img *ngIf="!isModuleDetailsEditOpen && isEditable"
-           src="assets/content/images/delete.svg" alt="new" width="25" height="25"
-           (click)="onDeleteAddedCards()" />
-      <div *ngIf="isModuleDetailsEditOpen" 
-           class="app-screen--info-header-right" (click)="onBackClickHandle('edit')">
-           <img src="assets/content/images/backward.svg" />
-           <span>Back</span>
-      </div>
+            src="assets/content/images/delete.svg" alt="new" width="20" height="20"
+            (click)="onDeleteAddedCards()" />   
+      <button *ngIf="isModuleDetailsEditOpen" class="app-secondary-header--btn"
+        (click)="onBackClickHandle('edit')">
+        <i class="fa-solid fa-chevron-left app-secondary-header--btn-icon"></i>
+        <span>Back</span>
+      </button>
     </div>
   </div>
 </div>
@@ -174,7 +175,7 @@
   </app-parts-search>
 
   <app-installbase-modules-salesconfig 
-    *ngIf="!isModuleDetailsOpen && !isModuleDetailsEditOpen && !isModulePartsAddOpen"
+    *ngIf="isAddModulesFromSalesConfigOpen"
     [srid]="srid"
     [installBaseId]="installBaseId"
     [addedPartsDetailsCard]="modulePartsCard"

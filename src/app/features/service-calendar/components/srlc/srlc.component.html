@@ -115,7 +115,10 @@
                        [servicePrerequisites]="servicePrerequisites"
                        [srlcDetails]="srlcDetails"
                        [moduleDetails]="moduleDetails"
+                       [srlcPartDiagnosisDetails]="srlcPartDiagnosisDetails"
                        [otherTasksDetails]="otherTasksDetails"
-                       (moduleDetailsCardChange)="updateModuleDetailsCard($event)"></app-call-action>
+                       (stepLabelChange)="onStepLabelChange($event)"
+                       (moduleDetailsCardChange)="updateModuleDetailsCard($event)"
+                       (partDiagnosisDetailsCardChange)="updatePartDiagnosisCard($event)"></app-call-action>
   </ion-content>
 </div>

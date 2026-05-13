@@ -21,12 +21,15 @@ export class CompletionDetailsComponent implements OnInit{
   @Input() srid: number = 0;
   @Input() srlcDetails: svcGetSRLCDetails[] = [];
   @Input() CSRAttachment: Array<FileInfo> = [];
+  @Input() OBSheetAttachment: Array<FileInfo> = [];
+  @Input() NCReportAttachment: Array<FileInfo> = [];
   @Output() surveyValidator: EventEmitter<void> = new EventEmitter<void>();
   showAPILoader: boolean = false;
   dependantComboDataForOtherCalls: svcDependentComboData[] = [];
   dependantComboDataForResolutionType: svcDependentComboData[] = [];
+  dependantComboDataForProbType: svcDependentComboData[] = [];
 
-  //Attachment Pop up related variables
+  // Attachment Pop up related variables
   // showCSRAttachment: boolean = false;
   // attachmentPopupDetails: AttachmentPopupDetails [] = [];
 
@@ -53,6 +56,36 @@ export class CompletionDetailsComponent implements OnInit{
       }
       this.surveyValidator.emit();
     });
+    this.completionDetails.get('partsUsedYes')?.valueChanges.subscribe((isChecked: boolean) => {
+      if (isChecked) {
+        this.completionDetails.get('partsUsedNo')?.setValue(false, { emitEvent: false });
+      } else {
+        this.completionDetails.get('partsUsedNo')?.setValue(true, { emitEvent: false });
+      }
+    });
+    this.completionDetails.get('partsUsedNo')?.valueChanges.subscribe((isChecked: boolean) => {
+      if (isChecked) {
+        this.completionDetails.get('partsUsedYes')?.setValue(false, { emitEvent: false });
+      } else {
+        this.completionDetails.get('partsUsedYes')?.setValue(true, { emitEvent: false });
+      }
+    });
+
+    this.completionDetails.get('callibSuccessYes')?.valueChanges.subscribe((isChecked: boolean) => {
+      if (isChecked) {
+        this.completionDetails.get('callibSuccessNo')?.setValue(false, { emitEvent: false });
+      } else {
+        this.completionDetails.get('callibSuccessNo')?.setValue(true, { emitEvent: false });
+      }
+    });
+    this.completionDetails.get('callibSuccessNo')?.valueChanges.subscribe((isChecked: boolean) => {
+      if (isChecked) {
+        this.completionDetails.get('callibSuccessYes')?.setValue(false, { emitEvent: false });
+      } else {
+        this.completionDetails.get('callibSuccessYes')?.setValue(true, { emitEvent: false });
+      }
+    });
+
     this.getPrerequisiteCombo();
     this.getPrerequisiteComboDataOnLoad();
     // this.patchFormValues('completionDetails');
@@ -80,6 +113,9 @@ export class CompletionDetailsComponent implements OnInit{
     this.serviceCalendarService.getPrerequisiteCombo("SRLC", this.loginService.employeeId as number).subscribe((data: any) => {
       this.dependantComboDataForResolutionType = data.filter(
         (item: any) => item.comboType === 'RESOLUTIONTYPE'
+      );
+      this.dependantComboDataForProbType = data.filter(
+        (item: any) => item.comboType === 'TYPEOFPROBLEM'
       );
     });
   }
@@ -132,61 +168,105 @@ export class CompletionDetailsComponent implements OnInit{
   //   this.loaderService.hideLoader();
   // }
 
-  async downloadAttachment(index: number) {
+  async downloadAttachment(index: number, attachmentType: string, docSrcType: number) {
     this.loaderService.showLoader();
+    let attachmentArray: Array<FileInfo> = [];
+
+    switch (attachmentType) {
+      case 'CSR':
+        attachmentArray = this.CSRAttachment;
+        break;
+
+      case 'OBSheet':
+        attachmentArray = this.OBSheetAttachment;
+        break;
+
+      case 'NCReport':
+        attachmentArray = this.NCReportAttachment;
+        break;
+    }
+
+    // Validate attachment
+    if (!attachmentArray || attachmentArray.length === 0 || !attachmentArray[index]) {
+      this.loaderService.hideLoader();
+
+      this.notificationService.showNotification(
+        'Attachment not found',
+        'error',
+        'center',
+        'bottom'
+      );
+
+      return;
+    }
+
     this.commonService.getAttachment(
       this.srid as unknown as string,
-      this.commonService.docSrcTypeCSRAttachment,
+      docSrcType,
       "",
       index
     ).subscribe(async (response) => {
       try {
         const contentType = response.headers.get('content-type')!;
-        const filename = this.CSRAttachment[index].name;
-        const blob = new Blob([response.body!], { type: contentType });
+        const filename = attachmentArray[index].name;
+
+        const blob = new Blob([response.body!], {
+          type: contentType
+        });
 
         if (Capacitor.getPlatform() === 'web') {
+
           const url = window.URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.href = url;
           link.download = filename || 'attachment';
           link.click();
+
           window.URL.revokeObjectURL(url);
 
           this.notificationService.showNotification(
             'File downloaded successfully',
-            'success', 'center', 'bottom'
+            'success',
+            'center',
+            'bottom'
           );
-        } else {
-          const base64Data = await this.commonService.convertBlobToBase64(blob) as string;
+        } 
+        else {
+
+          const base64Data =
+            await this.commonService.convertBlobToBase64(blob) as string;
+
           const saved = await Filesystem.writeFile({
             path: filename,
             data: base64Data,
             directory: Directory.Cache
           });
+
           await Share.share({
             title: 'Share or Save File',
             url: saved.uri,
             dialogTitle: 'Open or Save with'
           });
-          // this.notificationService.showNotification(
-          //   `File ready: ${filename}`,
-          //   'success', 'center', 'bottom'
-          // );
         }
-      } catch (err) {
+
+      }catch (err) {
         this.notificationService.showNotification(
           'Failed to download file',
-          'error', 'center', 'bottom'
+          'error',
+          'center',
+          'bottom'
         );
-      } finally {
+      }finally {
         this.loaderService.hideLoader();
       }
     }, _ => {
+
       this.loaderService.hideLoader();
       this.notificationService.showNotification(
         'Failed to download file',
-        'error', 'center', 'bottom'
+        'error',
+        'center',
+        'bottom'
       );
     });
   }

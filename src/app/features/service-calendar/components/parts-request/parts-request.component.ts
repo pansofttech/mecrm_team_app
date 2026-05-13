@@ -18,10 +18,13 @@ export class PartsRequestComponent {
   showAPILoader = false;
   loaderMessage: string = 'Loading Details...';
   partsSearchForm!: FormGroup;
+  partDetailsForm!: FormGroup;
   @Input() srid: number = 0;
   @Input() servicePrerequisites: svcPrerequisites[] = [];
   addedPartsDetailsCard: svcPartsDetails[] = [];
   svcpartsRequestItems: svcPartsRequest[] = [];
+  dependantComboDataForProbType: svcDependentComboData[] = [];
+  dependantComboDataForCompetency: svcDependentComboData[] = [];
 
   isPartsRequisitionOpen = true;
   isContinueCall: boolean = false;
@@ -53,8 +56,32 @@ export class PartsRequestComponent {
         productLine: new FormControl(null, Validators.nullValidator),
         description: new FormControl('', Validators.nullValidator),
       });
+      this.partDetailsForm = new FormGroup({
+        probType: new FormControl({value: '', disabled: false}, Validators.required),
+        competency: new FormControl({value: '', disabled: false}, Validators.required),
+      });
       this.addedPartsDetailsCard = this.serviceCalendarService.addedPartsDetailsCard;
       this.callHandleClick();
+      this.getPrerequisiteCombo();
+      this.patchFormValues();
+  }
+
+  getPrerequisiteCombo(){
+    this.serviceCalendarService.getPrerequisiteCombo("SRLC", this.loginService.employeeId as number).subscribe((data: any) => {
+      this.dependantComboDataForCompetency = data.filter(
+        (item: any) => item.comboType === 'COMPETENCY'
+      );
+      this.dependantComboDataForProbType = data.filter(
+        (item: any) => item.comboType === 'TYPEOFPROBLEM'
+      );
+    });
+  }
+
+  patchFormValues(){
+    this.partDetailsForm.patchValue({
+      probType: this.servicePrerequisites[0].engProblemID? this.servicePrerequisites[0].engProblemID: null,
+      competency: this.servicePrerequisites[0].competencyID? this.servicePrerequisites[0].competencyID: null,
+    });
   }
 
   onAddPartsClick() {
@@ -119,42 +146,50 @@ export class PartsRequestComponent {
     this.assignPartsRequestDetails();
     this.loaderMessage = 'Requesting for parts...';
     this.loaderService.showLoader();
-    this.serviceCalendarService.postPartsRequest(
-      this.srid,
-      this.servicePrerequisites[0].partReqId? this.servicePrerequisites[0].partReqId : 0,
-      this.servicePrerequisites[0].customerId,
-      this.servicePrerequisites[0].callIOID? this.servicePrerequisites[0].callIOID: 0,
-      '',
-      0,
-      this.svcpartsRequestItems,
-      "SRLC",
-      this.isContinueCall,
-    ).subscribe((data: any) => {
-      this.loaderService.hideLoader();
-      this.loaderMessage = 'Loading Details...';
-      if (data) {
-        const notificationMessage = data.outPut;
-        const notificationType = data.outPut.indexOf('Success') !== -1 ? 'success' : 'error';
-        this.notificationService.showNotification(
-          notificationMessage,
-          notificationType,
-          'center',
-          'bottom'
-        );
-        if(notificationType == 'success'){
-          this.resetValues();
-          this.router.navigate([AppRoutePaths.ServiceCalendar]);
+    const formValue = this.partDetailsForm.getRawValue();
+    if(this.partDetailsForm.valid){
+      this.serviceCalendarService.postPartsRequest(
+        this.srid,
+        this.servicePrerequisites[0].partReqId? this.servicePrerequisites[0].partReqId : 0,
+        this.servicePrerequisites[0].customerId,
+        this.servicePrerequisites[0].callIOID? this.servicePrerequisites[0].callIOID: 0,
+        '',
+        0,
+        this.svcpartsRequestItems,
+        "SRLC",
+        this.isContinueCall,
+        formValue.competency,
+        formValue.probType
+      ).subscribe((data: any) => {
+        this.loaderService.hideLoader();
+        this.loaderMessage = 'Loading Details...';
+        if (data) {
+          const notificationMessage = data.outPut;
+          const notificationType = data.outPut.indexOf('Success') !== -1 ? 'success' : 'error';
+          this.notificationService.showNotification(
+            notificationMessage,
+            notificationType,
+            'center',
+            'bottom'
+          );
+          if(notificationType == 'success'){
+            this.resetValues();
+            this.router.navigate([AppRoutePaths.ServiceCalendar]);
+          }
         }
-      }
-    },
-    error => {
+      },
+      error => {
+        this.loaderService.hideLoader();
+        this.loaderMessage = 'Loading Details...';
+        this.notificationService.showNotification(
+          'Parts request unsuccessful' + error,
+          'error', 'center', 'bottom'
+        );
+      });
+    }else{
       this.loaderService.hideLoader();
-      this.loaderMessage = 'Loading Details...';
-      this.notificationService.showNotification(
-        'Parts request unsuccessful' + error,
-        'error', 'center', 'bottom'
-      );
-    });
+      this.partDetailsForm.markAllAsTouched();
+    }
   }
 
   onDescriptionClick(index: number){

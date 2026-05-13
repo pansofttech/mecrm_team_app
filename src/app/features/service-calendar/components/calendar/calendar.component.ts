@@ -107,6 +107,10 @@ export class CalendarComponent implements OnInit, OnDestroy{
     return formattedDate as string;
   }
 
+  getDayName(date: Date): string {
+    return this.datePipe.transform(date, 'EEE') || 'Mon';
+  }
+
   callPhoneNumber(phoneNumber: string): void {
     window.location.href = 'tel:' + phoneNumber;
   }

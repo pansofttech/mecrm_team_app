@@ -39,6 +39,7 @@ export class InstallationDetailsComponent implements OnInit{
     // this.patchFormValues('installationDetails');
     this.subscribe();
     this.getPrerequisiteCombo();
+    this.setConditionalValidators();
   }
 
   getPrerequisiteCombo(){
@@ -47,6 +48,23 @@ export class InstallationDetailsComponent implements OnInit{
         (item: any) => item.comboType === 'STICKERSTATUS'
       );
     });
+  }
+
+  setConditionalValidators(){
+    if (this.srlcDetails[0].callCategory?.toLowerCase() == "install") {
+      const ibWarrantyStartControl = this.installationDetails.get('ibWarrantyStart');
+      const ibWarrantyEndControl = this.installationDetails.get('ibWarrantyEnd');
+      
+      if (ibWarrantyStartControl) {
+        ibWarrantyStartControl.setValidators([Validators.required]);
+        ibWarrantyStartControl.updateValueAndValidity();
+      }
+      
+      if (ibWarrantyEndControl) {
+        ibWarrantyEndControl.setValidators([Validators.required]);
+        ibWarrantyEndControl.updateValueAndValidity();
+      }
+    }
   }
 
   // patchFormValues(formGroupName: string){
@@ -67,18 +85,18 @@ export class InstallationDetailsComponent implements OnInit{
   // }
 
   subscribe(){
-    this.installationDetails.get('principalWarrantyStart')?.valueChanges.subscribe(() => {
+    this.installationDetails.get('ibWarrantyStart')?.valueChanges.subscribe(() => {
       this.validateDates();
     });
-    this.installationDetails.get('principalWarrantyEnd')?.valueChanges.subscribe(() => {
-      this.validateDates();
-    });
-    this.installationDetails.get('clientWarrantyStart')?.valueChanges.subscribe(() => {
-      this.validateDates();
-    });
-    this.installationDetails.get('clientWarrantyEnd')?.valueChanges.subscribe(() => {
-      this.validateDates();
-    });
+    // this.installationDetails.get('ibWarrantyEnd')?.valueChanges.subscribe(() => {
+    //   this.validateDates();
+    // });
+    // this.installationDetails.get('clientWarrantyStart')?.valueChanges.subscribe(() => {
+    //   this.validateDates();
+    // });
+    // this.installationDetails.get('clientWarrantyEnd')?.valueChanges.subscribe(() => {
+    //   this.validateDates();
+    // });
 
     this.installationDetails.get('ibStickerStatus')?.valueChanges.subscribe((value: number) => {
       const ibStickerAttachmentControl = this.installationDetails.get('ibStickerAttachment');
@@ -94,29 +112,48 @@ export class InstallationDetailsComponent implements OnInit{
   }
 
   validateDates() {
-    const principalWarrantyStart = this.installationDetails.get('principalWarrantyStart') as FormControl;
-    const principalWarrantyEnd = this.installationDetails.get('principalWarrantyEnd') as FormControl;
-    const clientWarrantyStart = this.installationDetails.get('clientWarrantyStart') as FormControl;
-    const clientWarrantyEnd = this.installationDetails.get('clientWarrantyEnd') as FormControl;
-    
-    const principalWarrantyStartDate = principalWarrantyStart?.value;
-    const principalWarrantyEndDate = principalWarrantyEnd?.value;
-    const clientWarrantyStartDate = clientWarrantyStart?.value;
-    const clientWarrantyEndDate = clientWarrantyEnd?.value;
+    const ibWarrantyStart = this.installationDetails.get('ibWarrantyStart') as FormControl;
+    const ibWarrantyEnd = this.installationDetails.get('ibWarrantyEnd') as FormControl;
+    // const clientWarrantyStart = this.installationDetails.get('clientWarrantyStart') as FormControl;
+    // const clientWarrantyEnd = this.installationDetails.get('clientWarrantyEnd') as FormControl;
+    const WarDuration = this.srlcDetails[0].customerWarr? this.srlcDetails[0].customerWarr : 0;
+    const ExtWarrantyQty = this.srlcDetails[0].extendedWarrQty? this.srlcDetails[0].extendedWarrQty : 0;
+
+    const ibWarrantyStartDate = ibWarrantyStart?.value;
+    const ibWarrantyEndDate = ibWarrantyEnd?.value;
+    // const clientWarrantyStartDate = clientWarrantyStart?.value;
+    // const clientWarrantyEndDate = clientWarrantyEnd?.value;
   
-    let principalEndErrors = null;
-    let clientEndErrors = null;
+    let ibEndErrors = null;
+    // let clientEndErrors = null;
   
-    if (principalWarrantyStartDate && principalWarrantyEndDate && principalWarrantyStartDate > principalWarrantyEndDate) {
-      principalEndErrors = { required: true, dateInvalid: 'Principal warranty end date should be greater than start date' };
+    // Calculate and set end date when start date is selected
+    if (ibWarrantyStartDate) {
+      const endDate = new Date(ibWarrantyStartDate);
+      
+      // End Date Month = Start Date Month + WarDuration
+      endDate.setMonth(endDate.getMonth() + WarDuration);
+      
+      // End Date Year = Start Date Year + ExtWarrantyQty
+      endDate.setFullYear(endDate.getFullYear() + ExtWarrantyQty);
+      
+      // End Date Date = Start Date Day - 1
+      endDate.setDate(endDate.getDate() - 1);
+      
+      // Set the calculated end date
+      ibWarrantyEnd?.setValue(endDate);
     }
   
-    if (clientWarrantyStartDate && clientWarrantyEndDate && clientWarrantyStartDate > clientWarrantyEndDate) {
-      clientEndErrors = { required: true, dateInvalid: 'Client warranty end date should be greater than start date' };
+    if (ibWarrantyStartDate && ibWarrantyEndDate && ibWarrantyStartDate > ibWarrantyEndDate) {
+      ibEndErrors = { required: true, dateInvalid: 'IB warranty end date should be greater than start date' };
     }
   
-    principalWarrantyEnd.setErrors(principalEndErrors);
-    clientWarrantyEnd.setErrors(clientEndErrors);
+    // if (clientWarrantyStartDate && clientWarrantyEndDate && clientWarrantyStartDate > clientWarrantyEndDate) {
+    //   clientEndErrors = { required: true, dateInvalid: 'Client warranty end date should be greater than start date' };
+    // }
+  
+    ibWarrantyEnd.setErrors(ibEndErrors);
+    // clientWarrantyEnd.setErrors(clientEndErrors);
   }
 
   // downloadAttachment(index: number) {

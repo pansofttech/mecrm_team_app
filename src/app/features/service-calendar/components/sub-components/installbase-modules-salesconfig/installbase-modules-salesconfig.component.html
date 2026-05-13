@@ -1,17 +1,19 @@
 <div class="app-locked--container">
-    <div class="app-screen--info-header">
-      <div class="app-screen--info-header-left">
-        Add Modules from Sales Config
-      </div>
-      <div class="app-screen--info-header-right" (click)="onBackClick()">
-        <img src="assets/content/images/backward.svg" />
-        <span>Back</span>
-      </div>
+  <div class="app-secondary-header">
+    <div class="app-secondary-header-left">
+      <i class="fa-solid fa-bag-shopping app-secondary-header-icon"></i>
+      <div class="app-secondary-header-name">Add Modules from Sales Config</div>
     </div>
+    <button class="app-secondary-header--btn"
+      (click)="onBackClick()">
+      <i class="fa-solid fa-chevron-left app-secondary-header--btn-icon"></i>
+      <span>Back</span>
+    </button>
+  </div>
 </div>
 
-<div class="app-scrollable--container" *ngIf="!showAPILoader">
-    <div class="part-details-cards--container" *ngIf="ibSalesConfigDetailsCard.length > 0 && !showAPILoader">
+<div>
+    <div class="part-details-cards--container" *ngIf="ibSalesConfigDetailsCard.length > 0">
       <div *ngFor="let a of ibSalesConfigDetailsCard;let i=index;" class="part-details-listview--cards"
            (click)="onCardClick($event)">
         <kendo-card class="app-enquiry-details-listview--kendo-card">
@@ -95,16 +97,16 @@
       </div>
     </div>
 
-    <div *ngIf="ibSalesConfigDetailsCard.length === 0 && !showAPILoader" class="app-disclaimer--card">
+    <div *ngIf="ibSalesConfigDetailsCard.length === 0" class="app-disclaimer--card">
       <div class="app-disclaimer--content">
         <h5>No modules found from sales config</h5>
       </div>
     </div>
 </div>
 
-<div class="app-screen--loader" *ngIf="showAPILoader">
+<!-- <div class="app-screen--loader" *ngIf="showAPILoader">
     <kendo-loader type="converging-spinner"
                   themeColor="info"
                   size="medium"></kendo-loader>
     <div>{{ loaderMessage }}</div>
-</div>
+</div> -->

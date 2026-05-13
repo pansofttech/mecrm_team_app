@@ -19,6 +19,7 @@ export class CallContinueComponent implements OnInit, OnDestroy{
   loaderMessage: string = 'Loading Call Hold...';
   @Input() srlcDetails: svcGetSRLCDetails[] = [];
   @Output() widgetSelected: EventEmitter<void> = new EventEmitter<void>();
+  @Output() stepLabelChange: EventEmitter<string> = new EventEmitter<string>();
 
   callContinueForm!: FormGroup;
 
@@ -45,6 +46,7 @@ export class CallContinueComponent implements OnInit, OnDestroy{
          continueRemarks: new FormControl('', Validators.nullValidator),
       })
     });
+    this.stepLabelChange.emit('Call Continue');
   }
 
   ngOnDestroy(): void {

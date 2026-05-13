@@ -158,7 +158,7 @@
         </div>
       </div>
       <div class="app-control--container">
-        <div class="app-screen--info-tab" *ngIf="addedPartsDetailsCard.length > 0">
+        <!-- <div class="app-screen--info-tab" *ngIf="addedPartsDetailsCard.length > 0">
           <div class="app-screen--info-tab-right">
             How do you want to handle this call ?
           </div>
@@ -176,6 +176,48 @@
                   (click)="callHandleClick('waiting')">
             Move to waiting
           </button>
+        </div> -->
+        <div class="app-kendo-form--container margin-top-1"
+        [formGroup]="partDetailsForm" *ngIf="addedPartsDetailsCard.length > 0 && !showAPILoader">
+          <kendo-formfield>
+            <div class="app-kendo--content">
+              <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="probType">
+                Type of Problem
+              </kendo-label>
+              <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="probType"
+                #probType
+                [data]="dependantComboDataForProbType"
+                textField="comboName"
+                valueField="comboId"
+                [valuePrimitive]="true">
+              </kendo-dropdownlist>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">
+                Problem Type is required
+            </kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+            <div class="app-kendo--content">
+              <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="competency">
+                Competency
+              </kendo-label>
+              <kendo-dropdownlist
+                class="app-kendo--dropdownlist"
+                formControlName="competency"
+                #competency
+                [data]="dependantComboDataForCompetency"
+                textField="comboName"
+                valueField="comboId"
+                [valuePrimitive]="true">
+              </kendo-dropdownlist>
+            </div>
+            <kendo-formerror class="app-kendo--error-msg">
+                Competency is required
+            </kendo-formerror>
+          </kendo-formfield>
         </div>
         <div class="app-screen--footer" *ngIf="!showAPILoader">
           <div class="parts-request-add-button" *ngIf="isPartsRequisitionOpen">

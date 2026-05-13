@@ -26,6 +26,8 @@ import { InstallationDetailsComponent } from './components/sub-components/instal
 import { SystematizationDetailsComponent } from './components/sub-components/systematization-details/systematization-details.component';
 import { ModuleDetailsComponent } from './components/sub-components/module-details/module-details.component';
 import { ModuleDetailsEditComponent } from './components/sub-components/module-details-edit/module-details-edit.component';
+import { PartsUsageComponent } from './components/sub-components/parts-usage/parts-usage.component';
+import { PartsUsageEditComponent } from './components/sub-components/parts-usage-edit/parts-usage-edit.component';
 import { OtherTasksComponent } from "./components/sub-components/other-tasks/other-tasks.component";
 import { OtherTasksEditComponent } from './components/sub-components/other-tasks-edit/other-tasks-edit.component';
 import { CustomerDelayComponent } from './components/sub-components/customer-delay/customer-delay.component';
@@ -56,6 +58,8 @@ import { PartsSearchComponent } from '../common/components/parts-search/parts-se
     SystematizationDetailsComponent,
     ModuleDetailsComponent,
     ModuleDetailsEditComponent,
+    PartsUsageComponent,
+    PartsUsageEditComponent,
     OtherTasksComponent,
     OtherTasksEditComponent,
     CustomerDelayComponent,

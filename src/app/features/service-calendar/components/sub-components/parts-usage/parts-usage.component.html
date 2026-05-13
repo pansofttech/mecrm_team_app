@@ -1,0 +1,240 @@
+<div class="app-locked--sub-container">
+  <!-- <div *ngIf="isPartsUsageDetailsOpen" class="app-screen--info-header">
+    <div class="app-screen--info-header-left">
+      Parts Usage
+    </div>
+    <div class="app-screen--info-header-right">
+      <img *ngIf="!isPartsUsageEditOpen"
+           src="assets/content/images/delete.svg" alt="new" width="25" height="25"
+           (click)="onDeleteAddedCards()" />
+      <div *ngIf="isPartsUsageEditOpen" 
+           class="app-screen--info-header-right" (click)="onBackClickHandle('edit')">
+           <img src="assets/content/images/backward.svg" />
+           <span>Back</span>
+      </div>
+    </div>
+  </div> -->
+
+  <div *ngIf="isPartsUsageDetailsOpen" class="app-secondary-header">
+    <div class="app-secondary-header-left">
+        <i class="fa-solid fa-cogs app-secondary-header-icon"></i>
+      <div class="app-secondary-header-name">Parts Usage</div>
+    </div>
+    <div class="app-secondary-header-right">
+      <img *ngIf="!isPartsUsageEditOpen"
+            src="assets/content/images/delete.svg" alt="new" width="20" height="20"
+            (click)="onDeleteAddedCards()" />   
+      <button *ngIf="isPartsUsageEditOpen" class="app-secondary-header--btn"
+        (click)="onBackClickHandle('edit')">
+        <i class="fa-solid fa-chevron-left app-secondary-header--btn-icon"></i>
+        <span>Back</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="app-scrollable--container" *ngIf="!showAPILoader">
+  <div *ngIf="isPartsUsageDetailsOpen && !isPartsUsageEditOpen" [formGroup]="partsUsageDetails">
+    <kendo-formfield>
+      <kendo-textbox
+        formControlName="dummyPartsUsageControl"
+        #dummyPartsUsageControl
+        hidden>
+      </kendo-textbox>
+      <kendo-formerror class="app-stepper--error-msg">
+        Used Qty and Remarks are mandatory
+      </kendo-formerror>
+    </kendo-formfield>
+  </div>
+
+  <div *ngIf="isPartsUsageDetailsOpen">
+    <div *ngIf="partDiagnosisDetailsCard.length > 0 && !showAPILoader && !isPartsUsageEditOpen">
+      <div *ngFor="let a of partDiagnosisDetailsCard;let i=index;" class="app-enquiry-details-listview--cards">
+        <kendo-card class="app-enquiry-details-listview--kendo-card"
+                    [ngClass]="{'selected-card': a.isCardSelected}">
+          <div class="app-enquiry-details-listview--kendo-card-header">
+            <div class="app-enquiry-details-listview--kendo-card-number">
+              {{ a.supplierName }}
+            </div>
+            <div  class="card-two-options">
+              <div>
+                <img src="assets/content/images/edit.svg"
+                alt="new"
+                (click)="onPartsUsageEdit(i)"/>
+              </div>
+              <div *ngIf="a.partReqId == 0">
+                <input type="radio"
+                kendoRadioButton
+                [checked]="a.isCardSelected"
+                (click)="isCardSelected(i)" />
+              </div>
+            </div>  
+          </div>
+
+          <div class="app-enquiry-details-listview--kendo-splitter">
+            <kendo-splitter orientation="horizontal"></kendo-splitter>
+          </div>
+
+          <!-- <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Part Req. Id
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.partReqId }}
+              </div>
+            </div>
+          </div> -->
+
+          <!-- <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Part No.
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.partNo }}
+              </div>
+            </div>
+          </div> -->
+
+          <!-- <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Opt.
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.option }}
+              </div>
+            </div>
+          </div> -->
+
+          <!-- <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                PL
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.productLine }}
+              </div>
+            </div>
+          </div> -->
+
+          <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Description
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.description }}
+              </div>
+            </div>
+          </div>
+
+          <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Req Qty
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.qty }}
+              </div>
+            </div>
+          </div>
+
+          <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Used Qty
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.usedQty }}
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Status
+              </div>
+              <div class="sold sold-content-total">
+                {{ a.partDiagStatus }}
+              </div>
+            </div>
+          </div> -->
+
+
+          <div *ngIf="!a.isDescOpen" class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Remarks
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-comments" (click)="onDescriptionClick(i)">
+                <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                  {{ a.remarks | slice:0:30 }} .....
+                </div>
+                <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                  <img (click)="onDescriptionClick(i)" src="assets/content/images/down.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="a.isDescOpen" class="total-header">
+            <div class="sub-title-left">
+              <div class="sub-title sub-title-total">
+                Remarks
+              </div>
+              <div class="app-enquiry-details-listview--kendo-card-comments" (click)="onDescriptionClick(i)">
+                <div class="app-enquiry-details-listview--kendo-card-comments-left">
+                  {{ a.remarks }}
+                </div>
+                <div class="app-enquiry-details-listview--kendo-card-comments-right">
+                  <img (click)="onDescriptionClick(i)" src="assets/content/images/up.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </kendo-card>
+      </div>
+    </div>
+
+    <app-parts-usage-edit
+      *ngIf="isPartsUsageEditOpen"
+      [srid]="srid"
+      [svcModuleDetails]="partDiagnosisDetailsCard"
+      [index]="selectedIndex"
+      (onBackClick)="onBackClickHandle('edit')">
+    </app-parts-usage-edit>
+
+    <div *ngIf="partDiagnosisDetailsCard.length === 0 && !showAPILoader && !isPartsUsageEditOpen" class="app-disclaimer--card">
+      <div class="app-disclaimer--content">
+        <h5>No parts usage details found</h5>
+      </div>
+    </div>
+    
+    <div class="app-control--container">
+      <div class="app-screen--footer" *ngIf="!showAPILoader && !isPartsUsageEditOpen">
+        <div class="parts-request-add-button" *ngIf="isPartsUsageDetailsOpen">
+          <img src="assets/content/images/add-circular-button.svg" alt="new" width="60" height="60"
+               (click)="onAddPartsClick()" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-parts-search 
+    *ngIf="!isPartsUsageDetailsOpen && !isPartsUsageEditOpen"
+    [srid]="srid"
+    [addedPartsDetailsCard]="addedPartsCard"
+    (onBackClickHandle)="onBackClickHandle('add')">
+  </app-parts-search>
+
+</div>
+
+<div class="app-screen--loader" *ngIf="showAPILoader">
+  <kendo-loader type="converging-spinner"
+                themeColor="info"
+                size="medium"></kendo-loader>
+  <div>{{ loaderMessage }}</div>
+</div> 

@@ -1,17 +1,20 @@
 <div class="app-locked--container" *ngIf="!showAPILoader">
-  <div class="app-screen--info-header">
-    <div class="app-screen--info-header-left">
-      Completion
+  <div class="app-secondary-header">
+    <div class="app-secondary-header-left">
+      <img src="assets/content/images/call-complete.svg" 
+       style="width: 18px; height: 18px;filter: brightness(0) invert(1);"/>
+      <div class="app-secondary-header-name">Completion</div>
     </div>
-    <div class="app-screen--info-header-right" (click)="onBackClickHandle()">
-      <img src="assets/content/images/backward.svg" />
+    <button class="app-secondary-header--btn"
+      (click)="onBackClickHandle()">
+      <i class="fa-solid fa-chevron-left app-secondary-header--btn-icon"></i>
       <span>Back</span>
-    </div>
+    </button>
   </div>
 </div>
 
 <div *ngIf="!showAPILoader">
-    <kendo-stepper
+  <kendo-stepper
     [steps]="steps"
     stepType="full"
     [linear]="false"
@@ -27,7 +30,9 @@
         [completionDetails]="currentGroup"
         [srid]="srid"
         [srlcDetails]="srlcDetails"
-        [CSRAttachment]="CSRAttachment"   
+        [CSRAttachment]="CSRAttachment"  
+        [OBSheetAttachment]="OBSheetAttachment"
+        [NCReportAttachment]="NCReportAttachment" 
         (surveyValidator)="surveyValidator()"></app-completion-details>
       <app-installation-details
         *ngIf="currentStep === 1"
@@ -50,8 +55,17 @@
         (hideShowFooter)="hideShowFooter($event)"
         (validateModuleDetails)="validateModules(this.moduleDetails)"
         (moduleDetailsCardChange)="updateModuleDetailsCard($event)"></app-module-details>
-      <app-other-tasks
+      <app-parts-usage
         *ngIf="currentStep === 4"
+        [srid]="srid"
+        [isEditable]="isEditable"
+        [partsUsageDetails]="currentGroup"
+        [partDiagnosisDetailsCard]="srlcPartDiagnosisDetails"
+        (hideShowFooter)="hideShowFooter($event)"
+        (validatePartsDiagnosis)="validatePartsDiagnosis(this.srlcPartDiagnosisDetails)"
+        (partDiagnosisDetailsCardChange)="updatePartDiagnosisCard($event)"></app-parts-usage>
+      <app-other-tasks
+        *ngIf="currentStep === 5"
         [srid]="srid"
         [isEditable]="isEditable"
         [otherDetails]="currentGroup"
@@ -60,7 +74,7 @@
         (hideShowFooter)="hideShowFooter($event)"
         (validateOtherDetails)="validateOtherTasks(this.otherTasksDetails)"></app-other-tasks>
       <app-service-survey
-        *ngIf="currentStep === 5 && serviceCalendarService.isSurveyRequired"
+        *ngIf="currentStep === 6 && serviceCalendarService.isSurveyRequired"
         [srid]="srid"
         [surveyDetails]="currentGroup"
         [srlcDetails]="srlcDetails"></app-service-survey>
@@ -70,14 +84,14 @@
         kendobutton
         class="app-general--button"
         (click)="next()"
-        *ngIf="currentStep !== (serviceCalendarService.isSurveyRequired? 5: 4)">
+        *ngIf="currentStep !== (serviceCalendarService.isSurveyRequired? 6: 5)">
         Next
       </button>
       <button
         kendoButton
         class="app-save--button"
         (click)="submit()"
-        *ngIf="currentStep === (serviceCalendarService.isSurveyRequired? 5: 4)">
+        *ngIf="currentStep === (serviceCalendarService.isSurveyRequired? 6: 5)">
         Submit
       </button>
       <button

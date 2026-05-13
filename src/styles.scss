@@ -354,6 +354,7 @@ ion-content::part(scroll) {
 .app-secondary-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.75rem;
   background-color: var(--secondary-color);
   padding: 0.75rem 1rem;
@@ -379,7 +380,21 @@ ion-content::part(scroll) {
   color: var(--primary-white);
   font-size: var(--text-size-02);
   font-weight: var(--font-weight-bolder);
+}
+
+.app-secondary-header-date-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: center;
   flex: 1;
+}
+
+.app-secondary-header-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.3px;
 }
 
 .app-secondary-header-row {
@@ -406,6 +421,11 @@ ion-content::part(scroll) {
   align-items: center;
   gap: 0.5rem;
   flex: 1;
+}
+.app-secondary-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .app-secondary-header-icon {

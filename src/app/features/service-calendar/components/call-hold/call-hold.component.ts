@@ -33,6 +33,7 @@ export class CallHoldComponent implements OnInit, OnDestroy{
   @Input() srid: number = 0;
   @Input() srlcDetails: svcGetSRLCDetails[] = [];
   @Output() widgetSelected: EventEmitter<void> = new EventEmitter<void>();
+  @Output() stepLabelChange: EventEmitter<string> = new EventEmitter<string>();
 
   private isStepValid = (index: number): boolean => {
     return this.getGroupAt(index).valid || this.currentGroup.untouched;
@@ -154,6 +155,8 @@ export class CallHoldComponent implements OnInit, OnDestroy{
   }
 
   public get currentGroup(): FormGroup {
+    const stepLabel = this.steps[this.currentStep].label;
+    this.stepLabelChange.emit(stepLabel);
     return this.getGroupAt(this.currentStep);
   }
 

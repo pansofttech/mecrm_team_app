@@ -84,8 +84,9 @@ export class CommonService implements OnDestroy{
   docSrcTypeWSAttachment: number = 658;
   docSrcTypeCSRAttachment: number = 11;
   docIBStickerAttachment: number = 708;
-  CSRUploadSrcType: number = 11;
-
+  docSrcTypeOBSheet: number = 720;
+  docSrcTypeCCNCReport: number = 723;
+  
   public currentUrl: string | null = null;
   public navigationMap: Map<string, string> = new Map();
   private backNavigationCallback?: () => void;
@@ -589,7 +590,7 @@ export class CommonService implements OnDestroy{
   putUploadCSR(docSrcVal: string, attachment: any) {
     const body = new FormData();
     body.append('docSrcVal', docSrcVal);
-    body.append('docSrcType', this.CSRUploadSrcType as any);
+    body.append('docSrcType', this.docSrcTypeCSRAttachment as any);
     body.append('LoginID', this.loginService.employeeId as string);
     body.append('attachment', attachment ? attachment : null);
 

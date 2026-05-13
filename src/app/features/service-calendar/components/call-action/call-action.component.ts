@@ -1,7 +1,8 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { LoginService } from 'src/app/features/login/components/login/login.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
-import { ServiceCalendarService, engEffortsList, svcGetSRLCDetails, svcPrerequisites, svcIBModuleDetails, svcGetOtherTasksDetails} from '../../service-calendar.service';
+import { ServiceCalendarService, engEffortsList, svcGetSRLCDetails, svcPrerequisites, 
+         svcIBModuleDetails, svcGetOtherTasksDetails, svcGetSRLCPartDiagnosisDetails} from '../../service-calendar.service';
 
 @Component({
   selector: 'app-call-action',
@@ -29,8 +30,11 @@ export class CallActionComponent implements OnInit{
   @Input() servicePrerequisites: svcPrerequisites[] = [];
   @Input() srlcDetails: svcGetSRLCDetails[] = [];
   @Input() moduleDetails: svcIBModuleDetails[] = [];
+  @Input() srlcPartDiagnosisDetails: svcGetSRLCPartDiagnosisDetails[] = [];
   @Input() otherTasksDetails: svcGetOtherTasksDetails[] = [];
+  @Output() stepLabelChange: EventEmitter<string> = new EventEmitter<string>();
   @Output() moduleDetailsCardChange: EventEmitter<svcIBModuleDetails[]> = new EventEmitter<svcIBModuleDetails[]>();
+  @Output() partDiagnosisDetailsCardChange: EventEmitter<svcGetSRLCPartDiagnosisDetails[]> = new EventEmitter<svcGetSRLCPartDiagnosisDetails[]>();
 
   constructor(
     private serviceCalendarService: ServiceCalendarService,
@@ -84,6 +88,7 @@ export class CallActionComponent implements OnInit{
         this.callContinueSelected = true;
         break;
       case 'back':
+        this.stepLabelChange.emit('Call Action');
         break;
     }
   }
@@ -158,6 +163,14 @@ export class CallActionComponent implements OnInit{
 
   updateModuleDetailsCard(updatedList: svcIBModuleDetails[]) {
     this.moduleDetailsCardChange.emit(updatedList);
+  }
+
+  updatePartDiagnosisCard(updatedList: svcGetSRLCPartDiagnosisDetails[]) {
+    this.srlcPartDiagnosisDetails = updatedList;
+  }
+
+  onStepLabelChange(stepLabel: string) {
+    this.stepLabelChange.emit(stepLabel);
   }
 
   ValidateEfforts(): Promise<boolean>{

@@ -112,6 +112,11 @@ export class EffortsListViewComponent {
   }
 
   addEffort(cardIndex: number, filteredCard: engEffortsList[]) {
+    this.isIBConfirmEnabled = (this.srlcDetails[0].isIBConfirmed == false && this.srlcDetails[0].callType?.toLowerCase() == 'service' &&
+                               this.srlcDetails[0].srStatusID != this.serviceCalendarService.SRCompletedStatus && this.srlcDetails[0].srStatusID != this.serviceCalendarService.SRClosedStatus &&
+                              ((this.srlcDetails[0].poType == '' || this.srlcDetails[0].poType == null) 
+                              || (this.srlcDetails[0].poType != '' && this.srlcDetails[0].poType != null && this.srlcDetails[0].poType.toLowerCase() != "wait for po" && this.srlcDetails[0].poType.toLowerCase() != "po available"))) 
+
     if(!this.isIBConfirmEnabled){
       const selectedCard = filteredCard[cardIndex];
       this.otherEngEffortsList = this.engeffortListCards.filter(

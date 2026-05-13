@@ -5,7 +5,8 @@ import { AppRoutePaths } from 'src/app/core/Constants';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { CommonService } from 'src/app/features/common/common.service';
 import { LoginService } from 'src/app/features/login/components/login/login.service';
-import { ServiceCalendarService, engEffortsList, callsList, svcPrerequisites, svcGetSRLCDetails, svcIBModuleDetails, svcGetOtherTasksDetails } from '../../service-calendar.service';
+import { ServiceCalendarService, engEffortsList, callsList, svcPrerequisites, svcGetSRLCDetails, 
+         svcIBModuleDetails, svcGetOtherTasksDetails, svcGetSRLCPartDiagnosisDetails } from '../../service-calendar.service';
 
 @Component({
   selector: 'app-srlc',
@@ -36,6 +37,7 @@ export class SrlcComponent implements OnInit, OnDestroy{
   srlcDetails: svcGetSRLCDetails[] = [];
   moduleDetails: svcIBModuleDetails[] = [];
   otherTasksDetails: svcGetOtherTasksDetails[] = [];
+  srlcPartDiagnosisDetails: svcGetSRLCPartDiagnosisDetails[] = [];
   schCallCards: callsList[] = [];
 
   constructor(
@@ -66,6 +68,7 @@ export class SrlcComponent implements OnInit, OnDestroy{
       this.getServicePrereq();
       this.getSRLCDetails();
       this.getOtherTasksDetails();
+      this.getSRLCPartDiagnosisDetails();
       this.scheduledCallsDetails();
       this.onStepperClick(1);
     }
@@ -178,9 +181,25 @@ export class SrlcComponent implements OnInit, OnDestroy{
         this.serviceCalendarService.otherTasksDetailsCard = data;
       });
     }
+        
+    getSRLCPartDiagnosisDetails(){
+      this.serviceCalendarService.getSRLCPartDiagnosis(this.selectedSRID).
+      subscribe((data: any) => {
+        this.srlcPartDiagnosisDetails = data;
+        this.serviceCalendarService.pdUsageDetailsCard = data;
+      });
+    }
     
     updateModuleDetailsCard(updatedList: svcIBModuleDetails[]) {
       this.moduleDetails = updatedList;
+    }
+    
+    updatePartDiagnosisCard(updatedList: svcGetSRLCPartDiagnosisDetails[]) {
+      this.srlcPartDiagnosisDetails = updatedList;
+    }
+
+    onStepLabelChange(stepLabel: string) {
+      this.stepName = stepLabel;
     }
 
     onSRIDInfoClick(){

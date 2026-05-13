@@ -117,6 +117,12 @@ export interface svcPrerequisites {
   isIBConfirmed: boolean;
   isIBStickerUsed: boolean;
   ibWorkingStatus: string | null;
+  isPartDiagnosisEnable: boolean;
+  isCQDone: boolean;
+  isQualificationReq: boolean;
+  engProblemID?: number;
+  competencyID?: number;
+  isCalibSuccess?: boolean;
 }
 
 export interface svcPartsRequest {
@@ -245,9 +251,7 @@ export interface svcGetSRLCDetails {
   poType?: string;
   engEmployeeNames?: string;
   quoteSubmissionDate?: string;
-  svcWOPTATHrs?: number;
   escallationID?: number;
-  vendorQuoteExists?: boolean;
   partReqId?: number;
   isConfigProduct?: boolean;
   isEffortsEntered?: boolean;
@@ -261,14 +265,9 @@ export interface svcGetSRLCDetails {
   hssrId?: number;
   isPsgScheduleBlock?: boolean;
   installedDate?: string;
-  warrantyStartDate?: string;
-  warrantyFinishDate?: string;
-  extendedWarStartDate?: string;
-  extendedWarEndDate?: string;
   contractStartDate?: string;
   contractEndDate?: string;
   isPartsReqAllowed?: boolean;
-  invoiceStatus?: string;
   isQualificationReq?: boolean;
   warrentyYear?: string;
   addWarrentyYear?: string;
@@ -385,6 +384,18 @@ export interface svcGetSRLCDetails {
   mainTaskEngrResponse?: string;
   pddAttachment?: string;
   stickerStatusID? : number;
+  cqNotReqReasonID?: number;
+  competencyID?: number;
+  cqProblemID?: number;
+  engProblemID?: number;
+  isPartsUsed?: boolean;
+  partDiagAccPct?: number;
+  partsUtilPct?: number;
+  ibWarrantyStartDate?: string;
+  ibWarrantyEndDate?: string;
+  customerWarr?: number;
+  extendedWarrQty?: number;
+  isProjectOrder?: boolean;
 }
 
 export interface svcIBModuleDetails {
@@ -460,10 +471,10 @@ export interface callActionBO {
   CSRRemarks?: string;
   SerialNo?: string;
   Labmodifcation?: boolean;
-  WarrantyFinishDate?: string;
-  WarrantyStartDate?: string;
-  ExtendedWarStartDate?: string;
-  ExtendedWarEndDate?: string;
+  IBWarrantyStartDate?: string;
+  IBWarrantyEndDate?: string;
+  // ExtendedWarStartDate?: string;
+  // ExtendedWarEndDate?: string;
   Location?: string;
   CustomerTagNo?: string;
   IsCalibration?: boolean;
@@ -499,6 +510,10 @@ export interface callActionBO {
   IBStickerAttachmentSrcType?: number;
   CSRAttachment?: any;
   CSRAttachmentSrcType?: number;
+  OBSheetAttachment?: any;
+  OBSheetAttachmentSrcType?: number;
+  NCReportAttachment?: any;
+  NCReportAttachmentSrcType?: number;
   Guid?: string;
   IsAwaitingUserAccptance?: boolean;
   IsATCallContinue?: boolean;
@@ -511,9 +526,50 @@ export interface callActionBO {
   SRStatusId? : number;
   SRStatus?: string;
   IsSiteVisitRequired?: boolean; 
-  IsReopen?: boolean,
-  IsPSG?: boolean,
-  CustomerSiteId?: number,
+  IsReopen?: boolean;
+  IsPSG?: boolean;
+  CustomerSiteId?: number;
+  LstPartDiag?:	partDiagnosisBO[];
+  CompetencyID?: number;
+  CQProblemID?: number;
+  EngProblemID?: number;
+  IsPartsUsed?: boolean;
+  IsCalibSuccess?: boolean;
+}
+
+export interface svcGetSRLCPartDiagnosisDetails {
+  partReqId?: number;
+  partListID?: number;
+  partsMasterId?: number;
+  partNo?: string;
+  option?: string;
+  supplierId?: number;
+  supplierName?: string;
+  productLine?: string;
+  description?: string;
+  qty?: number;
+  usedQty?: number;
+  partDiagStatusId?: number;
+  partDiagStatus?: string;
+  remarks?: string;
+  isCardSelected?: boolean | null;
+  isDescOpen?: boolean | null;
+}
+
+export interface partDiagnosisBO {
+  srid?: number;
+  partReqId?: number | null;
+  partsListId?: number | null;
+  partsMasterId?: number;
+  partNo?: string;
+  option?: string;
+  supplierId?: number;
+  supplierName?: string;
+  qty?: number;
+  usedQty?: number | null;
+  partDiagStatusId?: number;
+  partDiagStatus?: string;
+  remarks?: string;
 }
 
 @Injectable({
@@ -526,7 +582,6 @@ export class ServiceCalendarService {
   selectedCallCat!: string;
   selectedCallCompletion!: boolean;
   csrComments!: string;
-  CSRUploadSrcType: number = 11;
   SRStatusId: number = 3;
   SRSubTaskId: number = 9;
   InstallationSubTaskId: number = 6;
@@ -537,7 +592,9 @@ export class ServiceCalendarService {
   delayRemarks!: string;
   addedPartsDetailsCard: svcPartsDetails[] = [];
   moduleDetailsCard: svcIBModuleDetails[] = [];
-  otherTasksDetailsCard: svcGetOtherTasksDetails[] = []
+  otherTasksDetailsCard: svcGetOtherTasksDetails[] = [];
+  pdUsageDetailsCard: svcGetSRLCPartDiagnosisDetails[] = [];
+  pdUsageDetailsBOCard: partDiagnosisBO[] = [];
   callActionDetails!: callActionBO;
   isSurveyRequired: boolean = false;
   isCallCompleted: boolean = false;
@@ -547,6 +604,11 @@ export class ServiceCalendarService {
   ibStickerGluedStatus: number= 3;
   ibStickerNotAllowingStatus: number= 2;
   ibStickerImageUploadedStatus: number= 1;
+
+  //PD Status 
+  pdReplacedStatusId: number = 1;
+  pdNotUsedStatusId: number = 2;
+  pdPartiallyUsedStatusId: number = 3;
 
   // public hasPatchedMap: { [key: string]: boolean } = {
   //   completionDetails: false,
@@ -568,7 +630,7 @@ export class ServiceCalendarService {
   private postServiceRequestUrl = `${this.configService.apiUrl}/api/ServiceCalendar/UpdServiceRequest`;
   private getEngEffortsUrl = `${this.configService.apiUrl}/api/ServiceCalendar/GetEngEfforts`;
   private postEngEffortsUrl = `${this.configService.apiUrl}/api/ServiceCalendar/AddEngEfforts`;
-  public  postGenerateCSRUrl = `${this.configService.apiUrl}/api/ServiceCalendar/GenerateCSRPath`;
+  private postGenerateCSRUrl = `${this.configService.apiUrl}/api/ServiceCalendar/GenerateCSRPath`;
   private getCSRDownloadFileUrl = `${this.configService.apiUrl}/api/UploadDownload/GetCSRDownloadFile`;
   private postUploadCSRUrl = `${this.configService.apiUrl}/api/ServiceCalendar/UploadCSR`;
   private getPartsSearchUrl = `${this.configService.apiUrl}/api/ServiceCalendar/GetPartsDetails`;
@@ -577,6 +639,7 @@ export class ServiceCalendarService {
   private getOtherTasksDetailsUrl = `${this.configService.apiUrl}/api/ServiceCalendar/GetOtherTasksDetails`;
   private getIBSalesConfigDetailsUrl = `${this.configService.apiUrl}/api/ServiceCalendar/GetIBSalesConfigDetails`;
   private postCallActionUrl = `${this.configService.apiUrl}/api/ServiceCalendar/UpdateCallAction`;
+  private getSRLCPartDiagnosisUrl = `${this.configService.apiUrl}/api/ServiceCalendar/GetSRLCPartDiagnosis`;
 
   constructor(
     private http: HttpService,
@@ -784,7 +847,7 @@ export class ServiceCalendarService {
 
     const body = new FormData();
     body.append('docSrcVal', docSrcVal);
-    body.append('docSrcType', this.CSRUploadSrcType as any);
+    body.append('docSrcType', this.commonService.docSrcTypeCSRAttachment as any);
     body.append('LoginID', this.loginService.employeeId as string);
     body.append('attachment', attachment ? attachment : null);
 
@@ -808,7 +871,8 @@ export class ServiceCalendarService {
   //API call to request for added parts
   postPartsRequest(SRID: number, PartReqId: number, CustomerId: number, IOID: number,
     VendorQuoteDocument: string, VendorQuoteSouceTypeID: number,
-    lstPartReq: svcPartsRequest[], Source: string, IsInProgress: boolean) {
+    lstPartReq: svcPartsRequest[], Source: string, IsInProgress: boolean,
+    CompetencyID: number, EngProblemID: number) {
     const body = {
       srid: SRID,
       partReqId: PartReqId,
@@ -820,13 +884,31 @@ export class ServiceCalendarService {
       vendorQuoteSouceTypeID: VendorQuoteSouceTypeID,
       lstPartReq: lstPartReq,
       source: Source,
-      isInProgress: IsInProgress
+      isInProgress: IsInProgress,
+      competencyID: CompetencyID,
+      engProblemID: EngProblemID
     };
     return this.http.post(this.postPartsRequestUrl, body);
   }
 
   //Assigning call action parameters
   assignCallActionParams(SRLCLabel: svcGetSRLCDetails){
+    this.pdUsageDetailsBOCard = this.pdUsageDetailsCard.map(item => ({
+      srid: (item.partReqId === null || item.partReqId === 0)? 0 : this.selectedSRID,
+      partReqId: item.partReqId ?? null,
+      partsListId: item.partListID ?? null,
+      partsMasterId: item.partsMasterId ?? 0,
+      partNo: item.partNo ?? '',
+      option: item.option ?? '',
+      supplierId: item.supplierId ?? 0,
+      supplierName: item.supplierName ?? '',
+      qty: item.qty ?? 0,
+      usedQty: item.usedQty ?? null,
+      partDiagStatusId: item.partDiagStatusId ?? 0,
+      partDiagStatus: item.partDiagStatus ?? '',
+      remarks: item.remarks ?? ''
+    }));
+
     this.callActionDetails = {
       SRID: SRLCLabel.srid,
       SubTaskId: 0, //check
@@ -846,10 +928,10 @@ export class ServiceCalendarService {
       CSRRemarks: SRLCLabel.csrRemarks? SRLCLabel.csrRemarks: "",
       SerialNo: SRLCLabel.serialNumber? SRLCLabel.serialNumber: '',
       Labmodifcation: SRLCLabel.isLabModfReq? SRLCLabel.isLabModfReq : false,
-      WarrantyFinishDate: SRLCLabel.warrantyFinishDate? SRLCLabel.warrantyFinishDate: '',
-      WarrantyStartDate: SRLCLabel.warrantyStartDate? SRLCLabel.warrantyStartDate: '',
-      ExtendedWarStartDate: SRLCLabel.extendedWarStartDate? SRLCLabel.extendedWarStartDate: '',
-      ExtendedWarEndDate: SRLCLabel.extendedWarEndDate? SRLCLabel.extendedWarEndDate: '',
+      IBWarrantyStartDate: SRLCLabel.ibWarrantyStartDate? SRLCLabel.ibWarrantyStartDate: '',
+      IBWarrantyEndDate: SRLCLabel.ibWarrantyStartDate? SRLCLabel.ibWarrantyStartDate: '',
+      // ExtendedWarStartDate: SRLCLabel.extendedWarStartDate? SRLCLabel.extendedWarStartDate: '',
+      // ExtendedWarEndDate: SRLCLabel.extendedWarEndDate? SRLCLabel.extendedWarEndDate: '',
       Location: SRLCLabel.custSiteLocation,
       CustomerTagNo: SRLCLabel.customerTagNo,
       IsCalibration: SRLCLabel.isCalibration? SRLCLabel.isCalibration : false,
@@ -898,6 +980,14 @@ export class ServiceCalendarService {
       CustomerSiteId: SRLCLabel.customerSiteId? SRLCLabel.customerSiteId: 0,
       IBStickerAttachmentSrcType: this.commonService.docIBStickerAttachment,
       CSRAttachmentSrcType: this.commonService.docSrcTypeCSRAttachment,
+      OBSheetAttachmentSrcType: this.commonService.docSrcTypeOBSheet,
+      NCReportAttachmentSrcType: this.commonService.docSrcTypeCCNCReport,
+      LstPartDiag: this.pdUsageDetailsBOCard,
+      CompetencyID: SRLCLabel.competencyID? SRLCLabel.competencyID: 0,
+      CQProblemID: SRLCLabel.cqProblemID? SRLCLabel.cqProblemID: 0,
+      EngProblemID: SRLCLabel.engProblemID? SRLCLabel.engProblemID: 0,
+      IsPartsUsed: SRLCLabel.isPartsUsed? SRLCLabel.isPartsUsed: false,
+      IsCalibSuccess: false
     };
   }
 
@@ -944,8 +1034,23 @@ export class ServiceCalendarService {
     if (callActionBO.CSRAttachment && callActionBO.CSRAttachment.length > 0) {
       body.append("csrAttachment", callActionBO.CSRAttachment[0]);
     }
-  
+    if (callActionBO.OBSheetAttachment && callActionBO.OBSheetAttachment.length > 0) {
+      body.append("obSheetAttachment", callActionBO.OBSheetAttachment[0]);
+    }
+    if (callActionBO.NCReportAttachment && callActionBO.NCReportAttachment.length > 0) {
+      body.append("ncReportAttachment", callActionBO.NCReportAttachment[0]);
+    }
+
     return this.http.post(this.postCallActionUrl, body);
+  }
+
+  //API call to get SRLC Part Diagnosis Details
+  getSRLCPartDiagnosis(SRID: number) {
+    const body = {
+      SRID: SRID,
+      EmpID: this.loginService.employeeId as number
+    };
+    return this.http.post(this.getSRLCPartDiagnosisUrl, body);
   }
 
   //Function to reset all the common values stored in calendar service
@@ -957,6 +1062,8 @@ export class ServiceCalendarService {
     this.delayRemarks = "";
     this.addedPartsDetailsCard = [];
     this.moduleDetailsCard = [];
+    this.pdUsageDetailsCard = [];
+    this.pdUsageDetailsBOCard = [];
     this.otherTasksDetailsCard = [];
     this.callActionDetails =  null as any;
     this.isSurveyRequired = false;

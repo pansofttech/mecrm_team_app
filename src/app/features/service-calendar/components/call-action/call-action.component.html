@@ -34,14 +34,14 @@
                 Field Visit <br> Required
             </div>
         </div>
-        <div class="app-widget-option" (click)="callContinueEnabled && widgetSelected('callContinue')">
+        <!-- <div class="app-widget-option" (click)="callContinueEnabled && widgetSelected('callContinue')">
             <div class="app-widget-icon">
                 <img [src]="callContinueEnabled ? 'assets/content/images/call-continue.svg' : 'assets/content/images/call-continue-disabled.svg'"/>
             </div>
             <div class="app-widget-label" [style.color]="callContinueEnabled ? 'var(--primary-white)' : '#c4c2c2'"> 
                 Continue <br> to work
             </div>
-        </div>
+        </div> -->
     </div>
 
     <app-call-completion
@@ -50,31 +50,38 @@
         [servicePrerequisites]="servicePrerequisites"
         [srlcDetails]="srlcDetails"
         [moduleDetails]="moduleDetails"
+        [srlcPartDiagnosisDetails]="srlcPartDiagnosisDetails"
         [otherTasksDetails]="otherTasksDetails"
         (widgetSelected)="widgetSelected('back')"
-        (moduleDetailsCardChange)="updateModuleDetailsCard($event)">
+        (stepLabelChange)="onStepLabelChange($event)"
+        (moduleDetailsCardChange)="updateModuleDetailsCard($event)"
+        (partDiagnosisDetailsCardChange)="updatePartDiagnosisCard($event)">
     </app-call-completion>
 
     <app-call-hold
         *ngIf="callHoldSelected"
         [srid]="srid"
         [srlcDetails]="srlcDetails"
-        (widgetSelected)="widgetSelected('back')">
+        (widgetSelected)="widgetSelected('back')"
+        (stepLabelChange)="onStepLabelChange($event)">
     </app-call-hold>
 
     <app-call-field-visit
         *ngIf="callFieldVisitSelected"
         [srid]="srid"
+        [servicePrerequisites]="servicePrerequisites"
         [srlcDetails]="srlcDetails"
-        (widgetSelected)="widgetSelected('back')">
+        (widgetSelected)="widgetSelected('back')"
+        (stepLabelChange)="onStepLabelChange($event)">
     </app-call-field-visit>
 
-    <app-call-continue
+    <!-- <app-call-continue
         *ngIf="callContinueSelected"
         [srlcDetails]="srlcDetails"
         (widgetSelected)="widgetSelected('back')"
+        (stepLabelChange)="onStepLabelChange($event)"
         [srid]="srid">
-    </app-call-continue>
+    </app-call-continue> -->
 
 </div>
 

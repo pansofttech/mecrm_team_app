@@ -11,7 +11,8 @@ import { AppRoutePaths } from 'src/app/core/Constants';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { CommonService } from 'src/app/features/common/common.service';
-import { ServiceCalendarService, svcGetSRLCDetails } from '../../service-calendar.service';
+import { LoginService } from 'src/app/features/login/components/login/login.service';
+import { ServiceCalendarService, svcPrerequisites, svcGetSRLCDetails, svcDependentComboData } from '../../service-calendar.service';
 
 @Component({
   selector: 'app-call-field-visit',
@@ -22,10 +23,15 @@ export class CallFieldVisitComponent implements OnInit, OnDestroy {
   private popstateSubscription?: Subscription;
   showAPILoader = false;
   loaderMessage: string = 'Loading Field Visit Details...';
+  @Input() servicePrerequisites: svcPrerequisites[] = [];
   @Input() srlcDetails: svcGetSRLCDetails[] = [];
   @Output() widgetSelected: EventEmitter<void> = new EventEmitter<void>();
+  @Output() stepLabelChange: EventEmitter<string> = new EventEmitter<string>(); 
   isEditable: boolean = false;
+  isPDEnabled: boolean = false;
   callFieldVisitForm!: FormGroup;
+  dependantComboDataForProbType: svcDependentComboData[] = [];
+  dependantComboDataForCompetency: svcDependentComboData[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +39,7 @@ export class CallFieldVisitComponent implements OnInit, OnDestroy {
     private router: Router,
     private notificationService: NotificationService,
     private commonService: CommonService,
+    private loginService: LoginService,
     public serviceCalendarService: ServiceCalendarService,
   ) {}
 
@@ -46,19 +53,38 @@ export class CallFieldVisitComponent implements OnInit, OnDestroy {
     this.loaderService.hideLoader();
 
     this.isEditable = this.srlcDetails[0].srStatus?.toLowerCase() == "in_progress";
+    this.isPDEnabled = this.servicePrerequisites[0].isPartDiagnosisEnable && this.servicePrerequisites[0].isQualificationReq && !this.servicePrerequisites[0].isCQDone;
+
     this.callFieldVisitForm = new FormGroup({
-      fieldVisitRemarks: new FormControl({value: false, disabled: !this.isEditable}, Validators.nullValidator)
+      fieldVisitRemarks: new FormControl({value: false, disabled: !this.isEditable}, Validators.nullValidator),
+      probType: new FormControl({value: '', disabled: !this.isEditable}, this.isPDEnabled? Validators.required: Validators.nullValidator),
+      competency: new FormControl({value: '', disabled: !this.isEditable}, this.isPDEnabled? Validators.required: Validators.nullValidator),
     });
+    this.getPrerequisiteCombo();
     this.patchFormValues();
+    this.stepLabelChange.emit('Field Visit');
   }
 
   ngOnDestroy(): void {
     this.popstateSubscription?.unsubscribe();
   }
 
+  getPrerequisiteCombo(){
+    this.serviceCalendarService.getPrerequisiteCombo("SRLC", this.loginService.employeeId as number).subscribe((data: any) => {
+      this.dependantComboDataForCompetency = data.filter(
+        (item: any) => item.comboType === 'COMPETENCY'
+      );
+      this.dependantComboDataForProbType = data.filter(
+        (item: any) => item.comboType === 'TYPEOFPROBLEM'
+      );
+    });
+  }
+
   patchFormValues(){
     this.callFieldVisitForm.patchValue({
       fieldVisitRemarks: this.srlcDetails[0].srStatusID == 5? this.srlcDetails[0].mainTaskEngrResponse: '',
+      probType: this.srlcDetails[0].cqProblemID? this.srlcDetails[0].cqProblemID: null,
+      competency: this.srlcDetails[0].competencyID? this.srlcDetails[0].competencyID: null,
     });
   }
 
@@ -70,6 +96,8 @@ export class CallFieldVisitComponent implements OnInit, OnDestroy {
     if(this.callFieldVisitForm.valid){
       //Field visit params
       this.serviceCalendarService.callActionDetails.IsExpertiseRequirement = true;
+      this.serviceCalendarService.callActionDetails.CompetencyID =  formValue.competency;
+      this.serviceCalendarService.callActionDetails.CQProblemID =  formValue.probType;
       this.serviceCalendarService.callActionDetails.Remarks =  formValue.fieldVisitRemarks;
       //Submit API
       this.serviceCalendarService.postCallAction(this.serviceCalendarService.callActionDetails).subscribe((data: any) =>{

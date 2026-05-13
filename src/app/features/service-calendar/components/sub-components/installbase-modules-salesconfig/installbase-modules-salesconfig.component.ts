@@ -13,8 +13,8 @@ import { ServiceCalendarService, svcPartsDetails, svcGetIBSalesConfigDetails } f
 })
 
 export class InstallbaseModulesSalesconfigComponent {
-  showAPILoader = false;
-  loaderMessage: string = 'Loading Details...';
+  // showAPILoader = false;
+  // loaderMessage: string = 'Loading Details...';
   ibSalesConfigDetailsCard: svcGetIBSalesConfigDetails[] = [];
 
   @Input() addedPartsDetailsCard: svcPartsDetails[] = [];
@@ -32,23 +32,24 @@ export class InstallbaseModulesSalesconfigComponent {
   ){}
 
   ngOnInit(): void {
-    this.loaderService.loaderState.subscribe(res => {
-      this.showAPILoader = res;
-    });
-    this.loaderService.hideLoader();
-    this.loaderMessage = 'Loading Details...';
+    // this.loaderService.loaderState.subscribe(res => {
+    //   this.showAPILoader = res;
+    // });
+    // this.loaderService.hideLoader();
+    // this.loaderMessage = 'Loading Details...';
+    console.log('InstallBaseId in SalesConfig:', this.installBaseId);
     this.getIBSalesConfigDetails();
   }
 
   getIBSalesConfigDetails(){
-    this.loaderService.showLoader();
+    // this.loaderService.showLoader();
     this.serviceCalendarService.getIBSalesConfigDetails(this.installBaseId,this.loginService.employeeId as number).
     subscribe((data: any) => {
       this.ibSalesConfigDetailsCard = data;
-      this.loaderService.hideLoader();
+      // this.loaderService.hideLoader();
     },
     error =>{
-      this.loaderService.hideLoader();
+      // this.loaderService.hideLoader();
       this.notificationService.showNotification(
         'Error fetching modules from sales config',
         'error', 

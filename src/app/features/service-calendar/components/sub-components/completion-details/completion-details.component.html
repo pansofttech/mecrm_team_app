@@ -1,7 +1,3 @@
-<div class="app-screen--header">
-  Completion Details
-</div>
-
 <div class="app-kendo-form--container" [formGroup]="completionDetails" *ngIf="!showAPILoader">
     <div>
       <kendo-formfield>
@@ -37,7 +33,7 @@
       </kendo-formfield>
     </div>
 
-    <div class="app-kendo-form--row-container">
+    <!-- <div class="app-kendo-form--row-container">
       <kendo-formfield class="flex-basis-50">
         <div class="app-kendo--content">
           <div class="app-kendo--content-horizontal">
@@ -95,7 +91,7 @@
           </div>
         </div>
       </kendo-formfield>
-    </div>
+    </div> -->
 
     <div>
       <kendo-formfield>
@@ -138,6 +134,136 @@
         <kendo-formerror class="app-kendo--error-msg">
             Resolution Type is required
         </kendo-formerror>
+      </kendo-formfield>
+    </div>
+
+    <div>
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="probType">
+            Type of Problem
+          </kendo-label>
+          <kendo-dropdownlist
+            class="app-kendo--dropdownlist"
+            formControlName="probType"
+            #probType
+            [data]="dependantComboDataForProbType"
+            textField="comboName"
+            valueField="comboId"
+            [valuePrimitive]="true">
+          </kendo-dropdownlist>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+            Problem Type is required
+        </kendo-formerror>
+      </kendo-formfield>
+    </div>
+
+    <div class="app-kendo-form--row-container">
+      <kendo-formfield class="flex-basis-50">
+        <div class="app-kendo--content">
+          <div class="app-kendo--content-horizontal">
+              <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="partsUsedYes">
+                  Parts Used
+              </kendo-label>
+              <div style="display: flex;align-items: center;gap:0.2rem;">
+                <kendo-checkbox class="app-kendo--checkbox"
+                    formControlName="partsUsedYes"  
+                    #partsUsedYes>
+                </kendo-checkbox>
+                <section>Yes</section>
+              </div>
+          </div>
+        </div>
+      </kendo-formfield>
+
+      <kendo-formfield class="flex-basis-50">
+        <div class="app-kendo--content">
+          <div class="app-kendo--content-horizontal">
+            <div style="display: flex;align-items: center;gap:0.2rem;">
+              <kendo-checkbox class="app-kendo--checkbox"
+                  formControlName="partsUsedNo"  
+                  #partsUsedNo>
+              </kendo-checkbox>
+              <section>No</section>
+            </div>
+          </div>
+        </div>
+      </kendo-formfield>
+    </div>
+
+    <div class="app-kendo-form--row-container">
+      <kendo-formfield class="flex-basis-50">
+        <div class="app-kendo--content">
+          <div class="app-kendo--content-horizontal">
+              <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="callibSuccessYes">
+                  <!-- Callib. Success -->
+                <span class="short-title">Cal. Success</span>
+                <span class="long-title">Callib. Success</span>
+              </kendo-label>
+              <div style="display: flex;align-items: center;gap:0.2rem;">
+                <kendo-checkbox class="app-kendo--checkbox"
+                    formControlName="callibSuccessYes"  
+                    #callibSuccessYes>
+                </kendo-checkbox>
+                <section>Yes</section>
+              </div>
+          </div>
+        </div>
+      </kendo-formfield>
+
+      <kendo-formfield class="flex-basis-50">
+        <div class="app-kendo--content">
+          <div class="app-kendo--content-horizontal">
+            <div style="display: flex;align-items: center;gap:0.2rem;">
+              <kendo-checkbox class="app-kendo--checkbox"
+                  formControlName="callibSuccessNo"  
+                  #callibSuccessNo>
+              </kendo-checkbox>
+              <section>No</section>
+            </div>
+          </div>
+        </div>
+      </kendo-formfield>
+    </div>
+
+    <div>
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label" [for]="obAttachment">OB Sheet</kendo-label>
+          <kendo-fileselect
+            class="app-kendo--fileupload"
+            formControlName="obAttachment"
+            #obAttachment>
+          </kendo-fileselect>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+          OB Sheet is required
+        </kendo-formerror>
+        <div *ngFor="let file of OBSheetAttachment; let i = index"
+          class="app-kendo-attachment-files">
+          <div (click)="downloadAttachment(i, 'OBSheet', commonService.docSrcTypeOBSheet)">{{ file.name }}</div>
+        </div>
+      </kendo-formfield>
+    </div>
+
+    <div>
+      <kendo-formfield>
+        <div class="app-kendo--content">
+          <kendo-label class="app-kendo--label" [for]="ncAttachment">CC/NC Report</kendo-label>
+          <kendo-fileselect
+            class="app-kendo--fileupload"
+            formControlName="ncAttachment"
+            #ncAttachment>
+          </kendo-fileselect>
+        </div>
+        <kendo-formerror class="app-kendo--error-msg">
+          CC/NC Report is required
+        </kendo-formerror>
+        <div *ngFor="let file of NCReportAttachment; let i = index"
+          class="app-kendo-attachment-files">
+          <div (click)="downloadAttachment(i, 'NCReport', commonService.docSrcTypeCCNCReport)">{{ file.name }}</div>
+        </div>
       </kendo-formfield>
     </div>
 
@@ -188,7 +314,7 @@
         </kendo-formerror>
         <div *ngFor="let file of CSRAttachment; let i = index"
           class="app-kendo-attachment-files">
-          <div (click)="downloadAttachment(i)">{{ file.name }}</div>
+          <div (click)="downloadAttachment(i, 'CSR', commonService.docSrcTypeCSRAttachment)">{{ file.name }}</div>
         </div>
       </kendo-formfield>
     </div>

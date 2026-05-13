@@ -1,7 +1,3 @@
-<div class="app-screen--header">
-      Installation Details
-</div>
-
 <div class="app-kendo-form--container"
     [formGroup]="installationDetails"
     *ngIf="!showAPILoader">
@@ -90,19 +86,19 @@
 
     <kendo-formfield>
         <div class="app-kendo--content">
-          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="principalWarrantyStart">
-            Principal Warranty
+          <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="ibWarrantyStart">
+            Warranty Date
           </kendo-label>
           <kendo-datepicker
             class="app-kendo--dropdownlist"
-            formControlName="principalWarrantyStart"
-            #principalWarrantyStart
+            formControlName="ibWarrantyStart"
+            #ibWarrantyStart
             placeholder="dd-MMM-yyyy"
             format="dd-MMM-yyyy">
           </kendo-datepicker>
         </div>
         <kendo-formerror class="app-kendo--error-msg">
-            Principal warranty start date is required
+            Warranty start date is required
         </kendo-formerror>
     </kendo-formfield>
 
@@ -110,18 +106,18 @@
         <div class="app-kendo--content">
           <kendo-datepicker
             class="app-kendo--dropdownlist"
-            formControlName="principalWarrantyEnd"
-            #principalWarrantyEnd
+            formControlName="ibWarrantyEnd"
+            #ibWarrantyEnd
             placeholder="dd-MMM-yyyy"
             format="dd-MMM-yyyy">
           </kendo-datepicker>
         </div>
         <kendo-formerror class="app-kendo--error-msg">
-            Principal warranty end date should be greater than start date
+            Warranty end date should be greater than start date
         </kendo-formerror>
     </kendo-formfield>
 
-    <kendo-formfield>
+    <!-- <kendo-formfield>
         <div class="app-kendo--content">
           <kendo-label class="app-kendo--label app-kendo--label-horizontal" [for]="clientWarrantyStart">
             Client Warranty
@@ -152,7 +148,7 @@
       <kendo-formerror class="app-kendo--error-msg">
           Client warranty end date should be greater than start date
       </kendo-formerror>
-    </kendo-formfield>
+    </kendo-formfield> -->
 
     <kendo-formfield>
       <div class="app-kendo--content">

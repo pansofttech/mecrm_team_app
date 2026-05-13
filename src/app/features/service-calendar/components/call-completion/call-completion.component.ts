@@ -10,7 +10,9 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { LoginService } from 'src/app/features/login/components/login/login.service';
 import { CommonService } from 'src/app/features/common/common.service';
-import { ServiceCalendarService, svcPrerequisites, engEffortsList, svcGetOtherTasksDetails, svcGetSRLCDetails, svcIBModuleDetails } from '../../service-calendar.service';
+import { ServiceCalendarService, svcPrerequisites, engEffortsList, 
+         svcGetOtherTasksDetails, svcGetSRLCDetails, svcIBModuleDetails,
+         svcGetSRLCPartDiagnosisDetails, partDiagnosisBO } from '../../service-calendar.service';
 
 @Component({
   selector: 'app-call-completion',
@@ -26,22 +28,30 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
   @ViewChild('stepper', { static: true })
   public stepper!: StepperComponent;
   isEditable: boolean = false;
+  isPDEnabled: boolean = false;
   isOtherTaskDetailsValid: boolean = false;
   isInstallationCall: boolean = false;
+  isCallibrationCall: boolean = false;
   isContractSVCCall: boolean = false;
   isCustContactConfirmed: boolean = true;
   isInnerScreen: boolean = false;
   engeffortListCards: engEffortsList[] = [];
   IBStickerAttachment: Array<FileInfo> = [];
   CSRAttachment: Array<FileInfo> = [];
+  OBSheetAttachment: Array<FileInfo> = [];
+  NCReportAttachment: Array<FileInfo> = [];
 
   @Input() srid: number = 0;
   @Input() servicePrerequisites: svcPrerequisites[] = [];
   @Input() srlcDetails: svcGetSRLCDetails[] = [];
   @Input() moduleDetails: svcIBModuleDetails[] = [];
+  @Input() srlcPartDiagnosisDetails: svcGetSRLCPartDiagnosisDetails[] = [];
+  pdUsageDetailsBOCard: partDiagnosisBO[] = [];
   @Input() otherTasksDetails: svcGetOtherTasksDetails[] = [];
   @Output() widgetSelected: EventEmitter<void> = new EventEmitter<void>();
+  @Output() stepLabelChange: EventEmitter<string> = new EventEmitter<string>();
   @Output() moduleDetailsCardChange: EventEmitter<svcIBModuleDetails[]> = new EventEmitter<svcIBModuleDetails[]>();
+  @Output() partDiagnosisDetailsCardChange: EventEmitter<svcGetSRLCPartDiagnosisDetails[]> = new EventEmitter<svcGetSRLCPartDiagnosisDetails[]>();
 
   private isStepValid = (index: number): boolean => {
     return this.getGroupAt(index).valid || this.currentGroup.untouched;
@@ -78,8 +88,39 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
     return isValid;
   }
 
+  validatePartsDiagnosis(pdDetails: svcGetSRLCPartDiagnosisDetails[]): boolean {
+    const dummyControl = this.callCompletionForm.get('partsUsageDetails.dummyPartsUsageControl');
+  
+    if (!pdDetails || pdDetails.length === 0) {
+      dummyControl?.setValidators(null);
+      dummyControl?.updateValueAndValidity();
+      return true;
+    }
+  
+    const isValid = pdDetails.every(item => 
+      item.usedQty !== null && item.usedQty! >= 0 &&
+      item.remarks !== null && item.remarks!.trim().length > 0
+    );
+  
+    if (isValid) {
+      dummyControl?.setValidators(null);
+      dummyControl?.updateValueAndValidity();
+    } else {
+      dummyControl?.setValidators([Validators.required]);
+      dummyControl?.updateValueAndValidity();
+      dummyControl?.markAsTouched();
+    }
+  
+    dummyControl?.updateValueAndValidity();
+    return isValid;
+  }
+
   updateModuleDetailsCard(updatedList: svcIBModuleDetails[]) {
     this.moduleDetailsCardChange.emit(updatedList);
+  }
+
+  updatePartDiagnosisCard(updatedList: svcGetSRLCPartDiagnosisDetails[]) {
+    this.srlcPartDiagnosisDetails = updatedList;
   }
 
   validateOtherTasks(otherTasksDetails: svcGetOtherTasksDetails[]): boolean {
@@ -135,6 +176,12 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
       icon: '',
     },
     {
+      label: 'Parts Usage',
+      isValid: (index: number) => this.isStepValid(index),
+      validate: (index: number) => this.shouldValidate(index),
+      icon: '',
+    },
+    {
       label: 'Other Details',
       isValid: (index: number) => this.isStepValid(index),
       validate: (index: number) => this.shouldValidate(index),
@@ -165,6 +212,7 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
     this.loaderService.hideLoader();
     this.callCompletionValidator();
     this.isEditable = this.srlcDetails[0].srStatus?.toLowerCase() == "in_progress" && this.srlcDetails[0].callCategory?.toLowerCase() == "install";
+    this.isPDEnabled = this.servicePrerequisites[0].isPartDiagnosisEnable && this.servicePrerequisites[0].isQualificationReq && !this.servicePrerequisites[0].isCQDone;
     this.callCompletionForm = this.formBuilder.group({
       completionDetails: new FormGroup({
         completedCheckBox: new FormControl({value: false, disabled: (this.srlcDetails[0].srStatus?.toLowerCase() == "completed")}, Validators.nullValidator),
@@ -179,17 +227,24 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
         CSR: new FormControl('', Validators.nullValidator),
         csrAttachment: new FormControl({value: '', disabled: false}, [Validators.nullValidator]),
         csrRemarks: new FormControl('', this.servicePrerequisites[0].isQuoteClosePrv? Validators.required: Validators.nullValidator),
+        probType: new FormControl({value: '', disabled: false}, this.isPDEnabled? Validators.required: Validators.nullValidator),
+        partsUsedYes: new FormControl({value: false, disabled: false}, Validators.nullValidator),
+        partsUsedNo: new FormControl({value: false, disabled: false}, Validators.nullValidator),
+        callibSuccessYes: new FormControl({value: false, disabled: false}, Validators.nullValidator),
+        callibSuccessNo: new FormControl({value: true, disabled: false}, Validators.nullValidator),
+        obAttachment: new FormControl({value: '', disabled: false}, [Validators.nullValidator]),
+        ncAttachment: new FormControl({value: '', disabled: false}, [Validators.nullValidator]),
       }),
       installationDetails: new FormGroup({
         productSerialNo: new FormControl({value: '', disabled: !this.isEditable},  Validators.required),
         sapNo: new FormControl({value: '', disabled: !this.isEditable}, Validators.nullValidator),
         productCategory: new FormControl({value: '', disabled: true}, Validators.nullValidator),
         leTag: new FormControl({value: '', disabled: !this.isEditable}, Validators.nullValidator),
-        location: new FormControl({value: '', disabled: !this.isEditable},  Validators.required),
-        principalWarrantyStart: new FormControl({value: '', disabled: !this.isEditable}, Validators.nullValidator),
-        principalWarrantyEnd: new FormControl({value: '', disabled: !this.isEditable}, Validators.nullValidator),
-        clientWarrantyStart: new FormControl({value: '', disabled: !this.isEditable}, Validators.nullValidator),
-        clientWarrantyEnd: new FormControl({value: '', disabled: !this.isEditable}, Validators.nullValidator),
+        location: new FormControl({value: '', disabled: !this.isEditable},  Validators.nullValidator),
+        ibWarrantyStart: new FormControl({value: '', disabled: !this.isEditable}, Validators.nullValidator),
+        ibWarrantyEnd: new FormControl({value: '', disabled: true}, Validators.nullValidator),
+        // clientWarrantyStart: new FormControl({value: '', disabled: !this.isEditable}, Validators.nullValidator),
+        // clientWarrantyEnd: new FormControl({value: '', disabled: !this.isEditable}, Validators.nullValidator),
         ibStickerStatus: new FormControl({value: '', disabled: false}, Validators.nullValidator),
         ibStickerAttachment: new FormControl({value: '', disabled: true}, [Validators.nullValidator]),
       }),
@@ -204,19 +259,27 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
       moduleDetails: new FormGroup({
         dummyModuleControl: new FormControl('', Validators.nullValidator)
       }),
+      partsUsageDetails: new FormGroup({
+        dummyPartsUsageControl: new FormControl('', Validators.nullValidator)
+      }),
       otherDetails: new FormGroup({
         dummyOtherTaskControl: new FormControl('', Validators.nullValidator)
       }),
       surveyDetails: new FormGroup({
         contactConfirmCheckbox: new FormControl(false, Validators.nullValidator),
-        contactName: new FormControl({value: '', disabled: this.isCustContactConfirmed}, Validators.nullValidator),
+        contactName: new FormControl({value: '', disabled: true}, Validators.nullValidator),
         contactEmail: new FormControl({value: '', disabled: true}, Validators.nullValidator),
       })
     });
     this.surveyValidator();
     this.patchFormValues();
-    this.getIBStickerAttachmentDetails(this.srlcDetails[0].installBaseID as unknown as string);
-    this.getCSRAttachmentDetails(this.srid as unknown as string);
+    //this.getIBStickerAttachmentDetails(this.srlcDetails[0].installBaseID as unknown as string);
+    //this.getCSRAttachmentDetails(this.srid as unknown as string);
+
+    this.getAttachmentDetails(this.srlcDetails[0].installBaseID as unknown as string, this.commonService.docIBStickerAttachment, 'IBSticker');
+    this.getAttachmentDetails(this.srid as unknown as string, this.commonService.docSrcTypeCSRAttachment, 'CSR');
+    this.getAttachmentDetails(this.srid as unknown as string, this.commonService.docSrcTypeOBSheet, 'OBSheet');
+    this.getAttachmentDetails(this.srid as unknown as string, this.commonService.docSrcTypeCCNCReport, 'NCReport');
   }
 
   checkboxRequiredValidator(): ValidatorFn {
@@ -234,6 +297,8 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
   }
 
   public get currentGroup(): FormGroup {
+    const stepLabel = this.steps[this.currentStep].label;
+    this.stepLabelChange.emit(stepLabel);
     return this.getGroupAt(this.currentStep);
   }
 
@@ -304,18 +369,40 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
     return groups[index];
   }
 
-  getIBStickerAttachmentDetails(srcId: string){
-    this.commonService.getAttachmentDetails(srcId, this.commonService.docIBStickerAttachment, "").subscribe((data: any) => {
-      if(data!=null){
-        this.IBStickerAttachment = data;
-      }
-    });
-  }
+  // getIBStickerAttachmentDetails(srcId: string){
+  //   this.commonService.getAttachmentDetails(srcId, this.commonService.docIBStickerAttachment, "").subscribe((data: any) => {
+  //     if(data!=null){
+  //       this.IBStickerAttachment = data;
+  //     }
+  //   });
+  // }
 
-  getCSRAttachmentDetails(srcId: string){
-    this.commonService.getAttachmentDetails(srcId, this.commonService.docSrcTypeCSRAttachment, "").subscribe((data: any) => {
-      if(data!=null){
-        this.CSRAttachment = data;
+  // getCSRAttachmentDetails(srcId: string){
+  //   this.commonService.getAttachmentDetails(srcId, this.commonService.docSrcTypeCSRAttachment, "").subscribe((data: any) => {
+  //     if(data!=null){
+  //       this.CSRAttachment = data;
+  //     }
+  //   });
+  // }
+
+  getAttachmentDetails(srcId: string, docType: number, attachmentType: string){
+    this.commonService.getAttachmentDetails(srcId, docType, "").subscribe((data: any) => {
+      if(data != null){
+        // Assign to the appropriate component property based on attachment type
+        switch(attachmentType){
+          case 'IBSticker':
+            this.IBStickerAttachment = data;
+            break;
+          case 'CSR':
+            this.CSRAttachment = data;
+            break;
+          case 'OBSheet':
+            this.OBSheetAttachment = data;
+            break;
+          case 'NCReport':
+            this.NCReportAttachment = data;
+            break;
+        }
       }
     });
   }
@@ -332,7 +419,12 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
         otherCalls: this.srlcDetails[0].otherCallsId? this.srlcDetails[0].otherCallsId: null,
         resolutionType: this.srlcDetails[0].resolutionTypeId? this.srlcDetails[0].resolutionTypeId: null,
         awaitingCSR: this.srlcDetails[0].awaitingCSR,
-        csrRemarks: this.srlcDetails[0].csrRemarks == null? '': this.srlcDetails[0].csrRemarks
+        csrRemarks: this.srlcDetails[0].csrRemarks == null? '': this.srlcDetails[0].csrRemarks,
+        probType: this.srlcDetails[0].engProblemID? this.srlcDetails[0].engProblemID: null,
+        partsUsedYes: this.srlcDetails[0].isPartsUsed === true,
+        partsUsedNo: this.srlcDetails[0].isPartsUsed === false,
+        callibSuccessYes: this.servicePrerequisites[0].isCalibSuccess === true,
+        callibSuccessNo: this.servicePrerequisites[0].isCalibSuccess === false
       },
       installationDetails: {
         productSerialNo: this.srlcDetails[0].serialNumber? this.srlcDetails[0].serialNumber: '',
@@ -340,10 +432,10 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
         productCategory: this.srlcDetails[0].productCategory? this.srlcDetails[0].productCategory: '',
         leTag: this.srlcDetails[0].customerTagNo? this.srlcDetails[0].customerTagNo: '',
         location: this.srlcDetails[0].custSiteLocation? this.srlcDetails[0].custSiteLocation: '',
-        principalWarrantyStart: this.srlcDetails[0].warrantyStartDate? this.commonService.convertDateStringToDate(this.srlcDetails[0].warrantyStartDate): null,
-        principalWarrantyEnd: this.srlcDetails[0].warrantyFinishDate? this.commonService.convertDateStringToDate(this.srlcDetails[0].warrantyFinishDate): null,
-        clientWarrantyStart: this.srlcDetails[0].extendedWarStartDate? this.commonService.convertDateStringToDate(this.srlcDetails[0].extendedWarStartDate): null,
-        clientWarrantyEnd: this.srlcDetails[0].extendedWarEndDate? this.commonService.convertDateStringToDate(this.srlcDetails[0].extendedWarEndDate): null,
+        ibWarrantyStart: this.srlcDetails[0].ibWarrantyStartDate? this.commonService.convertDateStringToDate(this.srlcDetails[0].ibWarrantyStartDate): null,
+        ibWarrantyEnd: this.srlcDetails[0].ibWarrantyEndDate? this.commonService.convertDateStringToDate(this.srlcDetails[0].ibWarrantyEndDate): null,
+        // clientWarrantyStart: this.srlcDetails[0].extendedWarStartDate? this.commonService.convertDateStringToDate(this.srlcDetails[0].extendedWarStartDate): null,
+        // clientWarrantyEnd: this.srlcDetails[0].extendedWarEndDate? this.commonService.convertDateStringToDate(this.srlcDetails[0].extendedWarEndDate): null,
         ibStickerStatus: this.srlcDetails[0].stickerStatusID? this.srlcDetails[0].stickerStatusID: this.serviceCalendarService.ibStickerPendingStatus
       },
       systematizationDetails: {
@@ -363,6 +455,7 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
 
   callCompletionValidator(){
     this.isInstallationCall = this.srlcDetails[0].callCategory? this.srlcDetails[0].callCategory.toLowerCase() == "install" : false;
+    this.isCallibrationCall = this.srlcDetails[0].callType? this.srlcDetails[0].callType.toLowerCase() == "calibration" : false;
     this.isContractSVCCall = this.srlcDetails[0].callCategory? this.srlcDetails[0].callCategory.toLowerCase() == "contract svc" : false;
     this.isCustContactConfirmed = this.srlcDetails[0].isContactConfirmed? this.srlcDetails[0].isContactConfirmed: false;
     this.serviceCalendarService.isCallCompleted = (this.srlcDetails[0].completedDate != null && this.srlcDetails[0].completedDate != "");
@@ -371,10 +464,39 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
   serviceCallFormValidation(): string{
     const formValue = this.callCompletionForm.getRawValue();
 
-    if(formValue.completionDetails.completedCheckBox && !this.isInstallationCall){
-        if(!(formValue.completionDetails.oqpvCheckBox || formValue.completionDetails.bdServiceCheckBox ||
-             formValue.completionDetails.calibrationCheckBox || formValue.completionDetails.pmCheckBox)){
-              return 'Please select either OQPV, BD, PM or Calibration'         
+    if(formValue.completionDetails.completedCheckBox && this.isCallibrationCall){
+      if(formValue.completionDetails.callibSuccessYes == false){
+        return 'Please select calibration in completion details'
+      }
+      else if(formValue.completionDetails.callibSuccessYes == true && (formValue.completionDetails.obAttachment.length == 0 && this.OBSheetAttachment.length == 0)){
+        return 'Please attach OB sheet in completion details'
+      }
+      else if(formValue.completionDetails.callibSuccessYes == true && (formValue.completionDetails.ncAttachment.length == 0 && this.NCReportAttachment.length == 0)){
+        return 'Please attach NC sheet in completion details'
+      }
+      else if(formValue.completionDetails.callibSuccessYes == false && 
+        ((this.NCReportAttachment.length > 0 && formValue.completionDetails.ncAttachment.length > 0) || 
+          (this.OBSheetAttachment.length > 0 && formValue.completionDetails.obAttachment.length > 0)))
+      {
+        return 'Please select calibration successful in completion details'
+      }      
+      else{
+        return 'Success'
+      }
+    }
+    else if(formValue.completionDetails.completedCheckBox && !this.isInstallationCall){
+        // if(!(formValue.completionDetails.oqpvCheckBox || formValue.completionDetails.bdServiceCheckBox ||
+        //      formValue.completionDetails.calibrationCheckBox || formValue.completionDetails.pmCheckBox)){
+        //       return 'Please select either OQPV, BD, PM or Calibration'         
+        // }
+        if(this.srlcPartDiagnosisDetails.length <= 0 && !formValue.completionDetails.partsUsedNo && !formValue.completionDetails.partsUsedYes){
+              return 'Parts Used is mandatory in Completion Details'
+        }
+        else if(this.srlcPartDiagnosisDetails.length <=0 && formValue.completionDetails.partsUsedYes){
+              return 'Parts Usage details has to be added'
+        }
+        else if(this.isPDEnabled  && (formValue.completionDetails.probType == null || formValue.completionDetails.probType == 0)){
+              return 'Problem Type is Mandatory in Completion Details'
         }
         else if(formValue.installationDetails.ibStickerStatus == this.serviceCalendarService.ibStickerPendingStatus){
             if(this.servicePrerequisites[0].ibWorkingStatus == 'To Be Installed'){
@@ -409,10 +531,9 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
       if(this.moduleDetails.length <= 0){
         return 'Please select atleast one module in module details stepper'
       }
-      else if(!((formValue.installationDetails.principalWarrantyStart && formValue.installationDetails.principalWarrantyEnd) ||
-                (formValue.installationDetails.clientWarrantyStart && formValue.installationDetails.clientWarrantyEnd)))
+      else if(!(formValue.installationDetails.ibWarrantyStart && formValue.installationDetails.ibWarrantyEnd))
       {
-        return 'Please enter warranty date or client warranty date'
+        return 'Please enter warranty date in installation details'
       }
       else if(formValue.installationDetails.ibStickerStatus == this.serviceCalendarService.ibStickerPendingStatus){
         // if(formValue.installationDetails.ibStickerAttachment.length == 0 && this.IBStickerAttachment.length == 0){
@@ -478,6 +599,12 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
           icon: '',
         },
         {
+          label: 'Parts Usage',
+          isValid: (index: number) => this.isStepValid(index),
+          validate: (index: number) => this.shouldValidate(index),
+          icon: '',
+        },
+        {
           label: 'Other Details',
           isValid: (index: number) => this.isStepValid(index),
           validate: (index: number) => this.shouldValidate(index),
@@ -514,6 +641,12 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
         },
         {
           label: 'Module Details',
+          isValid: (index: number) => this.isStepValid(index),
+          validate: (index: number) => this.shouldValidate(index),
+          icon: '',
+        },
+        {
+          label: 'Parts Usage',
           isValid: (index: number) => this.isStepValid(index),
           validate: (index: number) => this.shouldValidate(index),
           icon: '',
@@ -571,24 +704,29 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
                 else
                   this.serviceCalendarService.callActionDetails.CompletedOn =  formValue.completionDetails.completedDate? formValue.completionDetails.completedDate: null;
           
-                  this.serviceCalendarService.callActionDetails.IsCalibration =  formValue.completionDetails.calibrationCheckBox;
-                  this.serviceCalendarService.callActionDetails.IsOQPV =  formValue.completionDetails.oqpvCheckBox;
-                  this.serviceCalendarService.callActionDetails.IsBDService =  formValue.completionDetails.bdServiceCheckBox;
-                  this.serviceCalendarService.callActionDetails.IsPreventiveMaintenance =  formValue.completionDetails.pmCheckBox;
+                  // this.serviceCalendarService.callActionDetails.IsCalibration =  formValue.completionDetails.calibrationCheckBox;
+                  // this.serviceCalendarService.callActionDetails.IsOQPV =  formValue.completionDetails.oqpvCheckBox;
+                  // this.serviceCalendarService.callActionDetails.IsBDService =  formValue.completionDetails.bdServiceCheckBox;
+                  // this.serviceCalendarService.callActionDetails.IsPreventiveMaintenance =  formValue.completionDetails.pmCheckBox;
                   this.serviceCalendarService.callActionDetails.OtherCallsId =  formValue.completionDetails.otherCalls? formValue.completionDetails.otherCalls: 0;
                   this.serviceCalendarService.callActionDetails.ResolutionTypeId =  formValue.completionDetails.resolutionType? formValue.completionDetails.resolutionType: 0;
                   this.serviceCalendarService.callActionDetails.AwaitingCSR =  formValue.completionDetails.awaitingCSR;
                   this.serviceCalendarService.callActionDetails.CSRAttachment = formValue.completionDetails.csrAttachment? formValue.completionDetails.csrAttachment: null;
                   this.serviceCalendarService.callActionDetails.CSRRemarks =  formValue.completionDetails.csrRemarks;
+                  this.serviceCalendarService.callActionDetails.EngProblemID =  formValue.completionDetails.probType;
+                  this.serviceCalendarService.callActionDetails.IsPartsUsed =  formValue.completionDetails.partsUsedYes == true ? true : false;
+                  this.serviceCalendarService.callActionDetails.IsCalibSuccess =  formValue.completionDetails.callibSuccessYes == true ? true : false;
+                  this.serviceCalendarService.callActionDetails.OBSheetAttachment = formValue.completionDetails.obAttachment? formValue.completionDetails.obAttachment: null;
+                  this.serviceCalendarService.callActionDetails.NCReportAttachment = formValue.completionDetails.ncAttachment? formValue.completionDetails.ncAttachment: null;          
                 //Installation params
                   this.serviceCalendarService.callActionDetails.SerialNo =  formValue.installationDetails.productSerialNo;
                   this.serviceCalendarService.callActionDetails.SapNo =  formValue.installationDetails.sapNo;
                   this.serviceCalendarService.callActionDetails.CustomerTagNo =  formValue.installationDetails.leTag;
                   this.serviceCalendarService.callActionDetails.Location =  formValue.installationDetails.location;
-                  this.serviceCalendarService.callActionDetails.WarrantyStartDate =  formValue.installationDetails.principalWarrantyStart;
-                  this.serviceCalendarService.callActionDetails.WarrantyFinishDate =  formValue.installationDetails.principalWarrantyEnd;
-                  this.serviceCalendarService.callActionDetails.ExtendedWarStartDate =  formValue.installationDetails.clientWarrantyStart;
-                  this.serviceCalendarService.callActionDetails.ExtendedWarEndDate =  formValue.installationDetails.clientWarrantyEnd;
+                  this.serviceCalendarService.callActionDetails.IBWarrantyStartDate =  formValue.installationDetails.ibWarrantyStart;
+                  this.serviceCalendarService.callActionDetails.IBWarrantyEndDate =  formValue.installationDetails.ibWarrantyEnd;
+                  // this.serviceCalendarService.callActionDetails.ExtendedWarStartDate =  formValue.installationDetails.clientWarrantyStart;
+                  // this.serviceCalendarService.callActionDetails.ExtendedWarEndDate =  formValue.installationDetails.clientWarrantyEnd;
                   this.serviceCalendarService.callActionDetails.StickerStatusId = formValue.installationDetails.ibStickerStatus? formValue.installationDetails.ibStickerStatus: this.serviceCalendarService.ibStickerPendingStatus;
                   this.serviceCalendarService.callActionDetails.IBStickerAttachment = formValue.installationDetails.ibStickerAttachment? formValue.installationDetails.ibStickerAttachment: null;
                 //Systematization params
@@ -598,8 +736,49 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
                   this.serviceCalendarService.callActionDetails.ComplexityId =  formValue.systematizationDetails.complexity;
                 //Module Details
                   this.serviceCalendarService.callActionDetails.InstallbasemoduleDetails = this.moduleDetails 
+                //Parts Usage Details
+                  this.pdUsageDetailsBOCard = this.srlcPartDiagnosisDetails.map(item => {
+                    const qty = item.qty ?? 0;
+                    const usedQty = item.usedQty ?? 0;
+
+                    let partDiagStatusId: number;
+                    let partDiagStatus: string;
+
+                    if (
+                      (qty > 0 && qty <= usedQty) ||
+                      (qty === 0 && usedQty > 0)
+                    ) {
+                      partDiagStatusId = this.serviceCalendarService.pdReplacedStatusId;
+                      partDiagStatus = "Replaced";
+                    }
+                    else if (usedQty > 0 && qty > usedQty) {
+                      partDiagStatusId = this.serviceCalendarService.pdPartiallyUsedStatusId;
+                      partDiagStatus = "Partially Used";
+                    }
+                    else {
+                      partDiagStatusId = this.serviceCalendarService.pdNotUsedStatusId;
+                      partDiagStatus = "Not Used";
+                    }
+
+                    return {
+                      srid: (item.partReqId === null || item.partReqId === 0)? 0 : this.serviceCalendarService.selectedSRID, 
+                      partReqId: item.partReqId ?? null, 
+                      partsListId: item.partListID ?? null, 
+                      partsMasterId: item.partsMasterId ?? 0, 
+                      partNo: item.partNo ?? '', 
+                      option: item.option ?? '', 
+                      supplierId: item.supplierId ?? 0, 
+                      supplierName: item.supplierName ?? '', 
+                      qty: item.qty ?? 0, 
+                      usedQty: item.usedQty ?? null, 
+                      partDiagStatusId: partDiagStatusId, 
+                      partDiagStatus: partDiagStatus, 
+                      remarks: item.remarks ?? ''
+                    };
+                  });
+                  this.serviceCalendarService.callActionDetails.LstPartDiag = this.pdUsageDetailsBOCard; 
                 //Other Details
-                  this.serviceCalendarService.callActionDetails.LstOtherSubTask = this.otherTasksDetails  
+                  this.serviceCalendarService.callActionDetails.LstOtherSubTask = this.otherTasksDetails; 
                 //Survey params
                   if(this.serviceCalendarService.isSurveyRequired){
                     // if(formValue.surveyDetails.contactConfirmCheckbox){
@@ -615,11 +794,11 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
           
                 //Submit API
                   this.serviceCalendarService.postCallAction(this.serviceCalendarService.callActionDetails).subscribe((data: any) =>{
-                    this.loaderService.hideLoader();
                     this.loaderMessage = 'Loading Call Completion...';
                     if (data) {
                       const notificationMessage = data.outPut;
                       const notificationType = data.outPut.indexOf('Success') !== -1 ? 'success' : 'error';
+                      this.loaderService.hideLoader();
                       this.notificationService.showNotification(
                         notificationMessage,
                         notificationType,
@@ -628,6 +807,7 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
                       );
                       if(notificationType == 'success'){
                         this.resetValues();
+                        this.loaderService.hideLoader();
                         this.router.navigate([AppRoutePaths.ServiceCalendar]);
                       }
                     }
@@ -644,6 +824,7 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
                   });
               }
               else{
+                this.loaderService.hideLoader();
                 this.notificationService.showNotification(
                   'Please fill engineer effort log',
                   'error',
@@ -654,6 +835,7 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
             });         
           }
           else{
+            this.loaderService.hideLoader();
             this.notificationService.showNotification(
               data[0].csrMandatory,
               'error',
@@ -674,10 +856,12 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
         });     
       }
       else{
+        this.loaderService.hideLoader();
         this.callCompletionForm.markAllAsTouched();
       }
     }
     else{
+      this.loaderService.hideLoader();
       this.notificationService.showNotification(
         serviceCallValidation,
         'error',
@@ -685,7 +869,7 @@ export class CallCompletionComponent implements OnInit, OnDestroy{
         'bottom'
       );
     }
-    this.loaderService.hideLoader();
+    //this.loaderService.hideLoader();
     this.loaderMessage = 'Loading Call Completion Details...';
   }
 
