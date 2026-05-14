@@ -108,12 +108,14 @@ export class HttpService {
         //   );
         // }
 
-
         // ----------- Browser request --------------
         return this.http.request(method, url, {
           headers: headers,  // Already HttpHeaders object
           body,
-          params: options.params
+          params: options.params,
+          responseType: options.responseType || 'json',  // Support blob, arraybuffer, text, etc.
+          observe: options.observe || 'body',  // Support 'response' for full HttpResponse
+          withCredentials: options.withCredentials || false
         }).pipe(
           catchError(err => this.handleError(err, method, url, body, options))
         );

@@ -207,12 +207,22 @@ export class CompletionDetailsComponent implements OnInit{
       index
     ).subscribe(async (response) => {
       try {
-        const contentType = response.headers.get('content-type')!;
+        // Validate response
+        if (!response || !response.body) {
+          throw new Error('Empty response body from server');
+        }
+
+        const contentType = response.headers.get('content-type') || 'application/octet-stream';
         const filename = attachmentArray[index].name;
 
         const blob = new Blob([response.body!], {
           type: contentType
         });
+
+        // Validate blob
+        if (blob.size === 0) {
+          throw new Error('Downloaded file is empty');
+        }
 
         if (Capacitor.getPlatform() === 'web') {
 
@@ -232,7 +242,6 @@ export class CompletionDetailsComponent implements OnInit{
           );
         } 
         else {
-
           const base64Data =
             await this.commonService.convertBlobToBase64(blob) as string;
 
@@ -248,10 +257,11 @@ export class CompletionDetailsComponent implements OnInit{
             dialogTitle: 'Open or Save with'
           });
         }
-
       }catch (err) {
+        console.error('Error processing attachment download:', err);
+        const errorMessage = err instanceof Error ? err.message : 'Failed to process attachment';
         this.notificationService.showNotification(
-          'Failed to download file',
+          errorMessage,
           'error',
           'center',
           'bottom'
@@ -259,11 +269,24 @@ export class CompletionDetailsComponent implements OnInit{
       }finally {
         this.loaderService.hideLoader();
       }
-    }, _ => {
-
+    }, (error) => {
+      console.error('Error downloading attachment:', error);
       this.loaderService.hideLoader();
+      
+      // Provide user-friendly error messages
+      let errorMessage = 'Failed to download file';
+      if (error.status === 0) {
+        errorMessage = 'Network error - check your connection';
+      } else if (error.status === 404) {
+        errorMessage = 'Attachment not found on server';
+      } else if (error.status === 401 || error.status === 403) {
+        errorMessage = 'You do not have permission to download this file';
+      } else if (error.status === 200 && !error.ok) {
+        errorMessage = 'Server returned invalid response - please try again';
+      }
+
       this.notificationService.showNotification(
-        'Failed to download file',
+        errorMessage,
         'error',
         'center',
         'bottom'
