@@ -4,7 +4,7 @@ import { HttpService } from 'src/app/core/services/http.service';
 import { DatePipe } from '@angular/common';
 import { DecimalPipe } from '@angular/common';
 import { Router, NavigationStart } from '@angular/router';
-import { filter, Subscription, Subject } from 'rxjs';
+import { filter, Subscription, Subject, BehaviorSubject } from 'rxjs';
 import { AppRoutePaths } from 'src/app/core/Constants';
 import { LoginService } from '../login/components/login/login.service';
 import { ConfigService } from 'src/app/core/services/config.service';
@@ -310,6 +310,7 @@ export class CommonService implements OnDestroy{
   // Sentinel returned when a second tap cancels an in-progress session
   private readonly SPEECH_STOPPED = '__speech_stopped__';
   private _isSpeechListening = false;
+  public isSpeechListening$ = new BehaviorSubject<boolean>(false);
   // ─────────────────────────────────────────────────────────────────────────────
 
   async startListening(): Promise<string> {
@@ -337,6 +338,7 @@ export class CommonService implements OnDestroy{
     }
 
     this._isSpeechListening = true;
+    this.isSpeechListening$.next(true);
     try {
       console.log('[Speech] calling SpeechRecognition.start()');
       const result = await SpeechRecognition.start({
@@ -351,6 +353,13 @@ export class CommonService implements OnDestroy{
       throw err;
     } finally {
       this._isSpeechListening = false;
+      this.isSpeechListening$.next(false);
+    }
+  }
+
+  async stopListening(): Promise<void> {
+    if (this._isSpeechListening) {
+      try { await SpeechRecognition.stop(); } catch (e) { console.warn('[Speech] stop() error:', e); }
     }
   }
 
@@ -363,7 +372,9 @@ export class CommonService implements OnDestroy{
       console.error('[Speech] startListeningAndPatch error:', err);
       this.notificationService.showNotification(
         typeof err === 'string' ? err : 'Speech Recognition failed. Please try again.',
-        'error'
+        'error',
+        'center',
+        'bottom'
       );
       return;
     }

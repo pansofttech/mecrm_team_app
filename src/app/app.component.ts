@@ -27,6 +27,12 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnInit{
   title = 'ecrm-frontend';
+  isSpeechListening$ = this.commonService.isSpeechListening$;
+
+  stopListening(): void {
+    this.commonService.stopListening();
+  }
+
   private isBackHandlerRegistered = false;
   private notificationInterval: any;
   private appCheckUpdateInterval: any;

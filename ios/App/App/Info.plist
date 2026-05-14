@@ -22,6 +22,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>MECRM uses the camera to capture and upload photos as attachments.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>MECRM uses the microphone to capture your voice input for speech-to-text fields.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>

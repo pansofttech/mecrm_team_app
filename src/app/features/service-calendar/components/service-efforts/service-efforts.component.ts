@@ -162,4 +162,8 @@ export class ServiceEffortsComponent {
     }
   }
 
+  async startListeningEffortRemarks() {
+    await this.commonService.startListeningAndPatch(this.serviceEffortsForm, 'effortremarks')
+  }
+
 }

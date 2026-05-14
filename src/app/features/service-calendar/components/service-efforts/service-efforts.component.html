@@ -72,7 +72,7 @@
         </div>
       </div>
 
-      <kendo-formfield>
+      <!-- <kendo-formfield>
         <div class="app-kendo--content">
           <kendo-label class="app-kendo--label" [for]="effortremarks"
             >Remarks</kendo-label
@@ -88,7 +88,32 @@
         <kendo-formerror class="app-kendo--error-msg"
           >Effort remarks is required</kendo-formerror
         >
-      </kendo-formfield>
+      </kendo-formfield> -->
+
+      <kendo-formfield>
+          <div class="app-kendo--content">
+            <div class="app-kendo--textarea-wrapper">
+              <kendo-label
+                class="app-kendo--label"
+                [for]="effortremarks"
+                >Remarks</kendo-label>
+              <button 
+                  type="button" 
+                  class="mic-icon-btn" 
+                  (click)="startListeningEffortRemarks();">
+                  <img src="assets/content/images/microphone.svg" alt="mic" />
+              </button>
+            </div>
+            <kendo-textarea
+              class="app-kendo--textarea"
+              placeholder="Type your message here.."
+              formControlName="effortremarks"
+              #effortremarks
+              [rows]="6"
+              resizable="vertical" required></kendo-textarea>          
+          </div>
+          <kendo-formerror class="app-kendo--error-msg">Effort remarks is required</kendo-formerror>
+        </kendo-formfield>
 </div>
 
 <!-- <div *ngIf="engeffortListCards.length > 0" class="app-screen--info-header">
