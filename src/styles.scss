@@ -1119,10 +1119,19 @@ ion-content::part(scroll) {
   padding: 1px;             
   border-radius: 50%;      
   cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 .mic-icon-btn img {
   width: 18px;             
   height: 18px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 .mic-icon-btn:active {
   background: rgba(0,0,0,0.1);

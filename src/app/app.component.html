@@ -1,7 +1,7 @@
 <router-outlet></router-outlet>
 
 <!-- Speech recognition listening overlay -->
-<div class="mic-overlay" *ngIf="isSpeechListening$ | async">
+<div class="mic-overlay" *ngIf="isSpeechListening$ | async" (contextmenu)="$event.preventDefault()">
   <div class="mic-overlay--backdrop"></div>
   <div class="mic-overlay--card">
     <div class="mic-overlay--pulse">

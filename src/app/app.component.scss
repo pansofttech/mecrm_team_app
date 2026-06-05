@@ -26,6 +26,10 @@
   padding: 2rem 2.5rem;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
   pointer-events: auto;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .mic-overlay--pulse {
@@ -43,6 +47,11 @@
 .mic-overlay--icon {
   font-size: 2rem;
   color: #ffffff;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .mic-overlay--label {

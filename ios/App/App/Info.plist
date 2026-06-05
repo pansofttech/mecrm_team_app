@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>MECRM</string>
+	<string>ECRMPro</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -23,11 +23,17 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>MECRM uses the camera to capture and upload photos as attachments.</string>
+	<string>ECRMPro uses the camera to capture and upload photos as attachments.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>MECRM uses the microphone to capture your voice input for speech-to-text fields.</string>
+	<string>ECRMPro uses the microphone to capture your voice input for speech-to-text fields.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>MECRM uses speech recognition to convert your voice into text in form fields.</string>
+	<string>ECRMPro uses speech recognition to convert your voice into text in form fields.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>ECRMPro uses your location while the app is in use to enable location-based features and improve data accuracy.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>ECRMPro accesses your photo library to attach photos to form submissions and communications.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>ECRMPro saves photos and documents to your photo library for your records and offline access.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
