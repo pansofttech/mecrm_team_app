@@ -215,6 +215,7 @@
   position: fixed;
   width: 100%;
   height: 100vh;
+  z-index: 1000;
 }
 .dashboard--menu-drawer-header{
   display: flex;
