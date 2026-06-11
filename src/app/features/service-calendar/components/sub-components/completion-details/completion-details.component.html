@@ -320,7 +320,7 @@
     </div>
 
     <div>
-      <kendo-formfield>
+      <!-- <kendo-formfield>
         <div class="app-kendo--content">
           <kendo-label
             class="app-kendo--label"
@@ -335,7 +335,32 @@
             resizable="vertical"></kendo-textarea>
         </div>
         <kendo-formerror class="app-kendo--error-msg">CSR remarks is required</kendo-formerror>
+      </kendo-formfield> -->
+
+      <kendo-formfield>
+          <div class="app-comments--content">
+            <div class="app-kendo--textarea-wrapper">
+              <kendo-label
+                class="app-kendo--label"
+                [for]="csrRemarks"
+                >CSR Remarks</kendo-label>
+              <button 
+                  type="button" 
+                  class="mic-icon-btn" 
+                  (click)="startListeningCSRRemarks();">
+                  <img src="assets/content/images/microphone.svg" alt="mic" />
+              </button>
+            </div>
+            <kendo-textarea class="app-kendo--textarea"
+                            placeholder="Type your message here.."
+                            formControlName="csrRemarks"
+                            #csrRemarks
+                            [rows]="6"
+                            resizable="vertical"></kendo-textarea>
+          </div>
+          <kendo-formerror class="app-kendo--error-msg">CSR remarks is required</kendo-formerror>
       </kendo-formfield>
+
     </div>
 </div>
 

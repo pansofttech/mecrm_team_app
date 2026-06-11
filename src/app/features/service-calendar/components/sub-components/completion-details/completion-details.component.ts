@@ -293,4 +293,8 @@ export class CompletionDetailsComponent implements OnInit{
       );
     });
   }
+
+  async startListeningCSRRemarks() {
+    await this.commonService.startListeningAndPatch(this.completionDetails, 'csrRemarks')
+  }
 }

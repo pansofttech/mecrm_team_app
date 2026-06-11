@@ -45,7 +45,7 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
   public isTenantSelectionScreen: boolean = false;
   private userPhone: string = '';
   private userEmail: string = '';
-  public otpMethod: string = 'phone';
+  public otpMethod: string = 'email';
   otpControls = Array.from({ length: 6 }, () => new FormControl(''));
   countdown = 120;
   timer: any;

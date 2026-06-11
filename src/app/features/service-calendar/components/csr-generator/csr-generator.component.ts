@@ -30,7 +30,7 @@ export class CsrGeneratorComponent {
   constructor(
     private router: Router,
     private loaderService: LoaderService,
-    private serviceCalendarService: ServiceCalendarService,
+    public serviceCalendarService: ServiceCalendarService,
     private notificationService: NotificationService,
     private commonService: CommonService,
     private sanitizer: DomSanitizer,

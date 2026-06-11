@@ -53,6 +53,7 @@ type salesExecutive = {
 
 export class EnquiryDetailsFormsComponent implements OnInit {
   public areaList: any = [];
+  public generatedByAreaList: any = [];
   public sales: unknown = [];
   public channel: unknown = [];
   public company: any = [];
@@ -77,6 +78,7 @@ export class EnquiryDetailsFormsComponent implements OnInit {
   ){
     this.areaList = this.areaList.slice();
     this.company = this.company.slice();
+    this.generatedByAreaList = this.generatedByAreaList.slice();
   }
 
   ngOnInit(): void {
@@ -120,6 +122,7 @@ export class EnquiryDetailsFormsComponent implements OnInit {
         this.enquiryDetailsService
         .getgeneratedBy(generated.generatedFrom)
         .subscribe(res => {
+          this.generatedByAreaList = res;
           this.generatedBy = res;
         })
         this.formStateService.generatedByVisible = true;
@@ -197,6 +200,19 @@ export class EnquiryDetailsFormsComponent implements OnInit {
       );
     } else {
       this.areaList = this.generatedFromList;
+    }
+  }
+
+  handlegeneratedByFilter(generatedByID: any) {
+    if (generatedByID && generatedByID.length >= 1) {
+      this.generatedByAreaList = this.generatedByAreaList.filter(
+        (s: { generatedBy: string }) =>
+          s.generatedBy
+            .toLowerCase()
+            .indexOf(generatedByID.toLowerCase()) !== -1
+      );
+    } else {
+      this.generatedByAreaList = this.generatedBy;
     }
   }
 

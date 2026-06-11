@@ -187,6 +187,9 @@ ion-content::part(scroll) {
   font-family: var(--font-family-text);
   font-weight: var(--font-weight-semibold);
 }
+.k-upload-dropzone .k-dropzone-hint {
+    display: none !important;
+}
 
 //General Screen Styles
 .app-screen--content {

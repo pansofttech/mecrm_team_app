@@ -1,5 +1,6 @@
 <app-navigation-bar
   [title]="'Generate CSR'"
+  [subtitle]="'SRID: ' + this.serviceCalendarService.selectedSRID.toString()"
   [showRefresh]="true"
   (backClick)="onBackClickHandle()"
   (refreshClick)="onRefresh()">
@@ -7,14 +8,18 @@
 
 <div *ngIf="!showAPILoader" class="csr-pdf-screen">
     <kendo-pdfviewer 
-     style="height: 32rem;" 
+     style="height: 30rem;margin: 0.25rem;"
      [arrayBuffer]="arrayBuffer"
      [zoom]="1"
      [tools]="tools"> 
     </kendo-pdfviewer>
+
     <div class="content-wrapper">
-      <div class="app-screen--header">
-        Engineer Signature
+      <div class="app-secondary-header">
+          <div class="app-secondary-header-left">
+            <i class="fa-solid fa-user-gear app-secondary-header-icon"></i>
+            <div class="app-secondary-header-name">Engineer Signature</div>
+          </div>
       </div>
       <div class="signature-wrapper">
         <kendo-signature
@@ -36,9 +41,13 @@
         </button>
       </div>
     </div>   
+
     <div class="content-wrapper">
-      <div class="app-screen--header">
-        Customer Signature
+      <div class="app-secondary-header">
+          <div class="app-secondary-header-left">
+            <i class="fa-solid fa-user app-secondary-header-icon"></i>
+            <div class="app-secondary-header-name">Customer Signature</div>
+          </div>
       </div>
       <div class="signature-wrapper">
         <kendo-signature
@@ -65,15 +74,7 @@
             />
         </ng-container>
       </div>
-      <div class="save-clear-button">
-        <button
-            kendoButton
-            [svgIcon]="saveSvg"
-            themeColor="primary"
-            (click)="onSave()"
-            style="margin: 0.25rem;">
-            Save and Attach CSR
-        </button>
+      <div class="clear-button">
         <button 
             kendoButton
             (click)="clearCustomerSignature()">
@@ -82,6 +83,20 @@
       </div>
     </div>   
 </div>
+
+  <div class="app-screen--footer" *ngIf="!showAPILoader">
+    <button kendoButton
+            class="app-save--button"
+            (click)="onSave()">
+      <i class="fa-solid fa-floppy-disk"></i>
+      Save & Attach CSR
+    </button>
+    <button kendobutton
+            class="app-cancel--button"
+            (click)="onBackClickHandle()">
+        Cancel
+     </button>
+  </div>
 
 <div class="app-screen--loader" *ngIf="showAPILoader">
     <kendo-loader
