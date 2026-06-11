@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">MECRM</string>
-    <string name="title_activity_main">MECRM</string>
+    <string name="app_name">ECRMPro</string>
+    <string name="title_activity_main">ECRMPro</string>
     <string name="package_name">com.pansofttech.mecrm</string>
     <string name="custom_url_scheme">com.pansofttech.mecrm</string>
 </resources>

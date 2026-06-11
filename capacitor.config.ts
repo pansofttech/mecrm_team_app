@@ -3,7 +3,7 @@ import { environment } from './src/environments/environment';
 
 const config: CapacitorConfig = {
   appId: 'com.pansofttech.mecrm',
-  appName: 'MECRM',
+  appName: 'ECRMPro',
   webDir: 'dist/ecrm-frontend',
   plugins: {
     StatusBar: {
