@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "820020117711",
-    "project_id": "mecrm-c28ac",
-    "storage_bucket": "mecrm-c28ac.firebasestorage.app"
+    "project_number": "86174187947",
+    "project_id": "ecrm-pro",
+    "storage_bucket": "ecrm-pro.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:820020117711:android:afa8cbe1f0a65d38c477ba",
+        "mobilesdk_app_id": "1:86174187947:android:74bf0ea71e314e07bd52ee",
         "android_client_info": {
           "package_name": "com.pansofttech.mecrm"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDGbp0shqX-hJQrxyEO8IGq6C2qtG40iIg"
+          "current_key": "AIzaSyD5-bB2MWW_Yr8dxiWlMr_X4x9G0jcak_c"
         }
       ],
       "services": {
