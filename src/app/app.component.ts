@@ -97,6 +97,23 @@ export class AppComponent implements OnInit{
 
     this.commonService.initDB();
 
+    CapacitorApp.addListener('appUrlOpen', (event) => {
+      try {
+        const slug = event.url.replace('ecrmpro://', '');
+        this.zone.run(() => {
+          this.router.navigateByUrl(slug)
+            .then(result => {
+              console.log('Navigation Success:', result);
+            })
+            .catch(err => {
+              console.error('Navigation Error:', err);
+            });
+        });
+      } catch (err) {
+        console.error('URL Parse Error:', err);
+      }
+    });
+
     this.appCheckUpdateInterval = setInterval(() => {
       this.checkAppVersion();
     }, 15000);
