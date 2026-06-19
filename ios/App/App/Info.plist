@@ -59,5 +59,18 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.pansofttech.mecrm</string>
+
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ecrmpro</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
