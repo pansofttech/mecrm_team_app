@@ -20,6 +20,9 @@ const config: CapacitorConfig = {
     LiveUpdate: {
       appId: '7d9faee0-6da0-4227-96e4-82d1b3a204af',
       defaultChannel: environment.capChannel
+    },
+    App: {
+      urlScheme: "ecrmpro"
     }
   },
   platforms: {

@@ -331,7 +331,7 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
     } catch (error: any) {
 
       if (error?.error?.text === 'Your password has been Expired') {
-        this.router.navigate([AppRoutePaths.ForgotPassword], {queryParams: {UN: this.loginForm.value.username, AuthCode: '',CT: 'Changepwd'} });
+        this.router.navigate([AppRoutePaths.ForgotPassword], {queryParams: {UN: this.loginForm.value.username, AuthCode: '',CT: 'Changepwd',TenantID: this.selectedTenant?? 0} });
       } else {
         this.isUserLoggedOut = true;
         this.loginService.logoutUser();
