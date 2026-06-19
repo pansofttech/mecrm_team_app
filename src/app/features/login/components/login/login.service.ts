@@ -74,7 +74,7 @@ export class LoginService {
   forgotPassword(Username: string, tenantID: number = 0){
     const body = {
       UserName: Username,
-      LinkedUrl: location.protocol + '//' + location.host + '/' + AppRoutePaths.ForgotPassword,
+      LinkedUrl:  'ecrmpro://' + '/' + AppRoutePaths.ForgotPassword,
       TenantID: tenantID
     }
     return this.http.post(this.forgotPasswordUrl, body);
