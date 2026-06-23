@@ -508,12 +508,27 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
     if (this.resendCount >= this.maxResend) return;
     this.resendCount++;
 
-    if(type == 'phone' && this.userPhone == ''){
-        this.notificationService.showNotification(
-            'Please update your phone number in the CRM',
-            'error', 'center', 'bottom'
-        );
-        return;
+    if (type === 'phone') {
+
+        // Check if phone number exists
+        if (!this.userPhone || this.userPhone.trim() === '') {
+            this.notificationService.showNotification(
+                'Please update your phone number in the CRM',
+                'error', 'center', 'bottom'
+            );
+            return;
+        }
+
+        // Validate format (+ followed by country code and number)
+        const phoneRegex = /^\+[1-9]\d{1,14}$/;
+
+        if (!phoneRegex.test(this.userPhone.trim())) {
+            this.notificationService.showNotification(
+                'Please update your phone number with country code in CRM',
+                'error', 'center', 'bottom'
+            );
+            return;
+        }
     }
 
     this.loginService.sendOtp(
