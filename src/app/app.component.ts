@@ -304,7 +304,6 @@ export class AppComponent implements OnInit{
 
   // Initialize post-login services (push notifications, version check interval)
   private initializePostLoginServices() {
-    console.log('Initializing post-login services...');
     this.initializePushNotifications();
 
     // Start version check interval after login
@@ -318,7 +317,6 @@ export class AppComponent implements OnInit{
 
   // Cleanup post-login services on logout
   private cleanupPostLoginServices() {
-    console.log('Cleaning up post-login services...');
     if (this.notificationInterval) {
       clearInterval(this.notificationInterval);
       this.notificationInterval = null;
@@ -333,9 +331,6 @@ export class AppComponent implements OnInit{
         if (res.forceUpdate) {
           const currentUrl = this.router.url;
           const isOnForceUpdatePage = currentUrl.includes(AppRoutePaths.ForceUpdate);
-
-          console.log('isOnForceUpdatePage:', isOnForceUpdatePage);
-          console.log('currentUrl:', currentUrl);
 
           if (isOnForceUpdatePage) return;
           this.zone.run(() => {

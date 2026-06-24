@@ -13,6 +13,8 @@ import { CommonService } from 'src/app/features/common/common.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { Preferences } from '@capacitor/preferences';
+import { Capacitor } from '@capacitor/core';
+import { Keyboard } from '@capacitor/keyboard';
 
 function extractPrivilegeAndMenuName(data: any) {
   const privileges: string[] = [];
@@ -477,11 +479,17 @@ export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
     return this.otpControls.every(c => c.value);
   }
 
-  onOtpInput(event: any, index: number) {
+  async onOtpInput(event: any, index: number) {
     const input = event.target.value;
     if (input && index < 5) {
       const next = document.querySelectorAll('.otp-box')[index + 1] as HTMLElement;
       next?.focus();
+    }
+
+    if (this.isOtpComplete) {
+      if (Capacitor.isNativePlatform()) {
+        await Keyboard.hide().catch(() => {});
+      } 
     }
   }
 
