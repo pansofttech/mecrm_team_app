@@ -7,7 +7,7 @@
     </app-navigation-bar>
 
     <!-- TABS -->
-    <div class="app-screen--stepper-new">
+    <div class="app-screen--stepper-new" *ngIf="!showEnableNotificationsButton">
       <div class="app-screen--stepper-container-new"
         [ngClass]="{'selected': activeTab === 'all'}"
         (click)="onTabChange('all')">
@@ -30,9 +30,18 @@
         Read
       </div>
     </div>
+
+    <div class="notification-permission-prompt" *ngIf="showEnableNotificationsButton">
+      <div class="notification-permission-text">
+        Enable notifications to receive live updates and alerts.
+      </div>
+      <button class="k-button k-primary" type="button" (click)="requestNotificationPermission()">
+        Enable Notifications
+      </button>
+    </div>
   </div>
 
-  <ion-content scrollEvents="true">
+  <ion-content scrollEvents="true" *ngIf="!showEnableNotificationsButton">
     <!-- EMPTY STATE -->
     <div *ngIf="filteredNotifications.length === 0" class="notification-empty-state">
       <img src="assets/content/images/noNotification.png" alt="No Notifications" class="notification-empty-img" />

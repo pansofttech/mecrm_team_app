@@ -6,6 +6,9 @@ import { LoginService } from 'src/app/features/login/components/login/login.serv
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { CommonService } from 'src/app/features/common/common.service';
 import { ActivatedRoute } from '@angular/router';
+import { Capacitor } from '@capacitor/core';
+import { PushNotifications, PushNotificationToken } from '@capacitor/push-notifications';
+import { NativeSettings, AndroidSettings, IOSSettings } from 'capacitor-native-settings';
 
 @Component({
   selector: 'app-notification',
@@ -18,6 +21,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
   public showAPILoader = false;
   public activeTab: 'all' | 'unread' | 'read' = 'all';
   public swipedId: number | null = null;
+  public showEnableNotificationsButton = false;
+  public notificationPermissionChecked = false;
 
   private touchStartX = 0;
 
@@ -38,10 +43,46 @@ export class NotificationComponent implements OnInit, OnDestroy {
     });
     this.loaderService.hideLoader();
     this.commonService.updateNotificationData();
+    this.checkNotificationPermission();
   }
 
   ngOnDestroy(): void {
     this.popstateSubscription?.unsubscribe();
+  }
+
+  private async checkNotificationPermission() {
+    if (!Capacitor.isNativePlatform()) {
+      this.showEnableNotificationsButton = true;
+      return;
+    }
+
+    try {
+      const permStatus = await PushNotifications.checkPermissions();
+      if (permStatus.receive === 'granted') {
+        this.showEnableNotificationsButton = false;
+      } else {
+        this.showEnableNotificationsButton = true;
+      }
+      this.notificationPermissionChecked = true;
+    } catch (error) {
+      this.showEnableNotificationsButton = false;
+    }
+  }
+
+  public async requestNotificationPermission() {
+    if (!Capacitor.isNativePlatform()) {
+      return;
+    }
+
+    if (Capacitor.getPlatform() === 'ios') {
+      await NativeSettings.openIOS({
+        option: IOSSettings.App
+      });
+    } else if (Capacitor.getPlatform() === 'android') {
+      await NativeSettings.openAndroid({
+        option: AndroidSettings.ApplicationDetails
+      });
+    }
   }
 
   get allCount(): number {

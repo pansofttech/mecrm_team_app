@@ -119,6 +119,7 @@ export class AppComponent implements OnInit{
     }, 15000);
 
     await this.syncOta();
+    this.initializePushNotifications();
     this.listenToResume();
 
     // Subscribe to post-login initialization
@@ -191,20 +192,17 @@ export class AppComponent implements OnInit{
         if (fcmToken) deviceToken = fcmToken;
       }
 
-      console.log('Push registration success, token: ', deviceToken);
       this.commonService.DeviceToken = deviceToken;
       this.commonService.DeviceID = info.identifier;
       this.commonService.Platform = Capacitor.getPlatform();
     });
 
     PushNotifications.addListener('registrationError', err => {
-      console.error('Push registration error (full): ', JSON.stringify(err));
       this.commonService.DeviceToken = '';
       this.commonService.DeviceID = info.identifier;
     });
 
     PushNotifications.addListener('pushNotificationReceived', async (notification: PushNotification) => {
-      console.log('Notification received: ', notification);
       await LocalNotifications.schedule({
         notifications: [
           {
@@ -229,7 +227,6 @@ export class AppComponent implements OnInit{
       const path = extra?.notificationPath;
       const text = extra?.notificationModule;
       const notificationId = extra?.notificationId;
-      console.log('Local notification tapped, path:', path);
 
       if (notificationId && this.commonService.notificationData?.length) {
         this.commonService.notificationData = this.commonService.notificationData.map((item: any) =>
@@ -248,8 +245,6 @@ export class AppComponent implements OnInit{
     });
 
     PushNotifications.addListener('pushNotificationActionPerformed', (notification: PushNotificationActionPerformed) => {
-        console.log('Notification clicked:', notification);
-
         const data = notification.notification.data;
         const path = data?.notificationPath;
         const text = data?.notificationModule;
@@ -263,7 +258,6 @@ export class AppComponent implements OnInit{
         }
 
         if (path) {
-          console.log('Navigating to path:', path);
           this.pendingNotificationPath = path;
           this.pendingNotificationModule = text;
           if (this.router.navigated) {
@@ -285,6 +279,8 @@ export class AppComponent implements OnInit{
         this.commonService.updateNotificationData();
       }
     );
+
+    this.commonService.updPushNotificationRegistry();
   }
 
   private async syncOta() {
@@ -304,8 +300,6 @@ export class AppComponent implements OnInit{
 
   // Initialize post-login services (push notifications, version check interval)
   private initializePostLoginServices() {
-    this.initializePushNotifications();
-
     // Start version check interval after login
     if (this.notificationInterval) {
       clearInterval(this.notificationInterval);

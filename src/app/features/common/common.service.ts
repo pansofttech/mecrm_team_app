@@ -107,6 +107,7 @@ export class CommonService implements OnDestroy{
 
   //Offline Sync
   private syncInterval: any;
+  public unseenNotificationCount: number = 0;
   public alertData: AlertDetails[] = [
     // {
     //   url: "Test",
@@ -464,6 +465,9 @@ export class CommonService implements OnDestroy{
     if(this.loginService.employeeId != ''){
       this.getAllNotification().subscribe((data: any) => {
           this.notificationData = data;
+          this.unseenNotificationCount = this.notificationData
+            ? this.notificationData.filter(x => !x.actioned).length
+            : 0;
         },
         error => {
           console.log('Error pulling notification', error);

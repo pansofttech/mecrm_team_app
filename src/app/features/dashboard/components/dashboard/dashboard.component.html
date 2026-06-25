@@ -16,8 +16,8 @@
         <button kendoButton fillMode="flat" class="dashboard-notification-btn" (click)="onNotificationClick()">
           <section class="notification-icon">
             <i class="fa-solid fa-bell"></i>
-            <span *ngIf="unseenCount > 0" class="badge bounce-once">
-              {{ unseenCount }}
+            <span *ngIf="commonService.unseenNotificationCount > 0" class="badge bounce-once">
+              {{ commonService.unseenNotificationCount }}
             </span>
           </section>
         </button>

@@ -113,11 +113,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.router.navigate([AppRoutePaths.Notification]);
   }
 
-  get unseenCount(): number {
-    return this.commonService.notificationData
-      ? this.commonService.notificationData.filter(x => !x.actioned).length
-      : 0;
-  }
+  // get unseenCount(): number {
+  //   return this.commonService.notificationData
+  //     ? this.commonService.notificationData.filter(x => !x.actioned).length
+  //     : 0;
+  // }
 
   getCardsByModule(module: string): any[] {
     return this.filteredQuickCards.filter((card: any) => card.module === module);

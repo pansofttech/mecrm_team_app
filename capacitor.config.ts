@@ -18,7 +18,7 @@ const config: CapacitorConfig = {
       resizeOnFullScreen: true
     },
     LiveUpdate: {
-      appId: '7d9faee0-6da0-4227-96e4-82d1b3a204af',
+      appId: 'd85cb05a-f16f-40d9-a5d0-527ce930d17a',
       defaultChannel: environment.capChannel
     },
     App: {
