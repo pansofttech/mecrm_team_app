@@ -90,6 +90,7 @@
   font-weight: var(--font-weight-bold);
   border-radius: 0.5rem;
   border: none;
+  font-size: var(--text-size-01) !important;
   
   &.k-primary {
     background: linear-gradient(135deg, #8DBA22 0%, #37A6DB 100%);

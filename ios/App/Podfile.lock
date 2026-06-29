@@ -23,6 +23,8 @@ PODS:
     - Capacitor
   - CapacitorLocalNotifications (6.1.2):
     - Capacitor
+  - CapacitorNativeSettings (6.0.6):
+    - Capacitor
   - CapacitorNetwork (6.0.3):
     - Capacitor
   - CapacitorPreferences (6.0.3):
@@ -117,6 +119,7 @@ DEPENDENCIES:
   - "CapacitorGeolocation (from `../../node_modules/@capacitor/geolocation`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
   - "CapacitorLocalNotifications (from `../../node_modules/@capacitor/local-notifications`)"
+  - CapacitorNativeSettings (from `../../node_modules/capacitor-native-settings`)
   - "CapacitorNetwork (from `../../node_modules/@capacitor/network`)"
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
   - "CapacitorPushNotifications (from `../../node_modules/@capacitor/push-notifications`)"
@@ -165,6 +168,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/keyboard"
   CapacitorLocalNotifications:
     :path: "../../node_modules/@capacitor/local-notifications"
+  CapacitorNativeSettings:
+    :path: "../../node_modules/capacitor-native-settings"
   CapacitorNetwork:
     :path: "../../node_modules/@capacitor/network"
   CapacitorPreferences:
@@ -193,6 +198,7 @@ SPEC CHECKSUMS:
   CapacitorGeolocation: 3f6c960e6d9d11c83fcdd181c4912604857afb51
   CapacitorKeyboard: e8cd50fd5cbdd023a5947a5c0f5cca6e5aa5a253
   CapacitorLocalNotifications: 65d718c32cbcb753697627bea76dd4336ef85dc2
+  CapacitorNativeSettings: 453aa001834006fe051ffa8e5f0bdde7409ec69f
   CapacitorNetwork: ef75d8208f0974a2de3f98136bf9684524798f5c
   CapacitorPreferences: f3eadae2369ac3ab8e21743a2959145b0d1286a3
   CapacitorPushNotifications: 8fd92b3f47e05646fbe78f6bf4d09d041e8ef91a
@@ -213,6 +219,6 @@ SPEC CHECKSUMS:
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   ZIPFoundation: dfd3d681c4053ff7e2f7350bc4e53b5dba3f5351
 
-PODFILE CHECKSUM: d2700e69d1fc5515df92e35098057a3eba79d4a2
+PODFILE CHECKSUM: a546f11088c204eac354887c3a89edfcaa2a1460
 
 COCOAPODS: 1.16.2
